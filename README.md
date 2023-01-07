@@ -1,5 +1,5 @@
-#Jigar Gosar's little corner on the universe
+Website:
+https://jigargosar.github.io/
 
-jigargosar.github.io
-
-jigargosar.com
+Source:
+https://github.com/jigargosar/jigargosar.github.io
