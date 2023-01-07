@@ -4,8 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jigar Gosar</title>
+    <style>
+        :root {
+            --sepia-color: hsl(45, 57%, 95%);
+            --sepia_default-link-color: hsl(206, 100%, 39%);
+            --sepia_active-link-color: hsl(206, 92%, 44%);
+
+            font-size: 20px;
+            background-color: var(--sepia-color);
+            color: hsl(0, 0%, 20%);
+
+            font-family: "Sitka Text",Georgia, Cambria, Calibri,serif;
+        }
+        body{
+            min-width: 320px;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: var(--sepia_default-link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline ;
+        }
+
+        a:active {
+            color: var(--sepia_active-link-color);
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 <h1>Jigar Gosar</h1>
+<a href="https://github.com/jigargosar">GitHub</a>
 </body>
 </html>
