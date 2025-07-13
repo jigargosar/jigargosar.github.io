@@ -7,8 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "hugo --minify --gc --destination=docs",
-    "dev": "hugo server -D --destination=public"
+    "build": "hugo build --environment=production --minify --gc",
+    "serve": "hugo server --environment=production  --minify --gc --openBrowser",
+    "dev": "hugo server --environment=staging -D -p 1234 --openBrowser"
   },
   "keywords": [],
   "author": "",

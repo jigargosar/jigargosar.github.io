@@ -1,0 +1,4 @@
+baseURL = 'https://jigargosar.github.io/'
+languageCode = 'en-us'
+theme = 'ananke'
+cleanDestinationDir = true
