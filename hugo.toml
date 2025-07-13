@@ -1,5 +1,5 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://jigargosar.github.io/'
 languageCode = 'en-us'
 title = "Jigar Gosar's Blog"
 theme = 'ananke'
-publishDir = "public"
+publishDir = "docs"
