@@ -2,4 +2,4 @@ baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = "Jigar Gosar's Blog"
 theme = 'ananke'
-publishDir = "docs"
+publishDir = "public"
