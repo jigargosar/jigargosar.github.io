@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "cross-env BASE_PATH=/astro-blog/ astro build",
+    "clean": "rimraf docs",
+    "build": "pnpm run clean && cross-env BASE_PATH=/astro-blog/ astro build",
     "preview": "cross-env BASE_PATH=/astro-blog/ astro preview",
     "gh:preview": "pnpm run build && pnpm run preview",
     "gh:deploy": "pnpm run build && git diff --quiet docs || (git add docs && git commit -m \"build: deploy\" && git push)",
