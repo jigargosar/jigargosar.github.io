@@ -2,6 +2,7 @@
 import { assertRequiredProps } from '../lib/utils'
 assertRequiredProps(Astro.props, ['assetPrefix'])
 const { assetPrefix } = Astro.props
+const BASE = import.meta.env.BASE_URL
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +20,12 @@ const { assetPrefix } = Astro.props
     rel="stylesheet"
   />
 
+  <base href={import.meta.env.BASE_URL} />
   <!-- Stylesheets -->
-  <link rel="stylesheet" href={`${assetPrefix}vendor/css/tachyons.css`} />
+  <link rel="stylesheet" href={`vendor/css/tachyons.css`} />
   <link
     rel="stylesheet"
-    href={`${assetPrefix}assets/css/intellij-modern-dark-palette.css`}
+    href={`assets/css/intellij-modern-dark-palette.css`}
   />
 
   <style>

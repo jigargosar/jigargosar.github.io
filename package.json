@@ -4,11 +4,15 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "build": "cross-env BASE_PATH=/astro-blog/ astro build",
+    "preview": "cross-env BASE_PATH=/astro-blog/ astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^5.12.0"
+  },
+  "devDependencies": {
+    "astro-rehype-relative-markdown-links": "^0.18.1",
+    "cross-env": "^7.0.3"
   }
 }

@@ -8,4 +8,4 @@ description: Welcome to your first blog post! This is where you can share your t
 
 Welcome to your first blog post! This is where you can share your thoughts, ideas, or updates.
 
-[← Back to Home](/)
+[← Back to Home](.)
