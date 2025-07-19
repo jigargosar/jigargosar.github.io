@@ -6,6 +6,8 @@
     "dev": "astro dev",
     "build": "cross-env BASE_PATH=/astro-blog/ astro build",
     "preview": "cross-env BASE_PATH=/astro-blog/ astro preview",
+    "gh:preview": "pnpm run build && pnpm run preview",
+    "gh:deploy": "pnpm run build && git diff --quiet docs || (git add docs && git commit -m \"build: deploy\" && git push)",
     "astro": "astro"
   },
   "dependencies": {
@@ -13,6 +15,7 @@
   },
   "devDependencies": {
     "astro-rehype-relative-markdown-links": "^0.18.1",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "rimraf": "^6.0.1"
   }
 }
