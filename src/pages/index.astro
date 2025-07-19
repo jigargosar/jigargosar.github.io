@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import { getAssetPrefix } from '../lib/utils'
+
+const posts = await getCollection('posts')
+---
+<BaseLayout assetPrefix={getAssetPrefix(Astro.url.pathname)}>
+  <style>
+    .underline-offset {
+      text-underline-offset: 0.2em;
+    }
+    .decoration-thickness {
+      text-decoration-thickness: 0.01em;
+    }
+  </style>
+
+  <section id="posts">
+    <ul>
+      {posts.map(post => (
+        <li class="pv2">
+          <a
+            class="dib color-inherit underline-offset decoration-thickness"
+            href={`/posts/${post.slug}/`}
+          >
+            {post.data.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

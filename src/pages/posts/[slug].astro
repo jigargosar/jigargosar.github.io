@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection, getEntry } from 'astro:content'
+import { getAssetPrefix } from '../../lib/utils'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+  return posts.map(post => ({
+    params: { slug: post.slug }
+  }))
+}
+
+const { slug } = Astro.params
+const post = await getEntry('posts', slug)
+if (!post) {
+  throw new Error(`Post not found: ${slug}`)
+}
+
+const { Content } = await post.render()
+---
+<BaseLayout assetPrefix={getAssetPrefix(Astro.url.pathname)}>
+  <div class="post-content">
+    <Content />
+  </div>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+import { assertRequiredProps } from '../lib/utils'
+assertRequiredProps(Astro.props, ['assetPrefix'])
+const { assetPrefix } = Astro.props
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jigar@blog:~$</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Font pairing -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href={`${assetPrefix}vendor/css/tachyons.css`} />
+  <link
+    rel="stylesheet"
+    href={`${assetPrefix}assets/css/intellij-modern-dark-palette.css`}
+  />
+
+  <style>
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cursor {
+      width: 0.5rem;
+      height: 1rem;
+      animation: blink-cursor 1.5s infinite steps(2, start);
+    }
+    @keyframes blink-cursor {
+      0%, 70% { opacity: 1; }
+      80%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="mono fw1 bg-near-black light-gray flex flex-column min-vh-100">
+<header class="flex justify-center items-center pa3 bb b--dark-gray">
+  <span class="cyan">jigar@blog:~$</span>
+</header>
+
+<main class="w-100 measure-wide center ph2 flex-grow-1">
+  <slot />
+</main>
+
+<footer class="w-100 tc pa3 bt b--dark-gray">
+  <p class="f7 light-silver">Powered by Astro & Markdown</p>
+  <span class="cursor dib bg-cyan"></span>
+</footer>
+</body>
+</html>
