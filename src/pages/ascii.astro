@@ -1,132 +1,24 @@
 ---
-// @ts-nocheck
-function renderInlineLinks(text) {
-    return text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-        (_, label, url) => `<a href="${url}">${label}</a>`
-    );
-}
-
-function stripTags(html) {
-    return html.replace(/<[^>]+>/g, "");
-}
-
-// 1. Break the HTML string into tokens: <a>…</a>, whitespace, or text
-function tokenizeHTML(html) {
-    const re = /(<a\b[^>]*>.*?<\/a>)|(\s+)|([^\s<]+)/gi;
-    const tokens = [];
-    let match;
-    while ((match = re.exec(html))) {
-        tokens.push(match[0]);
-    }
-    return tokens;
-}
-
-// 2. Wrap tokens by visible length, preserving tags intact
-function wrapHTML(html, width) {
-    const tokens = tokenizeHTML(html);
-    const lines = [];
-    let buffer = [], bufLen = 0;
-
-    for (const tok of tokens) {
-        const isTag = tok.startsWith("<");
-        const text  = isTag ? "" : tok.replace(/\s+/g, " ");
-        const tlen  = text.length;
-
-        if (bufLen + tlen > width && bufLen > 0) {
-            lines.push(buffer.join(""));
-            buffer = [];
-            bufLen = 0;
-        }
-
-        buffer.push(tok);
-        bufLen += tlen;
-    }
-
-    if (buffer.length) lines.push(buffer.join(""));
-    return lines;
-}
-
-// 3. Pad a single HTML chunk to the inner width
-function padHtmlLine(html, inner) {
-    const visible = stripTags(html).length;
-    const padCount = Math.max(0, inner - visible);
-    return `| ${html}${" ".repeat(padCount)} |`;
-}
-
-const Layout = (() => {
-    function renderSpec(spec, width = 80) {
-        const inner  = width - 4;
-        const border = "+" + "-".repeat(width - 2) + "+";
-        const out    = [];
-
-        for (const block of spec) {
-            if (block.frame) out.push(border);
-
-            for (const rawLine of block.lines) {
-                const htmlLine = renderInlineLinks(rawLine);
-                const chunks   = block.wrap
-                    ? wrapHTML(htmlLine, inner)
-                    : [htmlLine.slice(0, inner)];
-
-                for (const chunk of chunks) {
-                    out.push(padHtmlLine(chunk, inner));
-                }
-            }
-
-            if (block.frame) out.push(border);
-        }
-
-        return out;
-    }
-
-    return { renderSpec };
-})();
-
-const spec = [
+const posts = [
     {
-        type: "header",
-        lines: ["JIGAR'S TERMINAL BLOG"],
-        wrap: false,
-        frame: true
+        date: "2025-07-20",
+        title: "Abstraction vs Duplication",
+        description: `Learn more about <a href="https://clarity.dev">clarity</a> and <a href="https://duplication.dev">duplication</a>.`
     },
     {
-        type: "post",
-        lines: [
-            "[2025-07-20] Abstraction vs Duplication",
-            "[read] Learn more about [clarity](https://clarity.dev) and [duplication](https://duplication.dev)"
-        ],
-        wrap: true,
-        frame: false
+        date: "2025-07-15",
+        title: "Migrating Blogs to Astro",
+        description: `Lessons from transitioning to <a href="https://astro.build">Astro</a>.`
     },
     {
-        type: "post",
-        lines: [
-            "[2025-07-15] Migrating Blogs to Astro",
-            "[read] Lessons from transitioning to [Astro](https://astro.build)"
-        ],
-        wrap: true,
-        frame: true
-    },
-    {
-        type: "post",
-        lines: [
-            "[2025-07-01] Embedding SPAs in Markdown",
-            "[read] Mixing static Markdown with dynamic [SPA islands](https://example.com/spa)"
-        ],
-        wrap: true,
-        frame: true
-    },
-    {
-        type: "footer",
-        lines: ["[about] [contact] [projects] [exit]"],
-        wrap: false,
-        frame: true
+        date: "2025-07-01",
+        title: "Embedding SPAs in Markdown",
+        description: `Mixing static Markdown with dynamic <a href="https://example.com/spa">SPA islands</a>.`
     }
 ];
 
-const output = Layout.renderSpec(spec);
+const footerLinks = ["about", "contact", "projects", "exit"];
 ---
-
 <style>
     html, body {
         margin: 0;
@@ -138,19 +30,41 @@ const output = Layout.renderSpec(spec);
         min-height: 100vh;
     }
 
-    pre {
+    main {
         padding: 2rem;
-        font-size: 16px;
-        line-height: 1.3;
-        white-space: pre-wrap;
-        word-break: break-word;
         width: 80ch;
         margin: 0 auto;
     }
 
+    h1 {
+        font-size: 20px;
+        font-weight: bold;
+        background: linear-gradient(to right, #00ff00, #66ff66);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        margin-bottom: 2rem;
+    }
+
+    .post {
+        margin-bottom: 1.5rem;
+    }
+
+    .description {
+        margin-top: 0.2rem;
+    }
+
     a {
-        color: #00ff00;
+        color: #00ffaa;
         text-decoration: underline;
+    }
+
+    footer {
+        border-top: 1px solid #004400;
+        margin-top: 3rem;
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
     }
 
     ::selection {
@@ -159,5 +73,19 @@ const output = Layout.renderSpec(spec);
     }
 </style>
 
-<pre set:html={output.join('\n')}></pre>
+<main>
+    <h1>JIGAR'S TERMINAL BLOG</h1>
 
+    {posts.map(post => (
+            <div class="post">
+                <div>✨ [{post.date}] {post.title}</div>
+                <div class="description" set:html={post.description}></div>
+            </div>
+    ))}
+
+    <footer>
+        {footerLinks.map(text => (
+                <a href="#">{`[${text}]`}</a>
+        ))}
+    </footer>
+</main>
