@@ -1,70 +1,82 @@
 ---
-function renderInlineLinks(text) { return text.replace(/ \[([^\] ]+)\] \(([^)]+)\)/g, (_, label, url) => { return `<a href="${url}">${label}</a>`; }); }
+// @ts-nocheck
+function renderInlineLinks(text) {
+    return text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        (_, label, url) => `<a href="${url}">${label}</a>`
+    );
+}
 
 function stripTags(html) {
     return html.replace(/<[^>]+>/g, "");
 }
 
-const Layout = (() => {
-    function padLine(content = "", inner = 76) {
-        return `| ${content.trim().padEnd(inner, " ")} |`;
+// 1. Break the HTML string into tokens: <a>…</a>, whitespace, or text
+function tokenizeHTML(html) {
+    const re = /(<a\b[^>]*>.*?<\/a>)|(\s+)|([^\s<]+)/gi;
+    const tokens = [];
+    let match;
+    while ((match = re.exec(html))) {
+        tokens.push(match[0]);
     }
+    return tokens;
+}
 
-    function wrapText(text, width = 76) {
-        const words = text.split(" ");
-        const lines = [];
-        let line = "";
+// 2. Wrap tokens by visible length, preserving tags intact
+function wrapHTML(html, width) {
+    const tokens = tokenizeHTML(html);
+    const lines = [];
+    let buffer = [], bufLen = 0;
 
-        for (const word of words) {
-            if (word.length > width) {
-                if (line) lines.push(line), line = "";
-                for (let i = 0; i < word.length; i += width) {
-                    lines.push(word.slice(i, i + width));
-                }
-            } else if ((line + word).length + 1 <= width) {
-                line += (line ? " " : "") + word;
-            } else {
-                lines.push(line), line = word;
-            }
+    for (const tok of tokens) {
+        const isTag = tok.startsWith("<");
+        const text  = isTag ? "" : tok.replace(/\s+/g, " ");
+        const tlen  = text.length;
+
+        if (bufLen + tlen > width && bufLen > 0) {
+            lines.push(buffer.join(""));
+            buffer = [];
+            bufLen = 0;
         }
 
-        if (line) lines.push(line);
-        return lines;
+        buffer.push(tok);
+        bufLen += tlen;
     }
 
-    function sanitize(text) {
-        return text.replace(/[^\x00-\x7F]/g, "");
-    }
+    if (buffer.length) lines.push(buffer.join(""));
+    return lines;
+}
 
+// 3. Pad a single HTML chunk to the inner width
+function padHtmlLine(html, inner) {
+    const visible = stripTags(html).length;
+    const padCount = Math.max(0, inner - visible);
+    return `| ${html}${" ".repeat(padCount)} |`;
+}
+
+const Layout = (() => {
     function renderSpec(spec, width = 80) {
-        const inner = width - 4;
+        const inner  = width - 4;
         const border = "+" + "-".repeat(width - 2) + "+";
-        const output = [];
+        const out    = [];
 
         for (const block of spec) {
-            if (block.frame) output.push(border);
+            if (block.frame) out.push(border);
 
             for (const rawLine of block.lines) {
-                const htmlLine = renderInlineLinks(sanitize(rawLine));
-                const visible = stripTags(htmlLine);
-                const wrapped = block.wrap
-                    ? wrapText(visible, inner)
-                    : [visible.slice(0, inner)];
+                const htmlLine = renderInlineLinks(rawLine);
+                const chunks   = block.wrap
+                    ? wrapHTML(htmlLine, inner)
+                    : [htmlLine.slice(0, inner)];
 
-                wrapped.forEach(line => {
-                    const padded = padLine(line, inner);
-                    const injected = padded.replace(line.trim(), match => {
-                        return htmlLine.includes(match) ? htmlLine : match;
-                    });
-
-                    output.push(injected);
-                });
+                for (const chunk of chunks) {
+                    out.push(padHtmlLine(chunk, inner));
+                }
             }
 
-            if (block.frame) output.push(border);
+            if (block.frame) out.push(border);
         }
 
-        return output;
+        return out;
     }
 
     return { renderSpec };
@@ -121,9 +133,7 @@ const output = Layout.renderSpec(spec);
         padding: 0;
         background-color: #0a0a0a;
         color: #00ff00;
-        font-family: "Fira Code", "Courier New", monospace;
-        overflow-x: auto;
-        overflow-y: auto;
+        font-family: "Fira Code", monospace;
         min-width: 80ch;
         min-height: 100vh;
     }
@@ -149,6 +159,5 @@ const output = Layout.renderSpec(spec);
     }
 </style>
 
-<pre>
-{output.join("\n")}
-</pre>
+<pre set:html={output.join('\n')}></pre>
+
