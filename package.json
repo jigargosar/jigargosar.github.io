@@ -17,6 +17,7 @@
   "devDependencies": {
     "astro-rehype-relative-markdown-links": "^0.18.1",
     "cross-env": "^7.0.3",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "ts-regex-builder": "^1.8.2"
   }
 }

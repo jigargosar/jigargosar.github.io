@@ -1,134 +1,152 @@
 ---
+function renderInlineLinks(text) { return text.replace(/ \[([^\] ]+)\] \(([^)]+)\)/g, (_, label, url) => { return `<a href="${url}">${label}</a>`; }); }
+
+function stripTags(html) {
+    return html.replace(/<[^>]+>/g, "");
+}
+
 const Layout = (() => {
-  function padLine(content = "", inner = 76) {
-    return `| ${content.trim().padEnd(inner, " ")} |`;
-  }
+    function padLine(content = "", inner = 76) {
+        return `| ${content.trim().padEnd(inner, " ")} |`;
+    }
 
-  function wrapText(text, width = 76) {
-    const words = text.split(" ");
-    const lines = [];
-    let line = "";
+    function wrapText(text, width = 76) {
+        const words = text.split(" ");
+        const lines = [];
+        let line = "";
 
-    for (const word of words) {
-      if (word.length > width) {
-        if (line) lines.push(line), (line = "");
-        for (let i = 0; i < word.length; i += width) {
-          lines.push(word.slice(i, i + width));
+        for (const word of words) {
+            if (word.length > width) {
+                if (line) lines.push(line), line = "";
+                for (let i = 0; i < word.length; i += width) {
+                    lines.push(word.slice(i, i + width));
+                }
+            } else if ((line + word).length + 1 <= width) {
+                line += (line ? " " : "") + word;
+            } else {
+                lines.push(line), line = word;
+            }
         }
-      } else if ((line + word).length + 1 <= width) {
-        line += (line ? " " : "") + word;
-      } else {
-        lines.push(line), (line = word);
-      }
+
+        if (line) lines.push(line);
+        return lines;
     }
 
-    if (line) lines.push(line);
-    return lines;
-  }
-
-  function sanitize(text) {
-    return text.replace(/[^\x00-\x7F]/g, "");
-  }
-
-  function renderSpec(spec, width = 80) {
-    const inner = width - 4;
-    const border = "+" + "-".repeat(width - 2) + "+";
-    const output = [];
-
-    for (const block of spec) {
-      if (block.frame) output.push(border);
-
-      for (const rawLine of block.lines) {
-        const line = sanitize(rawLine);
-        const segments = block.wrap
-          ? wrapText(line, inner)
-          : [line.slice(0, inner)];
-        segments.forEach((seg) => output.push(padLine(seg, inner)));
-      }
-
-      if (block.frame) output.push(border);
+    function sanitize(text) {
+        return text.replace(/[^\x00-\x7F]/g, "");
     }
 
-    return output;
-  }
+    function renderSpec(spec, width = 80) {
+        const inner = width - 4;
+        const border = "+" + "-".repeat(width - 2) + "+";
+        const output = [];
 
-  return { renderSpec };
+        for (const block of spec) {
+            if (block.frame) output.push(border);
+
+            for (const rawLine of block.lines) {
+                const htmlLine = renderInlineLinks(sanitize(rawLine));
+                const visible = stripTags(htmlLine);
+                const wrapped = block.wrap
+                    ? wrapText(visible, inner)
+                    : [visible.slice(0, inner)];
+
+                wrapped.forEach(line => {
+                    const padded = padLine(line, inner);
+                    const injected = padded.replace(line.trim(), match => {
+                        return htmlLine.includes(match) ? htmlLine : match;
+                    });
+
+                    output.push(injected);
+                });
+            }
+
+            if (block.frame) output.push(border);
+        }
+
+        return output;
+    }
+
+    return { renderSpec };
 })();
 
-// 🧪 Hardcoded layout spec for testing
 const spec = [
-  {
-    type: "header",
-    lines: ["JIGAR'S TERMINAL BLOG"],
-    wrap: false,
-    frame: true,
-  },
-  {
-    type: "post",
-    lines: [
-      "[2025-07-20] Abstraction vs Duplication",
-      "[read] A thoughtful exploration of how clarity and duplication improve long-term code maintainability.",
-    ],
-    wrap: true,
-    frame: false,
-  },
-  {
-    type: "post",
-    lines: [
-      "[2025-07-15] Migrating Blogs to Astro",
-      "[read] Lessons learned from transitioning to Astro, the new framework used for building this blog.",
-    ],
-    wrap: true,
-    frame: true,
-  },
-  {
-    type: "post",
-    lines: [
-      "[2025-07-01] Embedding SPAs in Markdown",
-      "[read] Your approach to interactive content—mixing static Markdown with dynamic Single Page Apps using Astro islands.",
-    ],
-    wrap: true,
-    frame: false,
-  },
-  {
-    type: "footer",
-    lines: ["[about] [contact] [projects] [exit]"],
-    wrap: false,
-    frame: true,
-  },
+    {
+        type: "header",
+        lines: ["JIGAR'S TERMINAL BLOG"],
+        wrap: false,
+        frame: true
+    },
+    {
+        type: "post",
+        lines: [
+            "[2025-07-20] Abstraction vs Duplication",
+            "[read] Learn more about [clarity](https://clarity.dev) and [duplication](https://duplication.dev)"
+        ],
+        wrap: true,
+        frame: false
+    },
+    {
+        type: "post",
+        lines: [
+            "[2025-07-15] Migrating Blogs to Astro",
+            "[read] Lessons from transitioning to [Astro](https://astro.build)"
+        ],
+        wrap: true,
+        frame: true
+    },
+    {
+        type: "post",
+        lines: [
+            "[2025-07-01] Embedding SPAs in Markdown",
+            "[read] Mixing static Markdown with dynamic [SPA islands](https://example.com/spa)"
+        ],
+        wrap: true,
+        frame: true
+    },
+    {
+        type: "footer",
+        lines: ["[about] [contact] [projects] [exit]"],
+        wrap: false,
+        frame: true
+    }
 ];
 
 const output = Layout.renderSpec(spec);
 ---
 
 <style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #0a0a0a;
-    color: #00ff00;
-    font-family: "Fira Code", "Courier New", monospace;
-    overflow-x: auto;
-    overflow-y: auto;
-    min-width: 80ch;
-    min-height: 100vh;
-  }
+    html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0a0a0a;
+        color: #00ff00;
+        font-family: "Fira Code", "Courier New", monospace;
+        overflow-x: auto;
+        overflow-y: auto;
+        min-width: 80ch;
+        min-height: 100vh;
+    }
 
-  pre {
-    padding: 2rem;
-    font-size: 16px;
-    line-height: 1.3;
-    white-space: pre;
-    word-break: keep-all;
-    width: 80ch;
-    margin: 0 auto;
-  }
+    pre {
+        padding: 2rem;
+        font-size: 16px;
+        line-height: 1.3;
+        white-space: pre-wrap;
+        word-break: break-word;
+        width: 80ch;
+        margin: 0 auto;
+    }
 
-  ::selection {
-    background: #004400;
-    color: #00ff00;
-  }
+    a {
+        color: #00ff00;
+        text-decoration: underline;
+    }
+
+    ::selection {
+        background: #004400;
+        color: #00ff00;
+    }
 </style>
 
 <pre>
