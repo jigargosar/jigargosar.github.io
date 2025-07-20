@@ -74,11 +74,11 @@ const footerLinks = ["about", "contact", "projects", "exit"];
 </style>
 
 <main>
-    <h1>JIGAR'S TERMINAL BLOG</h1>
+    <h1>jigar's terminal blog</h1>
 
     {posts.map(post => (
             <div class="post">
-                <div>✨ [{post.date}] {post.title}</div>
+                <div>[{post.date}] {post.title}</div>
                 <div class="description" set:html={post.description}></div>
             </div>
     ))}
