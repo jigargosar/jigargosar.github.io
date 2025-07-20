@@ -1,0 +1,88 @@
+---
+const WIDTH = 80;
+
+const data = {
+  header: "JIGAR'S TERMINAL BLOG",
+  posts: [
+    {
+      date: "2025-07-20",
+      title: "Abstraction vs Duplication",
+      desc: "A dive into clarity vs cleverness"
+    },
+    {
+      date: "2025-07-15",
+      title: "Migrating Blogs to Astro",
+      desc: "Lessons from the transition"
+    },
+    {
+      date: "2025-07-01",
+      title: "Embedding SPAs in Markdown",
+      desc: "Your approach to interactive content"
+    }
+  ],
+  footer: ["about", "contact", "projects", "exit"]
+};
+
+function padLine(content = "") {
+  return `| ${content.padEnd(WIDTH - 4, " ")} |`;
+}
+
+function renderWindow(data) {
+  let out = "";
+
+  const horizontalBorder = "+" + "-".repeat(WIDTH - 2) + "+\n";
+
+  // Header
+  out += horizontalBorder;
+  out += padLine(data.header) + "\n";
+  out += horizontalBorder;
+
+  // Posts
+  for (const post of data.posts) {
+    out += padLine(`[${post.date}] ${post.title}`) + "\n";
+    out += padLine(`[read] ${post.desc}`) + "\n";
+    out += padLine() + "\n";
+  }
+
+  // Footer
+  out += horizontalBorder;
+  const footerLine = data.footer.map(f => `[${f}]`).join(" ");
+  out += padLine(footerLine) + "\n";
+  out += horizontalBorder;
+
+  return out;
+}
+---
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    color: #00ff00;
+    font-family: "Fira Code", "Courier New", monospace;
+    overflow-x: auto;         /* horizontal scroll on body */
+    overflow-y: auto;
+    min-width: 80ch;          /* triggers horizontal scroll if needed */
+    min-height: 100vh;
+  }
+
+  pre {
+    padding: 2rem;
+    font-size: 16px;
+    line-height: 1.3;
+    white-space: pre;
+    word-break: keep-all;
+    width: 80ch;              /* locks layout width */
+    margin: 0 auto;
+  }
+
+  ::selection {
+    background: #004400;
+    color: #00ff00;
+  }
+</style>
+
+<pre>
+{renderWindow(data)}
+</pre>
