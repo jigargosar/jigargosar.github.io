@@ -1,69 +1,117 @@
 ---
-const WIDTH = 80;
-
-const data = {
-  header: "JIGAR'S TERMINAL BLOG",
-  posts: [
-    {
-      date: "2025-07-20",
-      title: "Abstraction vs Duplication",
-      desc: "A dive into clarity vs cleverness"
-    },
-    {
-      date: "2025-07-15",
-      title: "Migrating Blogs to Astro",
-      desc: "Lessons from the transition"
-    },
-    {
-      date: "2025-07-01",
-      title: "Embedding SPAs in Markdown",
-      desc: "Your approach to interactive content"
-    }
-  ],
-  footer: ["about", "contact", "projects", "exit"]
-};
-
-function padLine(content = "") {
-  return `| ${content.padEnd(WIDTH - 4, " ")} |`;
-}
-
-function renderWindow(data) {
-  let out = "";
-
-  const horizontalBorder = "+" + "-".repeat(WIDTH - 2) + "+\n";
-
-  // Header
-  out += horizontalBorder;
-  out += padLine(data.header) + "\n";
-  out += horizontalBorder;
-
-  // Posts
-  for (const post of data.posts) {
-    out += padLine(`[${post.date}] ${post.title}`) + "\n";
-    out += padLine(`[read] ${post.desc}`) + "\n";
-    out += padLine() + "\n";
+const Layout = (() => {
+  function padLine(content = "", inner = 76) {
+    return `| ${content.trim().padEnd(inner, " ")} |`;
   }
 
-  // Footer
-  out += horizontalBorder;
-  const footerLine = data.footer.map(f => `[${f}]`).join(" ");
-  out += padLine(footerLine) + "\n";
-  out += horizontalBorder;
+  function wrapText(text, width = 76) {
+    const words = text.split(" ");
+    const lines = [];
+    let line = "";
 
-  return out;
-}
+    for (const word of words) {
+      if (word.length > width) {
+        if (line) lines.push(line), (line = "");
+        for (let i = 0; i < word.length; i += width) {
+          lines.push(word.slice(i, i + width));
+        }
+      } else if ((line + word).length + 1 <= width) {
+        line += (line ? " " : "") + word;
+      } else {
+        lines.push(line), (line = word);
+      }
+    }
+
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function sanitize(text) {
+    return text.replace(/[^\x00-\x7F]/g, "");
+  }
+
+  function renderSpec(spec, width = 80) {
+    const inner = width - 4;
+    const border = "+" + "-".repeat(width - 2) + "+";
+    const output = [];
+
+    for (const block of spec) {
+      if (block.frame) output.push(border);
+
+      for (const rawLine of block.lines) {
+        const line = sanitize(rawLine);
+        const segments = block.wrap
+          ? wrapText(line, inner)
+          : [line.slice(0, inner)];
+        segments.forEach((seg) => output.push(padLine(seg, inner)));
+      }
+
+      if (block.frame) output.push(border);
+    }
+
+    return output;
+  }
+
+  return { renderSpec };
+})();
+
+// 🧪 Hardcoded layout spec for testing
+const spec = [
+  {
+    type: "header",
+    lines: ["JIGAR'S TERMINAL BLOG"],
+    wrap: false,
+    frame: true,
+  },
+  {
+    type: "post",
+    lines: [
+      "[2025-07-20] Abstraction vs Duplication",
+      "[read] A thoughtful exploration of how clarity and duplication improve long-term code maintainability.",
+    ],
+    wrap: true,
+    frame: false,
+  },
+  {
+    type: "post",
+    lines: [
+      "[2025-07-15] Migrating Blogs to Astro",
+      "[read] Lessons learned from transitioning to Astro, the new framework used for building this blog.",
+    ],
+    wrap: true,
+    frame: true,
+  },
+  {
+    type: "post",
+    lines: [
+      "[2025-07-01] Embedding SPAs in Markdown",
+      "[read] Your approach to interactive content—mixing static Markdown with dynamic Single Page Apps using Astro islands.",
+    ],
+    wrap: true,
+    frame: false,
+  },
+  {
+    type: "footer",
+    lines: ["[about] [contact] [projects] [exit]"],
+    wrap: false,
+    frame: true,
+  },
+];
+
+const output = Layout.renderSpec(spec);
 ---
 
 <style>
-  html, body {
+  html,
+  body {
     margin: 0;
     padding: 0;
     background-color: #0a0a0a;
     color: #00ff00;
     font-family: "Fira Code", "Courier New", monospace;
-    overflow-x: auto;         /* horizontal scroll on body */
+    overflow-x: auto;
     overflow-y: auto;
-    min-width: 80ch;          /* triggers horizontal scroll if needed */
+    min-width: 80ch;
     min-height: 100vh;
   }
 
@@ -73,7 +121,7 @@ function renderWindow(data) {
     line-height: 1.3;
     white-space: pre;
     word-break: keep-all;
-    width: 80ch;              /* locks layout width */
+    width: 80ch;
     margin: 0 auto;
   }
 
@@ -84,5 +132,5 @@ function renderWindow(data) {
 </style>
 
 <pre>
-{renderWindow(data)}
+{output.join("\n")}
 </pre>
