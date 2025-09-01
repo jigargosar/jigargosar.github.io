@@ -1,6 +1,6 @@
 ---
 title: "Fourth Dummy Post"
-date: "2025-07-25"
+date: "2025-07-20"
 description: "This is a dummy fourth post for testing purposes."
 ---
 

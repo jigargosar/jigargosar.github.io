@@ -1,6 +1,6 @@
 ---
 title: Second Post
-date: "2025-07-13"
+date: "2025-07-14"
 description: This is the second post for testing the index page automation.
 ---
 

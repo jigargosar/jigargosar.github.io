@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content'
 import { getAssetPrefix } from '../lib/utils'
 
 const posts = await getCollection('posts')
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 ---
 <BaseLayout assetPrefix={getAssetPrefix(Astro.url.pathname)}>
   <style>
@@ -17,7 +18,7 @@ const posts = await getCollection('posts')
 
   <section id="posts">
     <ul>
-      {posts.map(post => (
+      {sortedPosts.map(post => (
         <li class="pv2">
           <a
             class="dib color-inherit underline-offset decoration-thickness"
