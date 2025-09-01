@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "clean": "rimraf docs",
+    "build:old": "pnpm run clean && cross-env BASE_PATH=/astro-blog/ astro build",
+    "preview:old": "cross-env BASE_PATH=/astro-blog/ astro preview",
     "build": "pnpm run clean && cross-env BASE_PATH=/astro-blog/ astro build",
     "preview": "cross-env BASE_PATH=/astro-blog/ astro preview",
     "gh:preview": "pnpm run build && pnpm run preview",
