@@ -7,7 +7,7 @@
     "clean": "rimraf docs",
     "build:old": "pnpm run clean && cross-env BASE_PATH=/astro-blog/ astro build",
     "preview:old": "cross-env BASE_PATH=/astro-blog/ astro preview",
-    "build": "pnpm run clean && astro build",
+    "build": "pnpm run clean && astro build --out-dir docs",
     "preview": "astro preview",
     "gh:preview": "pnpm run build && pnpm run preview",
     "gh:deploy": "pnpm run build && git diff --quiet docs || (git add docs && git commit -m \"build: deploy\" && git push)",

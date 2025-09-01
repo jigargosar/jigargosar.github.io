@@ -4,8 +4,14 @@ import rehypeRelativeLinks from 'astro-rehype-relative-markdown-links'
 
 const base = process.env.BASE_PATH || '/';
 export default defineConfig({
-    outDir: 'docs',
     base,
+    vite: {
+        server: {
+            watch: {
+                ignored: ['**/docs/**']
+            }
+        }
+    },
     markdown: {
         rehypePlugins: [
             [rehypeRelativeLinks, { base }]
