@@ -4,17 +4,13 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "clean": "rimraf docs",
-    "build:old": "pnpm run clean && cross-env BASE_PATH=/astro-blog/ astro build",
-    "preview:old": "cross-env BASE_PATH=/astro-blog/ astro preview",
-    "build": "pnpm run clean && astro build --out-dir docs",
-    "preview": "astro preview",
-    "gh:preview": "pnpm run build && pnpm run preview",
-    "gh:deploy": "pnpm run build && (git diff --quiet docs || git add docs && git commit -m \"build: deploy\") && git push",
-    "astro": "astro"
+    "build": "rimraf dist && astro build",
+    "preview": "pnpm build && astro preview --port 4322"
   },
   "dependencies": {
-    "astro": "^5.12.0"
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.12.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "astro-rehype-relative-markdown-links": "^0.18.1",
