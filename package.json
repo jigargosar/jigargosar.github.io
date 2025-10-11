@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --force",
     "build": "rimraf dist && astro build",
     "preview": "pnpm build && astro preview --port 4322"
   },
