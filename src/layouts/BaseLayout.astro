@@ -1,4 +1,5 @@
 ---
+import '../styles/global.css'
 import { assertRequiredProps } from '../lib/utils'
 assertRequiredProps(Astro.props, ['assetPrefix'])
 const { assetPrefix } = Astro.props
@@ -22,12 +23,6 @@ const BASE = import.meta.env.BASE_URL
 
   <base href={import.meta.env.BASE_URL} />
   <link rel="icon" href="favicon.svg" sizes="32x32" />
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href={`vendor/css/tachyons.css`} />
-  <link
-    rel="stylesheet"
-    href={`assets/css/intellij-modern-dark-palette.css`}
-  />
 
   <style>
     .mono {
@@ -45,18 +40,18 @@ const BASE = import.meta.env.BASE_URL
   </style>
 </head>
 
-<body class="mono fw1 bg-near-black light-gray flex flex-column min-vh-100">
-<header class="flex justify-center items-center pa3 bb b--dark-gray">
-  <span class="cyan">jigar@blog:~$</span>
+<body class="mono font-extralight bg-gray-900 text-gray-400 flex flex-col min-h-screen">
+<header class="flex justify-center items-center p-3 border-b border-gray-700">
+  <span class="text-cyan-400">jigar@blog:~$</span>
 </header>
 
-<main class="w-100 measure-wide center ph2 flex-grow-1">
+<main class="w-full max-w-2xl mx-auto px-2 flex-grow">
   <slot />
 </main>
 
-<footer class="w-100 tc pa3 bt b--dark-gray">
-  <p class="f7 light-silver">Powered by Astro & Markdown</p>
-  <span class="cursor dib bg-cyan"></span>
+<footer class="w-full text-center p-3 border-t border-gray-700">
+  <p class="text-xs text-gray-400">Powered by Astro & Markdown</p>
+  <span class="cursor inline-block bg-cyan-400"></span>
 </footer>
 </body>
 </html>

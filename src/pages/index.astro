@@ -16,12 +16,12 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new D
     }
   </style>
 
-  <section id="posts">
+  <section id="posts" class="mt-8">
     <ul>
       {sortedPosts.map(post => (
-        <li class="pv2">
+        <li class="py-2">
           <a
-            class="dib color-inherit underline-offset decoration-thickness"
+            class="inline-block text-cyan-400 underline underline-offset decoration-thickness"
             href={`posts/${post.slug}/`}
           >
             {post.data.title}
