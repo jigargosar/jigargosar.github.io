@@ -2,18 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import Prose from '../../components/Prose.astro'
 import { getCollection } from 'astro:content'
-import { createSlugFromId } from '../../lib/slugs'
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts')
-  console.log('First post:', posts[0])
-  console.log('Post keys:', Object.keys(posts[0]))
-  console.log('Post.slug:', posts[0].slug)
-  console.log('Post.id:', posts[0].id)
-  return posts.map(post => ({
-    params: { slug: createSlugFromId(post.id) },
-    props: { post }
-  }))
+  return posts.map(post => {
+    const slug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    return {
+      params: { slug },
+      props: { post }
+    }
+  })
 }
 
 

@@ -2,7 +2,7 @@
 title: 'Prettier Config'
 date: '2025-10-11'
 description: Prettier configuration for new projects
-slug: 'test-custom-slug'
+slug: 'test-override'
 ---
 
 ## Prettier
