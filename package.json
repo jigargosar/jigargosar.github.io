@@ -7,6 +7,7 @@
     "build": "rimraf dist && astro build",
     "preview": "pnpm build && astro preview --port 4322"
   },
+  "packageManager": "pnpm@10.15.0",
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "astro": "^5.12.0",
