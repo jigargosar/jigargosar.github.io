@@ -1,2 +1,11 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@import url('https://cdn.staticdelivr.com/gfonts/css2?family=Fira+Code:wght@300..700&display=swap');
+
+@theme {
+  --color-background: #1d2021;
+  --color-foreground: #ebdbb2;
+  --color-accent: #8ec07c;
+
+  --font-mono: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace;
+}

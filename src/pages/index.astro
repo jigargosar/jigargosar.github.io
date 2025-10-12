@@ -25,12 +25,12 @@ const sortedPosts = posts
       {sortedPosts.map(post => (
         <li>
           <a
-            class="text-cyan-400 underline underline-offset decoration-thickness hover:text-cyan-300"
+            class="text-accent underline underline-offset decoration-thickness hover:opacity-80"
             href={`posts/${post.slug}/`}
           >
             {post.data.title}
           </a>
-          <p class="text-gray-400 text-sm mt-1">
+          <p class="text-sm mt-1 opacity-70">
             {post.data.description}
           </p>
         </li>
