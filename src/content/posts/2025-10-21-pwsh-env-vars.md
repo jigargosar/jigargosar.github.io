@@ -8,9 +8,8 @@ intro: How to set environment variables for a single command in PowerShell witho
 
 In PowerShell, setting an environment variable persists in your current session:
 
-```powershell
-$env:EDITOR = "vim"
-node script.js
+```pwsh
+$env:EDITOR = "vim"; node script.js
 # $env:EDITOR is still "vim" after command completes
 ```
 
@@ -24,7 +23,7 @@ EDITOR=vim node script.js  # EDITOR not set after
 
 Spawn a temporary PowerShell session using `-Command`:
 
-```powershell
+```pwsh
 pwsh -Command { $env:EDITOR = "vim"; node script.js }
 ```
 
