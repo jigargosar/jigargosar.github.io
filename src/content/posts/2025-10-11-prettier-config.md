@@ -5,8 +5,6 @@ description: Prettier configuration for new projects
 slug: 'prettier-config-reference'
 ---
 
-## Prettier
-
 Saved here so I stop grep-ing through old projects.
 
 ```json
