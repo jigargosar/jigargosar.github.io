@@ -8,7 +8,9 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [rehypeAstroRelativeMarkdownLinks],
     shikiConfig: {
-      theme: 'github-dark',
+      theme: 'material-theme-palenight',
+      // theme: 'nord',
+      // theme: 'dracula',
     },
   },
 
