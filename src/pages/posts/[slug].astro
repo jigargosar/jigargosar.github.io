@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import Prose from '../../components/Prose.astro'
 import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -19,9 +18,9 @@ const { post } = Astro.props
 const { Content } = await post.render()
 ---
 <BaseLayout>
-  <Prose>
+  <div class="prose prose-invert max-w-none prose-a:text-cyan-400">
     <h1>{post.data.title}</h1>
     <p>{post.data.intro}</p>
     <Content />
-  </Prose>
+  </div>
 </BaseLayout>
