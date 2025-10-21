@@ -20,17 +20,17 @@ const sortedPosts = posts
     }
   </style>
 
-  <section id="posts" class="mt-8">
-    <ul class="space-y-6">
+  <section id="posts" class="pt-8">
+    <ul class="flex flex-col gap-6">
       {sortedPosts.map(post => (
-        <li>
+        <li class="flex flex-col gap-1">
           <a
             class="text-cyan-400 underline underline-offset decoration-thickness hover:text-cyan-300"
             href={`posts/${post.slug}/`}
           >
             {post.data.title}
           </a>
-          <p class="text-gray-400 text-sm mt-1">
+          <p class="text-gray-400 text-sm">
             {post.data.description}
           </p>
         </li>
