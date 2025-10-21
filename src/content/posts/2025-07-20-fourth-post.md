@@ -1,7 +1,7 @@
 ---
 title: "Fourth Dummy Post"
 date: "2025-07-20"
-description: "This is a dummy fourth post for testing purposes."
+intro: "This is a dummy fourth post for testing purposes."
 ---
 
 This is a dummy fourth post for testing purposes.

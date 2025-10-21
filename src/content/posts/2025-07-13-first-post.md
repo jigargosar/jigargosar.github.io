@@ -1,7 +1,7 @@
 ---
 title: First Post
 date: "2025-07-13"
-description: Welcome to your first blog post! This is where you can share your thoughts, ideas, or updates.
+intro: Welcome to your first blog post! This is where you can share your thoughts, ideas, or updates.
 ---
 
 Welcome to your first blog post! This is where you can share your thoughts, ideas, or updates.

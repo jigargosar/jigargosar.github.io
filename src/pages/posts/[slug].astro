@@ -21,6 +21,7 @@ const { Content } = await post.render()
 <BaseLayout>
   <Prose>
     <h1>{post.data.title}</h1>
+    <p>{post.data.intro}</p>
     <Content />
   </Prose>
 </BaseLayout>
