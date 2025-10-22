@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title = 'jigar@blog:~$', description = 'Technical blog by Jigar Gosar' } = Astro.props
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +16,18 @@ const { title = 'jigar@blog:~$', description = 'Technical blog by Jigar Gosar' }
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content="article" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
