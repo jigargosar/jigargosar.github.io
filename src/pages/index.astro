@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
+import { SITE, AUTHOR } from '../config'
 
 const posts = await getCollection('posts')
 const sortedPosts = posts
@@ -13,18 +14,18 @@ const sortedPosts = posts
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'Jigar Gosar - Technical Blog',
-  description: 'Technical blog covering PowerShell, CSS, web development, and programming tips.',
-  url: 'https://jigargosar.github.io/',
+  name: SITE.title,
+  description: SITE.description,
+  url: SITE.url,
   author: {
     '@type': 'Person',
-    name: 'Jigar Gosar',
+    name: AUTHOR.name,
   },
 }
 ---
 <BaseLayout
-  title="Jigar Gosar - Technical Blog"
-  description="Technical blog covering PowerShell, CSS, web development, and programming tips."
+  title={SITE.title}
+  description={SITE.description}
   structuredData={structuredData}
 >
   <style>
