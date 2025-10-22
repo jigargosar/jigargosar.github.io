@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import { SITE } from '@astro-config'
+import { SITE } from '../config'
 
 interface Props {
   title?: string
@@ -8,7 +8,11 @@ interface Props {
   structuredData?: object
 }
 
-const { title = SITE.title, description = SITE.description, structuredData } = Astro.props
+const {
+  title = SITE.title,
+  description = SITE.description,
+  structuredData
+} = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 <!DOCTYPE html>

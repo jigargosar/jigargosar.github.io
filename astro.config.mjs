@@ -5,16 +5,6 @@ import sitemap from '@astrojs/sitemap'
 
 import tailwindcss from '@tailwindcss/vite'
 
-// Application constants
-export const SITE = {
-  title: 'Jigar Gosar - The Functional Programmer',
-  description: 'Functional programming insights and TIL moments from a developer\'s journey',
-}
-
-export const AUTHOR = {
-  name: 'Jigar Gosar',
-}
-
 export default defineConfig({
   site: 'https://jigargosar.github.io',
 
