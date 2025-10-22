@@ -1,10 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
 import rehypeAstroRelativeMarkdownLinks from 'astro-rehype-relative-markdown-links'
+import sitemap from '@astrojs/sitemap'
 
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
+  site: 'https://jigargosar.github.io',
+
+  integrations: [sitemap()],
+
   markdown: {
     rehypePlugins: [rehypeAstroRelativeMarkdownLinks],
     shikiConfig: {
