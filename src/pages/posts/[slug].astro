@@ -18,7 +18,24 @@ const { post } = Astro.props
 const { Content } = await post.render()
 ---
 <BaseLayout>
-  <div class="prose prose-invert max-w-none prose-a:text-cyan-400">
+  <style>
+    @reference "../../styles/global.css";
+
+    .post-content {
+      --text-color: theme('colors.gray.400');
+
+      @apply prose prose-invert max-w-none
+             prose-a:text-cyan-400
+             prose-headings:text-[var(--text-color)]
+             prose-p:text-[var(--text-color)]
+             prose-li:text-[var(--text-color)]
+             prose-code:text-[var(--text-color)]
+             prose-strong:text-[var(--text-color)]
+             prose-em:text-[var(--text-color)];
+    }
+  </style>
+
+  <div class="post-content">
     <h1>{post.data.title}</h1>
     <p>{post.data.intro}</p>
     <Content />
