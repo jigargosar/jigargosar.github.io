@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
-import { AUTHOR } from '../../config'
+import { AUTHOR } from '@astro-config'
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts')
@@ -27,7 +27,7 @@ const structuredData = {
   author: {
     '@type': 'Person',
     name: AUTHOR.name,
-    url: AUTHOR.url,
+    url: Astro.site?.href,
   },
 }
 ---
