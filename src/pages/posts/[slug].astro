@@ -17,7 +17,10 @@ export async function getStaticPaths() {
 const { post } = Astro.props
 const { Content } = await post.render()
 ---
-<BaseLayout>
+<BaseLayout
+  title={`${post.data.title} - Jigar Gosar`}
+  description={post.data.intro}
+>
   <style>
     @reference "../../styles/global.css";
 
