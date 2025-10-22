@@ -4,9 +4,10 @@ import '../styles/global.css'
 interface Props {
   title?: string
   description?: string
+  structuredData?: object
 }
 
-const { title = 'jigar@blog:~$', description = 'Technical blog by Jigar Gosar' } = Astro.props
+const { title = 'jigar@blog:~$', description = 'Technical blog by Jigar Gosar', structuredData } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 <!DOCTYPE html>
@@ -29,6 +30,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

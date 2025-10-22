@@ -9,10 +9,23 @@ const sortedPosts = posts
     ...post,
     slug: post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
   }))
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Jigar Gosar - Technical Blog',
+  description: 'Technical blog covering PowerShell, CSS, web development, and programming tips.',
+  url: 'https://jigargosar.github.io/',
+  author: {
+    '@type': 'Person',
+    name: 'Jigar Gosar',
+  },
+}
 ---
 <BaseLayout
   title="Jigar Gosar - Technical Blog"
   description="Technical blog covering PowerShell, CSS, web development, and programming tips."
+  structuredData={structuredData}
 >
   <style>
     .underline-offset {
