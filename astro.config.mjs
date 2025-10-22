@@ -11,6 +11,7 @@ export default defineConfig({
       theme: 'material-theme-palenight',
       // theme: 'nord',
       // theme: 'dracula',
+      wrap: true,
     },
   },
 
