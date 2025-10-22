@@ -16,7 +16,7 @@ const sortedPosts = posts
       text-underline-offset: 0.2em;
     }
     .decoration-thickness {
-      text-decoration-thickness: 0.01em;
+      text-decoration-thickness: 0.2em;
     }
   </style>
 
@@ -24,7 +24,7 @@ const sortedPosts = posts
     {sortedPosts.map(post => (
       <li class="flex flex-col gap-5">
         <a
-          class="text-cyan-300 text-2xl underline underline-offset decoration-thickness hover:text-cyan-300"
+          class="text-cyan-400 text-2xl underline underline-offset decoration-thickness decoration-cyan-950 hover:decoration-cyan-700"
           href={`posts/${post.slug}/`}
         >
           {post.data.title}
