@@ -44,6 +44,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap"
     rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
   />
 
   <base href={import.meta.env.BASE_URL} />
