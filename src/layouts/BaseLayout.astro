@@ -39,19 +39,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   )}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap"
-    rel="stylesheet"
-    media="print"
-    onload="this.media='all'"
-  />
-
   <base href={import.meta.env.BASE_URL} />
   <link rel="icon" href="favicon.svg" sizes="32x32" />
 
   <style>
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
