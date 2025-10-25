@@ -1,5 +1,5 @@
 ---
-title: 'Dead Simple Note Taking CLI'
+title: 'A Simple CLI Tool That Solves Note-Taking'
 date: '2025-10-25'
 intro: Note-taking doesn't need complexity. Create notes instantly, search through everything in milliseconds, and let plain markdown files be your database. One simple CLI tool, three powerful dependencies, zero friction.
 ---
