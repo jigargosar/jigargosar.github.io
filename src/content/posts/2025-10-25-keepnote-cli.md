@@ -22,83 +22,33 @@ What if note-taking was just... create search edit?
 
 Two operations, zero friction:
 
-**Create**: Command generates dated markdown file, opens in your editor
-**Search**: Full-text search across all notes, see live previews, jump to exact line
+### Create
 
-The workflow:
-- `kn "meeting notes"` → file created, editor opens, start writing
-- `kn` → type to filter, see matches, press Enter → editor opens at the line
+`kn "meeting notes"` - Creates file, opens editor, start writing.
 
-No navigation, no clicks, no UI. Type what you want, get exactly there.
+### Search
+
+`kn` - Type to filter, see matches, press Enter → editor opens at the line.
 
 Built on three battle-tested CLI tools:
-- **ripgrep** - Searches gigabytes of text in milliseconds
-- **fzf** - Interactive fuzzy finder with live filtering
-- **bat** - Syntax-highlighted preview
+- [**ripgrep**](https://github.com/BurntSushi/ripgrep) - Searches gigabytes of text in milliseconds
+- [**fzf**](https://github.com/junegunn/fzf) - Interactive fuzzy finder with live filtering
+- [**bat**](https://github.com/sharkdp/bat) - Syntax-highlighted preview
 
-## How It Works
+## Why It Matters
 
-### Creating Notes
+**Plain text files are portable.** Grep them, git them, sync them anywhere. No vendor lock-in, no format migrations. Works with any editor you prefer. I use chezmoi to sync my notes across machines - could just as easily use git, syncthing, or even Dropbox.
 
-```bash
-kn "project ideas"
-```
+**Composing existing tools beats building from scratch.** ripgrep is faster than anything I could write. fzf's fuzzy matching is battle-tested by millions. bat's syntax highlighting supports every language. Why reinvent when you can orchestrate?
 
-Creates `2025-10-25_project-ideas.md` and opens it in your editor. The date prefix keeps everything chronologically organized without thinking about it.
+**Date-prefixed filenames solve organization.** Natural chronological sorting. Easy to scan in any file browser. No folders, tags, or metadata needed.
 
-### Searching Notes
-
-```bash
-kn
-```
-
-Opens an interactive search through *all* your note contents. Type to filter, see live previews with syntax highlighting, press Enter to jump to the exact line.
-
-Search isn't by filename or tags. It's full-text search across everything you've ever written. ripgrep makes it instant even with thousands of notes.
-
-## Why This Works
-
-**Plain text files** mean:
-- Grep them, git them, sync them anywhere
-- No vendor lock-in, no format migrations
-- Works with any editor you prefer
-
-**Composing existing tools** beats building everything from scratch:
-- ripgrep is faster than anything I could write
-- fzf's fuzzy matching is battle-tested by millions
-- bat's syntax highlighting supports every language
-
-**Date-prefixed filenames** solve organization:
-- Natural chronological sorting
-- Easy to scan in any file browser
-- No need for metadata or frontmatter
-
-## The Stack
-
-The entire implementation is a single Node.js script that orchestrates external tools:
-
-```bash
-npm install -g keepnote
-```
-
-Prerequisites: `ripgrep`, `fzf`, `bat` (install via homebrew/scoop/apt)
-
-Configuration lives in `~/.config/keepnote/config.toml` - customize your notes directory and editor preference.
-
-Since it's just files in a directory, I use chezmoi to sync my notes across machines. No cloud service needed.
-
-## Why Simple Wins
-
-The tool does two things well. It doesn't have:
-- Cloud sync (use git/chezmoi/syncthing)
-- Rich text (markdown is enough)
-- Mobile apps (edit files anywhere)
-- AI features (grep finds what you need)
-
-Each note is a file. Each search is ripgrep + fzf. That's the entire mental model.
+**Simple tools, focused purpose.** The tool does two things well - create and search. It doesn't have cloud sync, rich text, mobile apps, or AI features. Each note is a file. Each search is ripgrep + fzf. That's the entire mental model.
 
 Fast tools, plain formats, zero complexity.
 
 ---
 
-Source: [github.com/jigargosar/keepnote](https://github.com/jigargosar/keepnote)
+**Install:** `npm install -g keepnote` ([GitHub](https://github.com/jigargosar/keepnote) | [npm](https://www.npmjs.com/package/keepnote))
+
+**Credits:** Inspired by [ripnote](https://github.com/cekrem/ripnote) by cekrem.
