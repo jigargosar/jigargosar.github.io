@@ -4,7 +4,7 @@ date: '2025-10-25'
 intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 ---
 
-[**keepnote**](https://github.com/jigargosar/keepnote) is a CLI tool that makes note-taking instant using plain text files.
+I built [**keepnote**](https://github.com/jigargosar/keepnote), a CLI tool for instant note-taking and search using plain text files.
 
 ## The Problem
 
