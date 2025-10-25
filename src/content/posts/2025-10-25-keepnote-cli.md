@@ -30,7 +30,9 @@ Two operations, zero friction:
 
 `kn` - Type to filter, see matches, press Enter → editor opens at the line.
 
-Built on three battle-tested CLI tools:
+### Built With
+
+Three battle-tested CLI tools:
 - [**ripgrep**](https://github.com/BurntSushi/ripgrep) - Searches gigabytes of text in milliseconds
 - [**fzf**](https://github.com/junegunn/fzf) - Interactive fuzzy finder with live filtering
 - [**bat**](https://github.com/sharkdp/bat) - Syntax-highlighted preview
