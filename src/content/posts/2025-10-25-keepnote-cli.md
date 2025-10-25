@@ -4,6 +4,8 @@ date: '2025-10-25'
 intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 ---
 
+[**keepnote**](https://github.com/jigargosar/keepnote) is a CLI tool that makes note-taking instant using plain text files.
+
 ## The Problem
 
 Taking notes should be instant. You have a thought, you capture it, you move on. Later, when you need it, you find it fast.
