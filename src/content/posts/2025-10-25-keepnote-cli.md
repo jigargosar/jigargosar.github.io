@@ -1,7 +1,7 @@
 ---
 title: 'A Simple CLI Tool That Solves Note-Taking'
 date: '2025-10-25'
-intro: Note-taking doesn't need complexity. Create notes instantly, search through everything in milliseconds, and let plain markdown files be your database. One simple CLI tool, three powerful dependencies, zero friction.
+intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 ---
 
 ## The Problem
@@ -9,22 +9,29 @@ intro: Note-taking doesn't need complexity. Create notes instantly, search throu
 Taking notes should be instant. You have a thought, you capture it, you move on. Later, when you need it, you find it fast.
 
 Most note-taking solutions add friction:
-- Launch an app
-- Navigate menus
-- Wait for sync
-- Search through proprietary formats
+- UI distractions when you just want to write
+- Too many steps to create or find notes
+- Search that requires navigation and multiple clicks
+- Designed for mouse interaction with keyboard support as afterthought
+- Feature-heavy, complex UIs tempting us to overthink organization, distracting from our primary purpose
+- Proprietary formats require painful export/conversion to switch tools
 
-What if note-taking was just... files and search?
+What if note-taking was just... create search edit?
 
 ## The Solution: keepnote
 
-A CLI tool that does exactly two things:
+Two operations, zero friction:
 
-1. **Create notes** with automatic date prefixes: `kn "meeting notes"`
-2. **Search everything** with fuzzy finding: `kn`
+**Create**: Command generates dated markdown file, opens in your editor
+**Search**: Full-text search across all notes, see live previews, jump to exact line
 
-That's it. No database, no sync service, no complex setup. Just markdown files and three battle-tested CLI tools:
+The workflow:
+- `kn "meeting notes"` → file created, editor opens, start writing
+- `kn` → type to filter, see matches, press Enter → editor opens at the line
 
+No navigation, no clicks, no UI. Type what you want, get exactly there.
+
+Built on three battle-tested CLI tools:
 - **ripgrep** - Searches gigabytes of text in milliseconds
 - **fzf** - Interactive fuzzy finder with live filtering
 - **bat** - Syntax-highlighted preview
