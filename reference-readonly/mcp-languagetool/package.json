@@ -1,0 +1,25 @@
+{
+  "name": "@jigargosar/mcp-languagetool",
+  "version": "1.0.0",
+  "description": "MCP server wrapping LanguageTool for grammar and spelling checks",
+  "type": "module",
+  "main": "mcp-languagetool-server.mjs",
+  "bin": {
+    "mcp-languagetool": "./mcp-languagetool-server.mjs"
+  },
+  "scripts": {
+    "start": "node mcp-languagetool-server.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "languagetool",
+    "grammar",
+    "spelling",
+    "model-context-protocol"
+  ],
+  "author": "Jigar Gosar",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2"
+  }
+}
