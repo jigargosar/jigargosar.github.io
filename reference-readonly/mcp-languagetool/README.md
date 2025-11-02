@@ -25,3 +25,12 @@ claude mcp add --transport stdio languagetool -- node /path/to/mcp-languagetool-
 ## Tool
 
 - `check_grammar` - Check grammar and spelling of text
+
+## Limitations
+
+- LanguageTool API returns many suggestions per error (hundreds in some cases)
+- Cannot be limited via API parameters
+- `maxSpellingSuggestions` requires config file with `--config` flag - no CLI parameter available
+- MCP server filters to top 3 suggestions before sending to Claude (Claude not bombarded)
+- LanguageTool server still generates all suggestions internally (may impact performance)
+- Consider alternative spell checkers if problematic
