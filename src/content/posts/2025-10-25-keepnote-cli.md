@@ -6,6 +6,12 @@ intro: Creating notes and finding what you need should be simple and instant. Yo
 
 I built [**keepnote**](https://github.com/jigargosar/keepnote), a CLI tool for instant note-taking and search using plain text files.
 
+---
+
+**Update (2025-11-04):** keepnote 3.0 is out with new features. [Read what's new →](/posts/2025-11-04-keepnote-3)
+
+---
+
 ## The Problem
 
 Taking notes should be instant. You have a thought, you capture it, you move on. Later, when you need it, you find it fast.
