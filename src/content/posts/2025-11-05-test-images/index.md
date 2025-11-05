@@ -4,6 +4,7 @@ date: '2025-11-05'
 intro: Testing how Astro handles images stored alongside post content in folders.
 image: ./image2.jpg
 imageAlt: Wide landscape test image
+draft: true
 ---
 
 This is a test post to verify how Astro handles images stored in the same folder as the post content.

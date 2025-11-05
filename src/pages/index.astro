@@ -1,15 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
+import { getPosts } from '../lib/posts'
 import { SITE, AUTHOR } from '../config'
 
-const posts = await getCollection('posts')
-const sortedPosts = posts
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .map(post => ({
-    ...post,
-    slug: post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
-  }))
+const posts = await getPosts()
+const sortedPosts = posts.map(post => ({
+  ...post,
+  slug: post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+}))
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -40,12 +38,19 @@ const structuredData = {
   <ul class="flex flex-col gap-10">
     {sortedPosts.map(post => (
       <li class="flex flex-col gap-5">
-        <a
-          class="text-cyan-400 text-2xl underline underline-offset decoration-thickness decoration-cyan-950 hover:decoration-cyan-700"
-          href={`posts/${post.slug}/`}
-        >
-          {post.data.title}
-        </a>
+        <div class="flex items-center gap-3">
+          <a
+            class="text-cyan-400 text-2xl underline underline-offset decoration-thickness decoration-cyan-950 hover:decoration-cyan-700"
+            href={`posts/${post.slug}/`}
+          >
+            {post.data.title}
+          </a>
+          {post.data.draft && import.meta.env.DEV && (
+            <span class="px-2 py-1 bg-cyan-400/10 border border-cyan-400/30 rounded text-cyan-400 text-xs">
+              DRAFT
+            </span>
+          )}
+        </div>
         <p class="text-gray-400 text-base">
           {post.data.intro}
         </p>

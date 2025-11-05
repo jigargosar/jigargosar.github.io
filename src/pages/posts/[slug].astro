@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
 import { Image } from 'astro:assets'
+import { getPosts } from '../../lib/posts'
 import { AUTHOR } from '../../config'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts')
+  const posts = await getPosts()
   return posts.map(post => {
     const slug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
     return {
@@ -79,6 +79,11 @@ const structuredData = {
       </div>
     )}
     <div class="post-content px-6 py-8 border-t border-white/[0.05]">
+      {post.data.draft && import.meta.env.DEV && (
+        <div class="mb-4 px-3 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded text-cyan-400 text-sm">
+          DRAFT - Not published in production
+        </div>
+      )}
       <h1>{post.data.title}</h1>
       <p>{post.data.intro}</p>
       <Content />
