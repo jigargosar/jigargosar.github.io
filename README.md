@@ -1,6 +1,4 @@
-# Blog
-
-Personal blog.
+Jigar Gosar's personal blog.
 
 **Tech Stack:**
 - Astro 5
