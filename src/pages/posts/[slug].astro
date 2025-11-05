@@ -68,7 +68,7 @@ const structuredData = {
 
   <div class="bg-white/[0.03] rounded-lg overflow-hidden">
     {post.data.image && (
-      <div class="aspect-[3/1]">
+      <div class="aspect-[5/3]">
         <Image
           src={post.data.image}
           alt={post.data.imageAlt || post.data.title}
@@ -80,7 +80,7 @@ const structuredData = {
     )}
     <div class="post-content px-6 py-8 border-t border-white/[0.05]">
       {post.data.draft && import.meta.env.DEV && (
-        <div class="mb-4 px-3 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded text-cyan-400 text-sm">
+        <div class="mb-4 px-3 py-2 bg-amber-400/20 border border-amber-400/50 rounded text-amber-300 text-sm font-medium">
           DRAFT - Not published in production
         </div>
       )}
