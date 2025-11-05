@@ -65,9 +65,18 @@ const structuredData = {
     }
   </style>
 
-  <div class="post-content">
-    <h1>{post.data.title}</h1>
-    <p>{post.data.intro}</p>
-    <Content />
+  <div class="bg-white/[0.03] rounded-lg overflow-hidden">
+    {post.data.image && (
+      <img
+        src={post.data.image}
+        alt={post.data.imageAlt || post.data.title}
+        class="w-full"
+      />
+    )}
+    <div class="post-content px-6 py-8">
+      <h1>{post.data.title}</h1>
+      <p>{post.data.intro}</p>
+      <Content />
+    </div>
   </div>
 </BaseLayout>
