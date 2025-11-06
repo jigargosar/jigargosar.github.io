@@ -2,7 +2,9 @@
 
 ## Planned
 
-- Optional post images (frontmatter-based)
+- Consistent navigation styling (same size, color, hover for logo and Resume link)
+- Change accent color from cyan to amber
+- Add card styling to list items on index page
 
 ## Someday / Maybe
 
