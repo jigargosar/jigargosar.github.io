@@ -1,0 +1,580 @@
+---
+const pageTitle = 'Jigar Gosar — Resume'
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{pageTitle}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --accent-bg: #eff6ff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .page-wrapper {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
+            z-index: 100;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 48px 48px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title {
+            font-size: 24px;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .contact-item a:hover {
+            border-color: white;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .summary-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-medium);
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .skill-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .skill-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+
+        .skill-items {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .experience-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            gap: 20px;
+        }
+
+        .company-role {
+            flex: 1;
+        }
+
+        .company-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .role-title {
+            font-size: 16px;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        .date-range {
+            background: var(--accent-bg);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 8px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .portfolio-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .portfolio-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .portfolio-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-title a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .portfolio-title a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .portfolio-desc {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .education-item {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-medium);
+        }
+
+        .education-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .languages {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .language-badge {
+            background: var(--accent-bg);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        @media print {
+            .page-wrapper {
+                background: white;
+                padding: 0;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: none;
+            }
+
+            .header {
+                background: var(--primary-color);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 20px 10px;
+            }
+
+            .nav-link {
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .header {
+                padding: 32px 24px;
+            }
+
+            .name {
+                font-size: 36px;
+            }
+
+            .job-title {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .contact-info {
+                gap: 12px;
+                font-size: 13px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .skill-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .skill-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+<a href="/" class="nav-link">← Blog</a>
+
+<div class="resume-container">
+    <div class="header">
+        <div class="header-content">
+            <h1 class="name">Jigar Gosar</h1>
+            <div class="job-title">Principal Software Engineer</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Mumbai, India
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    +91 98920 06911
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:jigar.gosar@gmail.com">jigar.gosar@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/jigargosar" target="_blank">GitHub</a>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/></svg>
+                    <a href="https://jigargosar.github.io/" target="_blank">Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">Summary</h2>
+            <p class="summary-text">
+                Principal‑level engineer with 13+ years designing and operating high‑throughput distributed microservices and real‑time messaging platforms. Built core messaging infrastructure (XMPP, LRHS) validated at ~100k concurrent users and ~1M messages/min. Active Elm developer for 5 years, building CLI and front‑end prototypes to demonstrate type‑driven UI design. Expert in system architecture, performance engineering, observability, CI/CD, and mentoring cross‑functional teams to deliver resilient, production‑grade platforms.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Core Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-row">
+                    <div class="skill-label">Languages:</div>
+                    <div class="skill-items">Java; Node.js; Scala; JavaScript; Elm</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-label">Systems & Frameworks:</div>
+                    <div class="skill-items">XMPP; ZeroMQ; Apache Mina; Jetty; Guice; Microservices</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-label">Infra & Tooling:</div>
+                    <div class="skill-items">MySQL; PostgreSQL; MongoDB; MS‑SQL; Jenkins; TeamCity; Maven; Webpack; ripgrep; fzf</div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-label">Practices:</div>
+                    <div class="skill-items">Architectural design; Performance tuning; Stress testing; CI/CD; TDD/BDD; Release engineering; Functional UI design; Observability</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company-role">
+                        <div class="company-name">ConfEngine</div>
+                        <div class="role-title">Principal Software Engineer</div>
+                    </div>
+                    <div class="date-range">2018–Present</div>
+                </div>
+                <ul class="achievements">
+                    <li>Architected and delivered the Schedule Editor as a reactive, componentized feature with backend service APIs; improved editor responsiveness and reduced regressions via feature flags and automated E2E tests.</li>
+                    <li>Implemented CI pipelines and service‑level observability (latency/throughput dashboards and alerts), reducing mean‑time‑to‑detect for regressions by >50%.</li>
+                    <li>Standardized deployment and release automation across services to reduce release lead time and rollback surface.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company-role">
+                        <div class="company-name">JPMC</div>
+                        <div class="role-title">React / Front End Consultant</div>
+                    </div>
+                    <div class="date-range">2016–2018</div>
+                </div>
+                <ul class="achievements">
+                    <li>Re‑engineered fragile React modules and introduced resilient component and state patterns, lowering front‑end defect rates in prioritized modules.</li>
+                    <li>Reduced initial bundle sizes through code splitting and dynamic imports; improved developer iteration speed with HMR and faster local builds.</li>
+                    <li>Instituted front‑end testing practices and lightweight performance budgets for critical user flows.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company-role">
+                        <div class="company-name">Flock / talk.to</div>
+                        <div class="role-title">Principal Engineer / Project Lead</div>
+                    </div>
+                    <div class="date-range">2010–2015</div>
+                </div>
+                <ul class="achievements">
+                    <li>Designed LRHS (Lookup, Routing, Heartbeat) core services and Java/Node client libraries to enable cluster discovery, resilient routing, and high availability across messaging clusters.</li>
+                    <li>Selected and integrated ZeroMQ for brokerless messaging and authored a multi‑queue executor with a concurrency model that increased throughput ~30% while lowering thread footprint.</li>
+                    <li>Instituted CI, release automation, and XP practices; mentored engineers in TDD/BDD, refactoring, and collective code ownership to raise delivery velocity and quality.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company-role">
+                        <div class="company-name">.PW Platform</div>
+                        <div class="role-title">Project Lead</div>
+                    </div>
+                    <div class="date-range">2008–2010</div>
+                </div>
+                <ul class="achievements">
+                    <li>Delivered initial XMPP Chat Server from scratch within one month; later added federation and multi‑user chat (MUC) support using Apache Mina for non‑blocking IO and Guice for DI.</li>
+                    <li>Built a functional test suite achieving >80% coverage; performed systematic stress testing and performance tuning to meet scale targets.</li>
+                    <li>Implemented HTTP APIs via embedded Jetty and designed multi‑queue executors to process ordered user requests efficiently.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company-role">
+                        <div class="company-name">LogicBoxes</div>
+                        <div class="role-title">Senior Software Engineer</div>
+                    </div>
+                    <div class="date-range">2004–2008</div>
+                </div>
+                <ul class="achievements">
+                    <li>Built finance and billing modules (Tax Engine, flexible pricing) and a DB‑independent SQL query builder to support migration from PostgreSQL to MS‑SQL.</li>
+                    <li>Led refactors, EL/JSTL adoption for cleaner views, and production‑copy stress testing to validate performance improvements and stabilize billing flows.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Open Source & Portfolio</h2>
+
+            <div class="portfolio-item">
+                <div class="portfolio-title">keepnote (CLI) — <a href="https://github.com/jigargosar/keepnote" target="_blank">github.com/jigargosar/keepnote</a></div>
+                <div class="portfolio-desc">
+                    CLI note‑taking tool combining ripgrep + fzf for instant search, editor integration, and modular commands; implemented command router, persistent note format, and editor workflows enabling sub‑second retrieval for large note sets.
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-title">Personal site & Elm demos — <a href="https://jigargosar.github.io/" target="_blank">jigargosar.github.io</a></div>
+                <div class="portfolio-desc">
+                    Technical posts and Elm prototypes demonstrating immutable model updates, typed message handling, time‑travel debugging, and performance profiling; used prototypes to validate UI state machines and reduce spec ambiguity.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="education-item">B.E. Information Technology, Vidyalankar Institute of Technology, Mumbai (2004)</div>
+            <div class="education-item">Diploma in Computer Technology, Bombay Institute of Technology, Mumbai (2001)</div>
+            <div class="education-item">Sun Certified Java Programmer (SCJP 1.4) — 100%</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Languages</h2>
+            <div class="languages">
+                <div class="language-badge">English (Fluent)</div>
+                <div class="language-badge">Hindi (Fluent)</div>
+            </div>
+        </section>
+    </div>
+</div>
+</div>
+</body>
+</html>
