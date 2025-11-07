@@ -9,10 +9,11 @@ export const AUTHOR = {
 
 // NOTE: Theme colors are duplicated from src/styles/accent-themes.css
 // When adding/changing themes, update both locations.
+
 // Ordered by hue angle for smooth color wheel progression
 export const THEMES = [
-  // { label: 'Rose', class: 'theme-rose', color: 'oklch(71.2% 0.194 13.428)' },    // 13.43°
-  // { label: 'Red', class: 'theme-red', color: 'oklch(70.4% 0.191 22.216)' },      // 22.22°
+  { label: 'Rose', class: 'theme-rose', color: 'oklch(71.2% 0.194 13.428)' },    // 13.43°
+  { label: 'Red', class: 'theme-red', color: 'oklch(70.4% 0.191 22.216)' },      // 22.22°
   { label: 'Lime', class: 'theme-lime', color: 'oklch(84.1% 0.238 128.85)' },    // 128.85°
   { label: 'Green', class: 'theme-green', color: 'oklch(79.2% 0.209 151.711)' }, // 151.71°
   { label: 'Emerald', class: 'theme-emerald', color: 'oklch(76.5% 0.177 163.223)' }, // 163.22°
