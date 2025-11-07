@@ -1,11 +1,14 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+
 /* good one */
-@import './accent-colors/sky.css';
 @import './accent-colors/teal.css';
-@import './accent-colors/emerald.css';
-@import './accent-colors/blue.css';
-@import './accent-colors/violet.css';
+
+/*@import './accent-colors/sky.css';*/
+/*@import './accent-colors/emerald.css';*/
+/*@import './accent-colors/blue.css';*/
+/*@import './accent-colors/violet.css';*/
 
 
 /* maybe */
