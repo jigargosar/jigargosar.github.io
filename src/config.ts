@@ -12,8 +12,6 @@ export const AUTHOR = {
 
 // Ordered by hue angle for smooth color wheel progression
 export const THEMES = [
-  { label: 'Rose', class: 'theme-rose', color: 'oklch(71.2% 0.194 13.428)' },    // 13.43°
-  { label: 'Red', class: 'theme-red', color: 'oklch(70.4% 0.191 22.216)' },      // 22.22°
   { label: 'Lime', class: 'theme-lime', color: 'oklch(84.1% 0.238 128.85)' },    // 128.85°
   { label: 'Green', class: 'theme-green', color: 'oklch(79.2% 0.209 151.711)' }, // 151.71°
   { label: 'Emerald', class: 'theme-emerald', color: 'oklch(76.5% 0.177 163.223)' }, // 163.22°
@@ -26,6 +24,8 @@ export const THEMES = [
   { label: 'Purple', class: 'theme-purple', color: 'oklch(71.4% 0.203 305.504)' }, // 305.50°
   { label: 'Fuchsia', class: 'theme-fuchsia', color: 'oklch(74% 0.238 322.16)' }, // 322.16°
   { label: 'Pink', class: 'theme-pink', color: 'oklch(71.8% 0.202 349.761)' },   // 349.76°
+  { label: 'Rose', class: 'theme-rose', color: 'oklch(71.2% 0.194 13.428)' },    // 13.43°
+  { label: 'Red', class: 'theme-red', color: 'oklch(70.4% 0.191 22.216)' },      // 22.22°
 ]
 
-export const DEFAULT_THEME = THEMES[0].class
+export const DEFAULT_THEME = THEMES.find(t => t.class === 'theme-teal')?.class || THEMES[0].class
