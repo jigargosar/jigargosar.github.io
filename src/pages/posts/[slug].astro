@@ -40,12 +40,13 @@ const structuredData = {
   <style>
     @reference "../../styles/global.css";
 
+    /* IMPORTANT: When changing accent colors on index page (src/pages/index.astro),
+       update these prose colors to match. No shared abstraction possible due to prose plugin.
+       Current: Links/headings use accent-500 to match index post titles */
+
     .post-content {
       --text-color: theme('colors.gray.400');
 
-      /* IMPORTANT: When changing accent colors on index page (src/pages/index.astro),
-         update these prose colors to match. No shared abstraction possible due to prose plugin.
-         Current: Links/headings use accent-500 to match index post titles */
       @apply prose prose-invert max-w-none
              prose-a:text-accent-500
              prose-headings:text-accent-500
