@@ -73,10 +73,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
   <a href="/" class="text-lg text-accent-400 hover:text-accent-300 flex items-center gap-2">
     <span>Jigar Gosar</span>
     <span class="flex gap-1.5 items-end">
-      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
-      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
-      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
-      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+      {[...Array(4)].map(() => (
+        <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+      ))}
     </span>
   </a>
   <nav class="flex items-center gap-4">
