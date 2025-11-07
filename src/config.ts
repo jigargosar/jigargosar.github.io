@@ -26,3 +26,5 @@ export const THEMES = [
   { label: 'Fuchsia', class: 'theme-fuchsia', color: 'oklch(74% 0.238 322.16)' }, // 322.16°
   { label: 'Pink', class: 'theme-pink', color: 'oklch(71.8% 0.202 349.761)' },   // 349.76°
 ]
+
+export const DEFAULT_THEME = THEMES[0].class

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import { SITE } from '../config'
+import { SITE, DEFAULT_THEME } from '../config'
 import ThemeSwitcher from '../components/ThemeSwitcher.astro'
 import ThemeSwitcherCursor from '../components/ThemeSwitcherCursor.astro'
 
@@ -18,7 +18,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 <!DOCTYPE html>
-<html lang="en" class="theme-emerald">
+<html lang="en" class={DEFAULT_THEME}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

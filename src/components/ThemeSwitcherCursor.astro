@@ -1,6 +1,7 @@
 ---
-import { THEMES } from '../config'
+import { THEMES, DEFAULT_THEME } from '../config'
 const themes = THEMES
+const defaultTheme = DEFAULT_THEME
 ---
 
 <div class="relative">
@@ -36,7 +37,7 @@ const themes = THEMES
   }
 </style>
 
-<script define:vars={{ themes }}>
+<script define:vars={{ themes, defaultTheme }}>
   const toggle = document.getElementById('theme-toggle-cursor')
   const dropdown = document.getElementById('theme-dropdown-cursor')
   const buttons = document.querySelectorAll('[data-theme-cursor]')
@@ -105,14 +106,14 @@ const themes = THEMES
   // Load theme from localStorage or use default
   function loadTheme() {
     const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      // Remove any existing theme classes
-      buttons.forEach((b) =>
-        document.documentElement.classList.remove(b.dataset.themeCursor),
-      )
-      // Apply saved theme
-      document.documentElement.classList.add(savedTheme)
-    }
+    const themeToApply = savedTheme || defaultTheme
+
+    // Remove any existing theme classes
+    buttons.forEach((b) =>
+      document.documentElement.classList.remove(b.dataset.themeCursor),
+    )
+    // Apply theme
+    document.documentElement.classList.add(themeToApply)
   }
 
   // Save theme to localStorage
