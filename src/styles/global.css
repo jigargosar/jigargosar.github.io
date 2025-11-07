@@ -1,23 +1,23 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 /* good one */
-/*@import './accent-colors/cyan.css';*/
-/*@import './accent-colors/blue.css';*/
-/*@import './accent-colors/green.css';*/
-/*@import './accent-colors/emerald.css';*/
-/*@import './accent-colors/teal.css';*/
-/*@import './accent-colors/sky.css';*/
-/*@import './accent-colors/purple.css';*/
-/*@import './accent-colors/violet.css';*/
+@import './accent-colors/sky.css';
+@import './accent-colors/teal.css';
+@import './accent-colors/emerald.css';
+@import './accent-colors/blue.css';
+@import './accent-colors/violet.css';
 
 
 /* maybe */
+/*@import './accent-colors/green.css';*/
+/*@import './accent-colors/cyan.css';*/
 /*@import './accent-colors/lime.css';*/
 /*@import './accent-colors/indigo.css';*/
 /*@import './accent-colors/pink.css';*/
 /*@import './accent-colors/red.css';*/
 /*@import './accent-colors/rose.css';*/
 /*@import './accent-colors/fuchsia.css';*/
+/*@import './accent-colors/purple.css';*/
 
 
 /* not good one */
