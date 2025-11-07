@@ -16,7 +16,6 @@ const themes = THEMES
       themes.map((theme) => (
         <button
           data-theme={theme.class}
-          data-theme-label={theme.label}
           class="w-6 h-6 rounded-full hover:ring-2 hover:ring-accent-400 hover:ring-offset-[3px] hover:ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-[3px] focus:ring-offset-gray-800"
           style={`background-color: ${theme.color};`}
           title={theme.label}
@@ -27,12 +26,12 @@ const themes = THEMES
   </div>
 </div>
 
-<script>
+<script define:vars={{ themes }}>
   const toggle = document.getElementById('theme-toggle')
   const dropdown = document.getElementById('theme-dropdown')
   const buttons = document.querySelectorAll('[data-theme]')
 
-  const handleEscape = (e: KeyboardEvent) => {
+  const handleEscape = (e) => {
     if (e.key === 'Escape') {
       dropdown?.classList.add('hidden')
       document.removeEventListener('keydown', handleEscape)
@@ -52,8 +51,8 @@ const themes = THEMES
 
   document.addEventListener('click', (e) => {
     if (
-      !toggle?.contains(e.target as Node) &&
-      !dropdown?.contains(e.target as Node)
+      !toggle?.contains(e.target) &&
+      !dropdown?.contains(e.target)
     ) {
       dropdown?.classList.add('hidden')
       document.removeEventListener('keydown', handleEscape)
@@ -86,12 +85,10 @@ const themes = THEMES
   // Update toggle button title to match current theme
   function updateToggleTitle() {
     const currentTheme = getCurrentTheme()
-    const currentButton = Array.from(buttons).find(
-      (b) => (b as HTMLElement).dataset.theme === currentTheme
-    ) as HTMLElement | undefined
+    const currentThemeData = themes.find(t => t.class === currentTheme)
 
-    if (currentButton && toggle) {
-      toggle.title = currentButton.dataset.themeLabel || ''
+    if (currentThemeData && toggle) {
+      toggle.title = currentThemeData.label
     }
   }
 
@@ -109,7 +106,7 @@ const themes = THEMES
   }
 
   // Save theme to localStorage
-  function saveTheme(theme: string) {
+  function saveTheme(theme) {
     localStorage.setItem('theme', theme)
   }
 
