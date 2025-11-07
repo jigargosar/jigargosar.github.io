@@ -1,17 +1,6 @@
 ---
-// NOTE: Theme colors are duplicated from src/styles/accent-themes.css
-// When adding/changing themes, update both locations.
-// Ordered by hue angle for smooth color wheel progression
-const themes = [
-  { label: 'Lime', class: 'theme-lime', color: 'oklch(84.1% 0.238 128.85)' },    // 128.85°
-  { label: 'Green', class: 'theme-green', color: 'oklch(79.2% 0.209 151.711)' }, // 151.71°
-  { label: 'Emerald', class: 'theme-emerald', color: 'oklch(76.5% 0.177 163.223)' }, // 163.22°
-  { label: 'Teal', class: 'theme-teal', color: 'oklch(77.7% 0.152 181.912)' },   // 181.91°
-  { label: 'Cyan', class: 'theme-cyan', color: 'oklch(78.9% 0.154 211.53)' },    // 211.53°
-  { label: 'Sky', class: 'theme-sky', color: 'oklch(74.6% 0.16 232.661)' },      // 232.66°
-  { label: 'Blue', class: 'theme-blue', color: 'oklch(70.7% 0.165 254.624)' },   // 254.62°
-  { label: 'Violet', class: 'theme-violet', color: 'oklch(70.2% 0.183 293.541)' }, // 293.54°
-]
+import { THEMES } from '../config'
+const themes = THEMES
 ---
 
 <div class="relative">
@@ -27,6 +16,7 @@ const themes = [
       themes.map((theme) => (
         <button
           data-theme-cursor={theme.class}
+          data-theme-label={theme.label}
           class="w-2 h-4 hover:ring-2 hover:ring-accent-400 hover:ring-offset-[3px] hover:ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-[3px] focus:ring-offset-gray-800"
           style={`background-color: ${theme.color};`}
           title={theme.label}
@@ -106,19 +96,12 @@ const themes = [
   // Update toggle button title to match current theme
   function updateToggleTitle() {
     const currentTheme = getCurrentTheme()
-    const currentThemeData = [
-      { label: 'Lime', class: 'theme-lime', color: 'oklch(84.1% 0.238 128.85)' },
-      { label: 'Green', class: 'theme-green', color: 'oklch(79.2% 0.209 151.711)' },
-      { label: 'Emerald', class: 'theme-emerald', color: 'oklch(76.5% 0.177 163.223)' },
-      { label: 'Teal', class: 'theme-teal', color: 'oklch(77.7% 0.152 181.912)' },
-      { label: 'Cyan', class: 'theme-cyan', color: 'oklch(78.9% 0.154 211.53)' },
-      { label: 'Sky', class: 'theme-sky', color: 'oklch(74.6% 0.16 232.661)' },
-      { label: 'Blue', class: 'theme-blue', color: 'oklch(70.7% 0.165 254.624)' },
-      { label: 'Violet', class: 'theme-violet', color: 'oklch(70.2% 0.183 293.541)' },
-    ].find(t => t.class === currentTheme)
+    const currentButton = Array.from(buttons).find(
+      (b) => (b as HTMLElement).dataset.themeCursor === currentTheme
+    ) as HTMLElement | undefined
 
-    if (currentThemeData && toggle) {
-      toggle.title = currentThemeData.label
+    if (currentButton && toggle) {
+      toggle.title = currentButton.dataset.themeLabel || ''
     }
   }
 
