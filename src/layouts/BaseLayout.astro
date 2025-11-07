@@ -70,7 +70,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 <body class="mono bg-gray-900 text-gray-300 flex flex-col min-h-screen">
 <header class="w-full max-w-2xl mx-auto p-3 flex items-center justify-between border-b border-gray-700">
-  <a href="/" class="text-lg text-accent-400 hover:text-accent-300">Jigar Gosar</a>
+  <a href="/" class="text-lg text-accent-400 hover:text-accent-300 flex items-center gap-2">
+    <span>Jigar Gosar</span>
+    <span class="flex gap-1.5 items-end">
+      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+      <span class="w-2 h-6 bg-accent-600 inline-block" style="transform: skewX(-12deg);"></span>
+    </span>
+  </a>
   <nav class="flex items-center gap-4">
     <a href="/resume/" class="text-sm text-accent-400 hover:text-accent-300 underline">Resume</a>
     <ThemeSwitcher />
