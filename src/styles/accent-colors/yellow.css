@@ -1,0 +1,13 @@
+@theme {
+  --color-accent-50: oklch(98.7% 0.026 102.212);
+  --color-accent-100: oklch(97.3% 0.071 103.193);
+  --color-accent-200: oklch(94.5% 0.129 101.54);
+  --color-accent-300: oklch(90.5% 0.182 98.111);
+  --color-accent-400: oklch(85.2% 0.199 91.936);
+  --color-accent-500: oklch(79.5% 0.184 86.047);
+  --color-accent-600: oklch(68.1% 0.162 75.834);
+  --color-accent-700: oklch(55.4% 0.135 66.442);
+  --color-accent-800: oklch(47.6% 0.114 61.907);
+  --color-accent-900: oklch(42.1% 0.095 57.708);
+  --color-accent-950: oklch(28.6% 0.066 53.813);
+}

@@ -1,6 +1,39 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import './accent-colors/cyan.css';
+/* good one */
+/*@import './accent-colors/cyan.css';*/
+/*@import './accent-colors/blue.css';*/
+/*@import './accent-colors/green.css';*/
+/*@import './accent-colors/emerald.css';*/
+/*@import './accent-colors/teal.css';*/
+/*@import './accent-colors/sky.css';*/
+/*@import './accent-colors/purple.css';*/
+/*@import './accent-colors/violet.css';*/
+
+
+/* maybe */
+/*@import './accent-colors/lime.css';*/
+/*@import './accent-colors/indigo.css';*/
+/*@import './accent-colors/pink.css';*/
+/*@import './accent-colors/red.css';*/
+/*@import './accent-colors/rose.css';*/
+/*@import './accent-colors/fuchsia.css';*/
+
+
+/* not good one */
+/*@import './accent-colors/yellow.css';*/
+/*@import './accent-colors/amber.css';*/
+/*@import './accent-colors/orange.css';*/
+/*@import './accent-colors/slate.css';*/
+/*@import './accent-colors/gray.css';*/
+/*@import './accent-colors/neutral.css';*/
+/*@import './accent-colors/zinc.css';*/
+/*@import './accent-colors/stone.css';*/
+
+
+/* remaining to test */
+
+
 
 html {
     scrollbar-gutter: stable;

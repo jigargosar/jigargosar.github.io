@@ -1,0 +1,13 @@
+@theme {
+  --color-accent-50: oklch(97.1% 0.013 17.38);
+  --color-accent-100: oklch(93.6% 0.032 17.717);
+  --color-accent-200: oklch(88.5% 0.062 18.334);
+  --color-accent-300: oklch(80.8% 0.114 19.571);
+  --color-accent-400: oklch(70.4% 0.191 22.216);
+  --color-accent-500: oklch(63.7% 0.237 25.331);
+  --color-accent-600: oklch(57.7% 0.245 27.325);
+  --color-accent-700: oklch(50.5% 0.213 27.518);
+  --color-accent-800: oklch(44.4% 0.177 26.899);
+  --color-accent-900: oklch(39.6% 0.141 25.723);
+  --color-accent-950: oklch(25.8% 0.092 26.042);
+}
