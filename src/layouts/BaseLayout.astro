@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css'
 import { SITE } from '../config'
+import ThemeSwitcher from '../components/ThemeSwitcher.astro'
+import ThemeSwitcherCursor from '../components/ThemeSwitcherCursor.astro'
 
 interface Props {
   title?: string
@@ -16,7 +18,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-emerald">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,7 +71,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 <body class="mono bg-gray-900 text-gray-300 flex flex-col min-h-screen">
 <header class="w-full max-w-2xl mx-auto p-3 flex items-center justify-between border-b border-gray-700">
   <a href="/" class="text-lg text-accent-400 hover:text-accent-300">Jigar Gosar</a>
-  <a href="/resume/" class="text-sm text-gray-400 hover:text-accent-400">Resume</a>
+  <nav class="flex items-center gap-4">
+    <a href="/resume/" class="text-sm text-accent-400 hover:text-accent-300 underline">Resume</a>
+    <ThemeSwitcher />
+  </nav>
 </header>
 
 <main class="w-full max-w-prose mx-auto px-3 py-8 flex-grow">
@@ -78,7 +83,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 <footer class="w-full max-w-2xl mx-auto p-3 border-t border-gray-700 flex flex-col items-center">
   <p class="text-xs text-gray-400">Powered by Astro & Markdown</p>
-  <span class="cursor inline-block bg-accent-400"></span>
+  <ThemeSwitcherCursor />
 </footer>
 
 <script>

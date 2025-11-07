@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-
+@import './accent-themes.css';
 
 /* good one */
-@import './accent-colors/teal.css';
+/*@import './accent-colors/teal.css';*/
 
 /*@import './accent-colors/sky.css';*/
 /*@import './accent-colors/emerald.css';*/
