@@ -106,7 +106,9 @@ const defaultTheme = DEFAULT_THEME
   // Load theme from localStorage or use default
   function loadTheme() {
     const savedTheme = localStorage.getItem('theme')
-    const themeToApply = savedTheme || defaultTheme
+    // Validate that saved theme exists in current themes list
+    const isValidTheme = savedTheme && themes.some(t => t.class === savedTheme)
+    const themeToApply = isValidTheme ? savedTheme : defaultTheme
 
     // Remove any existing theme classes
     buttons.forEach((b) =>
