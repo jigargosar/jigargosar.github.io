@@ -78,15 +78,17 @@ const structuredData = {
         />
       </div>
     )}
-    <div class="post-content px-6 py-8">
-      {post.data.draft && import.meta.env.DEV && (
-        <div class="mb-4 px-3 py-2 bg-amber-400/20 border border-amber-400/50 rounded text-amber-300 text-sm font-medium">
-          DRAFT - Not published in production
-        </div>
-      )}
-      <h1>{post.data.title}</h1>
-      <p>{post.data.intro}</p>
-      <Content />
+    <div class="px-6 py-8">
+      <div class="post-content max-w-prose mx-auto">
+        {post.data.draft && import.meta.env.DEV && (
+          <div class="mb-4 px-3 py-2 bg-amber-400/20 border border-amber-400/50 rounded text-amber-300 text-sm font-medium">
+            DRAFT - Not published in production
+          </div>
+        )}
+        <h1>{post.data.title}</h1>
+        <p>{post.data.intro}</p>
+        <Content />
+      </div>
     </div>
   </div>
 </BaseLayout>
