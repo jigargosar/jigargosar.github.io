@@ -26,6 +26,7 @@ Regarding theme related constants in following two files must be in sync:
 - theme names and colors are duplicated from css to config file.
 
 When removing `draft: true` from posts:
-    - we need to remember to update the `date` field to the current date. 
+    - we need to remember to update the `date` field to be in sync. 
     - otherwise the post will seem that it was published in the past.
-    - FYI: sorting and publication is derived from frontmatter, not from the folder/file name prefix.
+    - sorting and publication date in frontmatter is the authoritative source.
+        - FYI: not the folder/file name prefix.
