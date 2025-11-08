@@ -72,6 +72,7 @@ const structuredData = {
 
   <div class="bg-white/[0.01] rounded-lg overflow-hidden border border-white/[0.05] shadow-lg">
     {post.data.image && (
+      <!-- NOTE: If aspect ratio changes, update README.md hero image documentation -->
       <div class="aspect-[5/3]">
         <Image
           src={post.data.image}

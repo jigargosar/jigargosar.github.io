@@ -15,7 +15,7 @@ Jigar Gosar's personal blog.
 
 ## ⚠️ Important
 
-Hero images of posts must match 3:1 aspect ratio (1200×400px recommended).
+Hero images of posts must match 5:3 aspect ratio (1200×720px recommended).
     - otherwise content at edges may be cropped.
 
 
