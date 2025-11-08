@@ -23,18 +23,6 @@ Jigar Gosar's personal blog.
 
 ### Multi-Location Updates
 
-Some features require updates in multiple places:
-
-**Themes:**
-
-Requires updates in **both** locations:
-- `src/config.ts` - `THEMES` array with theme metadata (label, class, color)
-- `src/styles/accent-themes.css` - `.theme-*` CSS class definitions with OKLCH color values
-
-**When adding a theme:**
-- Add to `THEMES` array in `src/config.ts`
-- Add `.theme-*` class with 11 shades (50-950) in `src/styles/accent-themes.css`
-
-**When removing a theme:**
-- Remove from `THEMES` array in `src/config.ts`
-- Keep CSS class in `src/styles/accent-themes.css` (allows easy toggling themes on/off without recreating CSS)
+Regarding theme related constants in following two files must be in sync. 
+- `src/styles/accent-themes.css` and `src/config.ts`
+- theme names and colors are duplicated from css to config file.
