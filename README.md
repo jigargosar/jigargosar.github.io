@@ -37,4 +37,4 @@ Requires updates in **both** locations:
 
 **When removing a theme:**
 - Remove from `THEMES` array in `src/config.ts`
-- Keep CSS class in `src/styles/accent-themes.css` (for users with saved preference in localStorage)
+- Keep CSS class in `src/styles/accent-themes.css` (allows easy toggling themes on/off without recreating CSS)
