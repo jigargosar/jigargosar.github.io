@@ -3,6 +3,7 @@ import '../styles/global.css'
 import { SITE, DEFAULT_THEME } from '../config'
 import ThemeSwitcher from '../components/ThemeSwitcher.astro'
 import ThemeSwitcherCursor from '../components/ThemeSwitcherCursor.astro'
+import Link from '../components/Link.astro'
 
 interface Props {
   title?: string
@@ -79,7 +80,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     </span>
   </a>
   <nav class="flex items-center gap-4">
-    <a href="/resume/" class="text-sm text-accent-400 underline decoration-accent-950 hover:decoration-accent-700" style="text-underline-offset: 0.2em; text-decoration-thickness: 0.2em;">Resume</a>
+    <Link href="/resume/">Resume</Link>
     <ThemeSwitcher />
   </nav>
 </header>
