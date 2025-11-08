@@ -49,6 +49,8 @@ const structuredData = {
 
       @apply prose prose-invert max-w-none
              prose-a:text-accent-500
+             prose-a:underline
+             prose-a:decoration-accent-950
              prose-headings:text-accent-500
              prose-headings:font-bold
              prose-headings:mb-2
@@ -67,6 +69,15 @@ const structuredData = {
              prose-code:text-[var(--text-color)]
              prose-strong:text-[var(--text-color)]
              prose-em:text-[var(--text-color)];
+    }
+
+    .post-content :global(a) {
+      text-underline-offset: 0.2em;
+      text-decoration-thickness: 0.2em;
+    }
+
+    .post-content :global(a:hover) {
+      text-decoration-color: theme('colors.accent.700');
     }
   </style>
 
