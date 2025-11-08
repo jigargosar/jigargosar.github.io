@@ -31,6 +31,7 @@ When removing `draft: true` from posts:
     - sorting and publication date in frontmatter is the authoritative source.
         - FYI: not the folder/file name prefix.
 
-Global styling need to synced with markdown content styling, (currently only with post slug page)
+Global styling need to synced with markdown content styling.
+    - every time we make any changes to style of elements, we need to ensure that markdown prose styling is also updated accordingly.
 
 ThemeSwitcher and ThemeSwitcherCursor, have intentionally duplicated. which needs to be in sync.
