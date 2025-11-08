@@ -30,3 +30,5 @@ When removing `draft: true` from posts:
     - otherwise the post will seem that it was published in the past.
     - sorting and publication date in frontmatter is the authoritative source.
         - FYI: not the folder/file name prefix.
+
+Global styling need to synced with markdown content styling, (currently only with post slug page)
