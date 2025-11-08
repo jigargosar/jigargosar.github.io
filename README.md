@@ -15,14 +15,17 @@ Jigar Gosar's personal blog.
 
 ## ⚠️ Important
 
-**Publishing drafts:** When removing `draft: true`, remember to update the `date` field to the current date. The frontmatter date controls sorting and publication date, not the folder name.
+Hero images of posts must match 3:1 aspect ratio (1200×400px recommended).
+    - otherwise content at edges may be cropped.
 
-**Post images:** Images must match 3:1 aspect ratio (1200×400px recommended). Content at vertical edges may be cropped.
 
-## 🔧 Development Notes
+## Multi-Location Update Reference
 
-### Multi-Location Updates
-
-Regarding theme related constants in following two files must be in sync. 
+Regarding theme related constants in following two files must be in sync:
 - `src/styles/accent-themes.css` and `src/config.ts`
 - theme names and colors are duplicated from css to config file.
+
+When removing `draft: true` from posts:
+    - we need to remember to update the `date` field to the current date. 
+    - otherwise the post will seem that it was published in the past.
+    - FYI: sorting and publication is derived from frontmatter, not from the folder/file name prefix.
