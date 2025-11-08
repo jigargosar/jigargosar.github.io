@@ -32,3 +32,5 @@ When removing `draft: true` from posts:
         - FYI: not the folder/file name prefix.
 
 Global styling need to synced with markdown content styling, (currently only with post slug page)
+
+ThemeSwitcher and ThemeSwitcherCursor, have intentionally duplicated. which needs to be in sync.
