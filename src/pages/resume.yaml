@@ -1,0 +1,88 @@
+name: Jigar Gosar
+title: Principal Software Engineer
+
+contact:
+  location: Mumbai, India
+  phone: +91 98920 06911
+  email: jigar.gosar@gmail.com
+  github: github.com/jigargosar
+  website: jigargosar.github.io
+
+summary: |
+  Principal‑level engineer with 13+ years designing and operating
+  high‑throughput distributed microservices and real‑time messaging
+  platforms. Built core messaging infrastructure (XMPP, LRHS)
+  validated at ~100k concurrent users and ~1M messages/min. Active
+  Elm developer for 5 years, building CLI and front‑end prototypes
+  to demonstrate type‑driven UI design. Expert in system
+  architecture, performance engineering, observability, CI/CD, and
+  mentoring cross‑functional teams to deliver resilient,
+  production‑grade platforms.
+
+skills:
+  - label: Languages
+    items: Java; Node.js; Scala; JavaScript; Elm
+  - label: Systems & Frameworks
+    items: XMPP; ZeroMQ; Apache Mina; Jetty; Guice; Microservices
+  - label: Infra & Tooling
+    items: MySQL; PostgreSQL; MongoDB; MS‑SQL; Jenkins; TeamCity; Maven; Webpack; ripgrep; fzf
+  - label: Practices
+    items: Architectural design; Performance tuning; Stress testing; CI/CD; TDD/BDD; Release engineering; Functional UI design; Observability
+
+experience:
+  - company: ConfEngine
+    role: Principal Software Engineer
+    dateRange: 2018–Present
+    achievements:
+      - Architected and delivered the Schedule Editor as a reactive, componentized feature with backend service APIs; improved editor responsiveness and reduced regressions via feature flags and automated E2E tests.
+      - Implemented CI pipelines and service‑level observability (latency/throughput dashboards and alerts), reducing mean‑time‑to‑detect for regressions by >50%.
+      - Standardized deployment and release automation across services to reduce release lead time and rollback surface.
+
+  - company: JPMC
+    role: React / Front End Consultant
+    dateRange: 2016–2018
+    achievements:
+      - Re‑engineered fragile React modules and introduced resilient component and state patterns, lowering front‑end defect rates in prioritized modules.
+      - Reduced initial bundle sizes through code splitting and dynamic imports; improved developer iteration speed with HMR and faster local builds.
+      - Instituted front‑end testing practices and lightweight performance budgets for critical user flows.
+
+  - company: Flock / talk.to
+    role: Principal Engineer / Project Lead
+    dateRange: 2010–2015
+    achievements:
+      - Designed LRHS (Lookup, Routing, Heartbeat) core services and Java/Node client libraries to enable cluster discovery, resilient routing, and high availability across messaging clusters.
+      - Selected and integrated ZeroMQ for brokerless messaging and authored a multi‑queue executor with a concurrency model that increased throughput ~30% while lowering thread footprint.
+      - Instituted CI, release automation, and XP practices; mentored engineers in TDD/BDD, refactoring, and collective code ownership to raise delivery velocity and quality.
+
+  - company: .PW Platform
+    role: Project Lead
+    dateRange: 2008–2010
+    achievements:
+      - Delivered initial XMPP Chat Server from scratch within one month; later added federation and multi‑user chat (MUC) support using Apache Mina for non‑blocking IO and Guice for DI.
+      - Built a functional test suite achieving >80% coverage; performed systematic stress testing and performance tuning to meet scale targets.
+      - Implemented HTTP APIs via embedded Jetty and designed multi‑queue executors to process ordered user requests efficiently.
+
+  - company: LogicBoxes
+    role: Senior Software Engineer
+    dateRange: 2004–2008
+    achievements:
+      - Built finance and billing modules (Tax Engine, flexible pricing) and a DB‑independent SQL query builder to support migration from PostgreSQL to MS‑SQL.
+      - Led refactors, EL/JSTL adoption for cleaner views, and production‑copy stress testing to validate performance improvements and stabilize billing flows.
+
+portfolio:
+  - title: keepnote (CLI)
+    url: github.com/jigargosar/keepnote
+    description: CLI note‑taking tool combining ripgrep + fzf for instant search, editor integration, and modular commands; implemented command router, persistent note format, and editor workflows enabling sub‑second retrieval for large note sets.
+
+  - title: Personal site & Elm demos
+    url: jigargosar.github.io
+    description: Technical posts and Elm prototypes demonstrating immutable model updates, typed message handling, time‑travel debugging, and performance profiling; used prototypes to validate UI state machines and reduce spec ambiguity.
+
+education:
+  - B.E. Information Technology, Vidyalankar Institute of Technology, Mumbai (2004)
+  - Diploma in Computer Technology, Bombay Institute of Technology, Mumbai (2001)
+  - Sun Certified Java Programmer (SCJP 1.4) — 100%
+
+languages:
+  - English (Fluent)
+  - Hindi (Fluent)

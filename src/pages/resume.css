@@ -1,0 +1,496 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --text-dark: #1e293b;
+  --text-medium: #475569;
+  --text-light: #64748b;
+  --bg-light: #f8fafc;
+  --border-color: #e2e8f0;
+  --accent-bg: #eff6ff;
+}
+
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.page-wrapper {
+  background: #111827;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+/* Navigation bar with both buttons */
+.nav-bar {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+}
+
+.nav-button {
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.resume-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: white;
+  padding: 48px 48px 40px;
+  position: relative;
+  overflow: hidden;
+  /* Force background printing */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+  opacity: 0.5;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.name {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job-title {
+  font-size: 24px;
+  font-weight: 300;
+  opacity: 0.95;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-item svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.contact-item a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: border-color 0.2s;
+}
+
+.contact-item a:hover {
+  border-color: white;
+}
+
+.content {
+  padding: 48px;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--primary-color);
+  display: inline-block;
+}
+
+.summary-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-medium);
+  text-align: justify;
+}
+
+.skills-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.skill-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.skill-label {
+  font-weight: 600;
+  color: var(--text-dark);
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.skill-items {
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+
+.experience-item {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.experience-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 20px;
+}
+
+.company-role {
+  flex: 1;
+}
+
+.company-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.role-title {
+  font-size: 16px;
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+.date-range {
+  background: var(--accent-bg);
+  color: var(--primary-color);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.achievements {
+  list-style: none;
+  padding: 0;
+}
+
+.achievements li {
+  padding-left: 28px;
+  margin-bottom: 10px;
+  position: relative;
+  color: var(--text-medium);
+  line-height: 1.65;
+}
+
+.achievements li::before {
+  content: '▸';
+  position: absolute;
+  left: 8px;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.portfolio-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.portfolio-item:last-child {
+  margin-bottom: 0;
+}
+
+.portfolio-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.portfolio-title a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s, color 0.2s;
+}
+
+.portfolio-title a:hover {
+  color: var(--secondary-color);
+  text-decoration-color: currentColor;
+}
+
+.portfolio-desc {
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+
+.education-item {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-medium);
+}
+
+.education-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.languages {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.language-badge {
+  background: var(--accent-bg);
+  color: var(--primary-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 15px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* PRINT STYLES - Fixed for proper PDF output */
+@media print {
+  @page {
+    margin: 0.5in 0.6in;
+  }
+
+  body {
+    background: white;
+  }
+
+  .page-wrapper {
+    background: white;
+    padding: 0;
+  }
+
+  /* Hide navigation buttons */
+  .nav-bar {
+    display: none !important;
+  }
+
+  .resume-container {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+  }
+
+  .content {
+    padding: 32px 40px;
+  }
+
+  .header {
+    padding: 36px 40px 32px;
+  }
+
+  /* Force header background to print */
+  .header {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color) 0%,
+      var(--secondary-color) 100%
+    ) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Ensure all colored backgrounds print */
+  .date-range,
+  .portfolio-item,
+  .language-badge {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Show full URLs for ATS compatibility */
+  .contact-item a::after,
+  .portfolio-title a::after {
+    content: '';
+  }
+
+  /* Tighter spacing for print */
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    margin-bottom: 12px;
+  }
+
+  .experience-item {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+  }
+
+  .experience-header {
+    margin-bottom: 10px;
+  }
+
+  .achievements li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  /* Prevent page breaks inside sections */
+  .experience-item,
+  .portfolio-item,
+  .education-item,
+  .skill-row {
+    page-break-inside: avoid;
+  }
+
+  /* Keep section titles with content */
+  .section-title {
+    page-break-after: avoid;
+  }
+
+  h2 {
+    page-break-after: avoid;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 20px 10px;
+  }
+
+  .nav-bar {
+    top: 10px;
+    right: 10px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .header {
+    padding: 32px 24px;
+  }
+
+  .name {
+    font-size: 36px;
+  }
+
+  .job-title {
+    font-size: 20px;
+  }
+
+  .content {
+    padding: 32px 24px;
+  }
+
+  .contact-info {
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .experience-header {
+    flex-direction: column;
+  }
+
+  .skill-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .skill-label {
+    min-width: auto;
+  }
+}
