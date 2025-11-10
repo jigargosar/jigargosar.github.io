@@ -1,5 +1,5 @@
 ---
-title: 'A Simple CLI Tool That Solves Note-Taking'
+title: 'keepnote: A Simple CLI Tool That Solves Note-Taking'
 date: '2025-10-25'
 intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 image: ./hero.png
