@@ -2,8 +2,9 @@
 import { defineConfig } from 'astro/config'
 import rehypeAstroRelativeMarkdownLinks from 'astro-rehype-relative-markdown-links'
 import sitemap from '@astrojs/sitemap'
-
 import tailwindcss from '@tailwindcss/vite'
+import yaml from '@rollup/plugin-yaml';
+
 
 export default defineConfig({
   site: 'https://jigargosar.github.io',
@@ -21,6 +22,6 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), yaml()],
   },
 })
