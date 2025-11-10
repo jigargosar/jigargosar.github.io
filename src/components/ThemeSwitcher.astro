@@ -1,7 +1,5 @@
 ---
-import { THEMES, DEFAULT_THEME } from '../config'
-const themes = THEMES
-const defaultTheme = DEFAULT_THEME
+import { THEMES } from '../config'
 ---
 
 <div class="relative inline-flex">
@@ -14,7 +12,7 @@ const defaultTheme = DEFAULT_THEME
     class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 p-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg flex flex-col gap-3 items-center"
   >
     {
-      themes.map((theme) => (
+      THEMES.map((theme) => (
         <button
           data-theme={theme.class}
           class="w-6 h-6 rounded-full hover:ring-2 hover:ring-accent-400 hover:ring-offset-[3px] hover:ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-[3px] focus:ring-offset-gray-800"
@@ -27,7 +25,11 @@ const defaultTheme = DEFAULT_THEME
   </div>
 </div>
 
-<script define:vars={{ themes, defaultTheme }}>
+<script>
+  import { THEMES, DEFAULT_THEME } from '../config'
+
+  const themes = THEMES
+  const defaultTheme = DEFAULT_THEME
   const toggle = document.getElementById('theme-toggle')
   const dropdown = document.getElementById('theme-dropdown')
   const buttons = document.querySelectorAll('[data-theme]')
