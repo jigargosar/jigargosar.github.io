@@ -1,7 +1,9 @@
 ---
 import resumeData from './resume.yaml'
+import HeadCommon from '../components/HeadCommon.astro'
 
 const pageTitle = 'Jigar Gosar — Resume'
+const pageDescription = 'Principal-level engineer with 13+ years designing distributed systems and real-time messaging platforms'
 import './resume.css'
 
 // Icon definitions
@@ -17,9 +19,7 @@ const icons = {
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{pageTitle}</title>
+    <HeadCommon title={pageTitle} description={pageDescription} />
   </head>
   <body>
     <div class="page-wrapper">

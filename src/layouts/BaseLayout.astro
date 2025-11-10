@@ -4,6 +4,7 @@ import { SITE, DEFAULT_THEME } from '../config'
 import ThemeSwitcher from '../components/ThemeSwitcher.astro'
 import ThemeSwitcherCursor from '../components/ThemeSwitcherCursor.astro'
 import Link from '../components/Link.astro'
+import HeadCommon from '../components/HeadCommon.astro'
 
 interface Props {
   title?: string
@@ -16,7 +17,6 @@ const {
   description = SITE.description,
   structuredData
 } = Astro.props
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 const navLinks = [
   { title: 'About', href: '/resume/' },
@@ -32,29 +32,7 @@ const skewedBar = {
 <!DOCTYPE html>
 <html lang="en" class={DEFAULT_THEME}>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={canonicalURL} />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonicalURL} />
-  <meta property="og:type" content="article" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-
-  {structuredData && (
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-  )}
-
-  <base href={import.meta.env.BASE_URL} />
-  <link rel="icon" href="favicon.svg" sizes="32x32" />
+  <HeadCommon title={title} description={description} structuredData={structuredData} />
 
   <style>
     @font-face {
