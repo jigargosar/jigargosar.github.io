@@ -37,3 +37,9 @@ After pasting, disable paste mode to restore normal editing features:
 ```vim
 :set nopaste
 ```
+
+## Note: Modern Vim + Terminals
+
+Vim 8+ with modern terminals (Windows Terminal, iTerm2, gnome-terminal, etc.) handle this automatically - no need to manually toggle `:set paste`.
+
+If you're on an older setup and want automatic paste handling, try the [vim-bracketed-paste](https://github.com/ConradIrwin/vim-bracketed-paste) plugin.
