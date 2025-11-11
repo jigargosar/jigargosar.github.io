@@ -9,14 +9,16 @@ contact:
   website: jigargosar.github.io
 
 summary: |
+  Coding as craft and joy since 1998, professionally since 2004.
   Versatile full-stack engineer with 20+ years across backend distributed
-  systems and modern frontend architecture. Programming since 1998,
-  professionally since 2004. Built scalable Node.js/Java backends
-  supporting ~100k concurrent users; delivered React applications
-  unblocking stuck teams. Recent focus on functional programming (Elm)
-  and type-driven UI development. Expert in performance engineering,
-  distributed tracing, system design, and cross-functional mentoring.
-  Passionate about continuous learning and building resilient applications.
+  systems and modern frontend architecture. Built scalable Node.js/Java
+  backends supporting ~100k concurrent users; delivered React applications
+  unblocking stuck teams. Passionate advocate for functional programming—
+  particularly Elm for type-safe, reliable UIs that eliminate entire
+  classes of runtime errors. Expert in performance engineering, distributed
+  tracing, system design, and cross-functional mentoring. Values
+  thoughtful technology choices, building maintainable systems, and
+  programming fundamentals over framework churn.
 
 skills:
   - label: Languages
