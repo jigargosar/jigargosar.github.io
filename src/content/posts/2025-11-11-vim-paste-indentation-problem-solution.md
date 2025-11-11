@@ -40,6 +40,23 @@ After pasting, disable paste mode to restore normal editing features:
 
 ## Note: Modern Vim + Terminals
 
-Vim 8+ with modern terminals (Windows Terminal, iTerm2, gnome-terminal, etc.) handle this automatically - no need to manually toggle `:set paste`.
+Vim 8+ with modern terminals (Windows Terminal, iTerm2, gnome-terminal, etc.) handle this automatically - both the terminal and Vim need to support bracketed paste mode.
 
-If you're on an older setup and want automatic paste handling, try the [vim-bracketed-paste](https://github.com/ConradIrwin/vim-bracketed-paste) plugin.
+If you're using an older Vim version (pre-8) with a modern terminal, try the [vim-bracketed-paste](https://github.com/ConradIrwin/vim-bracketed-paste) plugin to add this support to Vim.
+
+## Advanced: What is Bracketed Paste Mode?
+
+**Bracketed paste mode** is a feature that allows terminals and programs to automatically detect when you're pasting text (as opposed to typing it manually).
+
+### How It Works
+
+Normally, when you paste text into a terminal, the terminal sends it character-by-character as if you typed it really fast. Programs like Vim can't tell the difference between typing and pasting.
+
+With bracketed paste mode enabled, the terminal wraps pasted content with special escape sequences:
+
+- `\e[200~` signals "paste is starting"
+- `\e[201~` signals "paste is done"
+
+When Vim receives text wrapped in these sequences, it knows it's a paste operation and temporarily disables auto-formatting features. Once the closing sequence arrives, formatting is re-enabled.
+
+This gives you the same effect as manually toggling `:set paste` and `:set nopaste`, but automatically.
