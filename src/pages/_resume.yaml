@@ -9,16 +9,14 @@ contact:
   website: jigargosar.github.io
 
 summary: |
-  Principal Software Engineer with 20+ years designing and delivering
-  high‑throughput distributed microservices and real‑time messaging
-  platforms. Programming since 1998, professionally since 2004.
-  Built core messaging infrastructure (XMPP, LRHS)
-  supporting ~100k concurrent users and ~1M messages/min. Active
-  Elm developer for 5 years, building front‑end prototypes
-  to demonstrate type‑driven UI design. Expert in system
-  architecture, performance engineering, distributed tracing, CI/CD, and
-  mentoring cross‑functional teams to deliver resilient,
-  production‑grade platforms.
+  Versatile full-stack engineer with 20+ years across backend distributed
+  systems and modern frontend architecture. Programming since 1998,
+  professionally since 2004. Built scalable Node.js/Java backends
+  supporting ~100k concurrent users; delivered React applications
+  unblocking stuck teams. Recent focus on functional programming (Elm)
+  and type-driven UI development. Expert in performance engineering,
+  distributed tracing, system design, and cross-functional mentoring.
+  Passionate about continuous learning and building resilient applications.
 
 skills:
   - label: Languages
