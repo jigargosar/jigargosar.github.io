@@ -9,13 +9,14 @@ contact:
   website: jigargosar.github.io
 
 summary: |
-  Principal‑level engineer with 13+ years designing and operating
+  Principal Software Engineer with 20+ years designing and delivering
   high‑throughput distributed microservices and real‑time messaging
-  platforms. Built core messaging infrastructure (XMPP, LRHS)
-  validated at ~100k concurrent users and ~1M messages/min. Active
-  Elm developer for 5 years, building CLI and front‑end prototypes
+  platforms. Programming since 1998, professionally since 2004.
+  Built core messaging infrastructure (XMPP, LRHS)
+  supporting ~100k concurrent users and ~1M messages/min. Active
+  Elm developer for 5 years, building front‑end prototypes
   to demonstrate type‑driven UI design. Expert in system
-  architecture, performance engineering, observability, CI/CD, and
+  architecture, performance engineering, distributed tracing, CI/CD, and
   mentoring cross‑functional teams to deliver resilient,
   production‑grade platforms.
 
