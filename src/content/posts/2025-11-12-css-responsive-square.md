@@ -32,11 +32,11 @@ The game-changing solution uses just **two CSS properties** that work together:
 ```
 
 **That's it!** This creates a perfect responsive square that:
-- ✅ Maintains 1:1 aspect ratio at any size
-- ✅ Scales smoothly without jumping
-- ✅ Uses maximum available space
-- ✅ Works in any container shape
-- ✅ Requires zero JavaScript
+- Maintains 1:1 aspect ratio at any size
+- Scales smoothly without jumping
+- Uses maximum available space
+- Works in any container shape
+- Requires zero JavaScript
 
 ## How CSS Container Queries Work: The Magic Behind cqmin
 
@@ -99,7 +99,7 @@ Here's a full HTML/CSS example you can copy and test:
 
 ## Why This Beats Other CSS Square Methods
 
-### ❌ Old Method: CSS Padding Hack
+### Old Method: CSS Padding Hack
 ```css
 .square-old {
     width: 100%;
@@ -110,7 +110,7 @@ Here's a full HTML/CSS example you can copy and test:
 ```
 **Problems**: Complex, requires absolute positioning, hard to center content.
 
-### ❌ Viewport Units Method
+### Viewport Units Method
 ```css
 .square-viewport {
     width: 50vw;
@@ -119,7 +119,7 @@ Here's a full HTML/CSS example you can copy and test:
 ```
 **Problems**: Ignores parent container, breaks in nested layouts.
 
-### ✅ New Method: Container Queries
+### New Method: Container Queries
 ```css
 .square-modern {
     width: 100cqmin;
@@ -185,9 +185,9 @@ Create square dashboard cards that adapt to any layout:
 
 CSS Container Queries have excellent modern browser support:
 
-- ✅ **Chrome/Edge**: 105+ (September 2022)
-- ✅ **Firefox**: 110+ (February 2023)
-- ✅ **Safari**: 16+ (September 2022)
+- **Chrome/Edge**: 105+ (September 2022)
+- **Firefox**: 110+ (February 2023)
+- **Safari**: 16+ (September 2022)
 
 **Coverage**: ~90% of global users can use container queries today!
 
@@ -250,7 +250,7 @@ Combine with CSS Grid for responsive square layouts:
 
 ## Common Mistakes to Avoid
 
-### ❌ Don't forget container-type
+### Don't forget container-type
 Without `container-type: size`, `cqmin` won't work:
 
 ```css
@@ -261,7 +261,7 @@ Without `container-type: size`, `cqmin` won't work:
 }
 ```
 
-### ❌ Don't use fixed max-width/max-height
+### Don't use fixed max-width/max-height
 This breaks the smooth scaling:
 
 ```css
@@ -273,7 +273,7 @@ This breaks the smooth scaling:
 }
 ```
 
-### ❌ Don't mix with conflicting positioning
+### Don't mix with conflicting positioning
 Absolute positioning can break container queries:
 
 ```css
