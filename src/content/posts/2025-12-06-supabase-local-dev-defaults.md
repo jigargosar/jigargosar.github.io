@@ -2,7 +2,7 @@
 title: 'Supabase Local Development: Default Values and API Usage'
 date: '2025-12-06'
 intro: When you run `supabase start`, Supabase launches a local backend with fixed values. These defaults make it easy to connect without extra setup.
-heroImage: './supabase-local-dev-hero.png'
+image: './2025-12-06-supabase-local-dev-defaults-hero.png'
 ---
 
 ## Default Configuration
