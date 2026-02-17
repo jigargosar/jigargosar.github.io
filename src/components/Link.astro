@@ -8,17 +8,17 @@ const { href, variant = 'default', ...rest } = Astro.props
 
 const variantStyles = {
   default: 'text-sm',
-  large: 'text-2xl',
+  large: 'text-xl font-semibold font-[Instrument_Sans]',
 }
 
-const baseStyles = 'text-accent-500 underline decoration-accent-950 hover:decoration-accent-700'
+const baseStyles = 'text-w75 underline decoration-w18 hover:text-w90 hover:decoration-w30'
 const variantClass = variantStyles[variant]
 ---
 
 <a
   href={href}
   class={`${baseStyles} ${variantClass}`}
-  style="text-underline-offset: 0.2em; text-decoration-thickness: 0.2em;"
+  style="text-underline-offset: 0.2em; text-decoration-thickness: 0.1em; transition: color 150ms ease, text-decoration-color 150ms ease;"
   {...rest}
 >
   <slot />

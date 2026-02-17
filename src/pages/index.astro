@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getPosts } from '../lib/posts'
 import { SITE, AUTHOR } from '../config'
-import Link from '../components/Link.astro'
 
 const posts = await getPosts()
 const sortedPosts = posts.map(post => ({
@@ -27,24 +26,39 @@ const structuredData = {
   description={SITE.description}
   structuredData={structuredData}
 >
-  <ul class="flex flex-col gap-10">
+  <div class="font-mono text-xs text-w18 uppercase mb-10" style="letter-spacing: 3px;">Posts</div>
+
+  <ul class="list-none p-0">
     {sortedPosts.map(post => (
-      <li class="flex flex-col gap-5">
-        <div class="flex items-center gap-3">
-          <Link variant="large" href={`posts/${post.slug}/`}>
-            {post.data.title}
-          </Link>
+      <li class="py-7 border-b border-w08 first:border-t first:border-w08">
+        <div class="font-mono text-xs text-w30 mb-1.5" style="letter-spacing: 0.3px;">
+          {post.data.date}
           {post.data.draft && import.meta.env.DEV && (
-            <span class="px-2 py-1 bg-amber-400/20 border border-amber-400/50 rounded text-amber-300 text-xs font-medium">
-              DRAFT
+            <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded text-xs font-mono">
+              draft
             </span>
           )}
         </div>
-        <p class="text-gray-400 text-base">
+        <a
+          href={`posts/${post.slug}/`}
+          class="block font-sans font-semibold text-xl text-w90 no-underline hover:text-w75"
+          style="letter-spacing: -0.3px; line-height: 1.35; transition: color 150ms ease;"
+        >
+          {post.data.title}
+        </a>
+        <p class="text-w45 mt-1.5" style="font-size: 15px; line-height: 1.6; max-width: 620px;">
           {post.data.intro}
         </p>
+        {post.data.image && (
+          <img
+            src={post.data.image.src}
+            alt={post.data.imageAlt || post.data.title}
+            class="w-full mt-4 object-cover"
+            style="aspect-ratio: 5/3; filter: grayscale(100%) brightness(0.55) contrast(1.1);"
+            loading="lazy"
+          />
+        )}
       </li>
     ))}
   </ul>
-
 </BaseLayout>

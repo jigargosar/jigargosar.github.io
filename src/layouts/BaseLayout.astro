@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css'
-import { SITE, DEFAULT_THEME } from '../config'
-import ThemeSwitcher from '../components/ThemeSwitcher.astro'
-import ThemeSwitcherCursor from '../components/ThemeSwitcherCursor.astro'
+import { SITE } from '../config'
 import Link from '../components/Link.astro'
 import HeadCommon from '../components/HeadCommon.astro'
 
@@ -23,32 +21,24 @@ const navLinks = [
   { title: 'Projects', href: 'https://github.com/jigargosar' },
   { title: 'Resume', href: '/resume/' }
 ]
-
-const skewedBar = {
-  class: 'w-2 h-6 bg-accent-600 inline-block',
-  style: 'transform: skewX(-12deg);'
-}
 ---
 <!DOCTYPE html>
-<html lang="en" class={DEFAULT_THEME}>
+<html lang="en">
 <head>
   <HeadCommon title={title} description={description} structuredData={structuredData} />
 
-  <style>
-    @font-face {
-      font-family: 'JetBrains Mono';
-      src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
+  <style>
+    .font-serif { font-family: 'Source Serif 4', Georgia, serif; }
+    .font-sans { font-family: 'Instrument Sans', -apple-system, sans-serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+
     .cursor {
-      width: 0.5rem;
-      height: 1rem;
+      width: 7px;
+      height: 12px;
       animation: blink-cursor 1.5s infinite steps(2, start);
     }
     @keyframes blink-cursor {
@@ -58,39 +48,44 @@ const skewedBar = {
   </style>
 </head>
 
-<body class="mono bg-gray-900 text-gray-300 flex flex-col min-h-screen">
-<header class="w-full max-w-2xl mx-auto p-3 flex items-center justify-between gap-4 border-b border-gray-700">
-  <a href="/" class="text-lg text-accent-400 hover:text-accent-300 flex items-center gap-2 whitespace-nowrap">
-    <span>Jigar Gosar</span>
-    <span class="flex gap-1.5 items-end">
-      {[...Array(4)].map(() => (
-        <span class={skewedBar.class} style={skewedBar.style}></span>
-      ))}
-    </span>
-  </a>
-  <div class="flex items-center gap-4">
-    <nav class="flex flex-wrap justify-end items-center gap-x-4 gap-y-2">
-      {navLinks.map(link => (
-        <div class="flex items-center gap-4">
-          <Link href={link.href}>{link.title}</Link>
-          <span class={skewedBar.class} style={skewedBar.style}></span>
-        </div>
-      ))}
-    </nav>
-    <ThemeSwitcher />
-  </div>
-</header>
+<body class="font-serif bg-bg text-w60 flex flex-col min-h-screen font-light antialiased" style="font-size: 17px; line-height: 1.8;">
 
-<main class="w-full px-3 py-8 flex-grow">
-  <div class="max-w-prose mx-auto">
+<div class="w-full max-w-[820px] mx-auto px-10">
+  <header class="py-7 border-b border-w08">
+    <div class="flex items-center justify-between">
+      <a href="/" class="font-sans font-bold text-lg text-w90 no-underline hover:text-w75" style="letter-spacing: -0.3px; transition: color 150ms ease;">
+        Jigar Gosar
+      </a>
+      <nav class="flex gap-8">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class="font-mono text-xs text-w30 no-underline hover:text-w60"
+            style="letter-spacing: 0.5px; transition: color 150ms ease;"
+          >
+            {link.title}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main class="w-full flex-grow">
+  <div class="max-w-[820px] mx-auto px-10 py-12">
     <slot />
   </div>
 </main>
 
-<footer class="w-full max-w-2xl mx-auto p-4 border-t border-gray-700 flex flex-col items-center gap-2">
-  <p class="text-xs text-gray-400">Powered by Astro & Markdown</p>
-  <ThemeSwitcherCursor />
-</footer>
+<div class="w-full max-w-[820px] mx-auto px-10">
+  <footer class="border-t border-w08 py-7 flex justify-between items-center font-mono text-xs text-w18" style="letter-spacing: 0.5px;">
+    <span class="flex items-center gap-2">
+      <span class="cursor bg-w18 inline-block"></span>
+      <span>Jigar Gosar</span>
+    </span>
+    <span>2026</span>
+  </footer>
+</div>
 
 <script>
   import '../scripts/copy-code.js'
