@@ -21,7 +21,9 @@
 
 - Code block syntax highlighting — switch Shiki theme to monochrome
 
-- Drop cap — first-letter: sans 52px float left w90 bold
+- Drop cap — ~~first-letter: sans 52px~~ resized to 44px for 2-line span
+- Prose width — constrain to 660px (max-w-none override fix)
+- Inline code backticks — remove prose ::before/::after pseudo-elements
 - Prose paragraph margin — explicit margin-bottom 22px
 - Prose links — switch to border-bottom, hover text w75→w90 + border w18→w30
 - Prose em-dash color — w42→w18
