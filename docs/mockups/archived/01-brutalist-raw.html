@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brutalist Raw — Blog Post Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter+Tight:wght@900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #e8e8e8;
+    --accent: #ff3d00;
+    --muted: #666;
+    --border: #333;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 3px solid var(--fg);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  nav .logo {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+
+  nav .links a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 30px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: color 0.1s;
+  }
+
+  nav .links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    border-bottom: 3px solid var(--fg);
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(1.2);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(transparent, var(--bg));
+  }
+
+  /* TITLE */
+  .post-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -3px;
+    padding: 60px 40px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-title span {
+    color: var(--accent);
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    gap: 40px;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+
+  /* INTRO */
+  .intro {
+    padding: 40px;
+    font-size: 20px;
+    line-height: 1.6;
+    border-bottom: 3px solid var(--accent);
+    color: var(--fg);
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 60px 40px;
+    max-width: 780px;
+  }
+
+  .content h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin: 60px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .content p {
+    margin-bottom: 20px;
+    color: #bbb;
+  }
+
+  .content code {
+    background: #1a1a1a;
+    padding: 2px 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+  }
+
+  .content pre {
+    background: #111;
+    border: 2px solid var(--border);
+    padding: 24px;
+    margin: 30px 0;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .content pre code {
+    background: none;
+    padding: 0;
+    color: var(--fg);
+  }
+
+  .content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .content ul li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #bbb;
+  }
+
+  .content ul li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 3px solid var(--fg);
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Jigar Gosar</div>
+  <div class="links">
+    <a href="#">About</a>
+    <a href="#">Projects</a>
+    <a href="#">Resume</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1400&h=600&fit=crop" alt="hero">
+  <div class="hero-overlay"></div>
+</div>
+
+<h1 class="post-title">Shift+Enter <span>Not Working</span> in Claude Code</h1>
+
+<div class="meta">
+  <span>Feb 17, 2026</span>
+  <span>How-to</span>
+  <span>3 min read</span>
+</div>
+
+<div class="intro">
+  Shift+Enter submits instead of inserting a newline in Claude Code on Windows Terminal. A one-line settings fix solves it.
+</div>
+
+<div class="content">
+  <h2>The Problem</h2>
+  <p>You're using Claude Code in Windows Terminal. You press Shift+Enter expecting a newline — but it submits your input instead, just like plain Enter.</p>
+  <p>No error. No warning. It just doesn't work.</p>
+
+  <h2>Why It Happens</h2>
+  <p>Windows Terminal sends the same escape sequence for both Enter and Shift+Enter by default. Claude Code (and any terminal app) can't tell them apart — they both look like a plain carriage return.</p>
+
+  <h2>The Fix</h2>
+  <p>Open your Windows Terminal <code>settings.json</code> and add this to the <code>actions</code> array:</p>
+  <pre><code>{
+    "command": { "action": "sendInput", "input": "\u001b[13;2u" },
+    "keys": "shift+enter"
+}</code></pre>
+  <p>That's it. Windows Terminal picks up changes immediately — no restart needed.</p>
+
+  <h2>Why This Works</h2>
+  <p>The escape sequence follows the <a href="#">CSI u protocol</a> — encoding two things:</p>
+  <ul>
+    <li><strong>13</strong> — the keycode for Enter</li>
+    <li><strong>2</strong> — the modifier flag for Shift</li>
+  </ul>
+</div>
+
+<footer>
+  <span>Powered by Astro & Markdown</span>
+  <span>2026</span>
+</footer>
+
+</body>
+</html>

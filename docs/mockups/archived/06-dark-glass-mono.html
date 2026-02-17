@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Glass Mono — Blog Post Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b;
+    --glass: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-strong: rgba(255, 255, 255, 0.04);
+    --fg: #a1a1aa;
+    --fg-strong: #d4d4d8;
+    --heading: #fafafa;
+    --muted: #52525b;
+    --subtle-glow: rgba(255, 255, 255, 0.03);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* SUBTLE BG TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(255,255,255,0.02) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 100%, rgba(255,255,255,0.015) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(9, 9, 11, 0.8);
+  }
+
+  nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--heading);
+  }
+
+  nav .links a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+  }
+
+  nav .links a:hover { color: var(--fg-strong); }
+
+  /* HERO - FULL BLEED */
+  .hero {
+    width: 100%;
+    height: 40vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6) saturate(0.3);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 40%, var(--bg) 100%);
+  }
+
+  /* GLASS CARD */
+  .glass-card {
+    max-width: 760px;
+    margin: -80px auto 0;
+    position: relative;
+    z-index: 2;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(40px);
+    padding: 56px 52px;
+  }
+
+  .post-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(30px, 4.5vw, 44px);
+    line-height: 1.2;
+    color: var(--heading);
+    margin-bottom: 20px;
+  }
+
+  .post-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--fg-strong);
+  }
+
+  .post-intro {
+    font-size: 17px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .post-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 56px 40px 100px;
+  }
+
+  .content h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--heading);
+    margin: 52px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .content p { margin-bottom: 22px; }
+
+  .content strong { color: var(--fg-strong); }
+
+  .content code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    background: var(--glass-strong);
+    border: 1px solid var(--glass-border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--fg-strong);
+  }
+
+  .content pre {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 28px 0;
+    overflow-x: auto;
+    backdrop-filter: blur(10px);
+  }
+
+  .content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--fg-strong);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 22px;
+  }
+
+  .content ul li {
+    padding: 12px 16px;
+    margin-bottom: 6px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+  }
+
+  .content ul li strong {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--fg-strong);
+  }
+
+  .content a {
+    color: var(--fg-strong);
+    text-decoration: none;
+    border-bottom: 1px solid var(--muted);
+    transition: border-color 0.3s;
+  }
+
+  .content a:hover { border-bottom-color: var(--fg-strong); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--glass-border);
+    padding: 28px 60px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <nav>
+    <div class="logo">Jigar Gosar</div>
+    <div class="links">
+      <a href="#">About</a>
+      <a href="#">Projects</a>
+      <a href="#">Resume</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1400&h=600&fit=crop" alt="hero">
+  </div>
+
+  <div class="glass-card">
+    <div class="post-category">How-To</div>
+    <h1 class="post-title">Shift+Enter Not Working in Claude Code — <em>Here's the Fix</em></h1>
+    <p class="post-intro">A one-line settings fix for a missing Windows Terminal keybinding</p>
+    <div class="post-meta">February 17, 2026 · 3 min read</div>
+  </div>
+
+  <div class="content">
+    <h2>The Problem</h2>
+    <p>You're using Claude Code in Windows Terminal. You press Shift+Enter expecting a newline — but it submits your input instead, just like plain Enter.</p>
+    <p>No error. No warning. It just doesn't work.</p>
+
+    <h2>Why It Happens</h2>
+    <p>Windows Terminal sends the same escape sequence for both Enter and Shift+Enter by default. Claude Code (and any terminal app) can't tell them apart — they both look like a plain carriage return.</p>
+
+    <h2>The Fix</h2>
+    <p>Open your Windows Terminal <code>settings.json</code> (Settings → Open JSON file) and add this to the <code>actions</code> array:</p>
+    <pre><code>{
+    "command": { "action": "sendInput", "input": "\u001b[13;2u" },
+    "keys": "shift+enter"
+}</code></pre>
+    <p>That's it. Windows Terminal picks up changes immediately — no restart needed.</p>
+
+    <h2>Why This Works</h2>
+    <p>The escape sequence follows the <a href="#">CSI u protocol</a>. It encodes:</p>
+    <ul>
+      <li><strong>13</strong> — the keycode for Enter</li>
+      <li><strong>2</strong> — the modifier flag for Shift</li>
+    </ul>
+  </div>
+
+  <footer>Powered by Astro & Markdown · 2026</footer>
+</div>
+
+</body>
+</html>

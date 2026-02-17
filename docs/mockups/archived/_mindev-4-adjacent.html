@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup: Minimal-Developer 4 — Terminal-Adjacent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fg: #aeaaa2;
+    --fg-dim: #6b6760;
+    --fg-bright: #dedad2;
+    --fg-muted: #4a4742;
+    --bg: #0c0c0c;
+    --accent: #a48ec4;
+    --accent-dim: #7a6b96;
+    --rule: rgba(255,255,255,0.07);
+    --display: 'Space Mono', monospace;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 15px;
+    line-height: 1.75;
+    font-weight: 400;
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  a { color: var(--accent); text-decoration: none; transition: color 150ms ease; }
+  a:hover { color: var(--fg-bright); }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+  .header { padding: 2rem 0; border-bottom: 1px solid var(--rule); }
+  .header-inner { display: flex; justify-content: space-between; align-items: baseline; }
+
+  .logo {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fg-bright);
+  }
+  .logo .prompt { color: var(--accent-dim); font-weight: 400; }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--display);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  nav a { color: var(--fg-dim); }
+  nav a:hover { color: var(--accent); }
+  nav a.active { color: var(--accent); }
+
+  .main { padding: 3rem 0; }
+
+  .section-label {
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .post-list { list-style: none; }
+
+  .post-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .post-item:first-child { border-top: 1px solid var(--rule); }
+
+  .post-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-dim);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .post-meta .type { color: var(--accent); }
+
+  .post-title {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    color: var(--fg-bright);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+    transition: color 150ms ease;
+  }
+  .post-title a { color: inherit; }
+  .post-item:hover .post-title { color: var(--accent); }
+
+  .post-excerpt {
+    color: var(--fg-dim);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .draft-tag {
+    font-family: var(--display);
+    font-size: 0.6rem;
+    color: var(--fg-muted);
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 3.5rem 0 2.5rem;
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .post-detail { max-width: 680px; padding-bottom: 3rem; }
+
+  .post-detail .back {
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-dim);
+    margin-bottom: 2rem;
+    display: inline-block;
+    transition: color 150ms ease;
+  }
+  .post-detail .back:hover { color: var(--accent); }
+
+  .post-hero {
+    width: 100%;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    filter: saturate(0.9) brightness(0.85);
+  }
+
+  .post-detail h1 {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    color: var(--fg-bright);
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-bar {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-dim);
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .prose p { margin-bottom: 1.25rem; font-weight: 300; }
+
+  .prose h2 {
+    font-family: var(--display);
+    font-size: 1rem;
+    color: var(--accent);
+    margin: 2.5rem 0 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--accent-dim);
+  }
+
+  .prose code {
+    font-family: var(--display);
+    font-size: 0.85em;
+    background: rgba(255,255,255,0.04);
+    padding: 0.15em 0.4em;
+    color: var(--accent);
+  }
+
+  .prose pre {
+    font-family: var(--display);
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid var(--accent-dim);
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+  .prose pre code { background: none; padding: 0; color: var(--fg); }
+
+  .prose blockquote {
+    border-left: 2px solid var(--accent-dim);
+    padding-left: 1rem;
+    color: var(--fg-dim);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+
+  .prose ul { padding-left: 1.5rem; margin-bottom: 1.25rem; list-style: none; }
+  .prose li { margin-bottom: 0.4rem; padding-left: 0.5rem; position: relative; font-weight: 300; }
+  .prose li::before {
+    content: '·';
+    position: absolute;
+    left: -0.75rem;
+    color: var(--accent-dim);
+  }
+
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--display);
+    font-size: 0.7rem;
+    color: var(--fg-dim);
+    letter-spacing: 0.02em;
+  }
+  .footer .block {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--accent-dim);
+    margin-right: 0.5rem;
+    vertical-align: text-bottom;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span class="prompt">~/</span>jigar-gosar</div>
+    <nav>
+      <a href="#" class="active">posts</a>
+      <a href="#">resume</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="section-label">recent posts</div>
+  <ul class="post-list">
+    <li class="post-item">
+      <div class="post-meta"><span>2026-02-17</span><span class="type">til</span></div>
+      <div class="post-title"><a href="#">Shift+Enter Not Working in Claude Code: The Fix</a></div>
+      <p class="post-excerpt">Quick fix for the frustrating Shift+Enter newline issue in Claude Code terminal on Windows.</p>
+    </li>
+    <li class="post-item">
+      <div class="post-meta"><span>2026-02-15</span><span class="type">how-to</span></div>
+      <div class="post-title"><a href="#">Supabase Local Development: Defaults and API Usage</a></div>
+      <p class="post-excerpt">Everything you need to know about Supabase local dev — default credentials, API endpoints, and common gotchas.</p>
+    </li>
+    <li class="post-item">
+      <div class="post-meta"><span>2026-02-10</span><span class="type">deep-dive</span></div>
+      <div class="post-title"><a href="#">Building a Real-Time Collaborative Editor with CRDTs</a><span class="draft-tag">[draft]</span></div>
+      <p class="post-excerpt">A deep exploration of conflict-free replicated data types and how they power modern collaborative editing.</p>
+    </li>
+  </ul>
+
+  <div class="divider">— post detail —</div>
+
+  <article class="post-detail">
+    <a href="#" class="back">← back to posts</a>
+    <img src="https://picsum.photos/seed/adj1/1200/720" alt="" class="post-hero" loading="lazy">
+    <h1>Shift+Enter Not Working in Claude Code: The Fix</h1>
+    <div class="meta-bar">
+      <span>2026-02-17</span>
+      <span>3 min read</span>
+      <span>til</span>
+    </div>
+    <div class="prose">
+      <p>If you've been banging your head against the wall trying to get <code>Shift+Enter</code> to create a newline in Claude Code on Windows, you're not alone.</p>
+      <h2>The Problem</h2>
+      <p>Claude Code's terminal input captures <code>Shift+Enter</code> as a submit action instead of inserting a newline. This makes writing multi-line prompts painful.</p>
+      <h2>The Solution</h2>
+      <pre><code>{
+  "keybindings": {
+    "shift+enter": "newline",
+    "enter": "submit"
+  }
+}</code></pre>
+      <blockquote>The best tools get out of your way.</blockquote>
+      <ul>
+        <li>Check your terminal emulator settings too</li>
+        <li>Restart Claude Code after making changes</li>
+        <li>Verify with a multi-line code block paste</li>
+      </ul>
+    </div>
+  </article>
+</main>
+
+<footer class="footer">
+  <span><span class="block"></span>jigar gosar</span>
+  <span>2026</span>
+</footer>
+
+</div>
+</body>
+</html>

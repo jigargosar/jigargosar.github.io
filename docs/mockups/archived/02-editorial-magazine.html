@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial Magazine — Blog Post Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --card: #13161c;
+    --fg: #d4d4d8;
+    --heading: #f4f4f5;
+    --accent: #c8a96e;
+    --accent-dim: #8b7344;
+    --muted: #71717a;
+    --divider: #27272a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--heading);
+    letter-spacing: 1px;
+  }
+
+  nav .links {
+    display: flex;
+    gap: 36px;
+  }
+
+  nav .links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: color 0.3s;
+  }
+
+  nav .links a:hover { color: var(--accent); }
+
+  /* HEADER AREA */
+  .post-header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 60px 40px;
+    text-align: center;
+  }
+
+  .post-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.15;
+    color: var(--heading);
+    margin-bottom: 24px;
+  }
+
+  .post-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .post-subtitle {
+    font-size: 20px;
+    color: var(--muted);
+    font-weight: 300;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+
+  .post-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .post-meta span { margin: 0 12px; }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 40px auto;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .hero img {
+    width: 100%;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--divider);
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .content > p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    float: left;
+    line-height: 1;
+    padding-right: 12px;
+    padding-top: 4px;
+    color: var(--accent);
+    font-weight: 900;
+  }
+
+  .content h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--heading);
+    margin: 56px 0 20px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .content h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .content p {
+    margin-bottom: 24px;
+    color: var(--fg);
+  }
+
+  .content code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    background: rgba(200, 169, 110, 0.08);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(200, 169, 110, 0.15);
+  }
+
+  .content pre {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 28px;
+    margin: 32px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .content pre::before {
+    content: 'JSON';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--fg);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 24px;
+  }
+
+  .content ul li {
+    padding: 10px 0 10px 24px;
+    position: relative;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .content ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+    transition: border-color 0.3s;
+  }
+
+  .content a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .pullquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--accent);
+    padding: 32px 0;
+    margin: 40px 0;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--divider);
+    padding: 32px 60px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Jigar Gosar</div>
+  <div class="links">
+    <a href="#">About</a>
+    <a href="#">Projects</a>
+    <a href="#">Resume</a>
+  </div>
+</nav>
+
+<div class="post-header">
+  <div class="post-category">How-To Guide</div>
+  <h1 class="post-title">Shift+Enter Not Working in Claude Code — <em>Here's the Fix</em></h1>
+  <p class="post-subtitle">A one-line settings fix for a missing Windows Terminal keybinding</p>
+  <div class="post-meta">
+    February 17, 2026 <span>·</span> 3 min read
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1400&h=600&fit=crop" alt="hero">
+</div>
+
+<div class="content">
+  <p>You're using Claude Code in Windows Terminal. You press Shift+Enter expecting a newline — but it submits your input instead, just like plain Enter. No error. No warning. It just doesn't work.</p>
+
+  <h2>Why It Happens</h2>
+  <p>Windows Terminal sends the same escape sequence for both Enter and Shift+Enter by default. Claude Code (and any terminal app) can't tell them apart — they both look like a plain carriage return.</p>
+  <p>Other terminals like iTerm2, WezTerm, Ghostty, and Kitty handle this natively. Claude Code even has a <code>/terminal-setup</code> command — but Windows Terminal isn't on the list.</p>
+
+  <div class="pullquote">If you're on Windows Terminal, you're on your own. Until now.</div>
+
+  <h2>The Fix</h2>
+  <p>Open your Windows Terminal <code>settings.json</code> (Settings → Open JSON file) and add this to the <code>actions</code> array:</p>
+  <pre><code>{
+    "command": { "action": "sendInput", "input": "\u001b[13;2u" },
+    "keys": "shift+enter"
+}</code></pre>
+  <p>That's it. Windows Terminal picks up changes immediately — no restart needed.</p>
+
+  <h2>Why This Works</h2>
+  <p>The escape sequence follows the <a href="#">CSI u protocol</a> — a modern standard for encoding keyboard input. It encodes two things:</p>
+  <ul>
+    <li><strong>13</strong> — the keycode for Enter</li>
+    <li><strong>2</strong> — the modifier flag for Shift</li>
+  </ul>
+  <p>This lets Claude Code distinguish Shift+Enter from plain Enter and handle them differently.</p>
+</div>
+
+<footer>
+  Powered by Astro & Markdown · 2026
+</footer>
+
+</body>
+</html>

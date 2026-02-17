@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Terminal — Blog Post Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a05;
+    --fg: #33ff77;
+    --fg-dim: #1a9944;
+    --fg-bright: #66ffaa;
+    --amber: #ffaa00;
+    --red: #ff3344;
+    --scanline: rgba(0, 0, 0, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* CRT EFFECTS */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      var(--scanline) 0px,
+      var(--scanline) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* GLOW */
+  @keyframes flicker {
+    0%, 97%, 100% { opacity: 1; }
+    98% { opacity: 0.95; }
+    99% { opacity: 0.98; }
+  }
+
+  .screen {
+    animation: flicker 4s infinite;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 40px;
+  }
+
+  /* NAV */
+  nav {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--fg-dim);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  nav .logo {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    color: var(--fg-bright);
+    text-shadow: 0 0 10px var(--fg), 0 0 20px rgba(51, 255, 119, 0.3);
+  }
+
+  nav .links a {
+    color: var(--fg-dim);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 14px;
+    transition: all 0.1s;
+  }
+
+  nav .links a:hover {
+    color: var(--fg-bright);
+    text-shadow: 0 0 8px var(--fg);
+  }
+
+  /* SYSTEM PROMPT */
+  .system-line {
+    color: var(--fg-dim);
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .system-line .timestamp { color: var(--amber); }
+  .system-line .status { color: var(--fg); }
+
+  /* HERO */
+  .hero {
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--fg-dim);
+  }
+
+  .hero img {
+    width: 100%;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    filter: brightness(0.7) saturate(0.5) hue-rotate(80deg);
+    mix-blend-mode: screen;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(5, 10, 5, 0.8));
+  }
+
+  /* TITLE */
+  .post-title {
+    font-family: 'VT323', monospace;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.1;
+    color: var(--fg-bright);
+    text-shadow: 0 0 15px var(--fg), 0 0 30px rgba(51, 255, 119, 0.2);
+    margin: 24px 0 16px;
+  }
+
+  .post-title .error { color: var(--red); text-shadow: 0 0 10px var(--red); }
+
+  .prompt {
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+
+  .prompt::before { content: '> '; color: var(--fg-dim); }
+
+  /* CONTENT */
+  .content {
+    padding: 20px 0 80px;
+  }
+
+  .content h2 {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    color: var(--amber);
+    text-shadow: 0 0 8px rgba(255, 170, 0, 0.3);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--fg-dim);
+  }
+
+  .content h2::before {
+    content: '## ';
+    color: var(--fg-dim);
+  }
+
+  .content p {
+    margin-bottom: 20px;
+    color: var(--fg);
+  }
+
+  .content code {
+    color: var(--amber);
+    background: rgba(255, 170, 0, 0.08);
+    padding: 1px 6px;
+    border: 1px solid rgba(255, 170, 0, 0.2);
+  }
+
+  .content pre {
+    background: rgba(0, 20, 0, 0.6);
+    border: 1px solid var(--fg-dim);
+    padding: 20px;
+    margin: 24px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .content pre::before {
+    content: '┌─ settings.json ─────────────────────────┐';
+    display: block;
+    color: var(--fg-dim);
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  .content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--fg);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .content ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '├─';
+    position: absolute;
+    left: 0;
+    color: var(--fg-dim);
+  }
+
+  .content ul li:last-child::before {
+    content: '└─';
+  }
+
+  .content a {
+    color: var(--fg-bright);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .success {
+    color: var(--fg-bright);
+    padding: 12px 16px;
+    border: 1px solid var(--fg-dim);
+    margin: 20px 0;
+    background: rgba(51, 255, 119, 0.05);
+  }
+
+  .success::before {
+    content: '[OK] ';
+    color: var(--fg-bright);
+    font-weight: bold;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--fg-dim);
+    padding: 20px 0;
+    font-size: 13px;
+    color: var(--fg-dim);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <nav>
+    <div class="logo">JIGAR_GOSAR<span class="cursor-blink">_</span></div>
+    <div class="links">
+      <a href="#">/about</a>
+      <a href="#">/projects</a>
+      <a href="#">/resume</a>
+    </div>
+  </nav>
+
+  <div class="system-line"><span class="timestamp">[2026-02-17 10:42:03]</span> <span class="status">POST_LOADED</span> — shift-enter-not-working-claude-code</div>
+
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1400&h=600&fit=crop" alt="hero">
+  </div>
+
+  <h1 class="post-title">Shift+Enter <span class="error">Not Working</span> in Claude Code</h1>
+  <div class="prompt">A one-line settings fix solves it.</div>
+
+  <div class="content">
+    <h2>The Problem</h2>
+    <p>You're using Claude Code in Windows Terminal. You press Shift+Enter expecting a newline — but it submits your input instead, just like plain Enter.</p>
+    <p>No error. No warning. It just doesn't work.</p>
+
+    <h2>Why It Happens</h2>
+    <p>Windows Terminal sends the same escape sequence for both Enter and Shift+Enter by default. Claude Code (and any terminal app) can't tell them apart — they both look like a plain carriage return.</p>
+    <p>Other terminals like iTerm2, WezTerm, Ghostty, and Kitty handle this natively. Claude Code even has a <code>/terminal-setup</code> command — but Windows Terminal isn't on the list.</p>
+
+    <h2>The Fix</h2>
+    <p>Open your Windows Terminal <code>settings.json</code> and add this to the <code>actions</code> array:</p>
+    <pre><code>{
+    "command": { "action": "sendInput", "input": "\u001b[13;2u" },
+    "keys": "shift+enter"
+}</code></pre>
+    <div class="success">Windows Terminal picks up changes immediately — no restart needed.</div>
+
+    <h2>Why This Works</h2>
+    <p>The escape sequence follows the <a href="#">CSI u protocol</a>. It encodes:</p>
+    <ul>
+      <li><strong>13</strong> — the keycode for Enter</li>
+      <li><strong>2</strong> — the modifier flag for Shift</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span>POWERED_BY ASTRO && MARKDOWN</span>
+    <span>EOF<span class="cursor-blink">_</span></span>
+  </footer>
+</div>
+
+</body>
+</html>
