@@ -14,12 +14,12 @@
 - Reading time — compute from word count, show on post detail
 - Post header layout — ~~match mockup: date+author bottom meta bar~~, top meta: tag · reading time
 
-- Code block syntax highlighting — switch Shiki theme to monochrome (no colored tokens)
-
 - Header refinement — masthead, nav, spacing
 - Hover fixes — apply design principles across all interactive elements
 
 ## Done
+
+- Code block syntax highlighting — switch Shiki theme to monochrome
 
 - Drop cap — first-letter: sans 52px float left w90 bold
 - Prose paragraph margin — explicit margin-bottom 22px
