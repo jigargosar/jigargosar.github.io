@@ -155,10 +155,10 @@ const structuredData = {
 
   <article>
     <header class="pt-16 pb-0">
-      <div class="font-mono text-sm text-w50 mb-5 uppercase" style="letter-spacing: 3px;">
+      <div class="font-mono text-xs text-w30 mb-5 uppercase" style="letter-spacing: 3px;">
         {post.data.date}
         {post.data.draft && import.meta.env.DEV && (
-          <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w50 rounded normal-case" style="letter-spacing: 0;">
+          <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded normal-case" style="letter-spacing: 0;">
             draft
           </span>
         )}
@@ -169,7 +169,7 @@ const structuredData = {
       <p class="text-w45 font-light italic" style="font-size: 18px; line-height: 1.5; max-width: 560px; margin-bottom: 20px;">
         {post.data.intro}
       </p>
-      <div class="font-mono text-sm text-w50 pb-8 border-b border-w08" style="letter-spacing: 0.3px;">
+      <div class="font-mono text-xs text-w30 pb-8 border-b border-w08" style="letter-spacing: 0.3px;">
         {AUTHOR.name}
       </div>
     </header>

@@ -26,21 +26,23 @@ const structuredData = {
   description={SITE.description}
   structuredData={structuredData}
 >
+  <div class="font-mono text-xs text-w18 uppercase mb-10" style="letter-spacing: 3px;">Posts</div>
+
   <ul class="list-none p-0">
     {sortedPosts.map(post => (
-      <li class="py-7 border-b border-w08 last:border-b-0">
-        <div class="font-mono text-sm text-w50 mb-1.5" style="letter-spacing: 0.3px;">
+      <li class="group py-7 border-b border-w08 first:border-t first:border-w08">
+        <div class="font-mono text-xs text-w30 mb-1.5" style="letter-spacing: 0.3px;">
           {post.data.date}
           {post.data.draft && import.meta.env.DEV && (
-            <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w50 rounded text-sm font-mono">
+            <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded text-xs font-mono">
               draft
             </span>
           )}
         </div>
         <a
           href={`posts/${post.slug}/`}
-          class="block font-sans font-semibold text-xl text-w90 no-underline"
-          style="letter-spacing: -0.3px; line-height: 1.35;"
+          class="block font-sans font-semibold text-xl text-w90 no-underline group-hover:text-w75"
+          style="letter-spacing: -0.3px; line-height: 1.35; transition: color 150ms ease;"
         >
           {post.data.title}
         </a>
