@@ -10,13 +10,13 @@
 
 - Update blog theme to monochrome minimal-developer design — [plan](plans/migration-monochrome.md) | [mockup](mockups/_monochrome-real.html)
 
-- Post tags — add tag field to frontmatter, show in meta lines
+- Post tags — ~~add tag field to frontmatter~~, show in meta lines
 - Reading time — compute from word count, show on post detail
 - Post header layout — ~~match mockup: date+author bottom meta bar~~, top meta: tag · reading time
 
 - Header refinement — masthead, nav, spacing
 - Hover fixes — apply design principles across all interactive elements
-- CSS cleanup audit — check classes, global.css, custom properties, inline styles
+- CSS cleanup audit — check classes, global.css, custom properties, inline stylesK
 
 ## Done
 

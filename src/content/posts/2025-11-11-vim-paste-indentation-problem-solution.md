@@ -3,6 +3,7 @@ title: 'vim: paste indentation problem and solution'
 date: '2025-11-11'
 intro: How to fix Vim's paste indentation problem (the staircase effect). And how modern terminals and Vim use bracketed paste mode to solve this automatically.
 slug: 'vim-paste-indentation-problem-solution'
+tag: 'til'
 ---
 
 ## The Problem

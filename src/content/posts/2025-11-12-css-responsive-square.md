@@ -2,6 +2,7 @@
 title: 'CSS: How to Create a Perfect Responsive Square'
 date: '2025-11-12'
 intro: Learn the modern CSS technique to create responsive squares that maintain perfect aspect ratios using container queries and cqmin - no JavaScript required!
+tag: 'til'
 ---
 
 ## The Problem: Making Responsive Squares in CSS is Harder Than It Looks

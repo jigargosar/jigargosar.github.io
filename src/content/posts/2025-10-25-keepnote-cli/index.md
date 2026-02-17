@@ -4,6 +4,7 @@ date: '2025-10-25'
 intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 image: ./hero.png
 imageAlt: Futuristic neon terminal window showing keepnote CLI
+tag: 'project'
 ---
 
 I built [**keepnote**](https://github.com/jigargosar/keepnote), a CLI tool for instant note-taking and search using plain text files.
