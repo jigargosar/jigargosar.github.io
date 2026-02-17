@@ -53,15 +53,15 @@ const navLinks = [
 <div class="w-full max-w-[820px] mx-auto px-10">
   <header class="py-7 border-b border-w08">
     <div class="flex items-center justify-between">
-      <a href="/" class="font-serif font-light text-2xl text-w75 no-underline hover:text-w60" style="letter-spacing: 0.5px; transition: color 150ms ease;">
+      <a href="/" class="font-serif font-light text-2xl text-w75 no-underline" style="letter-spacing: 0.5px;">
         Jigar Gosar
       </a>
       <nav class="flex gap-8">
         {navLinks.map(link => (
           <a
             href={link.href}
-            class="font-mono text-sm text-w50 no-underline hover:text-w75"
-            style="letter-spacing: 0.5px; transition: color 150ms ease;"
+            class="font-mono text-sm text-w50 no-underline"
+            style="letter-spacing: 0.5px;"
           >
             {link.title}
           </a>
