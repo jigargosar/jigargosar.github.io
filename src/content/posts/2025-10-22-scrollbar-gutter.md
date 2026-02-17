@@ -2,6 +2,7 @@
 title: 'CSS: Prevent Layout Shift When Scrollbar Appears'
 date: '2025-10-22'
 intro: Navigate from a short page to a longer one and you'll notice the layout suddenly shifts left. The scrollbar appearing (and disappearing) takes up space, causing a jarring jump that disrupts the user experience. The fix? One CSS property `scrollbar-gutter`.
+tag: 'til'
 ---
 
 ## The Problem

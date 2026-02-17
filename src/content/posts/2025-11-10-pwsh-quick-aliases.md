@@ -2,6 +2,7 @@
 title: 'PowerShell: Simpler Way to Create Aliases'
 date: '2025-11-10'
 intro: Skip the Set-Alias boilerplate for personal shortcuts—just use `function a { b }`.
+tag: 'til'
 ---
 
 ## The Pattern Everyone Follows

@@ -2,6 +2,7 @@
 title: 'PowerShell: Environment Variable Woes'
 date: '2025-10-21'
 intro: How to set environment variables for a single command in PowerShell without polluting your current shell session.
+tag: 'til'
 ---
 
 ## The Problem
