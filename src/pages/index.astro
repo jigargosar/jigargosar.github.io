@@ -26,6 +26,15 @@ const structuredData = {
   description={SITE.description}
   structuredData={structuredData}
 >
+  <style>
+    .post-hero {
+      filter: grayscale(100%) brightness(0.55) contrast(1.1);
+      transition: filter 150ms ease;
+    }
+    .group:hover .post-hero {
+      filter: grayscale(100%) brightness(0.65) contrast(1.1);
+    }
+  </style>
   <ul class="list-none p-0">
     {sortedPosts.map(post => (
       <li class="group py-7 border-b border-w08">
@@ -51,8 +60,8 @@ const structuredData = {
           <img
             src={post.data.image.src}
             alt={post.data.imageAlt || post.data.title}
-            class="w-full mt-4 object-cover"
-            style="aspect-ratio: 5/3; filter: grayscale(100%) brightness(0.55) contrast(1.1);"
+            class="post-hero w-full mt-4 object-cover"
+            style="aspect-ratio: 5/3;"
             loading="lazy"
           />
         )}
