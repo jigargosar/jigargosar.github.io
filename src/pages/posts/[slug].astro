@@ -18,6 +18,10 @@ export async function getStaticPaths() {
 const { post } = Astro.props
 const { Content } = await post.render()
 
+const formattedDate = new Date(post.data.date + 'T00:00:00').toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric'
+})
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -155,14 +159,6 @@ const structuredData = {
 
   <article>
     <header class="pt-16 pb-0">
-      <div class="font-mono text-xs text-w30 mb-5 uppercase" style="letter-spacing: 3px;">
-        {post.data.date}
-        {post.data.draft && import.meta.env.DEV && (
-          <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded normal-case" style="letter-spacing: 0;">
-            draft
-          </span>
-        )}
-      </div>
       <h1 class="font-sans font-bold text-w90" style="font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px;">
         {post.data.title}
       </h1>
@@ -170,7 +166,12 @@ const structuredData = {
         {post.data.intro}
       </p>
       <div class="font-mono text-xs text-w30 pb-8 border-b border-w08" style="letter-spacing: 0.3px;">
-        {AUTHOR.name}
+        {formattedDate} · {AUTHOR.name}
+        {post.data.draft && import.meta.env.DEV && (
+          <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded" style="letter-spacing: 0;">
+            draft
+          </span>
+        )}
       </div>
     </header>
 
