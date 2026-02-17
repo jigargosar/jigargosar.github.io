@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import './accent-themes.css';
+
+@theme {
+    --color-w90: hsl(0 0% 100% / 0.88);
+    --color-w75: hsl(0 0% 100% / 0.72);
+    --color-w60: hsl(0 0% 100% / 0.58);
+    --color-w45: hsl(0 0% 100% / 0.42);
+    --color-w30: hsl(0 0% 100% / 0.28);
+    --color-w18: hsl(0 0% 100% / 0.16);
+    --color-w08: hsl(0 0% 100% / 0.07);
+    --color-bg: hsl(0 0% 7%);
+    --color-bg-raised: hsl(0 0% 100% / 0.02);
+    --color-border: hsl(0 0% 100% / 0.055);
+}
 
 html {
     scrollbar-gutter: stable;
