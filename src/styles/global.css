@@ -2,6 +2,10 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-sans: 'Instrument Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
     --color-w90: hsl(0 0% 100% / 0.88);
     --color-w75: hsl(0 0% 100% / 0.72);
     --color-w60: hsl(0 0% 100% / 0.58);
