@@ -47,7 +47,21 @@ const structuredData = {
       @apply prose prose-invert max-w-none;
     }
 
+    .post-content :global(> p:first-of-type::first-letter) {
+      font-family: 'Instrument Sans', -apple-system, sans-serif;
+      font-size: 52px;
+      float: left;
+      line-height: 1;
+      padding-right: 10px;
+      padding-top: 6px;
+      color: rgba(255,255,255,0.88);
+      font-weight: 700;
+    }
+
     /* Body text */
+    .post-content :global(p) {
+      margin-bottom: 22px;
+    }
     .post-content :global(p),
     .post-content :global(li),
     .post-content :global(em),
@@ -83,14 +97,13 @@ const structuredData = {
     /* Links */
     .post-content :global(a) {
       color: rgba(255,255,255,0.72);
-      text-decoration: underline;
-      text-decoration-color: rgba(255,255,255,0.16);
-      text-underline-offset: 0.2em;
-      text-decoration-thickness: 0.1em;
-      transition: text-decoration-color 150ms ease;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+      transition: color 150ms ease, border-bottom-color 150ms ease;
     }
     .post-content :global(a:hover) {
-      text-decoration-color: rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.88);
+      border-bottom-color: rgba(255,255,255,0.28);
     }
 
     /* Code */
@@ -123,17 +136,23 @@ const structuredData = {
     .post-content :global(ul) {
       list-style: none;
       padding: 0;
+      margin-bottom: 22px;
     }
     .post-content :global(ul li) {
       padding: 8px 0 8px 18px;
       position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .post-content :global(ul li::before) {
       content: '—';
       position: absolute;
       left: 0;
-      color: rgba(255,255,255,0.42);
+      color: rgba(255,255,255,0.16);
       font-size: 14px;
+    }
+    .post-content :global(ul li strong) {
+      font-family: 'IBM Plex Mono', monospace;
+      color: rgba(255,255,255,0.72);
     }
 
     /* Blockquote / aside */
@@ -144,13 +163,13 @@ const structuredData = {
     }
 
     .post-content :global(blockquote) {
-      border-left: 2px solid rgba(255,255,255,0.16);
+      border-left: none;
       padding-left: 18px;
       margin: 32px 0;
       font-style: italic;
     }
     .post-content :global(blockquote p) {
-      color: rgba(255,255,255,0.58);
+      color: rgba(255,255,255,0.42);
       font-size: 16px;
       line-height: 1.7;
     }
