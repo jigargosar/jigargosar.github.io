@@ -26,15 +26,15 @@ const structuredData = {
   description={SITE.description}
   structuredData={structuredData}
 >
-  <div class="font-mono text-sm text-w18 uppercase mb-10" style="letter-spacing: 3px;">Posts</div>
+  <div class="font-mono text-sm text-w60 uppercase mb-10" style="letter-spacing: 3px;">Posts</div>
 
   <ul class="list-none p-0">
     {sortedPosts.map(post => (
       <li class="py-7 border-b border-w08 first:border-t first:border-w08">
-        <div class="font-mono text-sm text-w30 mb-1.5" style="letter-spacing: 0.3px;">
+        <div class="font-mono text-sm text-w60 mb-1.5" style="letter-spacing: 0.3px;">
           {post.data.date}
           {post.data.draft && import.meta.env.DEV && (
-            <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w30 rounded text-sm font-mono">
+            <span class="ml-2 px-1.5 py-0.5 bg-w08 text-w60 rounded text-sm font-mono">
               draft
             </span>
           )}
