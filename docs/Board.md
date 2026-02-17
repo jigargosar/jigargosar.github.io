@@ -16,6 +16,7 @@
 
 - Header refinement — masthead, nav, spacing
 - Hover fixes — apply design principles across all interactive elements
+- CSS cleanup audit — check classes, global.css, custom properties, inline styles
 
 ## Done
 
