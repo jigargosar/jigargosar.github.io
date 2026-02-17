@@ -48,13 +48,13 @@ const structuredData = {
     }
 
     .post-content :global(> p:first-of-type::first-letter) {
-      font-family: 'Instrument Sans', -apple-system, sans-serif;
+      font-family: var(--font-sans);
       font-size: 52px;
       float: left;
       line-height: 1;
       padding-right: 10px;
       padding-top: 6px;
-      color: rgba(255,255,255,0.88);
+      color: var(--color-w90);
       font-weight: 700;
     }
 
@@ -66,59 +66,59 @@ const structuredData = {
     .post-content :global(li),
     .post-content :global(em),
     .post-content :global(strong) {
-      color: rgba(255,255,255,0.58);
+      color: var(--color-w60);
     }
     .post-content :global(strong) {
-      color: rgba(255,255,255,0.72);
+      color: var(--color-w75);
       font-weight: 600;
     }
 
     /* Headings */
     .post-content :global(h2) {
-      font-family: 'Instrument Sans', -apple-system, sans-serif;
+      font-family: var(--font-sans);
       font-weight: 600;
       font-size: 22px;
-      color: rgba(255,255,255,0.72);
+      color: var(--color-w75);
       letter-spacing: -0.3px;
       margin-top: 56px;
       margin-bottom: 18px;
       padding-left: 16px;
-      border-left: 2px solid rgba(255,255,255,0.16);
+      border-left: 2px solid var(--color-w18);
     }
     .post-content :global(h3) {
-      font-family: 'Instrument Sans', -apple-system, sans-serif;
+      font-family: var(--font-sans);
       font-weight: 500;
       font-size: 18px;
-      color: rgba(255,255,255,0.58);
+      color: var(--color-w60);
       margin-top: 40px;
       margin-bottom: 14px;
     }
 
     /* Links */
     .post-content :global(a) {
-      color: rgba(255,255,255,0.72);
+      color: var(--color-w75);
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.16);
+      border-bottom: 1px solid var(--color-w18);
       transition: color 150ms ease, border-bottom-color 150ms ease;
     }
     .post-content :global(a:hover) {
-      color: rgba(255,255,255,0.88);
-      border-bottom-color: rgba(255,255,255,0.28);
+      color: var(--color-w90);
+      border-bottom-color: var(--color-w30);
     }
 
     /* Code */
     .post-content :global(code) {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 15px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.055);
+      background: var(--color-bg-raised);
+      border: 1px solid var(--color-border);
       padding: 2px 7px;
       border-radius: 3px;
-      color: rgba(255,255,255,0.72);
+      color: var(--color-w75);
     }
     .post-content :global(pre) {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.055);
+      background: var(--color-bg-raised);
+      border: 1px solid var(--color-border);
       border-radius: 4px;
       padding: 24px;
       margin: 28px 0;
@@ -127,7 +127,7 @@ const structuredData = {
       background: none;
       border: none;
       padding: 0;
-      color: rgba(255,255,255,0.58);
+      color: var(--color-w60);
       font-size: 14px;
       line-height: 1.7;
     }
@@ -141,24 +141,24 @@ const structuredData = {
     .post-content :global(ul li) {
       padding: 8px 0 8px 18px;
       position: relative;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid var(--color-w08);
     }
     .post-content :global(ul li::before) {
       content: '—';
       position: absolute;
       left: 0;
-      color: rgba(255,255,255,0.16);
+      color: var(--color-w18);
       font-size: 14px;
     }
     .post-content :global(ul li strong) {
-      font-family: 'IBM Plex Mono', monospace;
-      color: rgba(255,255,255,0.72);
+      font-family: var(--font-mono);
+      color: var(--color-w75);
     }
 
     /* Blockquote / aside */
     .post-content :global(hr) {
       border: none;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid var(--color-w08);
       margin: 40px 0;
     }
 
@@ -169,7 +169,7 @@ const structuredData = {
       font-style: italic;
     }
     .post-content :global(blockquote p) {
-      color: rgba(255,255,255,0.42);
+      color: var(--color-w45);
       font-size: 16px;
       line-height: 1.7;
     }
