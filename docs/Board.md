@@ -10,7 +10,6 @@
 
 - Update blog theme to monochrome minimal-developer design — [plan](plans/migration-monochrome.md) | [mockup](mockups/_monochrome-real.html)
 
-- Hover fixes — apply design principles across all interactive elements
 - CSS cleanup audit — check classes, global.css, custom properties, inline styles
 
 ## Done
@@ -19,6 +18,7 @@
 - Reading time — compute from word count, show on post detail
 - Post header layout — date+author byline, top meta: tag · reading time
 - Header refinement — revert to mockup: sans bold name, remove λ watermark
+- Hover fixes — all states match mockup (nav, titles, images, prose links)
 
 - Code block syntax highlighting — switch Shiki theme to monochrome
 - Prose inline code weight — 600→300 (light, not bold)
