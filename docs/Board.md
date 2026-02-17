@@ -20,6 +20,7 @@
 ## Done
 
 - Code block syntax highlighting — switch Shiki theme to monochrome
+- Prose inline code weight — 600→300 (light, not bold)
 
 - Drop cap — ~~first-letter: sans 52px~~ resized to 44px for 2-line span
 - Prose width — constrain to 660px (max-w-none override fix)
