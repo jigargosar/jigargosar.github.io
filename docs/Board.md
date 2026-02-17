@@ -10,13 +10,13 @@
 
 - Update blog theme to monochrome minimal-developer design — [plan](plans/migration-monochrome.md) | [mockup](mockups/_monochrome-real.html)
 
-- Drop cap — first-letter: sans 52px float left w90 bold
-- Prose paragraph margin — explicit margin-bottom 22px
-- Prose links — switch to border-bottom, hover text w75→w90 + border w18→w30
-- Prose em-dash color — w42→w18
-- Prose list items — add border-bottom w08, margin-bottom 22px on ul
-- Prose list strong — mono font + w75 for strong inside li
-- Prose blockquote — remove border-left, keep padding-left + italic + w45
+- ~~Drop cap — first-letter: sans 52px float left w90 bold~~
+- ~~Prose paragraph margin — explicit margin-bottom 22px~~
+- ~~Prose links — switch to border-bottom, hover text w75→w90 + border w18→w30~~
+- ~~Prose em-dash color — w42→w18~~
+- ~~Prose list items — add border-bottom w08, margin-bottom 22px on ul~~
+- ~~Prose list strong — mono font + w75 for strong inside li~~
+- ~~Prose blockquote — remove border-left, keep padding-left + italic + w45~~
 - Markdown content styling — post-content CSS cleanup (raw rgba → tokens)
 
 - Post tags — add tag field to frontmatter, show in meta lines
