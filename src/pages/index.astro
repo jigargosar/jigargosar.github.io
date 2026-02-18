@@ -39,7 +39,7 @@ const structuredData = {
   */}
   <ul class="list-none p-0">
     {sortedPosts.map(post => (
-      <li class="group py-7 border-b border-w08 last:border-b-0">
+      <li class="group py-7">
         <div class="font-mono text-xs text-w30 mb-1.5" style="letter-spacing: 0.3px;">
           {post.data.date}{post.data.tag && ` · ${post.data.tag}`}
           {post.data.draft && import.meta.env.DEV && (
