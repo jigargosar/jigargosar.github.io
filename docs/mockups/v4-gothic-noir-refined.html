@@ -321,33 +321,12 @@
     </div>
   </nav>
 
-  <!-- Header ornament — angular iron knotwork -->
-  <div class="nav-border">
+  <!-- Header ornament — cycler (click to switch, number at far right) -->
+  <div class="nav-border" id="headerOrnamentCycler" style="cursor:pointer; position:relative;">
     <div class="nav-border-line"></div>
-    <svg width="80" height="16" viewBox="0 0 80 16" fill="none" style="opacity: 0.22;">
-      <!-- Center diamond -->
-      <path d="M35 8 L40 3 L45 8 L40 13 Z" stroke="currentColor" stroke-width="0.7" fill="none" style="color: var(--w60);"/>
-      <path d="M37.5 8 L40 5.5 L42.5 8 L40 10.5 Z" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <!-- Left angular arm -->
-      <path d="M35 8 L28 8 L24 4 L20 8 L16 4" stroke="currentColor" stroke-width="0.7" fill="none" style="color: var(--w60);"/>
-      <!-- Left lower crossbar -->
-      <path d="M28 8 L24 12 L20 8" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <!-- Left terminal arrow -->
-      <path d="M16 4 L12 8 L8 8" stroke="currentColor" stroke-width="0.6" fill="none" style="color: var(--w60);"/>
-      <path d="M12 8 L8 4" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <path d="M8 8 L2 8" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <path d="M4 5 L0 8 L4 11" stroke="currentColor" stroke-width="0.6" fill="none" style="color: var(--w60);"/>
-      <!-- Right angular arm (mirrored) -->
-      <path d="M45 8 L52 8 L56 4 L60 8 L64 4" stroke="currentColor" stroke-width="0.7" fill="none" style="color: var(--w60);"/>
-      <!-- Right lower crossbar -->
-      <path d="M52 8 L56 12 L60 8" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <!-- Right terminal arrow -->
-      <path d="M64 4 L68 8 L72 8" stroke="currentColor" stroke-width="0.6" fill="none" style="color: var(--w60);"/>
-      <path d="M68 8 L72 4" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <path d="M72 8 L78 8" stroke="currentColor" stroke-width="0.5" fill="none" style="color: var(--w60);"/>
-      <path d="M76 5 L80 8 L76 11" stroke="currentColor" stroke-width="0.6" fill="none" style="color: var(--w60);"/>
-    </svg>
+    <div id="headerOrnamentSlot" style="flex-shrink:0; filter: invert(1) brightness(0.7) opacity(0.5);"></div>
     <div class="nav-border-line"></div>
+    <span id="headerOrnamentLabel" style="position:absolute; right:0; top:50%; transform:translateY(-50%); font-family:var(--mono); font-size:9px; color:hsl(0 0% 100%/0.15); letter-spacing:1px; user-select:none;"></span>
   </div>
 
   <!-- ═══════════ INDEX ═══════════ -->
@@ -601,6 +580,75 @@
   </footer>
 
 </div>
+
+<script>
+(async function() {
+  const FILE = 'ornaments/10700738_43445.svg';
+  const MAX_W = 500, MAX_H = 40;
+
+  const res = await fetch(FILE);
+  const text = await res.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'image/svg+xml');
+  const svg = doc.querySelector('svg');
+
+  const topEls = Array.from(svg.children).filter(el => el.tagName === 'g' || el.tagName === 'path');
+
+  // Measure bounding boxes
+  const measurer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const vb = svg.getAttribute('viewBox') || '0 0 450 550';
+  measurer.setAttribute('viewBox', vb);
+  const vbP = vb.split(/\s+/);
+  measurer.style.cssText = `position:absolute;left:-9999px;width:${vbP[2]}px;height:${vbP[3]}px`;
+  document.body.appendChild(measurer);
+  Array.from(svg.children).forEach(c => measurer.appendChild(c.cloneNode(true)));
+
+  const items = [];
+  const mKids = Array.from(measurer.children).filter(el => el.tagName === 'g' || el.tagName === 'path');
+  mKids.forEach((el, i) => {
+    try {
+      const bb = el.getBBox();
+      const aspect = bb.width / bb.height;
+      if (bb.width > 50 && bb.height > 4 && aspect > 3) {
+        items.push({ bbox: bb, html: topEls[i].outerHTML });
+      }
+    } catch(e) {}
+  });
+  document.body.removeChild(measurer);
+
+  items.sort((a, b) => a.bbox.y - b.bbox.y);
+  const ornaments = items.slice(0, 2); // just 2 for now
+
+  if (!ornaments.length) return;
+
+  let idx = 0;
+  const slot = document.getElementById('headerOrnamentSlot');
+  const label = document.getElementById('headerOrnamentLabel');
+  const cycler = document.getElementById('headerOrnamentCycler');
+
+  function render() {
+    const o = ornaments[idx];
+    const b = o.bbox, pad = 4;
+    const vbX = (b.x - pad).toFixed(1);
+    const vbY = (b.y - pad).toFixed(1);
+    const vbW = (b.width + pad * 2).toFixed(1);
+    const vbH = (b.height + pad * 2).toFixed(1);
+    const aspect = b.width / b.height;
+    let dW, dH;
+    if (aspect > MAX_W / MAX_H) { dW = Math.min(b.width, MAX_W); dH = dW / aspect; }
+    else { dH = Math.min(b.height, MAX_H); dW = dH * aspect; }
+    slot.innerHTML = `<svg width="${Math.round(dW)}" height="${Math.round(dH)}" viewBox="${vbX} ${vbY} ${vbW} ${vbH}" xmlns="http://www.w3.org/2000/svg">${o.html}</svg>`;
+    label.textContent = `${idx + 1}/${ornaments.length}`;
+  }
+
+  cycler.addEventListener('click', () => {
+    idx = (idx + 1) % ornaments.length;
+    render();
+  });
+
+  render();
+})();
+</script>
 
 </body>
 </html>
