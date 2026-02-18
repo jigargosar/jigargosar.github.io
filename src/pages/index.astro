@@ -26,6 +26,7 @@ const structuredData = {
   description={SITE.description}
   structuredData={structuredData}
 >
+  {/* List page hero image styles — disabled, restore when re-enabling the image block above
   <style>
     .post-hero {
       filter: grayscale(100%) brightness(0.55) contrast(1.1);
@@ -35,6 +36,7 @@ const structuredData = {
       filter: grayscale(100%) brightness(0.65) contrast(1.1);
     }
   </style>
+  */}
   <ul class="list-none p-0">
     {sortedPosts.map(post => (
       <li class="group py-7 border-b border-w08 last:border-b-0">
@@ -56,15 +58,19 @@ const structuredData = {
         <p class="text-w45 mt-1.5" style="font-size: 15px; line-height: 1.6; max-width: 620px;">
           {post.data.intro}
         </p>
+        {/* List page hero image — disabled, re-enable and pick an aspect-ratio to restore
+          Styles (.post-hero hover) also commented out in <style> below.
+          imagePosition per-post frontmatter controls object-position (e.g. '50% 38%')
         {post.data.image && (
           <img
             src={post.data.image.src}
             alt={post.data.imageAlt || post.data.title}
             class="post-hero w-full mt-4 object-cover"
-            style="aspect-ratio: 5/3;"
+            style={`aspect-ratio: 2/1; object-position: ${post.data.imagePosition ?? '50% 50%'};`}
             loading="lazy"
           />
         )}
+        */}
       </li>
     ))}
   </ul>

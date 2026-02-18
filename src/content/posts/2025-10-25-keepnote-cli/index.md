@@ -4,6 +4,7 @@ date: '2025-10-25'
 intro: Creating notes and finding what you need should be simple and instant. You think, you write, you find.
 image: ./hero.png
 imageAlt: Futuristic neon terminal window showing keepnote CLI
+imagePosition: '50% 38%'
 tag: 'project'
 ---
 

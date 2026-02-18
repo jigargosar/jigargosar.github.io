@@ -4,6 +4,7 @@ date: '2026-02-17'
 intro: "Shift+Enter submits instead of inserting a newline in Claude Code on Windows Terminal. A one-line settings fix solves it."
 image: ./hero-heartbeat.jpg
 imageAlt: Neon Shift and Enter keycaps connected by a glowing heartbeat line
+imagePosition: '50% 48%'
 tag: 'how-to'
 ---
 
