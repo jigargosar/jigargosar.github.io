@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ornament Specimens</title>
+<title>Ornament Specimens v2</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -87,7 +87,7 @@ h1 {
 </head>
 <body>
 
-<h1>Ornament Specimens</h1>
+<h1>Ornament Specimens · Batch 1</h1>
 <div class="source-name" id="sourceName"></div>
 <div id="specimens"></div>
 
@@ -111,18 +111,16 @@ async function init() {
     el.tagName === 'g' || el.tagName === 'path'
   );
 
-  // We need to measure bounding boxes — render hidden svg
+  // Render hidden svg for measuring
   const measurer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   measurer.setAttribute('viewBox', svg.getAttribute('viewBox') || '0 0 450 550');
   measurer.style.cssText = 'position:absolute;left:-9999px;width:450px;height:550px;';
   document.body.appendChild(measurer);
 
-  // Clone all elements into measurer for context
   Array.from(svg.children).forEach(child => {
     measurer.appendChild(child.cloneNode(true));
   });
 
-  // Now measure each top-level element
   const measured = [];
   const measureChildren = Array.from(measurer.children).filter(el =>
     el.tagName === 'g' || el.tagName === 'path'
@@ -144,17 +142,14 @@ async function init() {
 
   document.body.removeChild(measurer);
 
-  // Filter: skip very large ones (>300px in either dimension relative to viewBox)
-  // and very tiny ones (<10px)
+  // Filter out oversized and tiny
   const filtered = measured.filter(m => {
     const b = m.bbox;
     return b.width < 350 && b.height < 200 && b.width > 8 && b.height > 8;
   });
 
-  // Sort by Y position
   filtered.sort((a, b) => a.bbox.y - b.bbox.y);
 
-  // Take first 10
   const batch = filtered.slice(0, 10);
 
   if (batch.length === 0) {
@@ -170,7 +165,6 @@ async function init() {
     const vbW = (b.width + pad * 2).toFixed(1);
     const vbH = (b.height + pad * 2).toFixed(1);
 
-    // Scale to fit max dimensions
     const aspect = b.width / b.height;
     let dispW, dispH;
     if (aspect > MAX_WIDTH / MAX_HEIGHT) {
@@ -181,12 +175,12 @@ async function init() {
       dispW = dispH * aspect;
     }
 
-    const svgMarkup = `<svg width="${Math.round(dispW)}" height="${Math.round(dispH)}" viewBox="${vbX} ${vbY} ${vbW} ${vbH}" fill="none" xmlns="http://www.w3.org/2000/svg">\n${item.html}\n</svg>`;
+    const svgCode = `<svg width="${Math.round(dispW)}" height="${Math.round(dispH)}" viewBox="${vbX} ${vbY} ${vbW} ${vbH}" fill="none" xmlns="http://www.w3.org/2000/svg">\n${item.html}\n</svg>`;
 
     const div = document.createElement('div');
     div.className = 'specimen';
 
-    const copyText = svgMarkup.split('\n').map(l => '  ' + l).join('\n') + ',\n';
+    const copyText = svgCode.split('\n').map(l => '  ' + l).join('\n') + ',\n';
 
     div.innerHTML = `
       <div class="label">${String(idx + 1).padStart(2, '0')} · ${Math.round(b.width)}×${Math.round(b.height)}px</div>
