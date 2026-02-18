@@ -8,6 +8,8 @@
 
 ## InProgress
 
+- Add hero images to all posts
+
 - Update blog theme to monochrome minimal-developer design — [plan](plans/migration-monochrome.md) | [mockup](mockups/_monochrome-real.html)
 
 - CSS cleanup audit — check classes, global.css, custom properties, inline styles
