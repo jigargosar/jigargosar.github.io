@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Deep space background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0d0221"/>
+      <stop offset="40%" stop-color="#0a0535"/>
+      <stop offset="100%" stop-color="#020010"/>
+    </radialGradient>
+
+    <!-- Aurora wave gradients -->
+    <linearGradient id="aurora1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7b2fff" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#b026e8" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#00e5ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7b2fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="aurora2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff2d78" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#ff6bbd" stop-opacity="0.55"/>
+      <stop offset="65%" stop-color="#a855f7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="aurora3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffd0" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#00cfff" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#7b61ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00ffd0" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="aurora4" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#ffaa44" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#ff6bbd" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Bokeh orb gradients -->
+    <radialGradient id="orb1" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="25%" stop-color="#e0b8ff" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#7b2fff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7b2fff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orb2" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="20%" stop-color="#aaf0ff" stop-opacity="0.75"/>
+      <stop offset="55%" stop-color="#00cfff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00cfff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orb3" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="20%" stop-color="#ffb8d9" stop-opacity="0.8"/>
+      <stop offset="55%" stop-color="#ff2d78" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orb4" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.95"/>
+      <stop offset="20%" stop-color="#ffd700" stop-opacity="0.8"/>
+      <stop offset="55%" stop-color="#ffaa00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffaa00" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orb5" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#eeffff" stop-opacity="0.85"/>
+      <stop offset="25%" stop-color="#a0ffe8" stop-opacity="0.7"/>
+      <stop offset="55%" stop-color="#00ffd0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00ffd0" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orb6" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f0f0ff" stop-opacity="0.8"/>
+      <stop offset="20%" stop-color="#b8b0ff" stop-opacity="0.65"/>
+      <stop offset="55%" stop-color="#6050ff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#6050ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Nebula cloud gradients -->
+    <radialGradient id="neb1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#b026e8" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#7b2fff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#7b2fff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="neb2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#0088cc" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0088cc" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="neb3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6bbd" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#dd2277" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#dd2277" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="neb4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffd0" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#00aa88" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00aa88" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glow filter for orbs -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft glow for aurora bands -->
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Blur for nebula -->
+    <filter id="nebBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="35"/>
+    </filter>
+
+    <!-- Star points blur -->
+    <filter id="starGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep space background -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Distant star field (tiny dots) -->
+  <g opacity="0.6">
+    <circle cx="42" cy="18" r="0.8" fill="#fff" opacity="0.7"/>
+    <circle cx="110" cy="55" r="1" fill="#fff" opacity="0.5"/>
+    <circle cx="195" cy="30" r="0.7" fill="#e0e8ff" opacity="0.8"/>
+    <circle cx="265" cy="70" r="0.9" fill="#fff" opacity="0.4"/>
+    <circle cx="350" cy="15" r="1" fill="#ffe0f8" opacity="0.6"/>
+    <circle cx="430" cy="48" r="0.7" fill="#fff" opacity="0.7"/>
+    <circle cx="510" cy="22" r="0.9" fill="#e0f8ff" opacity="0.5"/>
+    <circle cx="600" cy="60" r="0.8" fill="#fff" opacity="0.6"/>
+    <circle cx="690" cy="35" r="1" fill="#fff" opacity="0.4"/>
+    <circle cx="760" cy="80" r="0.7" fill="#ffe0e0" opacity="0.7"/>
+    <circle cx="78" cy="130" r="0.8" fill="#fff" opacity="0.5"/>
+    <circle cx="155" cy="145" r="0.7" fill="#e8e0ff" opacity="0.7"/>
+    <circle cx="290" cy="110" r="1" fill="#fff" opacity="0.45"/>
+    <circle cx="388" cy="155" r="0.9" fill="#fff" opacity="0.6"/>
+    <circle cx="468" cy="130" r="0.7" fill="#e0fff8" opacity="0.5"/>
+    <circle cx="565" cy="100" r="1" fill="#fff" opacity="0.55"/>
+    <circle cx="650" cy="145" r="0.8" fill="#fff" opacity="0.4"/>
+    <circle cx="730" cy="120" r="0.9" fill="#ffe8f0" opacity="0.65"/>
+    <circle cx="28" cy="210" r="0.7" fill="#fff" opacity="0.6"/>
+    <circle cx="135" cy="250" r="1" fill="#fff" opacity="0.4"/>
+    <circle cx="218" cy="200" r="0.8" fill="#e0e8ff" opacity="0.7"/>
+    <circle cx="342" cy="240" r="0.7" fill="#fff" opacity="0.5"/>
+    <circle cx="480" cy="210" r="0.9" fill="#fff" opacity="0.55"/>
+    <circle cx="575" cy="255" r="0.8" fill="#e8f0ff" opacity="0.6"/>
+    <circle cx="680" cy="220" r="1" fill="#fff" opacity="0.45"/>
+    <circle cx="755" cy="245" r="0.7" fill="#fff" opacity="0.7"/>
+    <circle cx="60" cy="330" r="1" fill="#fff" opacity="0.5"/>
+    <circle cx="175" cy="360" r="0.8" fill="#ffe0ff" opacity="0.6"/>
+    <circle cx="310" cy="320" r="0.7" fill="#fff" opacity="0.4"/>
+    <circle cx="415" cy="355" r="0.9" fill="#fff" opacity="0.65"/>
+    <circle cx="540" cy="340" r="0.8" fill="#e0f8ff" opacity="0.55"/>
+    <circle cx="635" cy="310" r="0.7" fill="#fff" opacity="0.7"/>
+    <circle cx="720" cy="350" r="1" fill="#fff" opacity="0.4"/>
+    <circle cx="95" cy="440" r="0.8" fill="#fff" opacity="0.55"/>
+    <circle cx="200" cy="470" r="0.7" fill="#e8e0ff" opacity="0.65"/>
+    <circle cx="325" cy="430" r="1" fill="#fff" opacity="0.45"/>
+    <circle cx="450" cy="465" r="0.8" fill="#fff" opacity="0.5"/>
+    <circle cx="560" cy="440" r="0.9" fill="#ffe8f0" opacity="0.6"/>
+    <circle cx="660" cy="470" r="0.7" fill="#fff" opacity="0.55"/>
+    <circle cx="745" cy="445" r="1" fill="#e0fff0" opacity="0.4"/>
+    <circle cx="45" cy="545" r="0.9" fill="#fff" opacity="0.6"/>
+    <circle cx="160" cy="570" r="0.7" fill="#fff" opacity="0.45"/>
+    <circle cx="270" cy="540" r="0.8" fill="#e0e8ff" opacity="0.7"/>
+    <circle cx="390" cy="580" r="1" fill="#fff" opacity="0.5"/>
+    <circle cx="500" cy="555" r="0.7" fill="#fff" opacity="0.55"/>
+    <circle cx="610" cy="575" r="0.8" fill="#ffe0f0" opacity="0.6"/>
+    <circle cx="710" cy="545" r="0.9" fill="#fff" opacity="0.4"/>
+    <circle cx="775" cy="565" r="0.7" fill="#e8f0ff" opacity="0.65"/>
+  </g>
+
+  <!-- Nebula cloud layers (blurred, behind aurora) -->
+  <ellipse cx="200" cy="200" rx="220" ry="160" fill="url(#neb1)" filter="url(#nebBlur)" opacity="0.9"/>
+  <ellipse cx="620" cy="400" rx="200" ry="170" fill="url(#neb2)" filter="url(#nebBlur)" opacity="0.85"/>
+  <ellipse cx="650" cy="150" rx="190" ry="130" fill="url(#neb3)" filter="url(#nebBlur)" opacity="0.8"/>
+  <ellipse cx="170" cy="450" rx="210" ry="150" fill="url(#neb4)" filter="url(#nebBlur)" opacity="0.8"/>
+  <ellipse cx="400" cy="300" rx="240" ry="180" fill="url(#neb1)" filter="url(#nebBlur)" opacity="0.5"/>
+
+  <!-- Aurora borealis bands -->
+  <g filter="url(#softGlow)">
+    <!-- Primary sweeping aurora ribbons -->
+    <path d="M-50,180 Q150,80 350,160 Q550,240 750,120 Q820,100 900,140"
+          stroke="url(#aurora1)" stroke-width="80" fill="none" stroke-opacity="0.65" stroke-linecap="round"/>
+    <path d="M-50,220 Q180,130 380,200 Q560,265 760,160 Q830,140 900,175"
+          stroke="url(#aurora2)" stroke-width="55" fill="none" stroke-opacity="0.55" stroke-linecap="round"/>
+    <path d="M-50,350 Q200,250 400,330 Q580,410 800,290 Q840,270 900,305"
+          stroke="url(#aurora3)" stroke-width="75" fill="none" stroke-opacity="0.55" stroke-linecap="round"/>
+    <path d="M-50,400 Q220,310 430,380 Q610,445 810,335 Q850,315 900,350"
+          stroke="url(#aurora1)" stroke-width="50" fill="none" stroke-opacity="0.45" stroke-linecap="round"/>
+
+    <!-- Secondary flowing bands -->
+    <path d="M-50,470 Q180,400 380,460 Q560,520 760,430 Q820,410 900,445"
+          stroke="url(#aurora4)" stroke-width="65" fill="none" stroke-opacity="0.5" stroke-linecap="round"/>
+    <path d="M-50,140 Q130,60 310,130 Q500,210 700,90 Q780,65 900,95"
+          stroke="url(#aurora3)" stroke-width="45" fill="none" stroke-opacity="0.45" stroke-linecap="round"/>
+
+    <!-- Tertiary accent bands -->
+    <path d="M-50,510 Q200,460 400,510 Q580,555 780,490 Q840,475 900,505"
+          stroke="url(#aurora2)" stroke-width="40" fill="none" stroke-opacity="0.4" stroke-linecap="round"/>
+    <path d="M-50,280 Q170,200 370,270 Q560,345 760,235 Q830,215 900,248"
+          stroke="url(#aurora4)" stroke-width="35" fill="none" stroke-opacity="0.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Overlapping translucent ellipses (aurora shimmer) -->
+  <ellipse cx="200" cy="180" rx="300" ry="90" fill="#8b2fff" opacity="0.08" transform="rotate(-12,200,180)"/>
+  <ellipse cx="600" cy="300" rx="280" ry="80" fill="#00e5ff" opacity="0.08" transform="rotate(8,600,300)"/>
+  <ellipse cx="400" cy="420" rx="320" ry="85" fill="#ff6bbd" opacity="0.07" transform="rotate(-5,400,420)"/>
+  <ellipse cx="120" cy="400" rx="200" ry="70" fill="#00ffd0" opacity="0.08" transform="rotate(15,120,400)"/>
+  <ellipse cx="680" cy="180" rx="240" ry="75" fill="#ffd700" opacity="0.06" transform="rotate(-8,680,180)"/>
+  <ellipse cx="500" cy="520" rx="260" ry="65" fill="#a855f7" opacity="0.07" transform="rotate(6,500,520)"/>
+
+  <!-- Bokeh orbs — large background glow orbs -->
+  <circle cx="120" cy="160" r="110" fill="url(#orb1)" opacity="0.25" filter="url(#nebBlur)"/>
+  <circle cx="680" cy="100" r="130" fill="url(#orb3)" opacity="0.22" filter="url(#nebBlur)"/>
+  <circle cx="650" cy="450" r="120" fill="url(#orb2)" opacity="0.22" filter="url(#nebBlur)"/>
+  <circle cx="160" cy="480" r="100" fill="url(#orb5)" opacity="0.2" filter="url(#nebBlur)"/>
+  <circle cx="400" cy="280" r="150" fill="url(#orb6)" opacity="0.18" filter="url(#nebBlur)"/>
+
+  <!-- Bokeh orbs — medium luminous orbs -->
+  <g filter="url(#glow)">
+    <circle cx="85" cy="220" r="42" fill="url(#orb1)" opacity="0.55"/>
+    <circle cx="190" cy="95" r="35" fill="url(#orb2)" opacity="0.5"/>
+    <circle cx="320" cy="490" r="38" fill="url(#orb3)" opacity="0.5"/>
+    <circle cx="480" cy="140" r="45" fill="url(#orb4)" opacity="0.55"/>
+    <circle cx="615" cy="320" r="40" fill="url(#orb5)" opacity="0.5"/>
+    <circle cx="740" cy="200" r="36" fill="url(#orb2)" opacity="0.48"/>
+    <circle cx="550" cy="500" r="43" fill="url(#orb1)" opacity="0.52"/>
+    <circle cx="250" cy="360" r="38" fill="url(#orb6)" opacity="0.5"/>
+    <circle cx="720" cy="500" r="40" fill="url(#orb4)" opacity="0.48"/>
+    <circle cx="60" cy="480" r="35" fill="url(#orb3)" opacity="0.45"/>
+    <circle cx="400" cy="60" r="38" fill="url(#orb5)" opacity="0.5"/>
+    <circle cx="135" cy="530" r="42" fill="url(#orb2)" opacity="0.45"/>
+  </g>
+
+  <!-- Bokeh orbs — small bright foreground orbs -->
+  <g filter="url(#glow)">
+    <circle cx="55" cy="350" r="18" fill="url(#orb4)" opacity="0.8"/>
+    <circle cx="145" cy="280" r="14" fill="url(#orb1)" opacity="0.85"/>
+    <circle cx="238" cy="155" r="16" fill="url(#orb3)" opacity="0.82"/>
+    <circle cx="330" cy="60" r="12" fill="url(#orb2)" opacity="0.78"/>
+    <circle cx="420" cy="390" r="20" fill="url(#orb6)" opacity="0.8"/>
+    <circle cx="510" cy="255" r="15" fill="url(#orb4)" opacity="0.82"/>
+    <circle cx="590" cy="410" r="18" fill="url(#orb1)" opacity="0.78"/>
+    <circle cx="670" cy="555" r="14" fill="url(#orb5)" opacity="0.82"/>
+    <circle cx="765" cy="380" r="16" fill="url(#orb3)" opacity="0.78"/>
+    <circle cx="345" cy="540" r="13" fill="url(#orb4)" opacity="0.8"/>
+    <circle cx="460" cy="470" r="20" fill="url(#orb2)" opacity="0.75"/>
+    <circle cx="760" cy="58" r="15" fill="url(#orb1)" opacity="0.8"/>
+    <circle cx="30" cy="120" r="12" fill="url(#orb6)" opacity="0.78"/>
+    <circle cx="625" cy="60" r="16" fill="url(#orb5)" opacity="0.8"/>
+    <circle cx="195" cy="555" r="14" fill="url(#orb3)" opacity="0.75"/>
+  </g>
+
+  <!-- Star pinpoints — bright sparkles -->
+  <g filter="url(#starGlow)">
+    <circle cx="310" cy="190" r="2.2" fill="#fff" opacity="0.95"/>
+    <circle cx="535" cy="95" r="2.5" fill="#fffbe0" opacity="0.9"/>
+    <circle cx="648" cy="265" r="2" fill="#e0f8ff" opacity="0.95"/>
+    <circle cx="182" cy="430" r="2.3" fill="#ffe0f8" opacity="0.9"/>
+    <circle cx="710" cy="445" r="2.2" fill="#fff" opacity="0.92"/>
+    <circle cx="92" cy="300" r="2" fill="#f0f0ff" opacity="0.88"/>
+    <circle cx="440" cy="545" r="2.4" fill="#e8fff0" opacity="0.9"/>
+    <circle cx="780" cy="300" r="2.1" fill="#fff8e0" opacity="0.92"/>
+    <circle cx="372" cy="340" r="2.5" fill="#fff" opacity="0.88"/>
+    <circle cx="570" cy="185" r="2.2" fill="#f8e0ff" opacity="0.9"/>
+  </g>
+
+  <!-- Soft luminous veil overlay — unifies the composition -->
+  <rect width="800" height="600" fill="#1a0040" opacity="0.12"/>
+  <radialGradient id="centerGlow" cx="50%" cy="50%" r="60%">
+    <stop offset="0%" stop-color="#5500aa" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="800" height="600" fill="url(#centerGlow)"/>
+</svg>

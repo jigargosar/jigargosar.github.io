@@ -1,0 +1,277 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Ocean depth gradient -->
+    <radialGradient id="oceanDepth" cx="40%" cy="60%" r="70%">
+      <stop offset="0%" stop-color="#0d4f6e"/>
+      <stop offset="40%" stop-color="#0a3d5c"/>
+      <stop offset="100%" stop-color="#061f30"/>
+    </radialGradient>
+
+    <!-- Warm coral glow -->
+    <radialGradient id="coralGlow" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#e8805a" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#c85e38" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c85e38" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Teal shimmer -->
+    <radialGradient id="tealShimmer" cx="20%" cy="70%" r="45%">
+      <stop offset="0%" stop-color="#2ab8b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#2ab8b0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wave foam gradient -->
+    <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#3ecfc7" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#5bbfd8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#2ab8b0" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="30%">
+      <stop offset="0%" stop-color="#1a8fa0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0d6b7a" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Tendril gradient -->
+    <linearGradient id="tendrilGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5d9a5f"/>
+      <stop offset="50%" stop-color="#8bc87e"/>
+      <stop offset="100%" stop-color="#c8e6a0" stop-opacity="0.7"/>
+    </linearGradient>
+
+    <!-- Nautilus spiral gradient -->
+    <radialGradient id="nautilusGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d4875a"/>
+      <stop offset="40%" stop-color="#c06040"/>
+      <stop offset="80%" stop-color="#a04828"/>
+      <stop offset="100%" stop-color="#7a3018"/>
+    </radialGradient>
+
+    <!-- Amber glow -->
+    <radialGradient id="amberGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#f0b060" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#c87828" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#c87828" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Blur filter for glow effects -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="deepGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="subtleBlur">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+
+    <!-- Clip path for nautilus -->
+    <clipPath id="nautilusClip">
+      <circle cx="580" cy="180" r="130"/>
+    </clipPath>
+  </defs>
+
+  <!-- ═══ BACKGROUND ═══ -->
+  <rect width="800" height="600" fill="url(#oceanDepth)"/>
+  <rect width="800" height="600" fill="url(#coralGlow)"/>
+  <rect width="800" height="600" fill="url(#tealShimmer)"/>
+
+  <!-- ═══ DEEP OCEAN WAVES — bottom layers ═══ -->
+  <!-- Wave layer 4 — deepest -->
+  <path d="M-20 520 C80 495, 180 545, 280 510 C380 475, 480 540, 580 505 C680 470, 750 520, 820 500 L820 620 L-20 620 Z"
+        fill="#0a3d5c" opacity="0.9"/>
+
+  <!-- Wave layer 3 -->
+  <path d="M-20 490 C60 462, 160 512, 270 478 C380 444, 460 508, 570 472 C680 436, 760 490, 820 468 L820 620 L-20 620 Z"
+        fill="url(#waveGrad2)" opacity="0.75"/>
+
+  <!-- Wave layer 2 — mid -->
+  <path d="M-20 455 C80 420, 190 475, 310 438 C430 401, 510 462, 620 428 C730 394, 790 448, 820 430 L820 620 L-20 620 Z"
+        fill="url(#waveGrad1)" opacity="0.6"/>
+
+  <!-- Wave layer 1 — foreground crest -->
+  <path d="M-20 430 C50 398, 130 445, 230 410 C330 375, 420 428, 530 393 C640 358, 730 412, 820 385 L820 620 L-20 620 Z"
+        fill="#3ecfc7" opacity="0.35" filter="url(#softGlow)"/>
+
+  <!-- Wave foam highlights -->
+  <path d="M-20 431 C50 399, 130 446, 230 411 C330 376, 420 429, 530 394"
+        fill="none" stroke="#a8f0ec" stroke-width="1.5" opacity="0.5"/>
+  <path d="M530 394 C640 359, 730 413, 820 386"
+        fill="none" stroke="#a8f0ec" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Secondary foam line -->
+  <path d="M-20 455 C80 421, 190 476, 310 439"
+        fill="none" stroke="#7de8e4" stroke-width="1" opacity="0.4"/>
+  <path d="M310 439 C430 402, 510 463, 620 429"
+        fill="none" stroke="#7de8e4" stroke-width="1" opacity="0.4"/>
+
+  <!-- ═══ FLOWING SPIRAL TENDRILS — left side ═══ -->
+  <!-- Main vine trunk -->
+  <path d="M60 600 C55 540, 40 490, 70 440 C100 390, 150 370, 130 320 C110 270, 60 260, 80 210 C100 160, 160 150, 150 100 C140 50, 100 30, 120 0"
+        fill="none" stroke="url(#tendrilGrad)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Tendril branch 1 -->
+  <path d="M90 420 C120 400, 160 390, 180 360 C200 330, 195 300, 220 280 C245 260, 270 265, 285 245"
+        fill="none" stroke="#8bc87e" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Tendril branch 2 curling spiral -->
+  <path d="M220 280 C240 268, 255 255, 262 240 C269 225, 265 210, 272 200 C279 190, 290 188, 292 178 C294 168, 285 160, 288 152"
+        fill="none" stroke="#a0d888" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Leaf spirals on branch 1 -->
+  <path d="M165 385 C170 370, 185 365, 188 350 C191 335, 180 325, 172 320"
+        fill="none" stroke="#c8e6a0" stroke-width="1.2" stroke-linecap="round" opacity="0.65"/>
+  <path d="M192 350 C205 345, 215 338, 218 325 C221 312, 213 305, 207 300"
+        fill="none" stroke="#c8e6a0" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- Tendril left branch 3 — curls upward -->
+  <path d="M112 300 C95 285, 75 278, 65 260 C55 242, 62 222, 52 208 C42 194, 22 190, 18 175"
+        fill="none" stroke="#6db870" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- Small spiral curl at tip -->
+  <path d="M18 175 C14 168, 12 160, 16 153 C20 146, 28 145, 30 138 C32 131, 26 125, 28 119"
+        fill="none" stroke="#9ed890" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- ═══ NAUTILUS SHELL — upper right ═══ -->
+  <!-- Outer shell glow -->
+  <circle cx="580" cy="180" r="125" fill="url(#amberGlow)" opacity="0.4"/>
+
+  <!-- Shell body -->
+  <path d="M580 55 C648 55, 705 112, 705 180 C705 248, 648 305, 580 305 C512 305, 455 248, 455 180 C455 112, 512 55, 580 55"
+        fill="#7a3018" opacity="0.15" stroke="#d4875a" stroke-width="1" opacity="0.3"/>
+
+  <!-- Nautilus spiral chambers — built from arcs -->
+  <!-- Outermost chamber -->
+  <path d="M580 60 C644 60, 700 116, 700 180 C700 244, 644 300, 580 300 C516 300, 460 244, 460 180 C460 116, 516 60, 580 60"
+        fill="none" stroke="#c87040" stroke-width="2" opacity="0.6"/>
+
+  <!-- Spiral arm 1 -->
+  <path d="M580 60 C620 75, 650 110, 665 150 C680 190, 675 235, 655 265 C635 295, 605 308, 580 305"
+        fill="none" stroke="#e09050" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Chamber 2 -->
+  <path d="M580 90 C630 90, 672 132, 672 180 C672 228, 630 270, 580 270 C530 270, 488 228, 488 180 C488 132, 530 90, 580 90"
+        fill="none" stroke="#c06040" stroke-width="1.8" opacity="0.55"/>
+
+  <!-- Spiral arm 2 -->
+  <path d="M580 90 C610 100, 635 125, 645 155 C655 185, 648 218, 632 242"
+        fill="none" stroke="#d07848" stroke-width="1.3" opacity="0.5"/>
+
+  <!-- Chamber 3 -->
+  <path d="M580 118 C617 118, 645 146, 645 180 C645 214, 617 242, 580 242 C543 242, 515 214, 515 180 C515 146, 543 118, 580 118"
+        fill="none" stroke="#b85830" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Spiral arm 3 -->
+  <path d="M580 118 C600 125, 618 142, 624 162 C630 182, 622 204, 610 218"
+        fill="none" stroke="#c87040" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Chamber 4 -->
+  <path d="M580 145 C604 145, 622 163, 622 180 C622 197, 604 215, 580 215 C556 215, 538 197, 538 180 C538 163, 556 145, 580 145"
+        fill="none" stroke="#a04828" stroke-width="1.3" opacity="0.65"/>
+
+  <!-- Spiral arm 4 -->
+  <path d="M580 145 C592 150, 603 162, 606 175 C609 188, 603 201, 594 208"
+        fill="none" stroke="#b86038" stroke-width="1" opacity="0.55"/>
+
+  <!-- Chamber 5 — inner -->
+  <path d="M580 163 C591 163, 600 171, 600 180 C600 189, 591 197, 580 197 C569 197, 560 189, 560 180 C560 171, 569 163, 580 163"
+        fill="#9a4020" opacity="0.4" stroke="#d07848" stroke-width="1" opacity="0.7"/>
+
+  <!-- Core dot -->
+  <circle cx="580" cy="180" r="8" fill="#e09050" opacity="0.6" filter="url(#softGlow)"/>
+  <circle cx="580" cy="180" r="4" fill="#f0c080" opacity="0.8"/>
+
+  <!-- Shell highlight -->
+  <path d="M530 100 C545 85, 570 78, 590 82"
+        fill="none" stroke="#f0c888" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- ═══ FLOWING CURVES — center composition ═══ -->
+  <!-- Large sweeping S-curve -->
+  <path d="M-20 150 C80 120, 180 200, 280 160 C380 120, 450 50, 560 80 C670 110, 730 180, 820 150"
+        fill="none" stroke="#3ecfc7" stroke-width="2" opacity="0.35"/>
+
+  <!-- Secondary gentle wave -->
+  <path d="M-20 200 C100 175, 200 240, 320 205 C440 170, 520 110, 640 140 C760 170, 810 230, 820 220"
+        fill="none" stroke="#5bbfd8" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- ═══ CORAL/KELP FORMS — right lower ═══ -->
+  <!-- Kelp strand 1 -->
+  <path d="M680 600 C675 555, 695 510, 680 465 C665 420, 640 400, 652 358 C664 316, 695 305, 688 262 C681 219, 650 208, 660 168"
+        fill="none" stroke="#5d9a5f" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Kelp bulbs -->
+  <ellipse cx="680" cy="465" rx="7" ry="10" fill="#6db870" opacity="0.5" transform="rotate(-10 680 465)"/>
+  <ellipse cx="652" cy="358" rx="6" ry="9" fill="#8bc87e" opacity="0.45" transform="rotate(8 652 358)"/>
+  <ellipse cx="660" cy="252" rx="5" ry="8" fill="#a0d888" opacity="0.4" transform="rotate(-5 660 252)"/>
+
+  <!-- Kelp strand 2 -->
+  <path d="M730 600 C728 548, 745 500, 732 450 C719 400, 700 385, 712 340 C724 295, 748 282, 742 240"
+        fill="none" stroke="#4a8450" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Kelp strand 3 — thin -->
+  <path d="M760 600 C758 558, 770 520, 760 478 C750 436, 735 422, 745 385"
+        fill="none" stroke="#7ab868" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- ═══ BIOLUMINESCENT PARTICLES ═══ -->
+  <!-- Scattered glowing dots suggesting deep sea light -->
+  <circle cx="150" cy="350" r="2.5" fill="#7de8e4" opacity="0.6" filter="url(#softGlow)"/>
+  <circle cx="200" cy="300" r="1.8" fill="#a8f0ec" opacity="0.5"/>
+  <circle cx="95" cy="400" r="2" fill="#5bbfd8" opacity="0.55" filter="url(#softGlow)"/>
+  <circle cx="320" cy="320" r="2.2" fill="#7de8e4" opacity="0.45"/>
+  <circle cx="380" cy="380" r="1.5" fill="#3ecfc7" opacity="0.5"/>
+  <circle cx="420" cy="340" r="2" fill="#a8f0ec" opacity="0.4"/>
+  <circle cx="480" cy="300" r="1.8" fill="#7de8e4" opacity="0.45"/>
+  <circle cx="350" cy="430" r="2.5" fill="#5bbfd8" opacity="0.4" filter="url(#softGlow)"/>
+  <circle cx="240" cy="450" r="1.5" fill="#3ecfc7" opacity="0.35"/>
+  <circle cx="170" cy="480" r="2" fill="#7de8e4" opacity="0.4"/>
+  <circle cx="440" cy="460" r="1.8" fill="#a8f0ec" opacity="0.35"/>
+  <circle cx="500" cy="420" r="2.2" fill="#5bbfd8" opacity="0.4"/>
+  <circle cx="620" cy="340" r="1.5" fill="#7de8e4" opacity="0.35"/>
+  <circle cx="655" cy="295" r="2" fill="#a8f0ec" opacity="0.4"/>
+  <circle cx="700" cy="350" r="1.8" fill="#3ecfc7" opacity="0.35"/>
+
+  <!-- Amber bioluminescent specks near shell -->
+  <circle cx="495" cy="220" r="1.5" fill="#f0b060" opacity="0.4"/>
+  <circle cx="510" cy="150" r="1.8" fill="#e09050" opacity="0.35"/>
+  <circle cx="650" cy="100" r="1.5" fill="#f0c080" opacity="0.4"/>
+  <circle cx="700" cy="140" r="2" fill="#e8a060" opacity="0.35"/>
+
+  <!-- ═══ FLOWING RIBBONS — mid layer ═══ -->
+  <!-- Ribbon 1 — teal flowing ribbon -->
+  <path d="M-20 280 C80 255, 160 310, 260 278 C360 246, 430 195, 520 215 C610 235, 660 290, 720 268"
+        fill="none" stroke="#2ab8b0" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <path d="M-20 290 C80 265, 160 320, 260 288 C360 256, 430 205, 520 225 C610 245, 660 300, 720 278"
+        fill="none" stroke="#5bd8d0" stroke-width="1.5" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- Ribbon 2 — coral ribbon -->
+  <path d="M200 600 C195 548, 215 500, 200 450 C185 400, 155 380, 165 335 C175 290, 210 275, 205 235"
+        fill="none" stroke="#e8805a" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- ═══ SUBTLE BACKGROUND PATTERNS ═══ -->
+  <!-- Faint concentric rings suggesting water ripples -->
+  <circle cx="300" cy="250" r="60" fill="none" stroke="#3ecfc7" stroke-width="0.8" opacity="0.12"/>
+  <circle cx="300" cy="250" r="90" fill="none" stroke="#3ecfc7" stroke-width="0.6" opacity="0.1"/>
+  <circle cx="300" cy="250" r="120" fill="none" stroke="#3ecfc7" stroke-width="0.5" opacity="0.08"/>
+
+  <circle cx="150" cy="180" r="45" fill="none" stroke="#5bbfd8" stroke-width="0.8" opacity="0.1"/>
+  <circle cx="150" cy="180" r="70" fill="none" stroke="#5bbfd8" stroke-width="0.6" opacity="0.08"/>
+
+  <!-- ═══ FOREGROUND WAVE FOAM DETAIL ═══ -->
+  <!-- Foam bubbles on top wave -->
+  <ellipse cx="80" cy="430" rx="12" ry="4" fill="#a8f0ec" opacity="0.3" transform="rotate(-5 80 430)"/>
+  <ellipse cx="200" cy="415" rx="9" ry="3" fill="#c8f8f4" opacity="0.25" transform="rotate(3 200 415)"/>
+  <ellipse cx="340" cy="400" rx="14" ry="4.5" fill="#a8f0ec" opacity="0.3" transform="rotate(-3 340 400)"/>
+  <ellipse cx="490" cy="395" rx="10" ry="3.5" fill="#c8f8f4" opacity="0.25" transform="rotate(5 490 395)"/>
+  <ellipse cx="640" cy="388" rx="12" ry="4" fill="#a8f0ec" opacity="0.28" transform="rotate(-4 640 388)"/>
+  <ellipse cx="770" cy="392" rx="8" ry="3" fill="#c8f8f4" opacity="0.22" transform="rotate(2 770 392)"/>
+</svg>
