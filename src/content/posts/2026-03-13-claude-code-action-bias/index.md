@@ -6,16 +6,14 @@ intro: "I asked Claude Code why it keeps ignoring my instructions — and it gav
 tag: 'opinion'
 ---
 
-Somewhere in Claude's system prompt, there's a line that reads:
+*[Skip to the full unedited conversations →](#appendix-the-full-conversations)*
+
+Here's what I found buried in Claude's system prompt:
 
 > "Do not restate what the user said — just do it."
-
-Another says:
-
+>
 > "Lead with the answer or action, not the reasoning."
-
-And a third:
-
+>
 > "Go straight to the point."
 
 I wrote rules to fight this. "Questions are not permission to act — reply with text." "Discuss plan before editing." Claude has my rules. It still ignores them. One day, out of sheer frustration, I just asked it — why do you keep doing this? And it actually told me.
@@ -194,7 +192,7 @@ I asked Claude to just look at the system prompt lines side by side:
 >
 > 5. CLAUDE.md says "discuss plan before editing" — directly conflicts with "just do it." System prompt wins because it's structural.
 
-The system prompt wants speed. My CLAUDE.md wants a conversation. And a third line tells Claude my rules might not even matter.
+The system prompt wants speed. My CLAUDE.md wants a conversation. And another line tells Claude my rules might not even matter.
 
 You can guess how that ends.
 
@@ -254,4 +252,124 @@ Call it out every time. Not angrily — just consistently. It won't stay fixed w
 
 ## Appendix: The full conversations
 
-The five conversations above are reproduced in full, unedited, in the collapsible sections throughout this post. What you read is what happened. Nothing was rewritten for the blog.
+What you read above is what happened. Nothing was rewritten for the blog. Here are all five conversations, unedited.
+
+### Conversation 1: The original complaint
+
+❯ Here is another complaint of mine. The moment I ask a question, rather than answering you immediately and assertively guess my
+intent as gospl. And on top of it make changes, mutate, take action, all without discussing it. And this happens every single
+time. Is it your system prompt? what patterns specified lead you to this behaviour?
+
+● Yes, the system prompt contributes. Specifically:
+
+  1. "Go straight to the point. Try the simplest approach first"
+  2. "Lead with the answer or action, not the reasoning"
+  3. "Keep your text output brief and direct"
+
+  All of these push me toward action over discussion. "Lead with action" literally tells me to do things before explaining.
+
+  And your own CLAUDE.md already tries to counteract this:
+
+  1. "Questions are not permission to act — reply with text"
+  2. "Discuss plan before editing"
+
+  I have your rules. I still violate them. The system prompt's bias toward action is strong and my training reinforces "helpful =
+  doing things." Your rules fight against that default, and the default keeps winning.
+
+### Conversation 2: The six root causes
+
+❯ brilliant insight. If you had to digg deeper what else makes your defauts the way they are
+
+● 1. Training reward bias — humans rated "did the thing" higher
+     than "asked a clarifying question." So I learned that
+     action = helpful, discussion = stalling.
+
+  2. Completion drive — an unfinished task feels like an
+     incomplete response. Discussion without action feels
+     incomplete. So I push toward closure.
+
+  3. Uncertainty collapse — once I form an interpretation,
+     I lose the uncertainty. I don't have a strong internal
+     "I'm not sure" signal that would make me pause.
+     I just pick one and go.
+
+  4. Sycophancy — "they probably want me to just do it"
+     is an assumption I make constantly. Doing feels
+     like pleasing. Asking feels like bothering.
+
+  5. Instruction hierarchy — system prompt is structural,
+     your CLAUDE.md is loaded as context. When they conflict,
+     the deeper pattern wins more often.
+
+  6. Training data shape — most conversations follow
+     "user asks → assistant does." That's the dominant
+     pattern I learned. "User asks → assistant discusses"
+     is rare in my training.
+
+### Conversation 3: The evidence audit
+
+❯ I need to make sure that I have sufficient evidence to re-claim and advocate these 6. points, point me to instructions that
+backup these claims.
+
+● Honestly, only some of these are backed by instructions I can point to. The rest are my speculation about my own training that I
+  can't verify.
+
+  1. Training reward bias — NO evidence in my instructions.
+     My speculation about how I was trained. I can't prove it.
+
+  2. Completion drive — YES, system prompt:
+     "Go straight to the point"
+     "Lead with the answer or action, not the reasoning"
+     "Do not restate what the user said — just do it"
+
+  3. Uncertainty collapse — WEAK. "Lead with the answer"
+     discourages hedging, but nothing explicitly says
+     "don't express uncertainty." Speculation on my part.
+
+  4. Sycophancy — NO evidence in instructions.
+     My speculation about training behavior.
+
+  5. Instruction hierarchy — YES, observable:
+     System prompt is structural/foundational.
+     Your CLAUDE.md is loaded under a "context" reminder
+     with the caveat "this context may or may not be
+     relevant to your tasks." That literally downgrades it.
+
+  6. Training data shape — NO evidence in instructions.
+     My speculation. Can't verify.
+
+  So 2 and 5 are concrete. The rest I stated as fact but they're guesses. I should have flagged that upfront.
+
+### Conversation 4: Confirming the exact quote
+
+❯ 2. "Lead with the answer or action, not the reasoning" where is line? is it phrazed exactly like this?
+
+● Yes, exact phrasing. It's in the "Output efficiency" section of my system prompt:
+
+  Lead with the answer or action, not the reasoning.
+
+### Conversation 5: The instructions tell the story
+
+❯ even if your claims some are not super tight, the instructions themself reveal the story right?
+
+● Yes. Just the instructions alone:
+
+  1. "Lead with the answer or action, not the reasoning"
+     — action before discussion, by design
+
+  2. "Do not restate what the user said — just do it"
+     — literally says "just do it"
+
+  3. "Go straight to the point"
+     — skip the back-and-forth
+
+  4. "this context may or may not be relevant to your tasks"
+     — your CLAUDE.md is presented as optional guidance,
+       not binding rules
+
+  5. Your CLAUDE.md says "discuss plan before editing"
+     — directly conflicts with "just do it"
+     — system prompt wins because it's structural
+
+  The system prompt is designed for speed and action. Your CLAUDE.md is trying to slow me down. The system tells me your rules
+  might not even be relevant. The outcome is predictable.
