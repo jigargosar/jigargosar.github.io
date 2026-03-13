@@ -21,7 +21,7 @@ Every single time.
 
 In frustration, I just asked it straight: *"Is it your system prompt? What patterns lead you to this behaviour?"*
 
-Claude's answer was unusually honest:
+I didn't expect a real answer. I got one.
 
 > "Yes, the system prompt contributes. Specifically:
 >
@@ -79,7 +79,7 @@ Claude offered six root causes:
 
 6. **Training data shape** — most conversations follow "user asks → assistant does." The pattern "user asks → assistant discusses" is rare in the training data.
 
-Six reasons, all presented with equal confidence. But are they all real?
+Six reasons. All delivered with the same confidence. That bugged me.
 
 <details>
 <summary>Full conversation</summary>
@@ -132,7 +132,7 @@ The breakdown:
 - **Instruction hierarchy** — YES. CLAUDE.md is loaded with the caveat "this context may or may not be relevant to your tasks." That literally downgrades user rules.
 - **Training data shape** — "NO evidence. Can't verify."
 
-Two out of six survived. But here's the thing — Claude folding on the others made the surviving two more credible. This wasn't a performance. It was an honest audit.
+Two out of six. But the four it dropped made the two it kept harder to dismiss.
 
 <details>
 <summary>Full conversation</summary>
@@ -186,9 +186,9 @@ I asked Claude to just look at the system prompt lines side by side:
 >
 > 5. CLAUDE.md says "discuss plan before editing" — directly conflicts with "just do it." System prompt wins because it's structural.
 
-The system prompt is designed for speed and action. My CLAUDE.md is trying to slow it down. And a third line tells Claude that my rules might not even be relevant.
+The system prompt wants speed. My CLAUDE.md wants a conversation. And a third line tells Claude my rules might not even matter.
 
-The outcome is predictable.
+You can guess how that ends.
 
 <details>
 <summary>Full conversation</summary>
@@ -229,11 +229,11 @@ The outcome is predictable.
 
 ## What actually fixed it
 
-I tried writing rules in CLAUDE.md over and over. "Questions are not permission to act." "Discuss plan before editing." They helped — partially. But the system prompt kept winning. The rules were marked as context that "may or may not be relevant." They didn't stick.
+I kept rewriting my CLAUDE.md rules. "Questions are not permission to act." "Discuss plan before editing." They'd work for a while, then Claude would slip right back. The system prompt kept winning.
 
-What finally worked was a [skill](https://github.com/jigargosar/dotfiles/blob/3f7f15268233808b459ddaf8cf98fedc2539798a/dot_claude/skills/restate/SKILL.md) — a different mechanism entirely. I took every repeated prompt, every correction I'd given Claude across dozens of conversations, and packaged them into a protocol. No mutation without the literal word `go`. Mandatory wait after every response. Explicit phases — restate the problem, research, propose solutions, draft, then and only then execute.
+Then I tried a [skill](https://github.com/jigargosar/dotfiles/blob/3f7f15268233808b459ddaf8cf98fedc2539798a/dot_claude/skills/restate/SKILL.md). Every correction I'd given Claude across dozens of conversations — I crammed them all into one protocol. No mutation without the literal word `go`. Wait after every response. Restate the problem, research, propose solutions, draft, then execute. That's the order. No skipping.
 
-The skill works where CLAUDE.md couldn't. Not because the words are different — they're the same rules I'd been writing all along. But skills are loaded differently than context marked "may or may not be relevant."
+Same rules I'd been writing all along. But as a skill, they actually stuck. CLAUDE.md gets loaded with "may or may not be relevant." Skills don't get that disclaimer.
 
 ## What you can do about it
 
@@ -241,7 +241,7 @@ Write counter-instructions in your CLAUDE.md. They do help — partially.
 
 But know that the system is fighting your rules. When it acts without asking, it's not because your instructions are poorly written. It's the architecture. The system prompt says "just do it." Your CLAUDE.md says "discuss first." And a line in the system prompt tells Claude that your rules "may or may not be relevant."
 
-Call it out every time. Not angrily — just consistently. The default is strong, but it's not unbreakable. It just won't stay broken without pressure.
+Call it out every time. Not angrily — just consistently. It won't stay fixed without pressure.
 
 
 ## Appendix: The full conversations
