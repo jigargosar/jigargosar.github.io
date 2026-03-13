@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Glow filters -->
+    <filter id="mid-glowSm">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="mid-glowMd">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="mid-glowLg">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="mid-glowCore">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Radial gradient for central mandala core -->
+    <radialGradient id="mid-coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#ffd700"/>
+      <stop offset="60%" stop-color="#4169e1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7b2dff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Gold stroke gradient for orbital rings -->
+    <linearGradient id="mid-orbitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffd700" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="mid-orbitGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="mid-orbitGrad3" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b8860b" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#ffd700" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#b8860b" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Flower of Life petal gradient -->
+    <radialGradient id="mid-flowerFill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffd700" stop-opacity="0.03"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== ORBITAL ELLIPSE RINGS ===== -->
+  <g id="mid-orbits">
+    <!-- Orbit 1: large, tilted left -->
+    <ellipse cx="400" cy="300" rx="260" ry="180" fill="none" stroke="url(#mid-orbitGrad1)" stroke-width="1.2" transform="rotate(-15,400,300)" opacity="0.7" filter="url(#mid-glowSm)"/>
+    <!-- Orbit 2: medium, tilted right -->
+    <ellipse cx="400" cy="300" rx="220" ry="150" fill="none" stroke="url(#mid-orbitGrad2)" stroke-width="1.5" transform="rotate(25,400,300)" opacity="0.6" filter="url(#mid-glowSm)"/>
+    <!-- Orbit 3: inner, steep tilt -->
+    <ellipse cx="400" cy="300" rx="190" ry="120" fill="none" stroke="url(#mid-orbitGrad3)" stroke-width="1" transform="rotate(-40,400,300)" opacity="0.5"/>
+  </g>
+
+  <!-- ===== CONSTELLATION NETWORKS ===== -->
+
+  <!-- Constellation: top-left -->
+  <g id="mid-constellation-tl" opacity="0.85">
+    <line x1="60" y1="50" x2="110" y2="85" stroke="#00e5ff" stroke-width="0.8" opacity="0.6"/>
+    <line x1="110" y1="85" x2="95" y2="140" stroke="#a855f7" stroke-width="0.8" opacity="0.5"/>
+    <line x1="110" y1="85" x2="155" y2="65" stroke="#ffffff" stroke-width="0.7" opacity="0.4"/>
+    <line x1="155" y1="65" x2="180" y2="110" stroke="#00e5ff" stroke-width="0.7" opacity="0.5"/>
+    <line x1="95" y1="140" x2="140" y2="155" stroke="#a855f7" stroke-width="0.6" opacity="0.4"/>
+    <circle cx="60" cy="50" r="2.5" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="110" cy="85" r="3" fill="#ffffff" filter="url(#mid-glowSm)"/>
+    <circle cx="95" cy="140" r="2" fill="#a855f7" filter="url(#mid-glowSm)"/>
+    <circle cx="155" cy="65" r="2" fill="#ffffff" opacity="0.8"/>
+    <circle cx="180" cy="110" r="2.5" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="140" cy="155" r="1.8" fill="#a855f7" opacity="0.7"/>
+  </g>
+
+  <!-- Constellation: top-right -->
+  <g id="mid-constellation-tr" opacity="0.8">
+    <line x1="650" y1="60" x2="700" y2="40" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="700" y1="40" x2="740" y2="80" stroke="#00e5ff" stroke-width="0.8" opacity="0.6"/>
+    <line x1="740" y1="80" x2="720" y2="130" stroke="#a855f7" stroke-width="0.7" opacity="0.5"/>
+    <line x1="650" y1="60" x2="680" y2="115" stroke="#00e5ff" stroke-width="0.7" opacity="0.4"/>
+    <line x1="680" y1="115" x2="720" y2="130" stroke="#ffffff" stroke-width="0.6" opacity="0.4"/>
+    <circle cx="650" cy="60" r="2.5" fill="#ffffff" filter="url(#mid-glowSm)"/>
+    <circle cx="700" cy="40" r="2" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="740" cy="80" r="3" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="720" cy="130" r="2" fill="#a855f7" filter="url(#mid-glowSm)"/>
+    <circle cx="680" cy="115" r="1.8" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- Constellation: bottom-left -->
+  <g id="mid-constellation-bl" opacity="0.75">
+    <line x1="50" y1="460" x2="100" y2="490" stroke="#a855f7" stroke-width="0.8" opacity="0.6"/>
+    <line x1="100" y1="490" x2="80" y2="540" stroke="#00e5ff" stroke-width="0.7" opacity="0.5"/>
+    <line x1="100" y1="490" x2="150" y2="510" stroke="#ffffff" stroke-width="0.7" opacity="0.4"/>
+    <line x1="150" y1="510" x2="135" y2="560" stroke="#a855f7" stroke-width="0.6" opacity="0.5"/>
+    <circle cx="50" cy="460" r="2" fill="#a855f7" filter="url(#mid-glowSm)"/>
+    <circle cx="100" cy="490" r="2.5" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="80" cy="540" r="2" fill="#00e5ff" opacity="0.8"/>
+    <circle cx="150" cy="510" r="2.5" fill="#ffffff" filter="url(#mid-glowSm)"/>
+    <circle cx="135" cy="560" r="1.8" fill="#a855f7" opacity="0.7"/>
+  </g>
+
+  <!-- Constellation: bottom-right -->
+  <g id="mid-constellation-br" opacity="0.8">
+    <line x1="670" y1="480" x2="720" y2="460" stroke="#00e5ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="720" y1="460" x2="755" y2="500" stroke="#ffffff" stroke-width="0.7" opacity="0.5"/>
+    <line x1="755" y1="500" x2="730" y2="550" stroke="#a855f7" stroke-width="0.8" opacity="0.6"/>
+    <line x1="670" y1="480" x2="710" y2="530" stroke="#a855f7" stroke-width="0.6" opacity="0.4"/>
+    <circle cx="670" cy="480" r="2.5" fill="#00e5ff" filter="url(#mid-glowSm)"/>
+    <circle cx="720" cy="460" r="2" fill="#ffffff" filter="url(#mid-glowSm)"/>
+    <circle cx="755" cy="500" r="3" fill="#a855f7" filter="url(#mid-glowSm)"/>
+    <circle cx="730" cy="550" r="2" fill="#a855f7" opacity="0.8"/>
+    <circle cx="710" cy="530" r="1.8" fill="#00e5ff" opacity="0.7"/>
+  </g>
+
+  <!-- ===== CENTRAL SACRED GEOMETRY FORMATION ===== -->
+  <g id="mid-centralFormation" transform="translate(400,300)">
+
+    <!-- Flower of Life: 7 overlapping circles -->
+    <g id="mid-flowerOfLife" opacity="0.7">
+      <!-- Center circle -->
+      <circle cx="0" cy="0" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.5"/>
+      <!-- 6 surrounding petals (60px apart at 60-degree intervals) -->
+      <circle cx="0" cy="-60" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="51.96" cy="-30" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="51.96" cy="30" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="0" cy="60" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="-51.96" cy="30" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="-51.96" cy="-30" r="60" fill="url(#mid-flowerFill)" stroke="#ffd700" stroke-width="0.8" opacity="0.45"/>
+    </g>
+
+    <!-- Hexagonal frame -->
+    <polygon id="mid-hexFrame"
+      points="0,-140 121.24,-70 121.24,70 0,140 -121.24,70 -121.24,-70"
+      fill="none" stroke="#ffd700" stroke-width="2.5" filter="url(#mid-glowMd)" opacity="0.9"/>
+
+    <!-- Star of David / Hexagram: two overlapping triangles -->
+    <!-- Upward triangle (electric blue) -->
+    <polygon id="mid-triUp"
+      points="0,-110 95.26,55 -95.26,55"
+      fill="none" stroke="#4169e1" stroke-width="2" filter="url(#mid-glowMd)" opacity="0.85"/>
+    <!-- Downward triangle (emerald) -->
+    <polygon id="mid-triDown"
+      points="0,110 95.26,-55 -95.26,-55"
+      fill="none" stroke="#00d050" stroke-width="2" filter="url(#mid-glowMd)" opacity="0.85"/>
+
+    <!-- Inner hexagonal detail lines -->
+    <polygon
+      points="0,-55 47.63,-27.5 47.63,27.5 0,55 -47.63,27.5 -47.63,-27.5"
+      fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+
+    <!-- Central mandala: concentric circles -->
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.5" filter="url(#mid-glowSm)"/>
+    <circle cx="0" cy="0" r="32" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.55"/>
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.65" filter="url(#mid-glowSm)"/>
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+
+    <!-- Glowing core -->
+    <circle cx="0" cy="0" r="18" fill="url(#mid-coreGrad)" filter="url(#mid-glowCore)" opacity="0.9"/>
+    <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.95" filter="url(#mid-glowMd)"/>
+
+    <!-- Mandala radial lines (12 spokes) -->
+    <g id="mid-mandalaSpokes" opacity="0.35" stroke="#ffd700" stroke-width="0.6">
+      <line x1="0" y1="-20" x2="0" y2="-45"/>
+      <line x1="10" y1="-17.32" x2="22.5" y2="-38.97"/>
+      <line x1="17.32" y1="-10" x2="38.97" y2="-22.5"/>
+      <line x1="20" y1="0" x2="45" y2="0"/>
+      <line x1="17.32" y1="10" x2="38.97" y2="22.5"/>
+      <line x1="10" y1="17.32" x2="22.5" y2="38.97"/>
+      <line x1="0" y1="20" x2="0" y2="45"/>
+      <line x1="-10" y1="17.32" x2="-22.5" y2="38.97"/>
+      <line x1="-17.32" y1="10" x2="-38.97" y2="22.5"/>
+      <line x1="-20" y1="0" x2="-45" y2="0"/>
+      <line x1="-17.32" y1="-10" x2="-38.97" y2="-22.5"/>
+      <line x1="-10" y1="-17.32" x2="-22.5" y2="-38.97"/>
+    </g>
+
+    <!-- Vertex dots on hexagonal frame -->
+    <g id="mid-hexVertices" fill="#ffd700" filter="url(#mid-glowSm)">
+      <circle cx="0" cy="-140" r="3"/>
+      <circle cx="121.24" cy="-70" r="3"/>
+      <circle cx="121.24" cy="70" r="3"/>
+      <circle cx="0" cy="140" r="3"/>
+      <circle cx="-121.24" cy="70" r="3"/>
+      <circle cx="-121.24" cy="-70" r="3"/>
+    </g>
+  </g>
+
+  <!-- ===== SCATTERED GEOMETRIC ACCENTS ===== -->
+  <g id="mid-accents">
+    <!-- Tiny triangles -->
+    <polygon points="210,100 215,90 220,100" fill="none" stroke="#dc143c" stroke-width="1.2" opacity="0.7"/>
+    <polygon points="590,130 595,120 600,130" fill="none" stroke="#00d050" stroke-width="1" opacity="0.65"/>
+    <polygon points="160,380 165,372 170,380" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.6"/>
+    <polygon points="640,400 644,392 648,400" fill="none" stroke="#dc143c" stroke-width="1.2" opacity="0.7"/>
+    <polygon points="320,80 324,72 328,80" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.6"/>
+    <polygon points="500,520 505,512 510,520" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.55"/>
+
+    <!-- Tiny diamonds -->
+    <polygon points="240,450 244,444 248,450 244,456" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6" filter="url(#mid-glowSm)"/>
+    <polygon points="560,200 564,194 568,200 564,206" fill="none" stroke="#00e5ff" stroke-width="1.2" opacity="0.7"/>
+    <polygon points="180,230 184,224 188,230 184,236" fill="none" stroke="#7b2dff" stroke-width="1" opacity="0.6"/>
+    <polygon points="620,330 623,325 626,330 623,335" fill="none" stroke="#dc143c" stroke-width="1" opacity="0.6"/>
+    <polygon points="470,90 474,84 478,90 474,96" fill="none" stroke="#00d050" stroke-width="1" opacity="0.55"/>
+
+    <!-- Tiny squares -->
+    <rect x="270" y="175" width="6" height="6" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.6" transform="rotate(15,273,178)"/>
+    <rect x="530" y="440" width="5" height="5" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.55" transform="rotate(30,532.5,442.5)"/>
+    <rect x="140" y="310" width="7" height="7" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.6" transform="rotate(20,143.5,313.5)"/>
+    <rect x="660" y="260" width="5" height="5" fill="none" stroke="#dc143c" stroke-width="1" opacity="0.65" transform="rotate(45,662.5,262.5)"/>
+    <rect x="350" y="510" width="6" height="6" fill="none" stroke="#7b2dff" stroke-width="1" opacity="0.55" transform="rotate(10,353,513)"/>
+    <rect x="480" y="165" width="4" height="4" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.5" transform="rotate(25,482,167)"/>
+
+    <!-- Additional tiny circles as star-like accents -->
+    <circle cx="300" cy="50" r="1.5" fill="#ffffff" opacity="0.6"/>
+    <circle cx="520" cy="560" r="1.5" fill="#00e5ff" opacity="0.5"/>
+    <circle cx="750" cy="300" r="1.8" fill="#ffd700" opacity="0.5"/>
+    <circle cx="50" cy="300" r="1.5" fill="#a855f7" opacity="0.55"/>
+    <circle cx="400" cy="560" r="1.2" fill="#ffffff" opacity="0.4"/>
+    <circle cx="200" cy="550" r="1.5" fill="#00e5ff" opacity="0.45"/>
+    <circle cx="680" cy="180" r="1.3" fill="#ffd700" opacity="0.5"/>
+    <circle cx="120" cy="170" r="1.2" fill="#dc143c" opacity="0.5"/>
+  </g>
+</svg>

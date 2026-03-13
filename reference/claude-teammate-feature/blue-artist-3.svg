@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Glow filters -->
+    <filter id="fg-glowSmall">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fg-glowMed">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fg-glowLarge">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fg-glowDot">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Supernova radial gradients -->
+    <radialGradient id="fg-burstGrad1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#00e5ff" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fg-burstGrad2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="18%" stop-color="#ffd700" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#ffaa44" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffaa44" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fg-burstGrad3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="15%" stop-color="#ff2d78" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ff6bbd" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff6bbd" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fg-burstGrad4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="22%" stop-color="#00cfff" stop-opacity="0.75"/>
+      <stop offset="55%" stop-color="#00e5ff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ============================================ -->
+  <!-- LIGHT RAYS from supernova centers            -->
+  <!-- ============================================ -->
+
+  <!-- Rays from supernova 1 at (180, 150) -->
+  <g opacity="0.2">
+    <line x1="180" y1="150" x2="30" y2="50" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="180" y1="150" x2="280" y2="10" stroke="#00e5ff" stroke-width="0.5"/>
+    <line x1="180" y1="150" x2="80" y2="280" stroke="#ffffff" stroke-width="0.7"/>
+    <line x1="180" y1="150" x2="320" y2="100" stroke="#a855f7" stroke-width="0.5"/>
+    <line x1="180" y1="150" x2="100" y2="10" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="180" y1="150" x2="250" y2="310" stroke="#00cfff" stroke-width="0.6"/>
+    <line x1="180" y1="150" x2="10" y2="180" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="180" y1="150" x2="340" y2="200" stroke="#00e5ff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Rays from supernova 2 at (620, 200) -->
+  <g opacity="0.18">
+    <line x1="620" y1="200" x2="780" y2="80" stroke="#ffd700" stroke-width="0.6"/>
+    <line x1="620" y1="200" x2="500" y2="50" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="620" y1="200" x2="750" y2="320" stroke="#ffaa44" stroke-width="0.5"/>
+    <line x1="620" y1="200" x2="480" y2="300" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="620" y1="200" x2="700" y2="30" stroke="#ffd700" stroke-width="0.7"/>
+    <line x1="620" y1="200" x2="550" y2="370" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="620" y1="200" x2="790" y2="180" stroke="#ffaa44" stroke-width="0.5"/>
+    <line x1="620" y1="200" x2="620" y2="10" stroke="#ffffff" stroke-width="0.6"/>
+  </g>
+
+  <!-- Rays from supernova 3 at (350, 450) -->
+  <g opacity="0.22">
+    <line x1="350" y1="450" x2="200" y2="580" stroke="#ff2d78" stroke-width="0.6"/>
+    <line x1="350" y1="450" x2="500" y2="580" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="350" y1="450" x2="220" y2="330" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="350" y1="450" x2="490" y2="350" stroke="#ff6bbd" stroke-width="0.5"/>
+    <line x1="350" y1="450" x2="350" y2="590" stroke="#ffffff" stroke-width="0.7"/>
+    <line x1="350" y1="450" x2="180" y2="480" stroke="#ff2d78" stroke-width="0.5"/>
+    <line x1="350" y1="450" x2="520" y2="500" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="350" y1="450" x2="280" y2="300" stroke="#ff6bbd" stroke-width="0.6"/>
+  </g>
+
+  <!-- Rays from supernova 4 at (700, 420) -->
+  <g opacity="0.15">
+    <line x1="700" y1="420" x2="790" y2="300" stroke="#00e5ff" stroke-width="0.5"/>
+    <line x1="700" y1="420" x2="580" y2="520" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="700" y1="420" x2="790" y2="550" stroke="#00cfff" stroke-width="0.6"/>
+    <line x1="700" y1="420" x2="600" y2="340" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="700" y1="420" x2="780" y2="420" stroke="#00e5ff" stroke-width="0.5"/>
+    <line x1="700" y1="420" x2="650" y2="570" stroke="#ffffff" stroke-width="0.7"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- GEOMETRIC RING SEGMENTS / ARCS              -->
+  <!-- ============================================ -->
+
+  <!-- Halo arc around supernova 1 -->
+  <path d="M 130,100 A 70,70 0 0,1 230,110" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.4"/>
+  <path d="M 210,200 A 55,55 0 0,1 145,195" fill="none" stroke="#a855f7" stroke-width="0.6" opacity="0.3"/>
+
+  <!-- Halo arc around supernova 2 -->
+  <path d="M 570,160 A 65,65 0 0,1 670,165" fill="none" stroke="#ffd700" stroke-width="0.9" opacity="0.35"/>
+  <path d="M 660,245 A 60,60 0 0,1 585,240" fill="none" stroke="#ffaa44" stroke-width="0.6" opacity="0.25"/>
+
+  <!-- Halo arc around supernova 3 -->
+  <path d="M 300,410 A 60,60 0 0,1 400,405" fill="none" stroke="#ff2d78" stroke-width="0.8" opacity="0.35"/>
+  <path d="M 385,500 A 55,55 0 0,0 310,490" fill="none" stroke="#ff6bbd" stroke-width="0.7" opacity="0.3"/>
+
+  <!-- Halo arc around supernova 4 -->
+  <path d="M 660,385 A 50,50 0 0,1 740,390" fill="none" stroke="#00cfff" stroke-width="0.7" opacity="0.35"/>
+
+  <!-- ============================================ -->
+  <!-- SUPERNOVA / STARBURST FORMATIONS            -->
+  <!-- ============================================ -->
+
+  <!-- Supernova 1: Cyan/Purple at (180, 150) - radius ~60 -->
+  <g transform="translate(180,150)" filter="url(#fg-glowLarge)">
+    <circle r="60" fill="url(#fg-burstGrad1)" opacity="0.6"/>
+    <!-- Rotated diamond petals forming starburst -->
+    <g opacity="0.85">
+      <polygon points="0,-55 4,-12 0,55 -4,-12" fill="#00e5ff" opacity="0.5"/>
+      <polygon points="0,-55 4,-12 0,55 -4,-12" fill="#00e5ff" opacity="0.5" transform="rotate(36)"/>
+      <polygon points="0,-55 4,-12 0,55 -4,-12" fill="#ffffff" opacity="0.4" transform="rotate(72)"/>
+      <polygon points="0,-55 4,-12 0,55 -4,-12" fill="#a855f7" opacity="0.45" transform="rotate(108)"/>
+      <polygon points="0,-55 4,-12 0,55 -4,-12" fill="#00e5ff" opacity="0.5" transform="rotate(144)"/>
+    </g>
+    <!-- Bright core -->
+    <circle r="6" fill="#ffffff" opacity="0.95"/>
+    <circle r="3" fill="#ffffff"/>
+  </g>
+
+  <!-- Supernova 2: Gold at (620, 200) - radius ~70 -->
+  <g transform="translate(620,200)" filter="url(#fg-glowLarge)">
+    <circle r="70" fill="url(#fg-burstGrad2)" opacity="0.55"/>
+    <g opacity="0.8">
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffd700" opacity="0.55"/>
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffd700" opacity="0.55" transform="rotate(30)"/>
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffffff" opacity="0.4" transform="rotate(60)"/>
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffaa44" opacity="0.5" transform="rotate(90)"/>
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffd700" opacity="0.5" transform="rotate(120)"/>
+      <polygon points="0,-65 5,-14 0,65 -5,-14" fill="#ffffff" opacity="0.35" transform="rotate(150)"/>
+    </g>
+    <circle r="7" fill="#ffffff" opacity="0.95"/>
+    <circle r="3.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Supernova 3: Magenta at (350, 450) - radius ~55 -->
+  <g transform="translate(350,450)" filter="url(#fg-glowLarge)">
+    <circle r="55" fill="url(#fg-burstGrad3)" opacity="0.6"/>
+    <g opacity="0.85">
+      <polygon points="0,-50 3.5,-10 0,50 -3.5,-10" fill="#ff2d78" opacity="0.55"/>
+      <polygon points="0,-50 3.5,-10 0,50 -3.5,-10" fill="#ff6bbd" opacity="0.5" transform="rotate(45)"/>
+      <polygon points="0,-50 3.5,-10 0,50 -3.5,-10" fill="#ffffff" opacity="0.4" transform="rotate(90)"/>
+      <polygon points="0,-50 3.5,-10 0,50 -3.5,-10" fill="#ff2d78" opacity="0.5" transform="rotate(135)"/>
+    </g>
+    <circle r="5.5" fill="#ffffff" opacity="0.95"/>
+    <circle r="2.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Supernova 4: Cyan at (700, 420) - radius ~45 -->
+  <g transform="translate(700,420)" filter="url(#fg-glowMed)">
+    <circle r="45" fill="url(#fg-burstGrad4)" opacity="0.55"/>
+    <g opacity="0.8">
+      <polygon points="0,-42 3,-9 0,42 -3,-9" fill="#00cfff" opacity="0.55"/>
+      <polygon points="0,-42 3,-9 0,42 -3,-9" fill="#00e5ff" opacity="0.5" transform="rotate(40)"/>
+      <polygon points="0,-42 3,-9 0,42 -3,-9" fill="#ffffff" opacity="0.4" transform="rotate(80)"/>
+      <polygon points="0,-42 3,-9 0,42 -3,-9" fill="#00cfff" opacity="0.5" transform="rotate(120)"/>
+      <polygon points="0,-42 3,-9 0,42 -3,-9" fill="#00e5ff" opacity="0.45" transform="rotate(160)"/>
+    </g>
+    <circle r="5" fill="#ffffff" opacity="0.95"/>
+    <circle r="2.5" fill="#ffffff"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- GEOMETRIC CRYSTAL / PRISM SHAPES            -->
+  <!-- ============================================ -->
+
+  <!-- Crystal 1: Faceted diamond near (90, 350) -->
+  <g transform="translate(90,350)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-20 12,0 0,20 -12,0" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.7"/>
+    <line x1="0" y1="-20" x2="0" y2="20" stroke="#ffffff" stroke-width="0.5" opacity="0.5"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#00e5ff" stroke-width="0.5" opacity="0.4"/>
+    <polygon points="0,-20 12,0 0,5" fill="none" stroke="#ffd700" stroke-width="0.5" opacity="0.45"/>
+  </g>
+
+  <!-- Crystal 2: Icosahedron wireframe near (470, 120) -->
+  <g transform="translate(470,120)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-25 14,-8 9,20 -9,20 -14,-8" fill="none" stroke="#ffd700" stroke-width="0.7" opacity="0.65"/>
+    <line x1="0" y1="-25" x2="9" y2="20" stroke="#ffffff" stroke-width="0.4" opacity="0.4"/>
+    <line x1="0" y1="-25" x2="-9" y2="20" stroke="#ffffff" stroke-width="0.4" opacity="0.4"/>
+    <line x1="14" y1="-8" x2="-9" y2="20" stroke="#ffd700" stroke-width="0.4" opacity="0.35"/>
+    <line x1="-14" y1="-8" x2="9" y2="20" stroke="#ffd700" stroke-width="0.4" opacity="0.35"/>
+  </g>
+
+  <!-- Crystal 3: Small faceted gem near (260, 280) -->
+  <g transform="translate(260,280) rotate(15)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-18 10,-5 6,15 -6,15 -10,-5" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.6"/>
+    <line x1="0" y1="-18" x2="6" y2="15" stroke="#00e5ff" stroke-width="0.4" opacity="0.4"/>
+    <line x1="0" y1="-18" x2="-6" y2="15" stroke="#00e5ff" stroke-width="0.4" opacity="0.4"/>
+    <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>
+  </g>
+
+  <!-- Crystal 4: Rotated diamond near (530, 520) -->
+  <g transform="translate(530,520) rotate(-20)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-22 13,0 0,22 -13,0" fill="none" stroke="#ff2d78" stroke-width="0.7" opacity="0.6"/>
+    <line x1="-13" y1="0" x2="0" y2="-22" stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>
+    <line x1="13" y1="0" x2="0" y2="22" stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>
+    <polygon points="0,-22 13,0 0,3" fill="none" stroke="#ffd700" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <!-- Crystal 5: Hexagonal prism near (750, 100) -->
+  <g transform="translate(750,100)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="none" stroke="#00cfff" stroke-width="0.7" opacity="0.6"/>
+    <line x1="0" y1="-16" x2="0" y2="16" stroke="#ffffff" stroke-width="0.4" opacity="0.4"/>
+    <line x1="-14" y1="-8" x2="14" y2="8" stroke="#00cfff" stroke-width="0.4" opacity="0.3"/>
+    <line x1="14" y1="-8" x2="-14" y2="8" stroke="#00cfff" stroke-width="0.4" opacity="0.3"/>
+  </g>
+
+  <!-- Crystal 6: Small triangular prism near (60, 530) -->
+  <g transform="translate(60,530) rotate(10)" filter="url(#fg-glowSmall)">
+    <polygon points="0,-15 13,8 -13,8" fill="none" stroke="#ffd700" stroke-width="0.7" opacity="0.6"/>
+    <polygon points="0,-10 8,5 -8,5" fill="none" stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>
+    <line x1="0" y1="-15" x2="0" y2="-10" stroke="#ffd700" stroke-width="0.4" opacity="0.4"/>
+    <line x1="13" y1="8" x2="8" y2="5" stroke="#ffd700" stroke-width="0.4" opacity="0.4"/>
+    <line x1="-13" y1="8" x2="-8" y2="5" stroke="#ffd700" stroke-width="0.4" opacity="0.4"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPARKLE DOTS                                -->
+  <!-- ============================================ -->
+  <g filter="url(#fg-glowDot)">
+    <circle cx="45" cy="80" r="2" fill="#ffffff" opacity="0.9"/>
+    <circle cx="310" cy="55" r="1.8" fill="#00e5ff" opacity="0.85"/>
+    <circle cx="550" cy="90" r="2.5" fill="#ffffff" opacity="0.92"/>
+    <circle cx="720" cy="60" r="1.5" fill="#ffd700" opacity="0.8"/>
+    <circle cx="140" cy="250" r="2.2" fill="#ffffff" opacity="0.88"/>
+    <circle cx="400" cy="200" r="1.8" fill="#00cfff" opacity="0.82"/>
+    <circle cx="500" cy="310" r="2" fill="#ffffff" opacity="0.9"/>
+    <circle cx="680" cy="300" r="2.5" fill="#ffd700" opacity="0.85"/>
+    <circle cx="100" cy="430" r="1.5" fill="#ff6bbd" opacity="0.78"/>
+    <circle cx="240" cy="500" r="2" fill="#ffffff" opacity="0.9"/>
+    <circle cx="450" cy="550" r="2.2" fill="#00e5ff" opacity="0.87"/>
+    <circle cx="600" cy="480" r="1.8" fill="#ffffff" opacity="0.92"/>
+    <circle cx="760" cy="520" r="2" fill="#ffaa44" opacity="0.82"/>
+    <circle cx="30" cy="180" r="1.5" fill="#ffffff" opacity="0.85"/>
+    <circle cx="780" cy="250" r="2.3" fill="#a855f7" opacity="0.8"/>
+    <circle cx="420" cy="370" r="1.8" fill="#ffffff" opacity="0.9"/>
+    <circle cx="160" cy="560" r="2" fill="#00e5ff" opacity="0.84"/>
+    <circle cx="570" cy="400" r="2.5" fill="#ffffff" opacity="0.93"/>
+    <circle cx="330" cy="160" r="1.5" fill="#ffd700" opacity="0.78"/>
+    <circle cx="680" cy="560" r="2" fill="#ff2d78" opacity="0.82"/>
+  </g>
+</svg>

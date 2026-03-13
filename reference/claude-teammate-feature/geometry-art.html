@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Art Masterpiece</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #16213e 50%, #1a1a3e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #FF7F66, #00d4ff, #ccff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .top-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .art-piece {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .art-piece:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(255, 127, 102, 0.3));
+        }
+
+        .art-piece:nth-child(2):hover {
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
+        }
+
+        .art-piece:nth-child(3):hover {
+            filter: drop-shadow(0 0 20px rgba(204, 255, 0, 0.3));
+        }
+
+        .art-piece svg {
+            width: 240px;
+            height: 240px;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        .art-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .label-coral {
+            color: #FF7F66;
+        }
+
+        .label-blue {
+            color: #00d4ff;
+        }
+
+        .label-green {
+            color: #ccff00;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 40px;
+            }
+
+            .bottom-section {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .art-piece svg {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Geometric Harmony</h1>
+
+        <div class="gallery">
+            <!-- Top: Star -->
+            <div class="top-section">
+                <div class="art-piece">
+                    <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="coralGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#FF7F66;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E84B2F;stop-opacity:1" />
+                            </radialGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <circle cx="100" cy="100" r="95" fill="#FFF5F0" opacity="0.5"/>
+                        <polygon points="100,20 125,80 190,80 140,130 165,190 100,140 35,190 60,130 10,80 75,80"
+                                 fill="url(#coralGradient)"
+                                 filter="url(#glow)"
+                                 opacity="0.95"/>
+                        <polygon points="100,40 120,85 175,85 135,125 155,175 100,135 45,175 65,125 25,85 80,85"
+                                 fill="#FF9F7F"
+                                 opacity="0.45"/>
+                    </svg>
+                    <span class="art-label label-coral">Coral Star</span>
+                </div>
+            </div>
+
+            <!-- Bottom: Hexagon & Spiral -->
+            <div class="bottom-section">
+                <div class="art-piece">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+                        <defs>
+                            <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0088ff;stop-opacity:1" />
+                            </linearGradient>
+                            <radialGradient id="hexRadial" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.4" />
+                                <stop offset="100%" style="stop-color:#0088ff;stop-opacity:0" />
+                            </radialGradient>
+                            <filter id="glow2">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <polygon points="100,30 160,65 160,135 100,170 40,135 40,65" fill="url(#hexGradient)" filter="url(#glow2)" />
+                        <polygon points="100,30 160,65 160,135 100,170 40,135 40,65" fill="url(#hexRadial)" />
+                        <polygon points="100,30 160,65 160,135 100,170 40,135 40,65" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.75" />
+                    </svg>
+                    <span class="art-label label-blue">Electric Hexagon</span>
+                </div>
+
+                <div class="art-piece">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="spiralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ccff00;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#99ff00;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="glow3">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <circle cx="100" cy="100" r="98" fill="none" stroke="#ccff00" stroke-width="0.5" opacity="0.3"/>
+                        <path d="M 100 20 Q 150 20, 150 70 Q 150 120, 100 120 Q 50 120, 50 70 Q 50 30, 100 30 Q 140 30, 140 70 Q 140 110, 90 110 Q 60 110, 60 80"
+                              fill="none"
+                              stroke="url(#spiralGrad)"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              filter="url(#glow3)"/>
+                        <path d="M 100 20 Q 150 20, 150 70 Q 150 120, 100 120 Q 50 120, 50 70 Q 50 30, 100 30 Q 140 30, 140 70 Q 140 110, 90 110 Q 60 110, 60 80"
+                              fill="none"
+                              stroke="#ccff00"
+                              stroke-width="1"
+                              stroke-linecap="round"
+                              opacity="0.4"/>
+                    </svg>
+                    <span class="art-label label-green">Lime Spiral</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

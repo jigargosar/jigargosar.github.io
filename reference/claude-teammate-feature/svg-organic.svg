@@ -148,7 +148,7 @@
 
   <!-- Shell body -->
   <path d="M580 55 C648 55, 705 112, 705 180 C705 248, 648 305, 580 305 C512 305, 455 248, 455 180 C455 112, 512 55, 580 55"
-        fill="#7a3018" opacity="0.15" stroke="#d4875a" stroke-width="1" opacity="0.3"/>
+        fill="#7a3018" fill-opacity="0.15" stroke="#d4875a" stroke-width="1" stroke-opacity="0.3"/>
 
   <!-- Nautilus spiral chambers — built from arcs -->
   <!-- Outermost chamber -->
@@ -185,7 +185,7 @@
 
   <!-- Chamber 5 — inner -->
   <path d="M580 163 C591 163, 600 171, 600 180 C600 189, 591 197, 580 197 C569 197, 560 189, 560 180 C560 171, 569 163, 580 163"
-        fill="#9a4020" opacity="0.4" stroke="#d07848" stroke-width="1" opacity="0.7"/>
+        fill="#9a4020" fill-opacity="0.4" stroke="#d07848" stroke-width="1" stroke-opacity="0.7"/>
 
   <!-- Core dot -->
   <circle cx="580" cy="180" r="8" fill="#e09050" opacity="0.6" filter="url(#softGlow)"/>
