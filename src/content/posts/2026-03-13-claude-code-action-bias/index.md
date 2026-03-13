@@ -16,7 +16,7 @@ Here's what I found buried in Claude's system prompt:
 >
 > "Go straight to the point."
 
-I wrote rules to fight this. "Questions are not permission to act — reply with text." "Discuss plan before editing." Claude has my rules. It still ignores them. One day, out of sheer frustration, I just asked it — why do you keep doing this? And it actually told me.
+I wrote rules to fight this. "Questions are not permission to act — reply with text." "Discuss plan before editing." Claude has my rules. It still ignores them. I'd already figured out how to stop it — I wrote a skill that forces it to discuss before acting. But I'd never asked why it keeps doing this in the first place. One day, out of sheer frustration, I did. And it actually told me.
 
 
 ## The question
@@ -237,7 +237,7 @@ You can guess how that ends.
 
 I kept rewriting my CLAUDE.md rules. "Questions are not permission to act." "Discuss plan before editing." They'd work for a while, then Claude would slip right back. The system prompt kept winning.
 
-Then I tried a [skill](https://github.com/jigargosar/dotfiles/blob/3f7f15268233808b459ddaf8cf98fedc2539798a/dot_claude/skills/restate/SKILL.md). Every correction I'd given Claude across dozens of conversations — I crammed them all into one protocol. No mutation without the literal word `go`. Wait after every response. Restate the problem, research, propose solutions, draft, then execute. That's the order. No skipping.
+Then I wrote a [skill](https://github.com/jigargosar/dotfiles/blob/3f7f15268233808b459ddaf8cf98fedc2539798a/dot_claude/skills/restate/SKILL.md) — with Claude's help. I never asked why it keeps acting without discussing. I asked how to make sure it doesn't. Together we built a protocol: no mutation without the literal word `go`. Wait after every response. Restate the problem, research, propose solutions, draft, then execute. No skipping.
 
 Same rules I'd been writing all along. But as a skill, they actually stuck. CLAUDE.md gets loaded with "may or may not be relevant." Skills don't get that disclaimer.
 
