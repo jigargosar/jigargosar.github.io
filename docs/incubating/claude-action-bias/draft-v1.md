@@ -117,7 +117,7 @@ Six reasons, all presented with equal confidence. But are they all real?
 
 ## The pushback
 
-I didn't take it at face value. I asked Claude to back up each claim with actual evidence from its instructions.
+I wasn't convinced. I asked Claude to point to specific instructions backing each claim.
 
 It folded on four of them.
 
@@ -172,9 +172,9 @@ Two out of six survived. But here's the thing — Claude folding on the others m
 
 ## The real discovery
 
-Then I realized something. Forget the speculation entirely. The system prompt instructions, laid side by side, tell the whole story on their own.
+But the six claims don't even matter. The instructions themselves reveal the conflict.
 
-I asked Claude: even if some claims don't hold up, don't the instructions themselves reveal the conflict?
+I asked Claude to just look at the system prompt lines side by side:
 
 > 1. "Lead with the answer or action, not the reasoning" — action before discussion, by design
 >
