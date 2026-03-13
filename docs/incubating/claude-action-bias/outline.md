@@ -1,3 +1,5 @@
+=============== section 1
+
 Great. Let me kick things off per the blog writing protocol — here are my recommendations:
 
 1. Audience
@@ -17,41 +19,10 @@ Great. Let me kick things off per the blog writing protocol — here are my reco
    b. "I Asked Claude Why It Ignores My Rules — The Answer Was Honest" (recommended)
    c. "The Action Bias Built Into Every AI Assistant"
 
-What resonates? Feel free to mix, override, or redirect any of these.
-
 ❯ i like all the recommendations, make a note. if you had to change your questions and recommendations what would they be?
 
-● Write(~\.claude\projects\C--Users-jigar-projects-jigar-gosar-github-blog\memory\project_new-blog-post.md)
-⎿  Added 11 lines, removed 5 lines
-1  ---
-2 -name: New blog post planned
-3 -description: User wants to write a new blog post (topic TBD as of 2026-03-13)
-2 +name: New blog post - AI action bias
-3 +description: Blog post about Claude's action bias — why AI assistants act on questions instead of discussing first
-+, based on user's conversation with Claude that produced honest root cause analysis
-4  type: project
-5  ---
-6
-7 -User mentioned wanting to write a new blog post on 2026-03-13. Topic not yet specified.
-7 +Blog post initiated 2026-03-13.
-8
-9 -**Why:** User stated intent at start of conversation.
-9 +**Topic:** Claude's action bias — the tendency to act on questions instead of discussing, and the root causes (tra
-+ining reward bias, completion drive, uncertainty collapse, sycophancy, instruction hierarchy, training data shape)
-+. Based on a real conversation the user had with Claude.
-10
-11 -**How to apply:** When user brings up blog content, follow the Blog Writing Tone & Style protocol from CLAUDE.md —
-- start from their topic, recommend audience/format/tone, get approval before drafting.
-11 +**Approved decisions:**
-12 +1. Audience: broad — developers and anyone curious about AI behavior
-13 +2. Format: opinion/essay — thesis-driven, personal
-14 +3. Tone: conversational + narrative
-15 +4. Working title: "I Asked Claude Why It Ignores My Rules — The Answer Was Honest"
-16 +
-17 +**Source material:** saved verbatim in feedback_action-bias-analysis.md
 
-❯ /btw
-⎿  Usage: /btw
+============= Section 2
 
 ● Noted. Now, if I'm being honest about what I'd change:
 
@@ -79,11 +50,7 @@ What resonates? Feel free to mix, override, or redirect any of these.
    a. The best title usually emerges from the writing itself
    b. Section headings often reveal the real title
 
-What do you think — do any of these change your direction?
-
-❯ sorry I ment about SEO, options and recommendations
-
-● Good call. Here are revised title options with SEO in mind:
+=========== section 3
 
 1. "I Asked Claude Why It Ignores My Rules — The Answer Was Honest"
    a. Pros: clickable, narrative, emotional
@@ -110,8 +77,11 @@ What do you think — do any of these change your direction?
 My recommendation is #5 — use the search-friendly title for SEO and the narrative title for the actual page. Want to go with
 that, or adjust?
 
+
 ❯ I also liked your pervious reply when you misunderstood me, so now we have three directions in total as discussed seperately?
 correct, or ask questions?
+
+===============  Section 4
 
 ● Correct, three directions:
 
