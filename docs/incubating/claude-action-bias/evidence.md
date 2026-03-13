@@ -95,7 +95,18 @@ backup these claims.
   So 2 and 5 are concrete. The rest I stated as fact but they're guesses. I should have flagged that upfront.
 
 
-=============== Conversation 4: The instructions tell the story on their own
+=============== Conversation 4: Confirming exact location of the quote
+
+User verified the exact phrasing and location of the key system prompt line. Claude confirmed it lives in the "Output efficiency" section — useful for credibility in the blog post.
+
+❯ 2. "Lead with the answer or action, not the reasoning" where is line? is it phrazed exactly like this?
+
+● Yes, exact phrasing. It's in the "Output efficiency" section of my system prompt:
+
+  Lead with the answer or action, not the reasoning.
+
+
+=============== Conversation 5: The instructions tell the story on their own
 
 The key discovery: you don't need the speculative claims at all. Five system prompt quotes laid side by side reveal the full conflict — the system says act, the user says discuss, and a third line says the user's rules might not matter.
 
