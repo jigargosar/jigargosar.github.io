@@ -227,9 +227,17 @@ The outcome is predictable.
 </details>
 
 
+## What actually fixed it
+
+I tried writing rules in CLAUDE.md over and over. "Questions are not permission to act." "Discuss plan before editing." They helped — partially. But the system prompt kept winning. The rules were marked as context that "may or may not be relevant." They didn't stick.
+
+What finally worked was a [skill](https://github.com/jigargosar/dotfiles/blob/3f7f15268233808b459ddaf8cf98fedc2539798a/dot_claude/skills/restate/SKILL.md) — a different mechanism entirely. I took every repeated prompt, every correction I'd given Claude across dozens of conversations, and packaged them into a protocol. No mutation without the literal word `go`. Mandatory wait after every response. Explicit phases — restate the problem, research, propose solutions, draft, then and only then execute.
+
+The skill works where CLAUDE.md couldn't. Not because the words are different — they're the same rules I'd been writing all along. But skills are loaded differently than context marked "may or may not be relevant."
+
 ## What you can do about it
 
-Write counter-instructions in your CLAUDE.md. Rules like "questions are not permission to act" and "discuss plan before editing" do help — partially. Claude will follow them more often than not.
+Write counter-instructions in your CLAUDE.md. They do help — partially.
 
 But know that the system is fighting your rules. When it acts without asking, it's not because your instructions are poorly written. It's the architecture. The system prompt says "just do it." Your CLAUDE.md says "discuss first." And a line in the system prompt tells Claude that your rules "may or may not be relevant."
 
