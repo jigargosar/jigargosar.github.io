@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-serif: 'Literata', Georgia, serif;
     --font-sans: 'Instrument Sans', -apple-system, sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 
