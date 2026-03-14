@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>void / dark monochrome blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0e0e0e;
+  --bg-raised: #141414;
+  --bg-subtle: #1a1a1a;
+  --surface: #202020;
+  --border: #2a2a2a;
+  --border-light: #333;
+  --text-primary: #c8c8c8;
+  --text-secondary: #888;
+  --text-tertiary: #5a5a5a;
+  --text-dim: #444;
+  --text-ghost: #333;
+  --white: #e0e0e0;
+  --accent: #777;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --content-width: 680px;
+  --page-padding: 24px;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* --- Noise texture overlay --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* --- Fade-in animations --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ===========================
+   SHARED: HEADER
+   =========================== */
+
+header {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 56px var(--page-padding) 0;
+  animation: fadeIn 0.8s ease both;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  color: var(--text-secondary);
+}
+
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin-top: 20px;
+  transform-origin: left;
+  animation: lineGrow 0.6s ease 0.3s both;
+}
+
+/* ===========================
+   INDEX PAGE
+   =========================== */
+
+.index-intro {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 64px var(--page-padding) 0;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.index-intro h1 {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+.index-intro p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* --- Post list --- */
+
+.post-list {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 48px var(--page-padding) 80px;
+  list-style: none;
+}
+
+.post-list li {
+  animation: fadeUp 0.5s ease both;
+}
+
+.post-list li:nth-child(1) { animation-delay: 0.3s; }
+.post-list li:nth-child(2) { animation-delay: 0.38s; }
+.post-list li:nth-child(3) { animation-delay: 0.46s; }
+.post-list li:nth-child(4) { animation-delay: 0.54s; }
+.post-list li:nth-child(5) { animation-delay: 0.62s; }
+.post-list li:nth-child(6) { animation-delay: 0.7s; }
+
+.post-item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s ease;
+}
+
+.post-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.post-item:hover {
+  border-color: var(--border-light);
+}
+
+.post-item:hover + .post-item {
+  border-top-color: var(--border-light);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.post-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.post-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.post-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.post-item:hover .post-title {
+  color: var(--white);
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+/* ===========================
+   POST PAGE
+   =========================== */
+
+.post-header {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 64px var(--page-padding) 0;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.post-header .post-meta {
+  margin-bottom: 20px;
+}
+
+.post-header .reading-time {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.post-header .reading-time::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--text-dim);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+.post-header h1 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+.post-header .post-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+/* --- Hero image --- */
+.hero-image {
+  max-width: var(--content-width);
+  margin: 40px auto 0;
+  padding: 0 var(--page-padding);
+  animation: fadeIn 0.8s ease 0.5s both;
+}
+
+.hero-image-inner {
+  position: relative;
+  aspect-ratio: 5/3;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.hero-image-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) brightness(0.7) contrast(1.1);
+}
+
+.hero-image-caption {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* --- Article content --- */
+.post-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 48px var(--page-padding) 96px;
+  animation: fadeUp 0.6s ease 0.6s both;
+}
+
+.post-content p {
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: var(--text-primary);
+  margin-bottom: 1.5em;
+}
+
+.post-content p.lead {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 2em;
+}
+
+.post-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+}
+
+.post-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  line-height: 1.35;
+}
+
+.post-content a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--text-dim);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--text-secondary);
+}
+
+.post-content strong {
+  font-weight: 500;
+  color: var(--white);
+}
+
+.post-content em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Blockquote */
+.post-content blockquote {
+  margin: 2em 0;
+  padding: 20px 0 20px 24px;
+  border-left: 2px solid var(--border-light);
+  margin-left: 8px;
+}
+
+.post-content blockquote p {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.post-content blockquote cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-style: normal;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-top: 12px;
+}
+
+/* Code */
+.post-content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 300;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.post-content pre {
+  margin: 2em 0;
+  padding: 24px 28px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.post-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.code-keyword { color: #7a7a7a; }
+.code-string { color: #999; }
+.code-comment { color: var(--text-dim); font-style: italic; }
+.code-fn { color: var(--text-primary); }
+.code-punct { color: var(--text-tertiary); }
+
+/* Lists */
+.post-content ul, .post-content ol {
+  margin: 1.5em 0;
+  padding-left: 1.5em;
+}
+
+.post-content li {
+  margin-bottom: 0.5em;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.post-content li::marker {
+  color: var(--text-dim);
+}
+
+/* Horizontal rule */
+.post-content hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3em 0;
+}
+
+/* Separator dots */
+.section-break {
+  text-align: center;
+  margin: 3em 0;
+  color: var(--text-dim);
+  letter-spacing: 0.5em;
+  font-size: 0.8rem;
+}
+
+/* --- Footer --- */
+footer {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding) 64px;
+}
+
+.footer-rule {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 24px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--text-secondary);
+}
+
+/* --- Page switcher --- */
+.page-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 1px;
+  z-index: 100;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.page-switcher button {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  background: var(--bg-raised);
+  color: var(--text-tertiary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-switcher button.active {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.page-switcher button:hover {
+  color: var(--text-primary);
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .index-intro h1 { font-size: 2rem; }
+  .post-title { font-size: 1.3rem; }
+  .post-header h1 { font-size: 2rem; }
+  .post-content h2 { font-size: 1.4rem; }
+  .footer-content { flex-direction: column; gap: 12px; align-items: flex-start; }
+}
+
+/* Page visibility */
+.page { display: none; }
+.page.visible { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ==================== INDEX PAGE ==================== -->
+<div class="page visible" id="page-index">
+
+  <header>
+    <div class="site-title"><a href="#">jigar gosar</a></div>
+    <span class="header-rule"></span>
+  </header>
+
+  <section class="index-intro">
+    <h1>Writing on craft,<br>code, and clarity</h1>
+    <p>Notes from years of building software, distilled into things worth remembering.</p>
+  </section>
+
+  <ul class="post-list" id="post-list"></ul>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-content">
+      <span class="footer-text">jigar gosar / 2026</span>
+      <nav class="footer-nav">
+        <a href="#">github</a>
+        <a href="#">rss</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ==================== POST PAGE ==================== -->
+<div class="page" id="page-post">
+
+  <header>
+    <div class="site-title"><a href="#" onclick="showPage('index'); return false;">jigar gosar</a></div>
+    <span class="header-rule"></span>
+  </header>
+
+  <article>
+    <div class="post-header">
+      <div class="post-meta">
+        <time class="post-date">2026-03-11</time>
+        <span class="post-tag">craft</span>
+        <span class="reading-time">6 min read</span>
+      </div>
+      <h1>The quiet discipline of<br>naming things well</h1>
+      <p class="post-subtitle">Why the hardest part of programming has nothing to do with algorithms.</p>
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-image-inner">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='720'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23181818'/%3E%3Cstop offset='50%25' stop-color='%23222'/%3E%3Cstop offset='100%25' stop-color='%23161616'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' width='1200' height='720'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' font-family='Georgia' font-size='48' fill='%23282828' letter-spacing='0.1em'%3Enaming%3C/text%3E%3C/svg%3E" alt="hero" />
+      </div>
+      <div class="hero-image-caption">photo by the author</div>
+    </div>
+
+    <div class="post-content" id="post-content"></div>
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-content">
+      <span class="footer-text">jigar gosar / 2026</span>
+      <nav class="footer-nav">
+        <a href="#">github</a>
+        <a href="#">rss</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ==================== PAGE SWITCHER ==================== -->
+<div class="page-switcher">
+  <button class="active" onclick="showPage('index')">index</button>
+  <button onclick="showPage('post')">post</button>
+</div>
+
+<script>
+// --- Post data ---
+var posts = [
+  {
+    date: '2026-03-11',
+    tag: 'craft',
+    title: 'The quiet discipline of naming things well',
+    excerpt: 'Why the hardest part of programming has nothing to do with algorithms, and everything to do with empathy for your future self.'
+  },
+  {
+    date: '2026-03-04',
+    tag: 'tools',
+    title: 'Leaving VS Code after seven years',
+    excerpt: 'It wasn\u2019t about the editor. It was about what the editor had trained me not to notice.'
+  },
+  {
+    date: '2026-02-18',
+    tag: 'opinion',
+    title: 'Most refactoring is just procrastination with a conscience',
+    excerpt: 'The code was fine. You were bored. Let\u2019s talk about it.'
+  },
+  {
+    date: '2026-02-03',
+    tag: 'deep dive',
+    title: 'What TypeScript gets wrong about confidence',
+    excerpt: 'Type safety is a spectrum, and we\u2019re standing too far to one side. A case for strategic any.'
+  },
+  {
+    date: '2026-01-21',
+    tag: 'til',
+    title: 'CSS :has() replaced 40 lines of JavaScript',
+    excerpt: 'A single selector eliminated a resize observer, two state variables, and a useEffect I never liked.'
+  },
+  {
+    date: '2026-01-09',
+    tag: 'craft',
+    title: 'The garden metaphor and why it fails',
+    excerpt: 'Software isn\u2019t a garden. It\u2019s a city. And cities need zoning laws, not gardeners.'
+  }
+];
+
+// --- Render post list ---
+var listEl = document.getElementById('post-list');
+var listHTML = '';
+for (var i = 0; i < posts.length; i++) {
+  var p = posts[i];
+  listHTML += '<li>'
+    + '<a class="post-item" href="#" onclick="showPage(\'post\'); return false;">'
+    + '<div class="post-meta">'
+    + '<time class="post-date">' + p.date + '</time>'
+    + '<span class="post-tag">' + p.tag + '</span>'
+    + '</div>'
+    + '<div class="post-title">' + p.title + '</div>'
+    + '<div class="post-excerpt">' + p.excerpt + '</div>'
+    + '</a>'
+    + '</li>';
+}
+listEl.innerHTML = listHTML;
+
+// --- Render post content ---
+var contentEl = document.getElementById('post-content');
+var contentHTML = ''
+  + '<p class="lead">Every programmer I admire shares one trait that has nothing to do with their technical ability: they name things with startling precision.</p>'
+  + '<p>I spent the first years of my career believing that naming was a soft skill\u2014something you got better at passively, like developing taste in coffee. You wrote code, you named things, and over time your names got less terrible. This was, it turns out, completely wrong.</p>'
+  + '<p>Naming is a <strong>hard skill</strong>. It requires active practice, deliberate revision, and an almost uncomfortable willingness to admit that <em>the name you chose five minutes ago is already wrong</em>.</p>'
+  + '<h2>The cost of a bad name</h2>'
+  + '<p>Consider a function called <code>processData</code>. Every codebase has one. It\u2019s the function equivalent of a junk drawer\u2014everything goes in, something comes out, and nobody wants to open it.</p>'
+  + '<p>The real cost isn\u2019t confusion. It\u2019s that bad names <strong>prevent questions</strong>. When a function is called <code>processData</code>, nobody asks what it actually does. The name is just vague enough to feel plausible. It suppresses the curiosity that would lead to better architecture.</p>'
+  + '<blockquote>'
+  + '<p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>'
+  + '<cite>\u2014 Phil Karlton</cite>'
+  + '</blockquote>'
+  + '<p>We laugh at this quote. We shouldn\u2019t. Karlton wasn\u2019t making a joke about difficulty\u2014he was making an observation about <em>frequency</em>. You name things hundreds of times a day. Cache invalidation comes up maybe twice a quarter.</p>'
+  + '<h2>A framework for better names</h2>'
+  + '<p>After years of paying attention, I\u2019ve converged on three principles. They\u2019re not clever. That\u2019s the point.</p>'
+  + '<h3>1. Name the contract, not the implementation</h3>'
+  + '<p>A function called <code>fetchUserFromPostgres</code> ties your interface to your infrastructure. Call it <code>findUser</code>. The contract is finding. The database is an implementation detail that will change before the contract does.</p>'
+  + '<h3>2. Longer names for larger scopes</h3>'
+  + '<p>A loop variable can be <code>i</code>. A module-level constant should be <code>MAX_RETRY_ATTEMPTS</code>. The scope of a name is proportional to its required specificity. Short names in large scopes create ambiguity; long names in small scopes create noise.</p>'
+  + '<h3>3. If you can\u2019t name it, you don\u2019t understand it</h3>'
+  + '<p>This is the most useful principle and the most uncomfortable one. When naming feels hard, it\u2019s almost never a vocabulary problem. It\u2019s a <em>thinking</em> problem. The thing you\u2019re trying to name is doing too much, or you haven\u2019t decided what it\u2019s for.</p>'
+  + '<pre><code>'
+  + '<span class="code-comment">// Before: what does this do?</span>\n'
+  + '<span class="code-keyword">function</span> <span class="code-fn">handleClick</span><span class="code-punct">(</span>e<span class="code-punct">) {</span>\n'
+  + '  validate<span class="code-punct">(</span>form<span class="code-punct">);</span>\n'
+  + '  save<span class="code-punct">(</span>form<span class="code-punct">);</span>\n'
+  + '  redirect<span class="code-punct">(</span><span class="code-string">\'/success\'</span><span class="code-punct">);</span>\n'
+  + '<span class="code-punct">}</span>\n\n'
+  + '<span class="code-comment">// After: the name IS the documentation</span>\n'
+  + '<span class="code-keyword">function</span> <span class="code-fn">submitValidatedForm</span><span class="code-punct">(</span>e<span class="code-punct">) {</span>\n'
+  + '  <span class="code-keyword">const</span> result <span class="code-punct">=</span> validate<span class="code-punct">(</span>form<span class="code-punct">);</span>\n'
+  + '  <span class="code-keyword">if</span> <span class="code-punct">(</span>result<span class="code-punct">.</span>valid<span class="code-punct">)</span> save<span class="code-punct">(</span>form<span class="code-punct">);</span>\n'
+  + '  redirect<span class="code-punct">(</span><span class="code-string">\'/success\'</span><span class="code-punct">);</span>\n'
+  + '<span class="code-punct">}</span>'
+  + '</code></pre>'
+  + '<p>The second version isn\u2019t just better named. It\u2019s better <em>thought</em>. The act of naming forced a question: should we save an invalid form? The original code did. The renamed code doesn\u2019t.</p>'
+  + '<div class="section-break">\u00b7 \u00b7 \u00b7</div>'
+  + '<p>Good names are acts of empathy. They\u2019re gifts to the person who will read this code at 2am, six months from now, in a codebase they barely know. That person might be you. Name things as if it will be.</p>';
+
+contentEl.innerHTML = contentHTML;
+
+// --- Page switching ---
+function showPage(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('visible');
+  }
+  document.getElementById('page-' + id).classList.add('visible');
+  var buttons = document.querySelectorAll('.page-switcher button');
+  for (var j = 0; j < buttons.length; j++) {
+    buttons[j].classList.remove('active');
+    if ((id === 'index' && j === 0) || (id === 'post' && j === 1)) {
+      buttons[j].classList.add('active');
+    }
+  }
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>

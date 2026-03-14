@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>void / dark monochrome blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0e0e0e;
+  --bg-raised: #141414;
+  --bg-subtle: #1a1a1a;
+  --surface: #202020;
+  --border: #2a2a2a;
+  --border-faint: #1e1e1e;
+  --text-primary: #c8c4be;
+  --text-secondary: #8a8680;
+  --text-tertiary: #5c5955;
+  --text-ghost: #3d3a37;
+  --accent: #a09888;
+  --accent-dim: #7a7268;
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --measure: 680px;
+  --measure-wide: 780px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- Grain overlay --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* --- Ambient glow --- */
+body::after {
+  content: '';
+  position: fixed;
+  top: -30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(160,152,136,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================
+   SHARED LAYOUT
+   ============================ */
+
+.page { position: relative; z-index: 1; }
+
+.site-header {
+  padding: 2.5rem var(--gutter) 0;
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+}
+
+.site-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-tertiary);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: color 0.4s ease;
+}
+
+.site-mark:hover { color: var(--text-secondary); }
+
+.site-mark .dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-dim);
+  border-radius: 50%;
+  position: relative;
+  top: -1px;
+  opacity: 0.6;
+}
+
+/* ============================
+   INDEX PAGE
+   ============================ */
+
+.index-hero {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 5rem var(--gutter) 3rem;
+}
+
+.index-hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.index-hero .subtitle {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+/* --- Post list --- */
+
+.post-list {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 6rem;
+}
+
+.post-list-year {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--text-ghost);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-faint);
+}
+
+.post-list-year:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.post-item {
+  display: block;
+  text-decoration: none;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border-faint);
+  transition: border-color 0.4s ease;
+  cursor: pointer;
+}
+
+.post-item:last-child { border-bottom: none; }
+
+.post-item:hover { border-bottom-color: var(--border); }
+
+.post-item-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+  transition: color 0.3s ease;
+  margin-bottom: 0.3rem;
+}
+
+.post-item:hover .post-item-title {
+  color: var(--accent);
+}
+
+.post-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-ghost);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.post-item-meta .sep {
+  width: 2px;
+  height: 2px;
+  background: var(--text-ghost);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.post-item-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  line-height: 1.55;
+  margin-top: 0.4rem;
+  max-width: 540px;
+}
+
+/* ============================
+   POST PAGE
+   ============================ */
+
+.post-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 4.5rem var(--gutter) 0;
+}
+
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-ghost);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  transition: color 0.3s ease;
+}
+
+.post-back:hover { color: var(--text-secondary); }
+
+.post-back svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  transition: transform 0.3s ease;
+}
+
+.post-back:hover svg { transform: translateX(-2px); }
+
+.post-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  max-width: var(--measure);
+}
+
+.post-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-ghost);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 2.5rem;
+}
+
+.post-meta-line .sep {
+  width: 2px;
+  height: 2px;
+  background: var(--text-ghost);
+  border-radius: 50%;
+}
+
+/* --- Hero image --- */
+
+.post-hero {
+  max-width: var(--measure-wide);
+  margin: 0 auto 3rem;
+  padding: 0 var(--gutter);
+}
+
+.post-hero-img {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border-faint);
+}
+
+/* --- Post body --- */
+
+.post-body {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 6rem;
+}
+
+.post-body p {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1.02rem;
+  line-height: 1.78;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.post-body p.lead {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+
+.post-body h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.65rem;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.005em;
+}
+
+.post-body h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.3s ease;
+}
+
+.post-body a:hover {
+  text-decoration-color: var(--accent-dim);
+}
+
+.post-body blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 1.25rem;
+  margin: 2rem 0 2rem 0.5rem;
+}
+
+.post-body blockquote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.post-body code {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.87em;
+  background: var(--bg-raised);
+  color: var(--accent);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--border-faint);
+}
+
+.post-body pre {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-faint);
+  border-radius: 5px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+.post-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.post-body ul, .post-body ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-body li {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  font-weight: 300;
+}
+
+.post-body li::marker {
+  color: var(--text-ghost);
+}
+
+.post-body hr {
+  border: none;
+  height: 1px;
+  background: var(--border-faint);
+  margin: 3rem auto;
+  max-width: 80px;
+}
+
+.post-body img {
+  width: 100%;
+  border-radius: 4px;
+  margin: 2rem 0;
+  border: 1px solid var(--border-faint);
+}
+
+.post-body figure {
+  margin: 2.5rem 0;
+}
+
+.post-body figcaption {
+  font-size: 0.8rem;
+  color: var(--text-ghost);
+  text-align: center;
+  margin-top: 0.6rem;
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+/* --- Separator between sections --- */
+.section-rule {
+  border: none;
+  height: 1px;
+  background: var(--border-faint);
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* --- Footer --- */
+.site-footer {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 3rem var(--gutter) 4rem;
+  font-size: 0.78rem;
+  color: var(--text-ghost);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* ============================
+   PAGE TOGGLE (demo only)
+   ============================ */
+
+.page-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  gap: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+
+.page-toggle button {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  border: none;
+  cursor: pointer;
+  color: var(--text-ghost);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.page-toggle button.active {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.page-toggle button:hover:not(.active) {
+  color: var(--text-tertiary);
+}
+
+/* ============================
+   ANIMATIONS
+   ============================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.3s; }
+.delay-7 { animation-delay: 0.35s; }
+.delay-8 { animation-delay: 0.4s; }
+.delay-9 { animation-delay: 0.45s; }
+.delay-10 { animation-delay: 0.5s; }
+.delay-11 { animation-delay: 0.55s; }
+.delay-12 { animation-delay: 0.6s; }
+.delay-13 { animation-delay: 0.65s; }
+
+/* Hidden page */
+.page.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ==================== INDEX PAGE ==================== -->
+<div class="page" id="page-index">
+
+  <header class="site-header animate-in delay-1">
+    <a href="#" class="site-mark">
+      jigar gosar <span class="dot"></span>
+    </a>
+  </header>
+
+  <section class="index-hero">
+    <h1 class="animate-in delay-2">Writing on software,<br>craft, and things<br>I've learned.</h1>
+    <p class="subtitle animate-in delay-3">Notes from building things on the web. Mostly code, sometimes process, occasionally something else entirely.</p>
+  </section>
+
+  <section class="post-list" id="post-list">
+    <!-- Populated by JS -->
+  </section>
+
+  <footer class="site-footer animate-in delay-13">
+    jigar gosar
+  </footer>
+</div>
+
+<!-- ==================== POST PAGE ==================== -->
+<div class="page hidden" id="page-post">
+
+  <header class="site-header animate-in delay-1">
+    <a href="#" class="site-mark">
+      jigar gosar <span class="dot"></span>
+    </a>
+  </header>
+
+  <article>
+    <div class="post-header">
+      <a href="#" class="post-back animate-in delay-2" id="btn-back-top">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        back
+      </a>
+      <h1 class="post-title animate-in delay-3">The quiet art of naming things well</h1>
+      <div class="post-meta-line animate-in delay-4">
+        <span>March 2, 2026</span>
+        <span class="sep"></span>
+        <span>8 min read</span>
+      </div>
+    </div>
+
+    <div class="post-hero animate-in delay-5">
+      <div class="post-hero-img" style="background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--surface) 40%, var(--bg-raised) 100%);"></div>
+    </div>
+
+    <div class="post-body">
+      <p class="lead animate-in delay-6">Good names don't describe what something is. They shape how you think about it. The best code reads like well-edited prose, not because it's clever, but because every name carries exactly the weight it should.</p>
+
+      <p class="animate-in delay-7">I spent twenty minutes last week renaming a variable. Not because the old name was wrong, but because it was imprecise. It said <code>data</code> when it meant <code>userPreferences</code>. That kind of vagueness compounds. Three months from now, someone reads that code and has to rebuild context that should have been free.</p>
+
+      <p class="animate-in delay-8">This isn't pedantry. It's the cheapest form of documentation you'll ever write. A well-named function is a promise. A well-named module is a boundary. Get them right and your architecture explains itself.</p>
+
+      <h2 class="animate-in delay-9">Names as cognitive shortcuts</h2>
+
+      <p class="animate-in delay-10">When you read <code>processItems()</code>, you know nothing. When you read <code>archiveExpiredListings()</code>, you know everything. The second name does work that would otherwise require a comment, a Slack message, or ten minutes of reading implementation details.</p>
+
+      <blockquote class="animate-in delay-10">
+        <p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>
+      </blockquote>
+
+      <p>Phil Karlton said that, and it's become a cliche because it's true. But I'd add a corollary: naming things is hard because it requires you to actually understand what you're building. The struggle to name something is often the struggle to define it.</p>
+
+      <h3>The spectrum of specificity</h3>
+
+      <p>Names exist on a spectrum. Too vague and they carry no meaning. Too specific and they become brittle, breaking every time the implementation shifts. The sweet spot is a name that captures intent without over-committing to mechanics.</p>
+
+      <pre><code>// Too vague
+const handle = (x) => { ... }
+
+// Too specific
+const parseJsonAndExtractUserEmailFromResponse = (res) => { ... }
+
+// Just right
+const extractUserEmail = (response) => { ... }</code></pre>
+
+      <p>The third version tells you what it does without telling you how. If you later switch from JSON to protobuf, the name still holds. That resilience matters more than you think.</p>
+
+      <h2>Naming as design pressure</h2>
+
+      <p>Here's something I've noticed over the years: when a name feels awkward, the abstraction is usually wrong. If you can't name a function simply, it's probably doing too much. If a module name requires a conjunction, it probably needs to be split.</p>
+
+      <ul>
+        <li>If the name needs "and," the function does too much</li>
+        <li>If the name needs "or," the type is too broad</li>
+        <li>If the name needs a number suffix, the architecture needs rethinking</li>
+        <li>If the name is generic, the concept hasn't been found yet</li>
+      </ul>
+
+      <p>Naming pressure is design pressure in disguise. Embrace it. Let the discomfort of a bad name push you toward better structure.</p>
+
+      <hr>
+
+      <p>I keep a <a href="#">running list</a> of naming patterns that have served me well. Not a dictionary, more like a field guide. Verbs for functions, nouns for data, adjectives for booleans. Simple patterns, but they eliminate an entire category of decision fatigue.</p>
+
+      <p>The next time you reach for <code>temp</code> or <code>data</code> or <code>result</code>, pause. That moment of friction is an opportunity. The name you choose will be read a hundred times. Spend the twenty minutes. It's the highest-leverage work you'll do all day.</p>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    jigar gosar
+  </footer>
+</div>
+
+<!-- ==================== PAGE TOGGLE ==================== -->
+<div class="page-toggle">
+  <button class="active" id="btn-index">Index</button>
+  <button id="btn-post">Post</button>
+</div>
+
+<script>
+// Post data for index page
+var posts = [
+  {
+    title: 'The quiet art of naming things well',
+    date: 'Mar 2',
+    readTime: '8 min',
+    excerpt: 'Good names shape how you think about code. A note on the cheapest form of documentation.'
+  },
+  {
+    title: 'Why I stopped writing clever code',
+    date: 'Feb 18',
+    readTime: '5 min',
+    excerpt: 'Clever code is a letter to your present self. Clear code is a letter to everyone else.'
+  },
+  {
+    title: 'Building a design system from scratch',
+    date: 'Feb 4',
+    readTime: '12 min',
+    excerpt: 'Tokens, components, and the long game of consistency across a growing product.'
+  },
+  {
+    title: 'Error boundaries and the edges of graceful failure',
+    date: 'Jan 22',
+    readTime: '7 min',
+    excerpt: 'What happens at the boundary between your code and everything that can go wrong.'
+  },
+  {
+    title: 'Rethinking state management in 2026',
+    date: 'Jan 9',
+    readTime: '10 min',
+    excerpt: 'Signals, stores, and the return to simplicity after years of over-engineering.'
+  },
+  {
+    title: 'The case for boring technology choices',
+    date: 'Dec 15',
+    readTime: '6 min',
+    excerpt: 'Innovation tokens are finite. Spend them where they matter.'
+  },
+  {
+    title: 'Typography on the web is still broken',
+    date: 'Nov 28',
+    readTime: '9 min',
+    excerpt: 'We have variable fonts, fluid type, and subgrid. And yet.'
+  },
+  {
+    title: 'Debugging as a creative act',
+    date: 'Nov 11',
+    readTime: '4 min',
+    excerpt: 'The systematic hunt for a bug is closer to detective work than engineering.'
+  },
+  {
+    title: 'A minimal Astro setup for content sites',
+    date: 'Oct 20',
+    readTime: '11 min',
+    excerpt: 'Content collections, image optimization, and getting out of the framework\'s way.'
+  }
+];
+
+var yearBreaks = {
+  0: '2026',
+  5: '2025'
+};
+
+// Render post list
+var listEl = document.getElementById('post-list');
+var html = '';
+var delayIdx = 4;
+
+for (var i = 0; i < posts.length; i++) {
+  if (yearBreaks[i] !== undefined) {
+    html += '<div class="post-list-year animate-in delay-' + delayIdx + '">' + yearBreaks[i] + '</div>';
+    delayIdx++;
+  }
+
+  var p = posts[i];
+  html += '<a class="post-item animate-in delay-' + delayIdx + '" href="#">';
+  html += '<div class="post-item-title">' + p.title + '</div>';
+  html += '<div class="post-item-meta">';
+  html += '<span>' + p.date + '</span>';
+  html += '<span class="sep"></span>';
+  html += '<span>' + p.readTime + ' read</span>';
+  html += '</div>';
+  html += '<div class="post-item-excerpt">' + p.excerpt + '</div>';
+  html += '</a>';
+  delayIdx++;
+}
+
+listEl.innerHTML = html;
+
+// Page switching
+var indexPage = document.getElementById('page-index');
+var postPage = document.getElementById('page-post');
+var btnIndex = document.getElementById('btn-index');
+var btnPost = document.getElementById('btn-post');
+var btnBack = document.getElementById('btn-back-top');
+
+function showIndex() {
+  indexPage.classList.remove('hidden');
+  postPage.classList.add('hidden');
+  btnIndex.classList.add('active');
+  btnPost.classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+function showPost() {
+  indexPage.classList.add('hidden');
+  postPage.classList.remove('hidden');
+  btnPost.classList.add('active');
+  btnIndex.classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+btnIndex.addEventListener('click', showIndex);
+btnPost.addEventListener('click', showPost);
+btnBack.addEventListener('click', function(e) {
+  e.preventDefault();
+  showIndex();
+});
+
+// Clicking a post item shows the post page
+var postItems = document.querySelectorAll('.post-item');
+for (var j = 0; j < postItems.length; j++) {
+  postItems[j].addEventListener('click', function(e) {
+    e.preventDefault();
+    showPost();
+  });
+}
+</script>
+</body>
+</html>

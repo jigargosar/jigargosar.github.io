@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Dark — Monochrome Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --void-0: #0c0c0e;
+  --void-1: #111114;
+  --void-2: #18181c;
+  --void-3: #1f1f24;
+  --void-4: #27272d;
+  --void-5: #323239;
+  --void-6: #3e3e47;
+  --void-7: #4d4d58;
+  --void-8: #62626f;
+  --void-9: #7a7a88;
+  --void-10: #9494a0;
+  --void-11: #ababb5;
+  --void-12: #c4c4cc;
+  --void-13: #d8d8de;
+  --void-14: #e8e8ec;
+  --void-15: #f0f0f3;
+
+  --text-primary: var(--void-13);
+  --text-secondary: var(--void-10);
+  --text-tertiary: var(--void-8);
+  --text-ghost: var(--void-6);
+  --text-heading: var(--void-14);
+
+  --surface-base: var(--void-0);
+  --surface-raised: var(--void-1);
+  --surface-overlay: var(--void-2);
+
+  --border-subtle: var(--void-3);
+  --border-medium: var(--void-5);
+
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  --measure: 680px;
+  --measure-wide: 780px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+html {
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  color: var(--text-primary);
+  background: var(--surface-base);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Subtle texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ========== PAGE SHELL ========== */
+.page-shell {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ========== SITE HEADER ========== */
+.site-header {
+  padding: 2.5rem 0 0;
+  margin-bottom: 3.5rem;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.site-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.site-name:hover {
+  color: var(--void-15);
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.site-nav a:hover {
+  color: var(--text-primary);
+}
+
+.header-rule {
+  border: none;
+  height: 1px;
+  background: var(--border-subtle);
+  margin-top: 1.25rem;
+}
+
+/* ========== INDEX PAGE ========== */
+
+.index-intro {
+  margin-bottom: 3.5rem;
+  max-width: 560px;
+}
+
+.index-intro p {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.post-list {
+  list-style: none;
+}
+
+.post-list__item {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.post-list__item:last-child {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.post-list__link {
+  display: block;
+  padding: 1.35rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition: none;
+}
+
+.post-list__title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.post-list__title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.post-list__link:hover .post-list__title {
+  color: var(--void-15);
+}
+
+.post-list__date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-ghost);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-list__excerpt {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.post-list__tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.post-list__tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--void-7);
+  letter-spacing: 0.03em;
+}
+
+.post-list__tag::before {
+  content: '#';
+  opacity: 0.5;
+}
+
+/* ========== POST PAGE ========== */
+
+.post-page { display: none; }
+
+.post-header {
+  margin-bottom: 2.75rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.post-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.post-header__date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-ghost);
+  letter-spacing: 0.02em;
+}
+
+.post-header__reading-time {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--void-6);
+  font-weight: 300;
+}
+
+.post-header__reading-time::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background: var(--void-5);
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+
+.post-header__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 4.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  max-width: 620px;
+}
+
+.post-header__subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+/* Hero image */
+.post-hero {
+  margin-bottom: 2.75rem;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 5 / 3;
+  background: var(--void-2);
+  position: relative;
+}
+
+.post-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+}
+
+/* Simulated hero with CSS art */
+.post-hero--simulated {
+  background: linear-gradient(
+    145deg,
+    var(--void-1) 0%,
+    var(--void-2) 30%,
+    var(--void-3) 60%,
+    var(--void-2) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.post-hero--simulated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,255,255,0.015) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(255,255,255,0.02) 0%, transparent 100%);
+}
+
+.post-hero--simulated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, var(--surface-base), transparent);
+}
+
+/* ========== PROSE CONTENT ========== */
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-primary);
+  hanging-punctuation: first;
+}
+
+.prose strong {
+  font-weight: 500;
+  color: var(--text-heading);
+}
+
+.prose em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.prose a {
+  color: var(--text-heading);
+  text-decoration: underline;
+  text-decoration-color: var(--void-5);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--void-10);
+}
+
+/* Headings in prose */
+.prose h2 {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-top: 3rem;
+  margin-bottom: 0.25rem;
+}
+
+.prose h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-top: 2.5rem;
+  margin-bottom: 0.15rem;
+}
+
+/* Blockquote */
+.prose blockquote {
+  border-left: 2px solid var(--void-4);
+  padding-left: 1.35rem;
+  margin-left: 0.5rem;
+}
+
+.prose blockquote p {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+/* Code */
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--void-11);
+  background: var(--void-2);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--void-3);
+}
+
+.prose pre {
+  background: var(--void-1);
+  border: 1px solid var(--void-3);
+  border-radius: 5px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--void-11);
+}
+
+/* Code block syntax hints */
+.prose pre .comment { color: var(--void-7); }
+.prose pre .keyword { color: var(--void-12); }
+.prose pre .string { color: var(--void-10); }
+.prose pre .function { color: var(--void-13); }
+
+/* Lists */
+.prose ul, .prose ol {
+  padding-left: 1.25rem;
+}
+
+.prose li {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin-top: 0.35rem;
+}
+
+.prose li::marker {
+  color: var(--void-6);
+}
+
+/* Horizontal rule in prose */
+.prose hr {
+  border: none;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 2.75rem 0;
+}
+
+/* Image in prose */
+.prose figure {
+  margin: 2.25rem 0;
+}
+
+.prose figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-ghost);
+  text-align: center;
+  margin-top: 0.6rem;
+  font-weight: 300;
+}
+
+/* ========== POST FOOTER ========== */
+
+.post-footer {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.post-footer__tags {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.post-footer__tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--void-7);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--void-3);
+  border-radius: 3px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.post-footer__tag:hover {
+  border-color: var(--void-5);
+  color: var(--void-9);
+}
+
+.post-nav {
+  margin-top: 2.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.post-nav__link {
+  text-decoration: none;
+  display: block;
+}
+
+.post-nav__link--next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.post-nav__label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--text-ghost);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.post-nav__title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.post-nav__link:hover .post-nav__title {
+  color: var(--text-heading);
+}
+
+/* ========== SITE FOOTER ========== */
+
+.site-footer {
+  margin-top: 5rem;
+  padding: 2rem 0 2.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.site-footer__copy {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-ghost);
+  font-weight: 300;
+}
+
+.site-footer__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-footer__links a {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-ghost);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer__links a:hover {
+  color: var(--text-secondary);
+}
+
+/* ========== PAGE SWITCHER (demo only) ========== */
+
+.page-switcher {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+.page-switcher button {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-ghost);
+  background: var(--void-2);
+  border: 1px solid var(--void-4);
+  padding: 0.4rem 0.75rem;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.page-switcher button:hover,
+.page-switcher button.active {
+  border-color: var(--void-6);
+  color: var(--text-secondary);
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.animate-in:nth-child(1) { animation-delay: 0.05s; }
+.animate-in:nth-child(2) { animation-delay: 0.1s; }
+.animate-in:nth-child(3) { animation-delay: 0.15s; }
+.animate-in:nth-child(4) { animation-delay: 0.2s; }
+.animate-in:nth-child(5) { animation-delay: 0.25s; }
+.animate-in:nth-child(6) { animation-delay: 0.3s; }
+.animate-in:nth-child(7) { animation-delay: 0.35s; }
+.animate-in:nth-child(8) { animation-delay: 0.4s; }
+
+/* ========== SCROLLBAR ========== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--void-4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--void-5);
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: var(--void-5);
+  color: var(--void-15);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+
+  .post-list__title-row {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .post-list__date {
+    order: -1;
+  }
+
+  .post-nav {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-nav__link--next {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== INDEX PAGE ==================== -->
+<div class="page-shell index-page" id="indexPage">
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-name">Jigar Gosar</a>
+      <nav class="site-nav">
+        <a href="#">Writing</a>
+        <a href="#">About</a>
+        <a href="#">RSS</a>
+      </nav>
+    </div>
+    <hr class="header-rule">
+  </header>
+
+  <main>
+    <div class="index-intro animate-in">
+      <p>Notes on software engineering, tools I reach for, and the occasional deep dive into something that caught my attention.</p>
+    </div>
+
+    <ul class="post-list" id="postList">
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__copy">Jigar Gosar</span>
+      <div class="site-footer__links">
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+        <a href="#">RSS</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== POST PAGE ==================== -->
+<div class="page-shell post-page" id="postPage">
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-name" onclick="showPage('index'); return false;">Jigar Gosar</a>
+      <nav class="site-nav">
+        <a href="#">Writing</a>
+        <a href="#">About</a>
+        <a href="#">RSS</a>
+      </nav>
+    </div>
+    <hr class="header-rule">
+  </header>
+
+  <main>
+    <article>
+      <div class="post-header">
+        <div class="post-header__meta">
+          <time class="post-header__date">2026-03-10</time>
+          <span class="post-header__reading-time">8 min read</span>
+        </div>
+        <h1 class="post-header__title">The Quiet Tyranny of Default Configuration</h1>
+        <p class="post-header__subtitle">Most software ships with defaults that optimize for demos, not for the people who actually use it every day.</p>
+      </div>
+
+      <div class="post-hero post-hero--simulated"></div>
+
+      <div class="prose">
+        <p>There is a particular kind of friction that most developers learn to ignore. It sits in the space between installing a tool and actually using it well &mdash; the gap where defaults live. These defaults, chosen by someone else under different constraints, quietly shape how you work.</p>
+
+        <h2>The Weight of Someone Else&rsquo;s Choices</h2>
+
+        <p>Every configuration file you never touch is a decision someone else made for you. Sometimes that person understood your context. <strong>Usually they didn&rsquo;t.</strong> They optimized for the first five minutes of experience, not the five hundredth hour.</p>
+
+        <p>This isn&rsquo;t negligence. It&rsquo;s a genuine design tension. The settings that make a tool approachable on day one are rarely the settings that make it powerful on day three hundred. And the people who write defaults know this &mdash; they simply have to choose.</p>
+
+        <blockquote>
+          <p>The best defaults are the ones that make you forget they exist. The worst are the ones that make you forget <em>you</em> have a choice.</p>
+        </blockquote>
+
+        <h2>A Practical Example</h2>
+
+        <p>Consider your editor. How much of its behavior have you actually chosen, versus inherited? The tab width, the line length, the way it handles whitespace, the color of warnings versus errors &mdash; each of these carries an opinion.</p>
+
+        <pre><code><span class="comment">// Most people never change this.</span>
+<span class="comment">// That doesn't mean it's right for them.</span>
+{
+  <span class="string">"editor.tabSize"</span>: <span class="keyword">2</span>,
+  <span class="string">"editor.wordWrap"</span>: <span class="string">"off"</span>,
+  <span class="string">"editor.minimap.enabled"</span>: <span class="keyword">true</span>,
+  <span class="string">"editor.renderWhitespace"</span>: <span class="string">"selection"</span>
+}</code></pre>
+
+        <p>The minimap is a good example. It&rsquo;s enabled by default in VS Code. It looks impressive in screenshots. But for most workflows on most screen sizes, it&rsquo;s consuming horizontal space in exchange for a feature you could replace with <code>Ctrl+G</code>.</p>
+
+        <h3>The Compound Effect</h3>
+
+        <p>One suboptimal default is nothing. A dozen of them, across the tools you use daily, creates a kind of ambient drag. You don&rsquo;t notice it because:</p>
+
+        <ul>
+          <li>You adapted to it gradually</li>
+          <li>Everyone around you has the same drag</li>
+          <li>The cost of investigating alternatives feels higher than the cost of continuing</li>
+        </ul>
+
+        <p>That last point is the real trap. The investigation cost is a one-time expense. The friction cost is paid every day, forever. But our brains are wired to avoid the acute cost and tolerate the chronic one.</p>
+
+        <hr>
+
+        <h2>What I Actually Do About It</h2>
+
+        <p>I keep a running document &mdash; just a plain text file &mdash; where I write down moments of friction. Not solutions, just the friction itself. <em>&ldquo;Waited for TypeScript to check files I wasn&rsquo;t editing.&rdquo;</em> or <em>&ldquo;Scrolled past the minimap to find the scrollbar again.&rdquo;</em></p>
+
+        <p>Once a month, I review the list. Patterns emerge. The patterns that show up three or more times are the ones worth fixing. Usually the fix is a single line in a config file. Sometimes it&rsquo;s a plugin. Rarely is it a new tool entirely.</p>
+
+        <p>The point isn&rsquo;t to optimize everything. It&rsquo;s to <strong>notice</strong>. Noticing is the hard part. The rest is just typing.</p>
+      </div>
+
+      <footer class="post-footer">
+        <div class="post-footer__tags">
+          <a href="#" class="post-footer__tag">workflow</a>
+          <a href="#" class="post-footer__tag">tools</a>
+          <a href="#" class="post-footer__tag">opinion</a>
+        </div>
+
+        <nav class="post-nav">
+          <a href="#" class="post-nav__link">
+            <div class="post-nav__label">Previous</div>
+            <div class="post-nav__title">Migrating to Astro Without Losing Your Mind</div>
+          </a>
+          <a href="#" class="post-nav__link post-nav__link--next">
+            <div class="post-nav__label">Next</div>
+            <div class="post-nav__title">Why I Still Reach for Plain CSS</div>
+          </a>
+        </nav>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__copy">Jigar Gosar</span>
+      <div class="site-footer__links">
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+        <a href="#">RSS</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Page switcher (demo) -->
+<div class="page-switcher">
+  <button class="active" onclick="showPage('index')">index</button>
+  <button onclick="showPage('post')">post</button>
+</div>
+
+<script>
+var posts = [
+  {
+    title: 'The Quiet Tyranny of Default Configuration',
+    date: '2026-03-10',
+    excerpt: 'Most software ships with defaults that optimize for demos, not for the people who actually use it every day.',
+    tags: ['workflow', 'tools']
+  },
+  {
+    title: 'Why I Still Reach for Plain CSS',
+    date: '2026-02-28',
+    excerpt: 'Utility frameworks have their place. But there is something about writing CSS directly that keeps me honest about what I actually need.',
+    tags: ['css', 'opinion']
+  },
+  {
+    title: 'Migrating to Astro Without Losing Your Mind',
+    date: '2026-02-14',
+    excerpt: 'A practical walkthrough of moving a blog from Next.js to Astro, with notes on what went smoothly and what required patience.',
+    tags: ['astro', 'migration']
+  },
+  {
+    title: 'Structured Data for Blogs That Actually Works',
+    date: '2026-01-30',
+    excerpt: 'JSON-LD, schema.org, and the minimum viable structured data that search engines care about.',
+    tags: ['seo', 'how-to']
+  },
+  {
+    title: 'Sharp Edges in Image Optimization',
+    date: '2026-01-18',
+    excerpt: 'Using Sharp for hero images, responsive srcsets, and the surprising places where quality settings actually matter.',
+    tags: ['images', 'performance']
+  },
+  {
+    title: 'The Case for Fewer Dependencies',
+    date: '2025-12-22',
+    excerpt: 'Every dependency is a liability with a half-life. Some are worth it. Most are solving problems you could solve with forty lines of code.',
+    tags: ['opinion', 'engineering']
+  },
+  {
+    title: 'Syntax Highlighting Without the Bloat',
+    date: '2025-12-08',
+    excerpt: 'Shiki gives you VS Code quality highlighting at build time. Here is how to set it up and keep the output clean.',
+    tags: ['shiki', 'tooling']
+  }
+];
+
+var listEl = document.getElementById('postList');
+var listHTML = '';
+for (var i = 0; i < posts.length; i++) {
+  var p = posts[i];
+  var tagsHTML = '';
+  for (var j = 0; j < p.tags.length; j++) {
+    tagsHTML += '<span class="post-list__tag">' + p.tags[j] + '</span>';
+  }
+  listHTML += '<li class="post-list__item animate-in">'
+    + '<a href="#" class="post-list__link" onclick="showPage(\'post\'); return false;">'
+    + '<div class="post-list__title-row">'
+    + '<span class="post-list__title">' + p.title + '</span>'
+    + '<time class="post-list__date">' + p.date + '</time>'
+    + '</div>'
+    + '<p class="post-list__excerpt">' + p.excerpt + '</p>'
+    + '<div class="post-list__tags">' + tagsHTML + '</div>'
+    + '</a>'
+    + '</li>';
+}
+listEl.innerHTML = listHTML;
+
+function showPage(page) {
+  var indexPage = document.getElementById('indexPage');
+  var postPage = document.getElementById('postPage');
+  var buttons = document.querySelectorAll('.page-switcher button');
+
+  if (page === 'index') {
+    indexPage.style.display = 'block';
+    postPage.style.display = 'none';
+    buttons[0].classList.add('active');
+    buttons[1].classList.remove('active');
+  } else {
+    indexPage.style.display = 'none';
+    postPage.style.display = 'block';
+    buttons[0].classList.remove('active');
+    buttons[1].classList.add('active');
+  }
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
