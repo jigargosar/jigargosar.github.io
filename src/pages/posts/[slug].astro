@@ -51,7 +51,7 @@ const structuredData = {
       font-size: 18px;
       font-weight: 200;
       line-height: 1.6;
-      color: var(--color-w60);
+      color: var(--color-w50);
     }
 
     .post-content :global(> p:first-of-type::first-letter) {
@@ -61,7 +61,7 @@ const structuredData = {
       line-height: 1;
       padding-right: 10px;
       padding-top: 4px;
-      color: var(--color-w60);
+      color: var(--color-w65);
       font-weight: 700;
     }
 
@@ -70,7 +70,7 @@ const structuredData = {
     }
 
     .post-content :global(strong) {
-      color: var(--color-w60);
+      color: var(--color-w65);
       font-weight: 500;
     }
 
@@ -79,7 +79,7 @@ const structuredData = {
       font-family: var(--font-sans);
       font-weight: 700;
       font-size: 30px;
-      color: var(--color-w60);
+      color: var(--color-w65);
       letter-spacing: -0.3px;
       margin: 80px 0 24px;
       line-height: 1.3;
@@ -88,14 +88,14 @@ const structuredData = {
       font-family: var(--font-sans);
       font-weight: 600;
       font-size: 22px;
-      color: var(--color-w60);
+      color: var(--color-w65);
       margin: 56px 0 16px;
       line-height: 1.35;
     }
 
     /* Links */
     .post-content :global(a) {
-      color: var(--color-w60);
+      color: var(--color-w65);
       text-decoration: underline;
       text-underline-offset: 3px;
       text-decoration-color: var(--color-w30);
@@ -145,14 +145,14 @@ const structuredData = {
       padding-left: 20px;
       margin: 48px 0;
       font-style: italic;
-      color: var(--color-w45);
+      color: var(--color-w60);
     }
     .post-content :global(blockquote p) {
       font-size: 18px;
       line-height: 1.7;
     }
     .post-content :global(blockquote strong) {
-      color: var(--color-w60);
+      color: inherit;
       font-weight: 500;
     }
     .post-content :global(blockquote a) {
@@ -230,7 +230,7 @@ const structuredData = {
           {post.data.tag}{post.data.tag && minutesRead && ' · '}{minutesRead && `${minutesRead} min`}
         </div>
       )}
-      <h1 class="font-sans font-bold text-w60" style="font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px;">
+      <h1 class="font-sans font-bold text-w65" style="font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px;">
         {post.data.title}
       </h1>
       <p class="text-w45 italic" style="font-size: 18px; line-height: 1.5; max-width: 560px; margin-bottom: 20px;">
