@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v84 — Void Dark Monochrome Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Deep monochrome palette — soft on eyes */
+  --bg-deep:       #101012;
+  --bg-surface:    #16161a;
+  --bg-raised:     #1c1c21;
+  --bg-subtle:     #222228;
+
+  --text-primary:  #c8c8ce;
+  --text-secondary:#8a8a94;
+  --text-tertiary: #5c5c66;
+  --text-ghost:    #3e3e46;
+
+  --accent:        #7a7a84;
+  --rule:          #2a2a30;
+  --rule-faint:    #1f1f25;
+
+  --font-body:     'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-ui:       'Outfit', -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+
+  --body-size:     20px;
+  --body-leading:  1.72;
+  --measure:       680px;
+  --page-px:       clamp(20px, 4vw, 48px);
+}
+
+html {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* ========================================
+   Shared Layout Shell
+   ======================================== */
+
+.page-shell {
+  max-width: calc(var(--measure) + var(--page-px) * 2);
+  margin: 0 auto;
+  padding: 0 var(--page-px);
+}
+
+/* ========================================
+   Site Header
+   ======================================== */
+
+.site-header {
+  padding: 48px 0 0;
+  margin-bottom: 56px;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-title {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.site-title:hover {
+  color: var(--text-primary);
+}
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.site-nav a {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.site-nav a:hover {
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   INDEX PAGE — Post List
+   ======================================== */
+
+.index-heading {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+}
+
+.post-list {
+  list-style: none;
+}
+
+.post-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule-faint);
+  transition: none;
+}
+
+.post-item:first-child {
+  border-top: 1px solid var(--rule-faint);
+}
+
+.post-item__link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.post-item__date {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--text-ghost);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.post-item__title {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  transition: color 0.25s ease;
+}
+
+.post-item__link:hover .post-item__title {
+  color: #dddde2;
+}
+
+.post-item__excerpt {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-tertiary);
+  max-width: 560px;
+}
+
+/* Year grouping */
+.post-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-ghost);
+  letter-spacing: 0.08em;
+  margin-top: 48px;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.post-year:first-child {
+  margin-top: 0;
+}
+
+/* ========================================
+   POST PAGE
+   ======================================== */
+
+.post-header {
+  margin-bottom: 48px;
+}
+
+.post-header__meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-ghost);
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.post-header__meta span {
+  color: var(--text-ghost);
+}
+
+.post-header__dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-ghost);
+  display: inline-block;
+}
+
+.post-header__title {
+  font-family: var(--font-body);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+.post-header__subtitle {
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-tertiary);
+  max-width: 580px;
+}
+
+.post-header__rule {
+  border: none;
+  height: 1px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+/* ========================================
+   Post Content — Prose
+   ======================================== */
+
+.prose {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  color: var(--text-primary);
+}
+
+.prose > * + * {
+  margin-top: 1.4em;
+}
+
+/* Headings */
+.prose h2 {
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-primary);
+  letter-spacing: -0.005em;
+  margin-top: 2.8em;
+  margin-bottom: 0.6em;
+}
+
+.prose h3 {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-top: 2.2em;
+  margin-bottom: 0.4em;
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0;
+}
+
+/* Paragraph */
+.prose p {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  hanging-punctuation: first last;
+}
+
+/* Links */
+.prose a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--text-ghost);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.25s ease;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--text-secondary);
+}
+
+/* Strong / Em */
+.prose strong {
+  font-weight: 600;
+  color: #d0d0d6;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+/* Blockquote */
+.prose blockquote {
+  border-left: 2px solid var(--rule);
+  padding-left: 24px;
+  margin-left: 0;
+  margin-right: 0;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.prose blockquote p {
+  font-variant-numeric: normal;
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--text-ghost);
+}
+
+/* Inline code */
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: var(--bg-raised);
+  color: var(--text-secondary);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--rule-faint);
+}
+
+/* Code blocks */
+.prose pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--rule-faint);
+  border-radius: 6px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Horizontal rule */
+.prose hr {
+  border: none;
+  height: 1px;
+  background: var(--rule);
+  margin: 3em 0;
+}
+
+/* Images */
+.prose figure {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose figure img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.prose figcaption {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ========================================
+   Post Footer
+   ======================================== */
+
+.post-footer {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  padding-bottom: 80px;
+}
+
+.post-footer__back {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s ease;
+}
+
+.post-footer__back:hover {
+  color: var(--text-secondary);
+}
+
+.post-footer__arrow {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.post-footer__back:hover .post-footer__arrow {
+  transform: translateX(-3px);
+}
+
+/* ========================================
+   Site Footer
+   ======================================== */
+
+.site-footer {
+  padding: 40px 0 48px;
+  border-top: 1px solid var(--rule-faint);
+  margin-top: 24px;
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer__text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-ghost);
+  letter-spacing: 0.03em;
+}
+
+/* ========================================
+   Page Switcher (for demo)
+   ======================================== */
+
+.demo-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 6px;
+  z-index: 100;
+}
+
+.demo-switcher button {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--bg-surface);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.demo-switcher button:hover {
+  border-color: var(--text-ghost);
+  color: var(--text-secondary);
+}
+
+.demo-switcher button.active {
+  background: var(--bg-raised);
+  border-color: var(--text-ghost);
+  color: var(--text-secondary);
+}
+
+/* Page visibility */
+.page { display: none; }
+.page.active { display: block; }
+
+/* Fade in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page.active .post-item,
+.page.active .post-year {
+  animation: fadeUp 0.4s ease both;
+}
+
+.page.active .post-year:nth-child(1) { animation-delay: 0.04s; }
+.page.active .post-item:nth-child(2) { animation-delay: 0.08s; }
+.page.active .post-item:nth-child(3) { animation-delay: 0.12s; }
+.page.active .post-item:nth-child(4) { animation-delay: 0.16s; }
+.page.active .post-item:nth-child(5) { animation-delay: 0.20s; }
+.page.active .post-item:nth-child(6) { animation-delay: 0.24s; }
+.page.active .post-item:nth-child(7) { animation-delay: 0.28s; }
+.page.active .post-item:nth-child(8) { animation-delay: 0.32s; }
+.page.active .post-item:nth-child(9) { animation-delay: 0.36s; }
+.page.active .post-item:nth-child(10) { animation-delay: 0.40s; }
+
+.page.active .prose > * {
+  animation: fadeUp 0.45s ease both;
+}
+
+.page.active .prose > *:nth-child(1)  { animation-delay: 0.04s; }
+.page.active .prose > *:nth-child(2)  { animation-delay: 0.08s; }
+.page.active .prose > *:nth-child(3)  { animation-delay: 0.10s; }
+.page.active .prose > *:nth-child(4)  { animation-delay: 0.12s; }
+.page.active .prose > *:nth-child(5)  { animation-delay: 0.14s; }
+.page.active .prose > *:nth-child(6)  { animation-delay: 0.15s; }
+.page.active .prose > *:nth-child(7)  { animation-delay: 0.16s; }
+.page.active .prose > *:nth-child(8)  { animation-delay: 0.17s; }
+.page.active .prose > *:nth-child(9)  { animation-delay: 0.18s; }
+.page.active .prose > *:nth-child(10) { animation-delay: 0.19s; }
+.page.active .prose > *:nth-child(n+11) { animation-delay: 0.20s; }
+
+/* ========================================
+   Selection
+   ======================================== */
+
+::selection {
+  background: rgba(200, 200, 206, 0.14);
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-ghost);
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     INDEX PAGE
+     ============================================================ -->
+<div id="page-index" class="page active">
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="#" class="site-title">Jigar Gosar</a>
+        <nav class="site-nav">
+          <a href="#">Writing</a>
+          <a href="#">About</a>
+          <a href="#">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <p class="index-heading">Recent writing</p>
+
+      <ul class="post-list" id="post-list"></ul>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <span class="site-footer__text">Jigar Gosar</span>
+        <span class="site-footer__text">2026</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ============================================================
+     POST PAGE
+     ============================================================ -->
+<div id="page-post" class="page">
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="#" class="site-title" onclick="showPage('index'); return false;">Jigar Gosar</a>
+        <nav class="site-nav">
+          <a href="#">Writing</a>
+          <a href="#">About</a>
+          <a href="#">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article>
+        <div class="post-header">
+          <div class="post-header__meta">
+            <span>March 12, 2026</span>
+            <span class="post-header__dot"></span>
+            <span>9 min read</span>
+          </div>
+          <h1 class="post-header__title">The Quiet Architecture of Durable Software</h1>
+          <p class="post-header__subtitle">
+            Why the systems that last decades share a common trait:
+            they were designed to be boring.
+          </p>
+          <hr class="post-header__rule">
+        </div>
+
+        <div class="prose" id="prose-content"></div>
+
+        <div class="post-footer">
+          <a href="#" class="post-footer__back" onclick="showPage('index'); return false;">
+            <span class="post-footer__arrow">&larr;</span>
+            All posts
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <span class="site-footer__text">Jigar Gosar</span>
+        <span class="site-footer__text">2026</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- Demo page switcher -->
+<div class="demo-switcher">
+  <button id="btn-index" class="active" onclick="showPage('index')">Index</button>
+  <button id="btn-post" onclick="showPage('post')">Post</button>
+</div>
+
+<script>
+// Page switching
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.getElementById('page-' + name).classList.add('active');
+
+  document.querySelectorAll('.demo-switcher button').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById('btn-' + name).classList.add('active');
+
+  window.scrollTo(0, 0);
+}
+
+// Generate index post list
+var posts = [
+  {
+    year: '2026',
+    entries: [
+      { date: 'Mar 12', title: 'The Quiet Architecture of Durable Software', excerpt: 'Why the systems that last decades share a common trait: they were designed to be boring.' },
+      { date: 'Feb 28', title: 'Replacing Redux with URL State', excerpt: 'A pattern for moving application state into the URL bar and deleting thousands of lines of code.' },
+      { date: 'Feb 14', title: 'Against Premature Abstraction', excerpt: 'The cost of the wrong abstraction is far higher than the cost of duplication.' },
+      { date: 'Jan 30', title: 'TypeScript Patterns I Reach For', excerpt: 'Discriminated unions, branded types, and the infer keyword in real codebases.' },
+      { date: 'Jan 11', title: 'Postgres Advisory Locks for Job Queues', excerpt: 'Skip the dedicated queue and use what you already have running.' }
+    ]
+  },
+  {
+    year: '2025',
+    entries: [
+      { date: 'Dec 18', title: 'What I Learned From Reading the SQLite Source', excerpt: 'A codebase that has been shipping for 25 years has a few things to teach us about craft.' },
+      { date: 'Nov 04', title: 'The Case for Server-Rendered HTML', excerpt: 'Why sending HTML over the wire is still the most resilient architecture for the web.' },
+      { date: 'Oct 21', title: 'Debugging with Git Bisect', excerpt: 'A walkthrough of the most underused command in the git toolbox.' },
+      { date: 'Sep 08', title: 'Minimal Viable Monitoring', excerpt: 'Four metrics, one dashboard, and the discipline to check it every morning.' }
+    ]
+  }
+];
+
+var listEl = document.getElementById('post-list');
+var listHTML = '';
+
+posts.forEach(function(group) {
+  listHTML += '<li class="post-year">' + group.year + '</li>';
+  group.entries.forEach(function(entry) {
+    listHTML += '<li class="post-item">'
+      + '<a href="#" class="post-item__link" onclick="showPage(\'post\'); return false;">'
+      + '<span class="post-item__date">' + entry.date + '</span>'
+      + '<h2 class="post-item__title">' + entry.title + '</h2>'
+      + '<p class="post-item__excerpt">' + entry.excerpt + '</p>'
+      + '</a></li>';
+  });
+});
+
+listEl.innerHTML = listHTML;
+
+// Generate post prose content
+var proseEl = document.getElementById('prose-content');
+var proseHTML = '';
+
+proseHTML += '<p>There is a particular kind of software that survives everything thrown at it. Not because it was built with the latest tools or the cleverest abstractions, but because someone made a series of unremarkable decisions that happened to be right. These systems don\u2019t announce themselves. They just keep working.</p>';
+
+proseHTML += '<p>I have been thinking about this pattern for years, and the more codebases I read, the more convinced I become: <strong>durability is a design choice</strong>, and it almost always looks boring from the outside.</p>';
+
+proseHTML += '<h2>The Unremarkable Codebase</h2>';
+
+proseHTML += '<p>Consider SQLite. Its source code is a single C file. There are no microservices, no dependency injection frameworks, no event-driven architectures. The <a href="#">test suite</a> is famously larger than the implementation. The API surface has barely changed in two decades.</p>';
+
+proseHTML += '<p>Or consider the Unix utilities that ship with every operating system. <code>grep</code>, <code>awk</code>, <code>sed</code> \u2014 tools written in the 1970s that remain in daily use. Their interfaces are stable. Their behavior is predictable. They compose with everything.</p>';
+
+proseHTML += '<blockquote><p>The best code is the code that nobody notices. It is infrastructure in the truest sense: invisible until it breaks, and it never breaks.</p></blockquote>';
+
+proseHTML += '<h2>Three Properties of Durable Systems</h2>';
+
+proseHTML += '<p>After studying these systems, I\u2019ve found they share three properties that seem almost too simple to be meaningful:</p>';
+
+proseHTML += '<ol><li><strong>Minimal dependencies.</strong> Every external dependency is a bet on someone else\u2019s maintenance schedule. Durable systems minimize these bets.</li>'
+  + '<li><strong>Stable interfaces.</strong> The contract between the system and its users changes rarely, if ever. New capabilities are added without breaking existing ones.</li>'
+  + '<li><strong>Explicit behavior.</strong> There is no magic. Reading the code tells you exactly what will happen. The mental model matches the runtime model.</li></ol>';
+
+proseHTML += '<h2>The Cost of Cleverness</h2>';
+
+proseHTML += '<p>I have worked on systems that were architecturally impressive. Multi-layer abstractions, elegant plugin systems, runtime code generation. They were a joy to build and a nightmare to maintain.</p>';
+
+proseHTML += '<p>The problem with cleverness is that it requires <em>everyone who touches the code</em> to be equally clever, forever. This is an unreasonable expectation. Teams change. Context is lost. The person debugging your metaprogramming at 2am does not share your enthusiasm for it.</p>';
+
+proseHTML += '<pre><code>// This is readable in six months\nfunction getUser(id) {\n  return db.query("SELECT * FROM users WHERE id = ?", [id]);\n}\n\n// This is not\nconst getUser = createQueryFactory(\n  withCache(withRetry(withMetrics(\n    schemaValidator(UserSchema)\n  )))\n);</code></pre>';
+
+proseHTML += '<h3>When abstraction is justified</h3>';
+
+proseHTML += '<p>I am not arguing against abstraction. I am arguing against <em>premature</em> abstraction \u2014 the kind driven by anticipated requirements rather than observed patterns. The rule of three exists for a reason: wait until you\u2019ve seen the pattern three times before you extract it.</p>';
+
+proseHTML += '<hr>';
+
+proseHTML += '<h2>Building for the Long Term</h2>';
+
+proseHTML += '<p>If you want your software to last, here is the uncomfortable truth: you have to resist the interesting choice. Choose the boring database. Write the straightforward implementation. Use the language your team already knows. Document the <em>why</em>, not just the <em>what</em>.</p>';
+
+proseHTML += '<p>Durable software is not a technical achievement. It is an act of discipline \u2014 the willingness to solve today\u2019s problem with today\u2019s tools and leave tomorrow\u2019s problem for tomorrow. That takes more courage than any clever architecture ever will.</p>';
+
+proseEl.innerHTML = proseHTML;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v86 — Void Dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0e0e0e;
+  --surface: #141414;
+  --border: #1e1e1e;
+  --border-light: #282828;
+  --w20: #333;
+  --w30: #4d4d4d;
+  --w40: #666;
+  --w45: #737373;
+  --w55: #8c8c8c;
+  --w60: #999;
+  --w70: #b3b3b3;
+  --w75: #bfbfbf;
+  --w80: #ccc;
+  --w85: #d9d9d9;
+  --w90: #e6e6e6;
+  --accent: #c8b896;
+  --accent-dim: #a89878;
+
+  --font-body: 'Newsreader', 'Georgia', serif;
+  --font-sans: 'Instrument Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --body-size: 20px;
+  --body-lh: 1.72;
+  --content-width: 680px;
+  --page-gutter: 24px;
+}
+
+html {
+  font-size: var(--body-size);
+  background: var(--bg);
+  color: var(--w75);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: var(--body-lh);
+  min-height: 100vh;
+}
+
+/* ========== LAYOUT ========== */
+.page-shell {
+  max-width: calc(var(--content-width) + var(--page-gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+/* ========== HEADER ========== */
+.site-header {
+  padding: 48px 0 0;
+  margin-bottom: 56px;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--w85);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-title:hover { color: var(--w90); }
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--w45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-nav a:hover { color: var(--w70); }
+
+/* ========== INDEX PAGE ========== */
+.index-header {
+  margin-bottom: 52px;
+}
+
+.index-header h1 {
+  font-family: var(--font-body);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--w85);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.index-header p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--w40);
+  line-height: 1.5;
+}
+
+/* ========== POST LIST ========== */
+.post-list {
+  list-style: none;
+}
+
+.post-list__item {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+}
+
+.post-list__item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list__link {
+  text-decoration: none;
+  display: block;
+}
+
+.post-list__title {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--w80);
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+
+.post-list__link:hover .post-list__title {
+  color: var(--w90);
+}
+
+.post-list__excerpt {
+  font-size: 0.85rem;
+  color: var(--w40);
+  line-height: 1.55;
+  margin-bottom: 10px;
+  max-width: 580px;
+}
+
+.post-list__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--w30);
+  letter-spacing: 0.01em;
+}
+
+.post-list__meta span { white-space: nowrap; }
+
+.post-list__tag {
+  color: var(--accent-dim);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.meta-dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--w30);
+  display: inline-block;
+}
+
+/* ========== POST PAGE ========== */
+.post-header {
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-header__tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-dim);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.post-header__title {
+  font-family: var(--font-body);
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--w90);
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+.post-header__subtitle {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--w45);
+  font-style: italic;
+  margin-bottom: 24px;
+  max-width: 560px;
+}
+
+.post-header__meta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--w30);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ========== PROSE ========== */
+.prose {
+  --prose-body: var(--w75);
+  --prose-heading: var(--w85);
+  --prose-dim: var(--w45);
+  --prose-link: var(--accent);
+  --prose-code-bg: var(--surface);
+  color: var(--prose-body);
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+}
+
+.prose h2 {
+  font-family: var(--font-body);
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--prose-heading);
+  margin-top: 2.8em;
+  margin-bottom: 0.8em;
+  letter-spacing: -0.01em;
+}
+
+.prose h3 {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--prose-heading);
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+}
+
+.prose a {
+  color: var(--prose-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--prose-link) 40%, transparent);
+  transition: text-decoration-color 0.2s;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--prose-link);
+}
+
+.prose strong {
+  font-weight: 500;
+  color: var(--w80);
+}
+
+.prose em {
+  font-style: italic;
+  color: var(--w70);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--border-light);
+  padding-left: 24px;
+  margin: 2em 0 2em 20px;
+  color: var(--w45);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.prose blockquote p {
+  margin-bottom: 0.8em;
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: var(--prose-code-bg);
+  padding: 2px 7px;
+  border-radius: 3px;
+  color: var(--w60);
+  border: 1px solid var(--border);
+}
+
+.prose pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 2em 0;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: 0.78rem;
+  color: var(--w55);
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.4em;
+  margin-bottom: 1.5em;
+}
+
+.prose li {
+  margin-bottom: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--w30);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 3em 0;
+}
+
+.prose img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 2em 0;
+}
+
+.prose .caption {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--w30);
+  text-align: center;
+  margin-top: -1.2em;
+  margin-bottom: 2em;
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  margin-top: 80px;
+  padding: 32px 0 48px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--w30);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer a {
+  color: var(--w40);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-footer a:hover { color: var(--w60); }
+
+/* ========== PAGE NAVIGATION ========== */
+.page-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-tab {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--w40);
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+  margin-right: -1px;
+}
+
+.page-tab:first-child { border-radius: 4px 0 0 4px; }
+.page-tab:last-child { border-radius: 0 4px 4px 0; }
+
+.page-tab:hover { color: var(--w60); border-color: var(--border-light); }
+
+.page-tab--active {
+  color: var(--w80);
+  background: var(--surface);
+  border-color: var(--border-light);
+}
+
+.page-view {
+  display: none;
+}
+
+.page-view--active {
+  display: block;
+}
+
+/* ========== BACK LINK ========== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--w40);
+  text-decoration: none;
+  margin-bottom: 36px;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: var(--w60); }
+
+.back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  color: var(--w90);
+}
+</style>
+</head>
+<body>
+
+<div class="page-shell">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-title">Jigar Gosar</a>
+      <nav>
+        <ul class="site-nav">
+          <li><a href="#">Writing</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Tab switcher -->
+  <div class="page-tabs">
+    <button class="page-tab page-tab--active" data-target="index">Index</button>
+    <button class="page-tab" data-target="post">Post</button>
+  </div>
+
+  <!-- ==================== INDEX PAGE ==================== -->
+  <div class="page-view page-view--active" id="view-index">
+
+    <div class="index-header">
+      <h1>Writing</h1>
+      <p>Notes on software, tools, and the craft of building things.</p>
+    </div>
+
+    <ul class="post-list" id="post-list"></ul>
+
+  </div>
+
+  <!-- ==================== POST PAGE ==================== -->
+  <div class="page-view" id="view-post">
+
+    <a href="#" class="back-link" id="back-to-index">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+      All posts
+    </a>
+
+    <article>
+      <header class="post-header">
+        <span class="post-header__tag">Engineering</span>
+        <h1 class="post-header__title">Replacing ESLint with Biome: A Measured Migration</h1>
+        <p class="post-header__subtitle">Why we moved our monorepo off ESLint, what broke, and the surprising performance difference.</p>
+        <div class="post-header__meta">
+          <span>March 8, 2026</span>
+          <span class="meta-dot"></span>
+          <span>9 min read</span>
+        </div>
+      </header>
+
+      <div class="prose" id="prose-content"></div>
+    </article>
+
+  </div>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Jigar Gosar</span>
+    <a href="#">RSS</a>
+  </footer>
+</div>
+
+<script>
+// --- Post list data ---
+var posts = [
+  {
+    title: "Replacing ESLint with Biome: A Measured Migration",
+    excerpt: "Why we moved our monorepo off ESLint, what broke, and the surprising performance difference.",
+    date: "Mar 8, 2026",
+    readTime: "9 min",
+    tag: "Engineering"
+  },
+  {
+    title: "The Quiet Power of Boring Technology",
+    excerpt: "A case for choosing tools that don't make headlines but let you ship without drama.",
+    date: "Feb 22, 2026",
+    readTime: "6 min",
+    tag: "Opinion"
+  },
+  {
+    title: "TIL: CSS color-mix() for Transparent Overlays",
+    excerpt: "One line that replaced three utility classes and a custom property hack.",
+    date: "Feb 15, 2026",
+    readTime: "2 min",
+    tag: "TIL"
+  },
+  {
+    title: "Building a Markdown Blog with Astro 5 and Zero JavaScript",
+    excerpt: "Content collections, image optimization, and the art of shipping less code to the browser.",
+    date: "Feb 3, 2026",
+    readTime: "12 min",
+    tag: "How-to"
+  },
+  {
+    title: "Why I Stopped Using State Management Libraries",
+    excerpt: "After five years of Redux, Zustand, and Jotai, I went back to React context and local state.",
+    date: "Jan 19, 2026",
+    readTime: "7 min",
+    tag: "Opinion"
+  },
+  {
+    title: "Debugging a Memory Leak in a Node.js Worker Thread",
+    excerpt: "Heap snapshots, allocation timelines, and the one-line fix that took three days to find.",
+    date: "Jan 5, 2026",
+    readTime: "10 min",
+    tag: "Engineering"
+  },
+  {
+    title: "Typography Defaults That Actually Work",
+    excerpt: "A starter set of font sizes, line heights, and spacing that handles 90% of content layouts.",
+    date: "Dec 28, 2025",
+    readTime: "5 min",
+    tag: "Design"
+  }
+];
+
+// --- Render post list ---
+var listEl = document.getElementById("post-list");
+var listHTML = "";
+for (var i = 0; i < posts.length; i++) {
+  var p = posts[i];
+  listHTML += '<li class="post-list__item">'
+    + '<a href="#" class="post-list__link">'
+    + '<h2 class="post-list__title">' + p.title + '</h2>'
+    + '<p class="post-list__excerpt">' + p.excerpt + '</p>'
+    + '<div class="post-list__meta">'
+    + '<span class="post-list__tag">' + p.tag + '</span>'
+    + '<span class="meta-dot"></span>'
+    + '<span>' + p.date + '</span>'
+    + '<span class="meta-dot"></span>'
+    + '<span>' + p.readTime + '</span>'
+    + '</div>'
+    + '</a>'
+    + '</li>';
+}
+listEl.innerHTML = listHTML;
+
+// --- Render prose content ---
+var proseEl = document.getElementById("prose-content");
+var prose = ""
+  + "<p>Our monorepo had accumulated 47 ESLint plugins. The lint step took 38 seconds on CI "
+  + "and required a <code>node_modules</code> install that dwarfed the application code itself. "
+  + "When Biome hit 1.5, we decided it was time to evaluate a migration.</p>"
+
+  + "<h2>The Catalyst</h2>"
+  + "<p>It wasn't performance that pushed us over the edge. It was a Tuesday morning where "
+  + "three developers independently reported that <code>eslint --fix</code> was producing "
+  + "different output on their machines. Same Node version, same lockfile, different results. "
+  + "The culprit was a plugin conflict between <code>eslint-plugin-import</code> and our "
+  + "custom rule set for path aliases.</p>"
+  + "<p>That was the moment we stopped debating and started planning. A linter that produces "
+  + "inconsistent output is worse than no linter at all, because it erodes the trust that "
+  + "makes automated tooling valuable.</p>"
+
+  + "<h2>Migration Strategy</h2>"
+  + "<p>We didn't do a big-bang migration. Instead, we ran both tools in parallel for two "
+  + "sprints, comparing output and catching edge cases before committing to the switch.</p>"
+
+  + "<h3>Phase 1: Shadow Mode</h3>"
+  + "<p>We added Biome to CI as a non-blocking step. Every PR showed both ESLint and Biome "
+  + "results, letting us track disagreements in a spreadsheet. Most differences fell into "
+  + "three categories:</p>"
+  + "<ul>"
+  + "<li>Import sorting conventions (Biome's default differs from <code>eslint-plugin-import</code>)</li>"
+  + "<li>Trailing comma handling in function parameters</li>"
+  + "<li>Indentation in ternary expressions spanning multiple lines</li>"
+  + "</ul>"
+
+  + "<h3>Phase 2: Rule Mapping</h3>"
+  + "<p>The tedious part. We went through every active ESLint rule and found the Biome "
+  + "equivalent, documented cases where behavior differed, and made deliberate choices "
+  + "about which tool's opinion to adopt.</p>"
+
+  + "<blockquote>"
+  + "<p>The best linter configuration is the one your team stops thinking about. If you're "
+  + "debating semicolons in 2026, you've already lost.</p>"
+  + "</blockquote>"
+
+  + "<h2>The Configuration</h2>"
+  + "<p>Here's a simplified version of our final <code>biome.json</code>:</p>"
+
+  + '<pre><code>{\n'
+  + '  "formatter": {\n'
+  + '    "indentStyle": "space",\n'
+  + '    "indentWidth": 2,\n'
+  + '    "lineWidth": 100\n'
+  + '  },\n'
+  + '  "linter": {\n'
+  + '    "rules": {\n'
+  + '      "recommended": true,\n'
+  + '      "complexity": {\n'
+  + '        "noExcessiveCognitiveComplexity": {\n'
+  + '          "level": "warn",\n'
+  + '          "options": { "maxAllowedComplexity": 15 }\n'
+  + '        }\n'
+  + '      }\n'
+  + '    }\n'
+  + '  }\n'
+  + '}</code></pre>'
+
+  + "<h2>Results</h2>"
+  + "<p>After the full migration, our CI lint step dropped from <strong>38 seconds to 1.2 "
+  + "seconds</strong>. That's not a typo. Biome's Rust-based parser processes our entire "
+  + "codebase in the time ESLint spent loading plugins.</p>"
+  + "<p>More importantly, we eliminated an entire category of developer friction. No more "
+  + "<code>.eslintrc</code> inheritance headaches across workspace packages. No more plugin "
+  + "version conflicts. No more mysterious auto-fix inconsistencies.</p>"
+
+  + "<h3>What We Lost</h3>"
+  + "<p>Not everything transferred cleanly. A few gaps we're living with:</p>"
+  + "<ul>"
+  + "<li>No equivalent for <code>eslint-plugin-react-hooks/exhaustive-deps</code> yet "
+  + "(Biome tracks this in their <a href=\"#\">roadmap</a>)</li>"
+  + "<li>Custom rule authoring requires Rust knowledge instead of JavaScript</li>"
+  + "<li>Some niche TypeScript-aware rules around type narrowing aren't available</li>"
+  + "</ul>"
+  + "<p>For our use case, these gaps were acceptable trade-offs. Your mileage will vary "
+  + "depending on how heavily you lean on ESLint's ecosystem.</p>"
+
+  + "<hr>"
+
+  + "<p>If you're considering this migration, start with shadow mode. Run both tools, "
+  + "compare output, and let the data guide your decision. The performance difference alone "
+  + "is compelling, but the real value is in <em>reduced complexity</em> \u2014 one tool doing "
+  + "the job of a plugin ecosystem.</p>";
+
+proseEl.innerHTML = prose;
+
+// --- Tab switching ---
+var tabs = document.querySelectorAll(".page-tab");
+for (var t = 0; t < tabs.length; t++) {
+  tabs[t].addEventListener("click", function() {
+    var target = this.getAttribute("data-target");
+    for (var j = 0; j < tabs.length; j++) {
+      tabs[j].classList.remove("page-tab--active");
+    }
+    this.classList.add("page-tab--active");
+    document.getElementById("view-index").classList.remove("page-view--active");
+    document.getElementById("view-post").classList.remove("page-view--active");
+    document.getElementById("view-" + target).classList.add("page-view--active");
+    window.scrollTo(0, 0);
+  });
+}
+
+// --- Back link ---
+document.getElementById("back-to-index").addEventListener("click", function(e) {
+  e.preventDefault();
+  tabs[0].click();
+});
+</script>
+
+</body>
+</html>
