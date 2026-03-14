@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Dark v8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* =========================================
+     RAW SCALE TOKENS
+     ========================================= */
+  :root {
+    /* Lightness scale — oklch(L C H) */
+    --raw-l-0:   oklch(0.000 0 0);
+    --raw-l-3:   oklch(0.030 0 0);
+    --raw-l-5:   oklch(0.050 0 0);
+    --raw-l-7:   oklch(0.070 0 0);
+    --raw-l-10:  oklch(0.100 0 0);
+    --raw-l-13:  oklch(0.130 0 0);
+    --raw-l-16:  oklch(0.160 0 0);
+    --raw-l-20:  oklch(0.200 0 0);
+    --raw-l-25:  oklch(0.250 0 0);
+    --raw-l-30:  oklch(0.300 0 0);
+    --raw-l-35:  oklch(0.350 0 0);
+    --raw-l-40:  oklch(0.400 0 0);
+    --raw-l-45:  oklch(0.450 0 0);
+    --raw-l-50:  oklch(0.500 0 0);
+    --raw-l-55:  oklch(0.550 0 0);
+    --raw-l-60:  oklch(0.600 0 0);
+    --raw-l-65:  oklch(0.650 0 0);
+    --raw-l-70:  oklch(0.700 0 0);
+    --raw-l-75:  oklch(0.750 0 0);
+    --raw-l-80:  oklch(0.800 0 0);
+    --raw-l-85:  oklch(0.850 0 0);
+    --raw-l-90:  oklch(0.900 0 0);
+    --raw-l-95:  oklch(0.950 0 0);
+    --raw-l-100: oklch(1.000 0 0);
+
+    /* Type scale — major third (1.250) */
+    --raw-text-xs:   0.75rem;
+    --raw-text-sm:   0.875rem;
+    --raw-text-base: 1rem;
+    --raw-text-md:   1.125rem;
+    --raw-text-lg:   1.25rem;
+    --raw-text-xl:   1.5rem;
+    --raw-text-2xl:  1.875rem;
+    --raw-text-3xl:  2.25rem;
+    --raw-text-4xl:  3rem;
+
+    /* Spacing scale */
+    --raw-space-1:  0.25rem;
+    --raw-space-2:  0.5rem;
+    --raw-space-3:  0.75rem;
+    --raw-space-4:  1rem;
+    --raw-space-5:  1.25rem;
+    --raw-space-6:  1.5rem;
+    --raw-space-8:  2rem;
+    --raw-space-10: 2.5rem;
+    --raw-space-12: 3rem;
+    --raw-space-16: 4rem;
+    --raw-space-20: 5rem;
+    --raw-space-24: 6rem;
+
+    /* =========================================
+       SEMANTIC TOKENS
+       ========================================= */
+
+    /* Surfaces */
+    --surface-page:          var(--raw-l-5);
+    --surface-raised:        var(--raw-l-10);
+    --surface-overlay:       var(--raw-l-13);
+    --surface-code:          var(--raw-l-7);
+
+    /* Text */
+    --text-primary:          var(--raw-l-85);
+    --text-body:             var(--raw-l-65);
+    --text-secondary:        var(--raw-l-45);
+    --text-ghost:            var(--raw-l-30);
+    --text-heading:          var(--raw-l-90);
+    --text-link:             var(--raw-l-75);
+    --text-link-hover:       var(--raw-l-95);
+    --text-code:             var(--raw-l-70);
+
+    /* Borders */
+    --border-subtle:         var(--raw-l-13);
+    --border-default:        var(--raw-l-20);
+    --border-emphasis:       var(--raw-l-35);
+
+    /* Typography */
+    --font-body:     'Newsreader', Georgia, serif;
+    --font-ui:       'DM Sans', system-ui, sans-serif;
+    --font-code:     'JetBrains Mono', 'Consolas', monospace;
+
+    --font-size-body:        var(--raw-text-md);
+    --font-size-small:       var(--raw-text-sm);
+    --font-size-caption:     var(--raw-text-xs);
+    --font-size-code:        var(--raw-text-sm);
+
+    --font-size-h1:          var(--raw-text-4xl);
+    --font-size-h2:          var(--raw-text-2xl);
+    --font-size-h3:          var(--raw-text-xl);
+    --font-size-h4:          var(--raw-text-lg);
+
+    --leading-body:          1.78;
+    --leading-heading:       1.25;
+    --leading-tight:         1.4;
+
+    /* Widths */
+    --width-content:         38rem;
+    --width-wide:            48rem;
+
+    /* Transitions */
+    --transition-fast:       120ms ease;
+    --transition-default:    200ms ease;
+  }
+
+  /* =========================================
+     RESET & BASE
+     ========================================= */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: var(--leading-body);
+    color: var(--text-body);
+    background-color: var(--surface-page);
+    min-height: 100vh;
+  }
+
+  /* =========================================
+     LAYOUT
+     ========================================= */
+  .page {
+    display: none;
+    min-height: 100vh;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  .site-header {
+    padding: var(--raw-space-6) var(--raw-space-6);
+    max-width: var(--width-wide);
+    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    font-family: var(--font-ui);
+    font-size: var(--raw-text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .site-title:hover {
+    color: var(--text-link-hover);
+  }
+
+  .site-nav {
+    display: flex;
+    gap: var(--raw-space-6);
+  }
+
+  .site-nav a {
+    font-family: var(--font-ui);
+    font-size: var(--raw-text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-default);
+  }
+
+  .site-nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .content-wrap {
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding: 0 var(--raw-space-6);
+  }
+
+  /* =========================================
+     INDEX PAGE
+     ========================================= */
+  .index-hero {
+    padding: var(--raw-space-20) 0 var(--raw-space-16);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--raw-space-12);
+  }
+
+  .index-hero h1 {
+    font-family: var(--font-body);
+    font-size: var(--raw-text-3xl);
+    font-weight: 400;
+    color: var(--text-heading);
+    line-height: var(--leading-heading);
+    margin-bottom: var(--raw-space-4);
+    font-style: italic;
+  }
+
+  .index-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body);
+    max-width: 32rem;
+  }
+
+  .post-list {
+    list-style: none;
+    padding-bottom: var(--raw-space-24);
+  }
+
+  .post-list-item {
+    padding: var(--raw-space-8) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: border-color var(--transition-default);
+  }
+
+  .post-list-item:first-child {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .post-list-item:hover {
+    border-color: var(--border-default);
+  }
+
+  .post-list-item:hover .post-title {
+    color: var(--text-link-hover);
+  }
+
+  .post-meta {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-small);
+    color: var(--text-ghost);
+    margin-bottom: var(--raw-space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--raw-space-3);
+  }
+
+  .post-meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-ghost);
+    display: inline-block;
+  }
+
+  .post-title {
+    font-family: var(--font-body);
+    font-size: var(--raw-text-xl);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--raw-space-2);
+    transition: color var(--transition-default);
+  }
+
+  .post-excerpt {
+    color: var(--text-secondary);
+    font-size: var(--raw-text-base);
+    line-height: var(--leading-body);
+    max-width: 34rem;
+  }
+
+  /* =========================================
+     POST PAGE
+     ========================================= */
+  .post-header {
+    padding: var(--raw-space-16) 0 var(--raw-space-10);
+  }
+
+  .post-header .post-meta {
+    margin-bottom: var(--raw-space-4);
+  }
+
+  .post-header h1 {
+    font-family: var(--font-body);
+    font-size: var(--font-size-h1);
+    font-weight: 500;
+    color: var(--text-heading);
+    line-height: var(--leading-heading);
+    margin-bottom: var(--raw-space-4);
+    letter-spacing: -0.02em;
+  }
+
+  .post-header .post-subtitle {
+    font-size: var(--raw-text-lg);
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .post-header-divider {
+    width: var(--raw-space-12);
+    height: 1px;
+    background: var(--border-emphasis);
+    margin-top: var(--raw-space-10);
+  }
+
+  /* =========================================
+     PROSE — long-form reading styles
+     ========================================= */
+  .prose {
+    padding-bottom: var(--raw-space-24);
+  }
+
+  .prose p {
+    margin-bottom: var(--raw-space-6);
+    hanging-punctuation: first;
+  }
+
+  .prose a {
+    color: var(--text-link);
+    text-decoration: underline;
+    text-decoration-color: var(--border-default);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color var(--transition-default), text-decoration-color var(--transition-default);
+  }
+
+  .prose a:hover {
+    color: var(--text-link-hover);
+    text-decoration-color: var(--text-link-hover);
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose h2 {
+    font-family: var(--font-body);
+    font-size: var(--font-size-h2);
+    font-weight: 500;
+    color: var(--text-heading);
+    line-height: var(--leading-heading);
+    margin-top: var(--raw-space-16);
+    margin-bottom: var(--raw-space-6);
+    letter-spacing: -0.01em;
+  }
+
+  .prose h3 {
+    font-family: var(--font-body);
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+    color: var(--text-heading);
+    line-height: var(--leading-heading);
+    margin-top: var(--raw-space-12);
+    margin-bottom: var(--raw-space-4);
+  }
+
+  .prose h4 {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: var(--leading-heading);
+    margin-top: var(--raw-space-10);
+    margin-bottom: var(--raw-space-3);
+    letter-spacing: 0.01em;
+  }
+
+  /* Lists */
+  .prose ul, .prose ol {
+    margin-bottom: var(--raw-space-6);
+    padding-left: var(--raw-space-6);
+  }
+
+  .prose ul {
+    list-style: none;
+    padding-left: var(--raw-space-5);
+  }
+
+  .prose ul li {
+    position: relative;
+    margin-bottom: var(--raw-space-2);
+  }
+
+  .prose ul li::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--raw-space-5));
+    top: 0.75em;
+    width: 5px;
+    height: 1px;
+    background: var(--text-ghost);
+  }
+
+  .prose ol li {
+    margin-bottom: var(--raw-space-2);
+    padding-left: var(--raw-space-2);
+  }
+
+  .prose ol li::marker {
+    color: var(--text-ghost);
+    font-family: var(--font-ui);
+    font-size: var(--font-size-small);
+  }
+
+  /* Blockquote */
+  .prose blockquote {
+    margin: var(--raw-space-8) 0;
+    margin-left: var(--raw-space-4);
+    padding-left: var(--raw-space-6);
+    border-left: 2px solid var(--border-default);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.85;
+  }
+
+  .prose blockquote p {
+    margin-bottom: var(--raw-space-3);
+  }
+
+  .prose blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose blockquote cite,
+  .prose blockquote footer {
+    display: block;
+    margin-top: var(--raw-space-3);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--text-ghost);
+  }
+
+  .prose blockquote cite::before,
+  .prose blockquote footer::before {
+    content: '\2014\00a0';
+  }
+
+  /* Code */
+  .prose code {
+    font-family: var(--font-code);
+    font-size: 0.85em;
+    color: var(--text-code);
+    background: var(--surface-code);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .prose pre {
+    margin: var(--raw-space-8) 0;
+    padding: var(--raw-space-5) var(--raw-space-6);
+    background: var(--surface-code);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.6;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: var(--font-size-code);
+    color: var(--text-body);
+  }
+
+  .prose .code-label {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-caption);
+    color: var(--text-ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--raw-space-2);
+    display: block;
+  }
+
+  /* Horizontal rule */
+  .prose hr {
+    border: none;
+    margin: var(--raw-space-12) auto;
+    width: var(--raw-space-12);
+    height: 1px;
+    background: var(--border-default);
+  }
+
+  /* Images & figures */
+  .prose figure {
+    margin: var(--raw-space-10) 0;
+  }
+
+  .prose figure img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .prose figcaption {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-small);
+    color: var(--text-ghost);
+    margin-top: var(--raw-space-3);
+    text-align: center;
+  }
+
+  /* Table */
+  .prose table {
+    width: 100%;
+    margin: var(--raw-space-8) 0;
+    border-collapse: collapse;
+    font-size: var(--raw-text-base);
+  }
+
+  .prose thead th {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: var(--raw-space-3) var(--raw-space-4);
+    border-bottom: 2px solid var(--border-default);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .prose tbody td {
+    padding: var(--raw-space-3) var(--raw-space-4);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+
+  .prose tbody tr:hover td {
+    background: var(--surface-raised);
+  }
+
+  /* Definition list */
+  .prose dl {
+    margin: var(--raw-space-6) 0;
+  }
+
+  .prose dt {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: var(--raw-space-4);
+  }
+
+  .prose dd {
+    padding-left: var(--raw-space-6);
+    margin-top: var(--raw-space-1);
+    color: var(--text-secondary);
+  }
+
+  /* Aside / callout */
+  .prose .callout {
+    margin: var(--raw-space-8) 0;
+    padding: var(--raw-space-5) var(--raw-space-6);
+    background: var(--surface-raised);
+    border-left: 3px solid var(--border-emphasis);
+    border-radius: 0 6px 6px 0;
+    font-size: var(--raw-text-base);
+  }
+
+  .prose .callout-label {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--raw-space-2);
+  }
+
+  .prose .callout p {
+    margin-bottom: 0;
+  }
+
+  /* Keyboard */
+  .prose kbd {
+    font-family: var(--font-code);
+    font-size: 0.8em;
+    padding: 0.15em 0.5em;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-default);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    color: var(--text-primary);
+  }
+
+  /* Mark / highlight */
+  .prose mark {
+    background: oklch(0.300 0 0);
+    color: var(--text-primary);
+    padding: 0.05em 0.2em;
+    border-radius: 2px;
+  }
+
+  /* Abbreviation */
+  .prose abbr[title] {
+    text-decoration: underline dotted;
+    text-decoration-color: var(--text-ghost);
+    text-underline-offset: 3px;
+    cursor: help;
+  }
+
+  /* Superscript footnote links */
+  .prose .fn {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-caption);
+    color: var(--text-secondary);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 1px;
+  }
+
+  .prose .fn:hover {
+    color: var(--text-link-hover);
+  }
+
+  /* Footnotes section */
+  .prose .footnotes {
+    margin-top: var(--raw-space-16);
+    padding-top: var(--raw-space-8);
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--raw-text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .prose .footnotes ol {
+    padding-left: var(--raw-space-6);
+  }
+
+  .prose .footnotes li {
+    margin-bottom: var(--raw-space-3);
+    padding-left: var(--raw-space-2);
+  }
+
+  /* Post footer */
+  .post-footer {
+    padding: var(--raw-space-10) 0 var(--raw-space-24);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: var(--raw-space-12);
+  }
+
+  .post-footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .post-footer-link {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-default);
+    max-width: 45%;
+  }
+
+  .post-footer-link:hover {
+    color: var(--text-primary);
+  }
+
+  .post-footer-link span {
+    display: block;
+    font-size: var(--font-size-caption);
+    color: var(--text-ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--raw-space-1);
+  }
+
+  /* Site footer */
+  .site-footer {
+    padding: var(--raw-space-8) var(--raw-space-6);
+    max-width: var(--width-wide);
+    margin: 0 auto;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-ui);
+    font-size: var(--font-size-caption);
+    color: var(--text-ghost);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Nav toggle */
+  .page-toggle {
+    position: fixed;
+    bottom: var(--raw-space-6);
+    right: var(--raw-space-6);
+    z-index: 100;
+    font-family: var(--font-ui);
+    font-size: var(--font-size-caption);
+    color: var(--text-ghost);
+    background: var(--surface-overlay);
+    border: 1px solid var(--border-default);
+    padding: var(--raw-space-2) var(--raw-space-4);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all var(--transition-default);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .page-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--border-emphasis);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface-page);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--raw-l-20);
+    border-radius: 3px;
+  }
+
+  /* Selection */
+  ::selection {
+    background: oklch(0.300 0 0);
+    color: var(--text-heading);
+  }
+
+  /* Focus */
+  :focus-visible {
+    outline: 2px solid var(--border-emphasis);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     PAGE TOGGLE (for mockup navigation)
+     ============================================= -->
+<button class="page-toggle" onclick="togglePage()">
+  <span id="toggleLabel">View Post</span>
+</button>
+
+<!-- =============================================
+     INDEX PAGE
+     ============================================= -->
+<div class="page active" id="indexPage">
+  <header class="site-header">
+    <a class="site-title" onclick="showPage('index')">Jigar Gosar</a>
+    <nav class="site-nav">
+      <a href="#">Writing</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main class="content-wrap">
+    <div class="index-hero">
+      <h1>Notes on software, craft, and the things between</h1>
+      <p>Writing about the details that compound over time. Code, tools, decisions, and the thinking behind them.</p>
+    </div>
+
+    <ul class="post-list" id="postList"></ul>
+  </main>
+
+  <footer class="site-footer">
+    <span>Jigar Gosar</span>
+    <span>Bombay</span>
+  </footer>
+</div>
+
+<!-- =============================================
+     POST PAGE
+     ============================================= -->
+<div class="page" id="postPage">
+  <header class="site-header">
+    <a class="site-title" onclick="showPage('index')">Jigar Gosar</a>
+    <nav class="site-nav">
+      <a href="#">Writing</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main class="content-wrap">
+    <article>
+      <div class="post-header">
+        <div class="post-meta">
+          <time>12 March 2026</time>
+          <span class="post-meta-dot"></span>
+          <span>14 min read</span>
+        </div>
+        <h1>The Quiet Cost of Premature Abstraction</h1>
+        <p class="post-subtitle">Why the code you extract too early becomes the code you fight forever</p>
+        <div class="post-header-divider"></div>
+      </div>
+
+      <div class="prose" id="proseContent"></div>
+
+      <div class="post-footer">
+        <nav class="post-footer-nav">
+          <a class="post-footer-link" href="#">
+            <span>Previous</span>
+            Debugging with printf Considered Powerful
+          </a>
+          <a class="post-footer-link" href="#" style="text-align: right;">
+            <span>Next</span>
+            What I Got Wrong About TypeScript Generics
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>Jigar Gosar</span>
+    <span>Bombay</span>
+  </footer>
+</div>
+
+<script>
+  // =============================================
+  // PAGE NAVIGATION (mockup only)
+  // =============================================
+  function showPage(name) {
+    document.getElementById('indexPage').classList.toggle('active', name === 'index');
+    document.getElementById('postPage').classList.toggle('active', name === 'post');
+    document.getElementById('toggleLabel').textContent = name === 'index' ? 'View Post' : 'View Index';
+    window.scrollTo(0, 0);
+  }
+
+  function togglePage() {
+    var isIndex = document.getElementById('indexPage').classList.contains('active');
+    showPage(isIndex ? 'post' : 'index');
+  }
+
+  // =============================================
+  // INDEX PAGE — generate post list from data
+  // =============================================
+  var posts = [
+    {
+      date: '12 Mar 2026',
+      read: '14 min',
+      title: 'The Quiet Cost of Premature Abstraction',
+      excerpt: 'A function extracted too early doesn\'t just add indirection. It encodes assumptions about a future that hasn\'t arrived yet, and locks the codebase into a shape it didn\'t choose.'
+    },
+    {
+      date: '4 Mar 2026',
+      read: '8 min',
+      title: 'Debugging with printf Considered Powerful',
+      excerpt: 'Before reaching for a step debugger, consider that the humble print statement is an underappreciated tool for understanding state flow in concurrent systems.'
+    },
+    {
+      date: '21 Feb 2026',
+      read: '6 min',
+      title: 'What I Got Wrong About TypeScript Generics',
+      excerpt: 'I spent a year writing increasingly clever generic types. Then I deleted most of them. Here\'s what I learned about the line between type safety and type vanity.'
+    },
+    {
+      date: '9 Feb 2026',
+      read: '10 min',
+      title: 'Configuration as a Dependency Graph',
+      excerpt: 'Most config files are treated as flat key-value stores. But configuration has structure, ordering, and dependencies that deserve to be modeled explicitly.'
+    },
+    {
+      date: '28 Jan 2026',
+      read: '5 min',
+      title: 'The Case for Fewer Branches',
+      excerpt: 'Long-lived feature branches create cognitive overhead that compounds with team size. Trunk-based development isn\'t just a workflow preference, it\'s a forcing function for smaller changes.'
+    },
+    {
+      date: '14 Jan 2026',
+      read: '12 min',
+      title: 'Building a Monochrome Design System from Scratch',
+      excerpt: 'Color is a crutch. Stripping it away forces you to get hierarchy, spacing, and typography right. Here\'s how I built a design system with only shades of gray.'
+    },
+    {
+      date: '3 Jan 2026',
+      read: '7 min',
+      title: 'Astro Changed How I Think About JavaScript',
+      excerpt: 'Islands architecture isn\'t just a performance optimization. It changes the way you decompose a page, the way you think about interactivity, and the way you ship.'
+    }
+  ];
+
+  var listEl = document.getElementById('postList');
+  posts.forEach(function(post) {
+    var li = document.createElement('li');
+    li.className = 'post-list-item';
+    li.onclick = function() { showPage('post'); };
+
+    var meta = document.createElement('div');
+    meta.className = 'post-meta';
+    meta.innerHTML = '<time>' + post.date + '</time><span class="post-meta-dot"></span><span>' + post.read + ' read</span>';
+
+    var title = document.createElement('div');
+    title.className = 'post-title';
+    title.textContent = post.title;
+
+    var excerpt = document.createElement('p');
+    excerpt.className = 'post-excerpt';
+    excerpt.textContent = post.excerpt;
+
+    li.appendChild(meta);
+    li.appendChild(title);
+    li.appendChild(excerpt);
+    listEl.appendChild(li);
+  });
+
+  // =============================================
+  // POST PAGE — generate prose content from blocks
+  // =============================================
+  var blocks = [
+    { type: 'p', text: 'Every codebase has them. Functions with names like <code>processData</code> or <code>handleItem</code> that were extracted before anyone understood what the data looked like or how the items would actually behave. They sit in utility files, imported everywhere, too entangled to rename and too vague to trust.' },
+
+    { type: 'p', text: 'Premature abstraction is one of those problems that feels like good engineering while it\'s happening. You see duplication, you extract it. You imagine a pattern, you encode it. You anticipate variation, you parameterize for it. Each individual decision seems reasonable. The cost only becomes visible months later, when you try to change something and discover that the abstraction has become load-bearing in ways nobody intended.' },
+
+    { type: 'h2', text: 'The Duplication Trap' },
+
+    { type: 'p', text: 'The instinct to eliminate duplication is drilled into us early. <strong>DRY</strong>\u2014Don\'t Repeat Yourself\u2014is one of the first principles most programmers learn. And it\'s genuinely useful. Repeated code is a maintenance liability. When the same logic exists in three places and you fix a bug in one, you\'ve introduced inconsistency in the other two.' },
+
+    { type: 'p', text: 'But DRY has a failure mode that\'s harder to see: <strong>coupling through false unification</strong>. Two pieces of code that happen to look similar today might be similar for entirely different reasons. They might evolve in different directions. When you extract them into a shared function, you\'ve made a bet that their similarity is structural, not coincidental.<a class="fn" href="#fn1">1</a>' },
+
+    { type: 'blockquote', text: 'Duplication is far cheaper than the wrong abstraction.<footer>Sandi Metz, "The Wrong Abstraction"</footer>' },
+
+    { type: 'p', text: 'Metz\'s advice sounds extreme until you\'ve lived through the alternative. I once worked on a codebase where a <code>formatEntity</code> function was shared between user profiles, product listings, and audit log entries. By the time I encountered it, the function had fourteen parameters, three of which were booleans that toggled entirely different formatting paths. Nobody could modify it without risking breakage in an unrelated feature.' },
+
+    { type: 'h2', text: 'What Premature Looks Like in Practice' },
+
+    { type: 'p', text: 'The word "premature" is doing important work here. Abstraction itself is essential\u2014without it, software would be an unmanageable tangle of inline operations. The question is <em>when</em> to abstract, and the answer is almost always later than you think.' },
+
+    { type: 'h3', text: 'The Three Stages' },
+
+    { type: 'p', text: 'In my experience, abstractions tend to go through three stages, and problems arise when you try to skip ahead:' },
+
+    { type: 'ol', items: [
+      '<strong>Concrete repetition.</strong> You write the same pattern two or three times. Each instance is slightly different, but the shape is recognizable. This is the stage where most people reach for extraction.',
+      '<strong>Understood variation.</strong> After living with the repetition, you begin to see which parts genuinely vary and which are stable. The <em>axis of change</em> reveals itself through real requirements, not guesswork.',
+      '<strong>Intentional abstraction.</strong> You extract the common structure and parameterize along the axis you\'ve observed. The abstraction fits because it\'s shaped by evidence, not prediction.'
+    ]},
+
+    { type: 'p', text: 'The mistake is jumping from stage one to stage three. You see duplication, skip the observation period, and create an abstraction shaped by your <em>assumptions</em> about how things will vary. Those assumptions are almost always wrong in some important way.' },
+
+    { type: 'h3', text: 'A Concrete Example' },
+
+    { type: 'p', text: 'Consider two API endpoints that fetch data, transform it, and return a response. The code looks similar:' },
+
+    { type: 'code', label: 'handlers/users.ts', text: 'async function getUsers(req: Request) {\n  const data = await db.query(\'SELECT * FROM users WHERE active = true\');\n  const mapped = data.map(row => ({\n    id: row.id,\n    name: row.full_name,\n    email: row.email,\n  }));\n  return json(mapped);\n}' },
+
+    { type: 'code', label: 'handlers/products.ts', text: 'async function getProducts(req: Request) {\n  const data = await db.query(\'SELECT * FROM products WHERE visible = true\');\n  const mapped = data.map(row => ({\n    id: row.id,\n    name: row.title,\n    price: row.unit_price,\n  }));\n  return json(mapped);\n}' },
+
+    { type: 'p', text: 'The pattern is obvious: query, map, respond. The temptation is to extract a generic <code>createListHandler</code> that takes a table name, a filter condition, and a mapping function. And it would work\u2014for about two weeks, until the products endpoint needs pagination, the users endpoint needs role-based filtering, and someone adds caching to one but not the other.' },
+
+    { type: 'callout', label: 'Note', text: 'The shared structure wasn\'t a meaningful abstraction. It was a coincidence of early simplicity. Once real requirements arrived, the "shared" code became a bottleneck that slowed down both features.' },
+
+    { type: 'h2', text: 'Recognizing the Symptoms' },
+
+    { type: 'p', text: 'Premature abstractions leave fingerprints. Here are the patterns I\'ve learned to watch for:' },
+
+    { type: 'ul', items: [
+      '<strong>Boolean parameters that toggle behavior.</strong> A function that takes <code>isCompact</code> or <code>useAlternateLayout</code> is usually two functions wearing a trench coat.',
+      '<strong>Generic names.</strong> If you can\'t name a function after what it <em>does</em>, only what it <em>handles</em> (<code>processItem</code>, <code>handleData</code>, <code>transformEntity</code>), the abstraction might not have a clear identity.',
+      '<strong>Configuration objects that grow.</strong> Options bags that accumulate properties over time are a sign that the abstraction is being stretched beyond its original shape.',
+      '<strong>Shotgun surgery.</strong> When a change to one feature requires modifications in the shared abstraction <em>and</em> defensive checks in every other consumer, coupling has exceeded its budget.'
+    ]},
+
+    { type: 'h2', text: 'The Economics of Waiting' },
+
+    { type: 'p', text: 'There\'s a real cost to duplication. I\'m not suggesting you ignore it. But there\'s also a cost to abstraction, and we\'re culturally biased toward underestimating it. The table below captures the tradeoff:' },
+
+    { type: 'table', headers: ['Factor', 'Duplication', 'Premature Abstraction'],
+      rows: [
+        ['Immediate cost', 'Higher \u2014 more code to write', 'Lower \u2014 less code, feels efficient'],
+        ['Change cost', 'Lower \u2014 each copy is independent', 'Higher \u2014 changes ripple to all consumers'],
+        ['Comprehension', 'Easier \u2014 code is local and concrete', 'Harder \u2014 must understand the abstraction layer'],
+        ['Deletion cost', 'Trivial \u2014 delete the duplicate', 'Painful \u2014 untangling shared dependencies'],
+        ['Risk profile', 'Linear \u2014 bugs are isolated', 'Multiplicative \u2014 bugs affect all consumers']
+      ]
+    },
+
+    { type: 'p', text: 'The key insight is that duplication has <strong>linear</strong> costs while premature abstraction has <strong>multiplicative</strong> costs. Three copies of a function cost roughly three times as much to maintain. But a bad abstraction shared by three consumers can make all three harder to work with\u2014and harder still when you add a fourth.' },
+
+    { type: 'h2', text: 'A Heuristic for Timing' },
+
+    { type: 'p', text: 'I\'ve settled on a personal rule that works well enough: <strong>wait for the third use, then abstract from the differences</strong>. Two instances of similar code give you one axis of comparison. Three give you two. With two axes, you can see which parts truly vary and which are stable.' },
+
+    { type: 'p', text: 'This isn\'t original\u2014it\'s a version of the <em>Rule of Three</em> that shows up throughout programming literature. But I\'d add a refinement: don\'t just count instances. Count <em>distinct reasons for change</em>. If two pieces of code look identical but change for different reasons (one driven by <abbr title="User Interface">UI</abbr> requirements, the other by API contracts), they\'re not candidates for unification regardless of how similar they appear.' },
+
+    { type: 'h3', text: 'Practical Steps' },
+
+    { type: 'dl', items: [
+      { term: 'Inline first', def: 'Start with duplication. Copy and paste. Let the code exist in its natural context.' },
+      { term: 'Annotate, don\'t extract', def: 'When you notice similarity, leave a comment: "Similar to getProducts handler." This signals the pattern without locking in an abstraction.' },
+      { term: 'Extract with evidence', def: 'When a third instance appears and you can name the stable parts and the varying parts from observation, extract.' },
+      { term: 'Keep escape hatches', def: 'Design the abstraction so consumers can opt out without forking. A good abstraction makes the common case easy and the uncommon case possible.' }
+    ]},
+
+    { type: 'h2', text: 'When Abstraction is Warranted Early' },
+
+    { type: 'p', text: 'None of this is absolute. There are cases where abstracting early is the right call:' },
+
+    { type: 'ul', items: [
+      '<strong>Security-sensitive logic.</strong> Authentication, authorization, input sanitization\u2014these should be centralized from day one. The cost of inconsistency is too high.',
+      '<strong>Well-understood domains.</strong> If you\'re implementing a known pattern (<abbr title="Create, Read, Update, Delete">CRUD</abbr> operations, pagination, retry logic), the abstraction is already proven. You\'re not guessing.',
+      '<strong>Cross-cutting concerns.</strong> Logging, error handling, telemetry. These touch everything and benefit from a single implementation.'
+    ]},
+
+    { type: 'p', text: 'The common thread is <strong>certainty</strong>. When you know the shape of the problem because it\'s been solved thousands of times before, early abstraction is just good engineering. When you\'re exploring new ground, premature abstraction is a bet against your own ignorance.' },
+
+    { type: 'hr' },
+
+    { type: 'h2', text: 'Closing Thought' },
+
+    { type: 'p', text: 'The best abstractions I\'ve written were always the ones I wrote last. They emerged from code that had been duplicated, modified, cursed at, and understood. They were shaped by what actually happened, not by what I thought would happen.' },
+
+    { type: 'p', text: 'The next time you see two blocks of similar code and feel the pull to extract, try waiting. Let the duplication sit. Watch how the code changes over the next few weeks. The right abstraction will reveal itself\u2014and when it does, it\'ll be obvious in a way that premature abstractions never are.' },
+
+    { type: 'p', text: 'Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> to search your codebase for functions named <code>handle</code> or <code>process</code> followed by a generic noun. Count them. Each one is a small bet someone made about the future. Ask yourself: how many of those bets paid off?' },
+
+    { type: 'footnotes', items: [
+      'This distinction between <mark>structural similarity</mark> and coincidental similarity is explored thoroughly in Parnas\'s 1972 paper "On the Criteria To Be Used in Decomposing Systems into Modules." The paper is fifty years old and still the clearest articulation of the idea.'
+    ]}
+  ];
+
+  // Render prose blocks
+  var proseEl = document.getElementById('proseContent');
+
+  blocks.forEach(function(block) {
+    var el;
+
+    if (block.type === 'p') {
+      el = document.createElement('p');
+      el.innerHTML = block.text;
+    }
+
+    else if (block.type === 'h2' || block.type === 'h3' || block.type === 'h4') {
+      el = document.createElement(block.type);
+      el.textContent = block.text;
+    }
+
+    else if (block.type === 'blockquote') {
+      el = document.createElement('blockquote');
+      el.innerHTML = '<p>' + block.text + '</p>';
+    }
+
+    else if (block.type === 'ul') {
+      el = document.createElement('ul');
+      block.items.forEach(function(item) {
+        var li = document.createElement('li');
+        li.innerHTML = item;
+        el.appendChild(li);
+      });
+    }
+
+    else if (block.type === 'ol') {
+      el = document.createElement('ol');
+      block.items.forEach(function(item) {
+        var li = document.createElement('li');
+        li.innerHTML = item;
+        el.appendChild(li);
+      });
+    }
+
+    else if (block.type === 'code') {
+      var wrapper = document.createDocumentFragment();
+      if (block.label) {
+        var label = document.createElement('span');
+        label.className = 'code-label';
+        label.textContent = block.label;
+        wrapper.appendChild(label);
+      }
+      el = document.createElement('pre');
+      var code = document.createElement('code');
+      code.textContent = block.text;
+      el.appendChild(code);
+      wrapper.appendChild(el);
+      proseEl.appendChild(wrapper);
+      return;
+    }
+
+    else if (block.type === 'callout') {
+      el = document.createElement('aside');
+      el.className = 'callout';
+      var calloutLabel = document.createElement('div');
+      calloutLabel.className = 'callout-label';
+      calloutLabel.textContent = block.label;
+      var calloutP = document.createElement('p');
+      calloutP.innerHTML = block.text;
+      el.appendChild(calloutLabel);
+      el.appendChild(calloutP);
+    }
+
+    else if (block.type === 'hr') {
+      el = document.createElement('hr');
+    }
+
+    else if (block.type === 'table') {
+      el = document.createElement('table');
+      var thead = document.createElement('thead');
+      var headRow = document.createElement('tr');
+      block.headers.forEach(function(h) {
+        var th = document.createElement('th');
+        th.textContent = h;
+        headRow.appendChild(th);
+      });
+      thead.appendChild(headRow);
+      el.appendChild(thead);
+
+      var tbody = document.createElement('tbody');
+      block.rows.forEach(function(row) {
+        var tr = document.createElement('tr');
+        row.forEach(function(cell) {
+          var td = document.createElement('td');
+          td.innerHTML = cell;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      el.appendChild(tbody);
+    }
+
+    else if (block.type === 'dl') {
+      el = document.createElement('dl');
+      block.items.forEach(function(item) {
+        var dt = document.createElement('dt');
+        dt.textContent = item.term;
+        var dd = document.createElement('dd');
+        dd.innerHTML = item.def;
+        el.appendChild(dt);
+        el.appendChild(dd);
+      });
+    }
+
+    else if (block.type === 'footnotes') {
+      el = document.createElement('section');
+      el.className = 'footnotes';
+      var fnOl = document.createElement('ol');
+      block.items.forEach(function(item) {
+        var li = document.createElement('li');
+        li.innerHTML = item;
+        fnOl.appendChild(li);
+      });
+      el.appendChild(fnOl);
+    }
+
+    if (el) {
+      proseEl.appendChild(el);
+    }
+  });
+</script>
+
+</body>
+</html>

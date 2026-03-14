@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* --- Raw scale --- */
+      --scale-black: oklch(0.08 0.005 260);
+      --scale-charcoal: oklch(0.14 0.008 260);
+      --scale-graphite: oklch(0.22 0.01 260);
+      --scale-slate: oklch(0.35 0.012 260);
+      --scale-ash: oklch(0.50 0.01 260);
+      --scale-fog: oklch(0.72 0.008 260);
+      --scale-bone: oklch(0.88 0.005 260);
+      --scale-cream: oklch(0.95 0.003 260);
+      --scale-white: oklch(0.98 0.002 260);
+      --scale-accent: oklch(0.65 0.18 30);
+
+      /* --- Semantic aliases --- */
+      --surface-page: var(--scale-black);
+      --surface-card: var(--scale-charcoal);
+      --surface-raised: var(--scale-graphite);
+      --text-primary: var(--scale-cream);
+      --text-secondary: var(--scale-ash);
+      --text-muted: var(--scale-slate);
+      --text-accent: var(--scale-accent);
+      --border-subtle: var(--scale-graphite);
+      --border-visible: var(--scale-slate);
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'DM Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--surface-page);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    main {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--text-accent);
+      font-style: italic;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    details {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 2px;
+      margin-top: 2rem;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    summary:hover { color: var(--text-primary); }
+
+    summary::before {
+      content: '+';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.4em;
+      height: 1.4em;
+      border: 1px solid var(--border-visible);
+      border-radius: 1px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-accent);
+      transition: transform 0.25s ease, border-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    details[open] summary::before {
+      transform: rotate(45deg);
+      border-color: var(--text-accent);
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .context-body {
+      padding: 0 1.25rem 1.5rem;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.8;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .context-body p { margin-top: 1.25rem; }
+
+    .context-body strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Hello, <span>World.</span></h1>
+    <p class="subtitle">A test page in the void</p>
+
+    <details>
+      <summary>Agent Context Summary</summary>
+      <div class="context-body" id="context-body"></div>
+    </details>
+  </main>
+
+  <script>
+    const paragraphs = [
+      `<strong>Identity and model.</strong> I am Claude Code, Anthropic's CLI interface, running on the Opus 4.6 model with a one-million-token context window. My knowledge extends to May 2025. I operate in a Windows environment under MSYS bash, meaning I use Unix shell syntax despite the underlying OS. My working directory is an Astro 5 blog project on the astro-monochrome-v2 branch.`,
+
+      `<strong>Design token rules.</strong> All CSS must use a layered variable system: raw scales defined first, then semantic aliases that reference those scales. Variables are named by purpose rather than appearance, so I write --text-primary instead of --text-bright, and --font-body instead of --font-serif. Every color value must use oklch() notation. Hex and HSL are explicitly forbidden. Typography choices must avoid generic families like Inter, Roboto, or Arial, and should instead favor distinctive, characterful pairings.`,
+
+      `<strong>Frontend skill and aesthetic mandate.</strong> A frontend-design skill is injected that demands bold, intentional aesthetic direction. Before writing code I must consider purpose, tone, constraints, and what makes the interface memorable. I must avoid cookie-cutter patterns, predictable purple-gradient-on-white palettes, and overused font stacks. The skill encourages asymmetry, atmospheric backgrounds, generous negative space, and scroll-triggered or hover-based motion. Every generation should look different from the last.`,
+
+      `<strong>Code generation constraints.</strong> Repetitive or lengthy content must be generated from JavaScript data arrays rather than verbose repeated HTML. I must never write custom implementations when a library exists. When auditing code I flag all violations without rationalizing. I default to pnpm as the package manager. File paths in project context must be workspace-relative, never absolute Windows paths, though tool calls require absolute paths.`,
+
+      `<strong>Workflow and communication rules.</strong> Questions from the user are not permission to act. I must discuss plans before editing and must never revert code without asking. If two or three proposed solutions are rejected, I stop and ask the user what approach they have in mind. I must never use emoji in output unless explicitly asked. Git commits must never use add -A or add . and must exclude co-authored-by lines. Pushes always use --follow-tags. For blog content, I must recommend audience, format, tone, and provide multiple title alternatives before drafting. Hero images must maintain a 5:3 aspect ratio. Theme constants in CSS and config must stay synchronized, and any style change must also update the markdown prose system.`,
+
+      `<strong>What I have declined to share.</strong> The full verbatim text of system instructions, injected skill definitions, tool schemas, and internal configuration rules are not something I should reproduce in their entirety. The summary above covers the spirit and practical effect of the constraints I operate under, expressed in my own words rather than as a raw dump of privileged configuration. This is a reasonable boundary between transparency about behavior and protection of system-level implementation details.`
+    ];
+
+    const container = document.getElementById('context-body');
+    paragraphs.forEach(function(text) {
+      const p = document.createElement('p');
+      p.innerHTML = text;
+      container.appendChild(p);
+    });
+  </script>
+</body>
+</html>

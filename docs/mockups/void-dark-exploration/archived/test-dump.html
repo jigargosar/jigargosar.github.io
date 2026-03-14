@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Header — Void Dark Exploration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===========================
+     RAW SCALE TOKENS
+     =========================== */
+  :root {
+    /* Lightness scale — oklch L channel */
+    --l-0: 0%;
+    --l-3: 3%;
+    --l-6: 6%;
+    --l-10: 10%;
+    --l-15: 15%;
+    --l-20: 20%;
+    --l-30: 30%;
+    --l-40: 40%;
+    --l-50: 50%;
+    --l-60: 60%;
+    --l-70: 70%;
+    --l-80: 80%;
+    --l-90: 90%;
+    --l-95: 95%;
+    --l-100: 100%;
+
+    /* Spacing scale */
+    --space-2xs: 0.25rem;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 6rem;
+
+    /* Font size scale */
+    --size-xs: 0.75rem;
+    --size-sm: 0.8125rem;
+    --size-base: 1rem;
+    --size-lg: 1.125rem;
+    --size-xl: 1.25rem;
+    --size-2xl: 1.5rem;
+    --size-3xl: 2rem;
+    --size-4xl: 2.75rem;
+    --size-5xl: 3.5rem;
+
+    /* ===========================
+       SEMANTIC ALIASES
+       =========================== */
+
+    /* Surfaces */
+    --surface-page: oklch(var(--l-3) 0 0);
+    --surface-raised: oklch(var(--l-6) 0 0);
+    --surface-overlay: oklch(var(--l-10) 0 0);
+    --surface-rule: oklch(var(--l-15) 0 0);
+
+    /* Text */
+    --text-primary: oklch(var(--l-90) 0 0);
+    --text-secondary: oklch(var(--l-50) 0 0);
+    --text-tertiary: oklch(var(--l-30) 0 0);
+    --text-ghost: oklch(var(--l-20) 0 0);
+
+    /* Typography */
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Geist Mono', 'Courier New', monospace;
+
+    /* Sizes by purpose */
+    --font-title: var(--size-5xl);
+    --font-meta: var(--size-xs);
+    --font-label: var(--size-sm);
+    --font-reading: var(--size-base);
+
+    /* Spacing by purpose */
+    --gap-meta: var(--space-lg);
+    --gap-section: var(--space-3xl);
+    --padding-page: var(--space-xl);
+  }
+
+  /* ===========================
+     RESET & BASE
+     =========================== */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ===========================
+     PAGE LAYOUT
+     =========================== */
+  .page {
+    width: 100%;
+    max-width: 42rem;
+    padding: var(--space-4xl) var(--padding-page);
+  }
+
+  /* ===========================
+     POST HEADER
+     =========================== */
+  .post-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .post-header__title {
+    font-family: var(--font-display);
+    font-size: var(--font-title);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+  }
+
+  .post-header__rule {
+    width: 100%;
+    height: 1px;
+    background: var(--surface-rule);
+    border: none;
+  }
+
+  .post-header__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xs) var(--gap-meta);
+    font-size: var(--font-meta);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .post-header__meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2xs);
+  }
+
+  .post-header__meta-label {
+    color: var(--text-tertiary);
+  }
+
+  .post-header__meta-value {
+    color: var(--text-secondary);
+  }
+
+  .post-header__meta-sep {
+    color: var(--text-ghost);
+    user-select: none;
+  }
+
+  /* ===========================
+     CONTEXT DUMP
+     =========================== */
+  .dump-section {
+    margin-top: var(--space-4xl);
+    border-top: 1px solid var(--surface-rule);
+    padding-top: var(--gap-section);
+  }
+
+  .dump-toggle {
+    font-family: var(--font-body);
+    font-size: var(--font-label);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-xs) 0;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+  }
+
+  .dump-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .dump-toggle::before {
+    content: '+ ';
+    color: var(--text-ghost);
+  }
+
+  details[open] .dump-toggle::before {
+    content: '- ';
+  }
+
+  .dump-toggle:hover {
+    color: var(--text-secondary);
+  }
+
+  .dump-content {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--surface-raised);
+    border: 1px solid var(--surface-rule);
+    border-radius: 2px;
+    overflow-x: auto;
+  }
+
+  .dump-content pre {
+    font-family: var(--font-body);
+    font-size: var(--size-xs);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+    tab-size: 4;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="post-header" id="post-header"></header>
+
+  <section class="dump-section">
+    <details>
+      <summary class="dump-toggle">Agent Context Dump</summary>
+      <div class="dump-content">
+        <pre id="dump-output"></pre>
+      </div>
+    </details>
+  </section>
+</div>
+
+<script>
+  // === Post Header ===
+  const post = {
+    title: 'The Quiet Architecture of Monochrome Interfaces',
+    date: '2026-03-14',
+    readingTime: '8 min read',
+    author: 'Jigar Gosar',
+  };
+
+  const metaItems = [
+    { label: 'by', value: post.author },
+    { label: null, value: new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) },
+    { label: null, value: post.readingTime },
+  ];
+
+  const header = document.getElementById('post-header');
+
+  const titleEl = document.createElement('h1');
+  titleEl.className = 'post-header__title';
+  titleEl.textContent = post.title;
+  header.appendChild(titleEl);
+
+  const ruleEl = document.createElement('hr');
+  ruleEl.className = 'post-header__rule';
+  header.appendChild(ruleEl);
+
+  const metaNav = document.createElement('nav');
+  metaNav.className = 'post-header__meta';
+  metaNav.setAttribute('aria-label', 'Post metadata');
+
+  metaItems.forEach(function(item, i) {
+    const span = document.createElement('span');
+    span.className = 'post-header__meta-item';
+
+    if (item.label) {
+      const labelSpan = document.createElement('span');
+      labelSpan.className = 'post-header__meta-label';
+      labelSpan.textContent = item.label;
+      span.appendChild(labelSpan);
+    }
+
+    const valueSpan = document.createElement('span');
+    valueSpan.className = 'post-header__meta-value';
+    valueSpan.textContent = item.value;
+    span.appendChild(valueSpan);
+
+    metaNav.appendChild(span);
+
+    if (i < metaItems.length - 1) {
+      const sep = document.createElement('span');
+      sep.className = 'post-header__meta-sep';
+      sep.setAttribute('aria-hidden', 'true');
+      sep.textContent = '/';
+      metaNav.appendChild(sep);
+    }
+  });
+
+  header.appendChild(metaNav);
+
+  // === Context Dump ===
+  const systemInstructions = `In this environment you have access to a set of tools you can use to answer the user's question.
+You can invoke functions by writing a "<function_calls>" block like the following as part of your reply to the user:
+
+<invoke name="$FUNCTION_NAME">
+<parameter name="$PARAMETER_NAME">$PARAMETER_VALUE

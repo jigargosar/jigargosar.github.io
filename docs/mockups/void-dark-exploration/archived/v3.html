@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Dark Blog Mockup v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-raised: #111111;
+    --bg-inset: #080808;
+    --border: #1e1e1e;
+    --border-strong: #2a2a2a;
+    --text: #c8c8c8;
+    --text-muted: #707070;
+    --text-faint: #4a4a4a;
+    --text-strong: #e8e8e8;
+    --text-bright: #f5f5f5;
+    --sans: 'Space Grotesk', system-ui, sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Consolas', monospace;
+    --content-width: 680px;
+    --wide-width: 960px;
+  }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    scrollbar-color: #222 #0a0a0a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: #333;
+    color: #fff;
+  }
+
+  /* ===== SECTIONS: show/hide via :target ===== */
+  #index,
+  #post {
+    display: none;
+  }
+
+  #index:target,
+  #post:target {
+    display: block;
+  }
+
+  /* Default: show index when no hash */
+  #index {
+    display: block;
+  }
+
+  #index:target ~ #post,
+  #post:target ~ #index {
+    display: none;
+  }
+
+  /* When #post is targeted, hide #index */
+  body:has(#post:target) #index {
+    display: none;
+  }
+
+  body:has(#index:target) #post {
+    display: none;
+  }
+
+  /* ===== SITE HEADER ===== */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 10, 10, 0.9);
+  }
+
+  .site-header-inner {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-logo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--text-bright);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+
+  .site-logo:hover {
+    color: #fff;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .site-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .site-nav a:hover {
+    color: var(--text-strong);
+  }
+
+  /* ===== INDEX PAGE ===== */
+  .index-hero {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .index-hero h1 {
+    font-family: var(--serif);
+    font-size: 4rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+  }
+
+  .index-hero h1 em {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .index-hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .post-list {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .post-list-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-item {
+    display: block;
+    text-decoration: none;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .post-item:hover {
+    padding-left: 1rem;
+  }
+
+  .post-item:hover .post-item-title {
+    color: #fff;
+  }
+
+  .post-item:hover .post-item-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .post-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-item-date {
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-weight: 400;
+  }
+
+  .post-item-tag {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .post-item-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--text-strong);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    transition: color 0.2s;
+    margin-bottom: 0.4rem;
+  }
+
+  .post-item-excerpt {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 600px;
+  }
+
+  .post-item-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateX(-8px);
+    opacity: 0;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: all 0.2s;
+  }
+
+  .post-item-reading {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+  }
+
+  /* ===== POST PAGE ===== */
+  .post-header {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+    text-align: left;
+  }
+
+  .post-header-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-header-date {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+
+  .post-header-tag {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .post-header-reading {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+
+  .post-header h1 {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .post-header-desc {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    max-width: 540px;
+  }
+
+  .post-hero-img {
+    max-width: var(--wide-width);
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+  }
+
+  .post-hero-img div {
+    width: 100%;
+    aspect-ratio: 5 / 3;
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 40%, #0d0d0d 100%);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .post-hero-img div::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.02) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+  }
+
+  /* ===== PROSE CONTENT ===== */
+  .prose {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .prose h2 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-top: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose h3 {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose p {
+    margin-bottom: 1.35rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  .prose strong {
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .prose em {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .prose a {
+    color: var(--text-strong);
+    text-decoration: underline;
+    text-decoration-color: var(--text-faint);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: all 0.15s;
+  }
+
+  .prose a:hover {
+    color: #fff;
+    text-decoration-color: var(--text-muted);
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--border-strong);
+    padding: 0.8rem 0 0.8rem 1.5rem;
+    margin: 2rem 0;
+    color: var(--text-muted);
+  }
+
+  .prose blockquote p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .prose blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose blockquote ul,
+  .prose blockquote ol {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .prose blockquote li {
+    margin-bottom: 0.3rem;
+  }
+
+  .prose blockquote strong {
+    color: var(--text);
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.35rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li {
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .prose li::marker {
+    color: var(--text-faint);
+  }
+
+  .prose code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    color: var(--text-strong);
+    font-weight: 400;
+  }
+
+  .prose pre {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+    line-height: 1.55;
+  }
+
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* Monochrome syntax: just brightness levels */
+  .prose pre .kw { color: #999; }
+  .prose pre .str { color: #8a8a8a; }
+  .prose pre .cm { color: #555; font-style: italic; }
+  .prose pre .fn { color: #bbb; }
+  .prose pre .num { color: #8a8a8a; }
+  .prose pre .op { color: #666; }
+  .prose pre .type { color: #999; }
+
+  .prose hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+  }
+
+  .prose details {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 2rem 0;
+    background: var(--bg-raised);
+  }
+
+  .prose details summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-strong);
+    font-size: 0.92rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.15s;
+  }
+
+  .prose details summary:hover {
+    color: #fff;
+  }
+
+  .prose details summary::before {
+    content: '\25B6';
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .prose details[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  .prose details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .prose details > div {
+    padding: 0 1.25rem 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  .prose details > div p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ===== BACK TO TOP / POST NAV ===== */
+  .post-footer {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .post-footer-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .post-footer a {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .post-footer a:hover {
+    color: var(--text-strong);
+  }
+
+  /* ===== SITE FOOTER ===== */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .site-footer p {
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    font-family: var(--mono);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    html { font-size: 15.5px; }
+
+    .index-hero h1 { font-size: 2.6rem; }
+    .post-header h1 { font-size: 2.2rem; }
+    .post-item-title { font-size: 1.4rem; }
+    .site-header { padding: 1rem 1.25rem; }
+    .index-hero { padding: 4rem 1.25rem 3rem; }
+    .post-list { padding: 0 1.25rem 4rem; }
+    .post-header { padding: 3.5rem 1.25rem 2rem; }
+    .post-hero-img { padding: 0 1.25rem; }
+    .prose { padding: 0 1.25rem 4rem; }
+    .post-footer { padding: 0 1.25rem 4rem; }
+    .site-nav { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== SITE HEADER ==================== -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#index" class="site-logo">void</a>
+    <nav class="site-nav">
+      <a href="#index">Writing</a>
+      <a href="#">Projects</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== INDEX PAGE ==================== -->
+<section id="index">
+  <div class="index-hero">
+    <h1>Writing about code, <em>craft, and the things between</em></h1>
+    <p>Notes from a decade of building software. Lessons learned through shipped code and failed experiments.</p>
+  </div>
+
+  <div class="post-list">
+    <div class="post-list-label">Recent Posts</div>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2026-03-10</span>
+        <span class="post-item-tag">Engineering</span>
+      </div>
+      <div class="post-item-title">The Case Against Premature Abstraction</div>
+      <div class="post-item-excerpt">Every layer of abstraction you add before you need it is a bet against your future self. Most of the time, that bet loses.</div>
+      <div class="post-item-reading">8 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2026-02-22</span>
+        <span class="post-item-tag">Tools</span>
+      </div>
+      <div class="post-item-title">Why I Switched to Neovim After 15 Years of VS Code</div>
+      <div class="post-item-excerpt">It started as a joke. A coworker dared me to use Vim for a week. Fourteen months later, I can't imagine going back.</div>
+      <div class="post-item-reading">12 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2026-02-08</span>
+        <span class="post-item-tag">Architecture</span>
+      </div>
+      <div class="post-item-title">Monoliths Are Not the Enemy</div>
+      <div class="post-item-excerpt">The industry spent a decade convincing itself that microservices solve everything. They don't. Sometimes a well-structured monolith is exactly right.</div>
+      <div class="post-item-reading">10 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2026-01-15</span>
+        <span class="post-item-tag">Career</span>
+      </div>
+      <div class="post-item-title">What Senior Engineers Actually Do All Day</div>
+      <div class="post-item-excerpt">Hint: it's not writing code. The hardest part of the job is the invisible work that never shows up in pull requests.</div>
+      <div class="post-item-reading">6 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2025-12-29</span>
+        <span class="post-item-tag">TIL</span>
+      </div>
+      <div class="post-item-title">Git Worktrees Changed How I Review Code</div>
+      <div class="post-item-excerpt">Stop stashing. Stop switching branches. Git worktrees let you hold multiple branches open simultaneously.</div>
+      <div class="post-item-reading">4 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+
+    <a href="#post" class="post-item">
+      <div class="post-item-meta">
+        <span class="post-item-date">2025-12-11</span>
+        <span class="post-item-tag">Opinion</span>
+      </div>
+      <div class="post-item-title">TypeScript Enums Considered Harmful</div>
+      <div class="post-item-excerpt">Union types do everything enums do, without the runtime overhead, the refactoring traps, or the surprising behaviors.</div>
+      <div class="post-item-reading">7 min read</div>
+      <span class="post-item-arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 void. All rights reserved.</p>
+  </footer>
+</section>
+
+<!-- ==================== POST PAGE ==================== -->
+<section id="post">
+  <article>
+    <header class="post-header">
+      <div class="post-header-meta">
+        <span class="post-header-date">2026-03-10</span>
+        <span class="post-header-tag">Engineering</span>
+        <span class="post-header-reading">8 min read</span>
+      </div>
+      <h1>The Case Against Premature Abstraction</h1>
+      <p class="post-header-desc">Every layer of abstraction you add before you need it is a bet against your future self. Most of the time, that bet loses.</p>
+    </header>
+
+    <div class="post-hero-img">
+      <div></div>
+    </div>
+
+    <div class="prose">
+
+      <p>Three years ago, I joined a team that had spent six months building a "flexible" configuration system. It could handle any data shape, any validation rule, any transformation pipeline. It was, by every technical measure, an impressive piece of engineering.</p>
+
+      <p>There was just one problem: <strong>nobody could figure out how to add a new config field</strong>. What should have been a five-minute change required modifying seven files across three packages, updating two schema definitions, and running a code generation step that took forty seconds and produced errors nobody understood.</p>
+
+      <p>They had abstracted too early, too aggressively, and for requirements that never materialized. The system was designed to handle twelve different config formats. In production, they used one.</p>
+
+      <h2>The Abstraction Instinct</h2>
+
+      <p>Programmers are pattern-matchers by nature. We see two pieces of code that look similar, and something deep in our brains screams <em>"don't repeat yourself."</em> We reach for abstraction the way a carpenter reaches for a hammer. It feels productive. It feels <em>right</em>.</p>
+
+      <p>But the DRY principle, taken to its extreme, produces code that is worse than the duplication it was trying to eliminate. The problem is not repetition itself. The problem is <strong>coupling things that change for different reasons</strong>.</p>
+
+      <p>Consider this: you have two API endpoints that both validate an email address. Your instinct says to extract a <code>validateEmail()</code> function. That's fine. Email validation genuinely is one concept with one reason to change.</p>
+
+      <p>Now consider: you have two API endpoints that both return a user object with the same five fields. Your instinct says to extract a <code>formatUserResponse()</code> function. That's where things go wrong. Those two endpoints serve different consumers with different needs. When one consumer needs a sixth field, you're adding <code>if</code> branches to shared code.</p>
+
+      <h2>Three Rules I Follow Now</h2>
+
+      <p>After years of writing over-abstracted code and then suffering through the consequences, I've adopted three rules that have dramatically improved the systems I build.</p>
+
+      <h3>1. Wait for the third occurrence</h3>
+
+      <p>Two instances of similar code is a coincidence. Three is a pattern. I don't extract shared logic until I've seen the same structure appear three times with genuinely identical reasons to change. This is sometimes called the <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">Rule of Three</a>, and it remains one of the most underused guidelines in software development.</p>
+
+      <h3>2. Prefer duplication over the wrong abstraction</h3>
+
+      <p>Sandi Metz wrote about this in her excellent article <a href="https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction"><em>The Wrong Abstraction</em></a>, and I think about it weekly. A little copy-paste never killed anyone. A bad abstraction that six teams depend on can paralyze an entire organization.</p>
+
+      <h3>3. Make the abstraction easy to delete</h3>
+
+      <p>When I do create an abstraction, I design it to be removable. No deep inheritance hierarchies. No framework-level conventions that require you to restructure your entire application if the abstraction turns out to be wrong. <strong>If you can't inline the abstraction back into its call sites in under an hour, it's too coupled.</strong></p>
+
+      <hr>
+
+      <h2>A Real-World Example</h2>
+
+      <p>Let me show you what premature abstraction looks like in practice. Here's a data fetching layer I inherited on a recent project:</p>
+
+<pre><code><span class="cm">// The "flexible" data layer (actual production code, simplified)</span>
+<span class="kw">class</span> <span class="type">DataProvider</span>&lt;<span class="type">T</span>, <span class="type">R</span> <span class="kw">extends</span> <span class="type">Record</span>&lt;<span class="type">string</span>, <span class="type">unknown</span>&gt;&gt; {
+  <span class="kw">private</span> transformer: <span class="type">DataTransformer</span>&lt;<span class="type">T</span>, <span class="type">R</span>&gt;;
+  <span class="kw">private</span> validator: <span class="type">SchemaValidator</span>&lt;<span class="type">R</span>&gt;;
+  <span class="kw">private</span> cache: <span class="type">CacheStrategy</span>&lt;<span class="type">R</span>&gt;;
+  <span class="kw">private</span> retryPolicy: <span class="type">RetryPolicy</span>;
+
+  <span class="kw">constructor</span>(config: <span class="type">DataProviderConfig</span>&lt;<span class="type">T</span>, <span class="type">R</span>&gt;) {
+    <span class="kw">this</span>.transformer = config.transformer ?? <span class="kw">new</span> <span class="fn">IdentityTransformer</span>();
+    <span class="kw">this</span>.validator = config.validator ?? <span class="kw">new</span> <span class="fn">NoopValidator</span>();
+    <span class="kw">this</span>.cache = config.cache ?? <span class="kw">new</span> <span class="fn">NoCache</span>();
+    <span class="kw">this</span>.retryPolicy = config.retryPolicy ?? <span class="fn">defaultRetryPolicy</span>();
+  }
+
+  <span class="kw">async</span> <span class="fn">fetch</span>(params: <span class="type">FetchParams</span>): <span class="type">Promise</span>&lt;<span class="type">R</span>&gt; {
+    <span class="kw">const</span> cached = <span class="kw">await</span> <span class="kw">this</span>.cache.<span class="fn">get</span>(params);
+    <span class="kw">if</span> (cached) <span class="kw">return</span> cached;
+
+    <span class="kw">const</span> raw = <span class="kw">await</span> <span class="kw">this</span>.retryPolicy.<span class="fn">execute</span>(() <span class="op">=></span>
+      <span class="kw">this</span>.<span class="fn">fetchRaw</span>(params)
+    );
+    <span class="kw">const</span> transformed = <span class="kw">this</span>.transformer.<span class="fn">transform</span>(raw);
+    <span class="kw">const</span> validated = <span class="kw">this</span>.validator.<span class="fn">validate</span>(transformed);
+
+    <span class="kw">await</span> <span class="kw">this</span>.cache.<span class="fn">set</span>(params, validated);
+    <span class="kw">return</span> validated;
+  }
+}</code></pre>
+
+      <p>Seven classes. Four generic type parameters. A plugin architecture with three extension points. And every single usage in the codebase passed the default values for transformer, validator, and cache. Here's what actually replaced it:</p>
+
+<pre><code><span class="cm">// What we actually needed</span>
+<span class="kw">async function</span> <span class="fn">fetchUsers</span>(): <span class="type">Promise</span>&lt;<span class="type">User</span>[]&gt; {
+  <span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/users'</span>);
+  <span class="kw">return</span> response.<span class="fn">json</span>();
+}
+
+<span class="kw">async function</span> <span class="fn">fetchPosts</span>(authorId: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">Post</span>[]&gt; {
+  <span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`/api/posts?author=</span>${authorId}<span class="str">`</span>);
+  <span class="kw">return</span> response.<span class="fn">json</span>();
+}</code></pre>
+
+      <p>Two plain functions. No generics. No plugins. No configuration objects. When we eventually needed caching for one of them, we added it to that one function. The other function never needed it.</p>
+
+      <blockquote>
+        <p><strong>The irony of premature abstraction:</strong> it's almost always motivated by a desire to make future changes easier. But the abstraction itself becomes the thing that makes future changes hard.</p>
+        <p>Signs you've over-abstracted:</p>
+        <ul>
+          <li>New team members take days to understand the pattern</li>
+          <li><strong>Simple changes</strong> require modifying multiple files</li>
+          <li>You have "Noop" or "Identity" implementations of your interfaces</li>
+          <li>The abstraction has more configuration options than call sites</li>
+        </ul>
+      </blockquote>
+
+      <h2>When Abstraction Is Worth It</h2>
+
+      <p>I'm not arguing against abstraction. Abstraction is one of the most powerful tools in programming. I'm arguing against doing it <em>before you have evidence</em> that it's the right abstraction.</p>
+
+      <p>Good abstractions share a few properties:</p>
+
+      <ol>
+        <li><strong>They emerge from real usage.</strong> You don't design them up front. You notice them after writing concrete code three or four times.</li>
+        <li><strong>They have a narrow, stable interface.</strong> If your abstraction's interface changes every time a new consumer adopts it, it's not abstracting the right thing.</li>
+        <li><strong>They reduce cognitive load.</strong> After the abstraction, developers think about fewer concepts to accomplish the same task. If your abstraction introduces new concepts (strategies, providers, factories, registries), it needs to eliminate more concepts than it introduces.</li>
+        <li><strong>They make deletion easy.</strong> The best abstractions are the ones you can replace with a direct implementation in thirty minutes if they turn out to be wrong.</li>
+      </ol>
+
+      <h2>The Cost Nobody Talks About</h2>
+
+      <p>There's a hidden cost to premature abstraction that goes beyond code complexity. It's the <strong>opportunity cost of understanding</strong>.</p>
+
+      <p>When you abstract something, you're making a claim: <em>"I understand this domain well enough to identify its stable boundaries."</em> Early in a project, that claim is almost always wrong. You haven't lived with the code long enough. You haven't seen how requirements actually evolve. You're guessing.</p>
+
+      <p>And here's the thing about wrong abstractions: <strong>they're harder to fix than no abstraction at all</strong>. With duplicated code, each copy is independent. You can change one without worrying about the others. With a shared abstraction, every change is a negotiation between all its consumers.</p>
+
+      <hr>
+
+      <h2>A Practical Checklist</h2>
+
+      <p>Before you extract a new abstraction, run through this list:</p>
+
+      <ul>
+        <li>Have you seen this pattern at least <strong>three times</strong> in real code?</li>
+        <li>Do all instances change for the <strong>same reason</strong>?</li>
+        <li>Can you name the abstraction with a <strong>domain concept</strong>, not a technical pattern? (<code>EmailValidator</code>, not <code>StringProcessor</code>)</li>
+        <li>Will the abstraction have <strong>fewer than three configuration options</strong>?</li>
+        <li>Can you <strong>inline it back</strong> into call sites in under an hour if it turns out to be wrong?</li>
+      </ul>
+
+      <p>If the answer to any of these is no, <strong>wait</strong>. Write the concrete code. Ship it. Live with it. The right abstraction will reveal itself when you're ready.</p>
+
+      <details>
+        <summary>Aside: The Gang of Four got this backwards</summary>
+        <div>
+          <p>The original <em>Design Patterns</em> book presented patterns as things you plan for up front. In practice, patterns should be <em>discovered</em>, not <em>applied</em>. You don't start a project by deciding "I'll use the Strategy pattern here." You start by writing concrete code, and if you later find three algorithms that share an interface, <em>then</em> you have a Strategy.</p>
+          <p>This is not a criticism of the patterns themselves. They remain useful as a shared vocabulary. The mistake is treating them as a design methodology rather than a recognition tool.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Further reading on this topic</summary>
+        <div>
+          <p>These are the articles and talks that shaped my thinking:</p>
+          <ul>
+            <li><a href="https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction">The Wrong Abstraction</a> by Sandi Metz</li>
+            <li><a href="https://www.youtube.com/watch?v=mVVNJKv9esE">Simple Made Easy</a> by Rich Hickey</li>
+            <li><a href="https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/">The Law of Leaky Abstractions</a> by Joel Spolsky</li>
+          </ul>
+          <p>Each one is worth revisiting every couple of years. You'll read them differently with more experience.</p>
+        </div>
+      </details>
+
+      <hr>
+
+      <p>The best engineers I've worked with share a common trait: <strong>they're comfortable with duplication</strong>. They don't reach for abstraction as a reflex. They wait. They watch. They let the code tell them where the real boundaries are.</p>
+
+      <p>Premature abstraction feels like progress. But progress without direction is just motion. Write the simple thing first. You can always make it more abstract later. You can rarely make it more simple.</p>
+
+    </div>
+  </article>
+
+  <div class="post-footer">
+    <div class="post-footer-divider"></div>
+    <a href="#index">&larr; Back to all posts</a>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 void. All rights reserved.</p>
+  </footer>
+</section>
+
+</body>
+</html>

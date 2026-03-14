@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>void-dark blog mockup v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ========================================
+     DESIGN TOKENS
+     ======================================== */
+  :root {
+    /* Monochrome scale — warm-neutral tinted blacks and grays */
+    --void-0: #0a0a0b;
+    --void-1: #111113;
+    --void-2: #18181b;
+    --void-3: #1e1e22;
+    --void-4: #27272b;
+    --void-5: #323237;
+    --void-6: #3f3f46;
+    --void-7: #52525b;
+    --void-8: #71717a;
+    --void-9: #a1a1aa;
+    --void-10: #d4d4d8;
+    --void-11: #e4e4e7;
+    --void-12: #fafafa;
+
+    /* Semantic */
+    --bg: var(--void-1);
+    --bg-surface: var(--void-2);
+    --bg-elevated: var(--void-3);
+    --border: var(--void-4);
+    --border-subtle: var(--void-3);
+    --text-primary: var(--void-11);
+    --text-secondary: var(--void-9);
+    --text-tertiary: var(--void-7);
+    --text-ghost: var(--void-6);
+    --accent: var(--void-10);
+
+    /* Typography */
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sans: 'DM Sans', -apple-system, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* Spacing */
+    --content-width: 680px;
+    --index-width: 720px;
+    --gutter: 24px;
+  }
+
+  /* ========================================
+     RESET & BASE
+     ======================================== */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 18px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--void-6);
+    color: var(--void-12);
+  }
+
+  /* ========================================
+     PAGE NAVIGATION (shared)
+     ======================================== */
+  .page-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    padding: 16px var(--gutter);
+    background: linear-gradient(var(--void-1) 60%, transparent);
+    pointer-events: none;
+  }
+
+  .page-nav-inner {
+    display: flex;
+    gap: 32px;
+    pointer-events: auto;
+  }
+
+  .page-nav a {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 4px 0;
+  }
+
+  .page-nav a:hover,
+  .page-nav a.active {
+    color: var(--text-primary);
+  }
+
+  /* ========================================
+     MOCKUP SWITCHER
+     ======================================== */
+  .mockup-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    gap: 2px;
+    background: var(--void-3);
+    border: 1px solid var(--void-4);
+    border-radius: 8px;
+    padding: 3px;
+    font-family: var(--font-sans);
+  }
+
+  .mockup-switcher button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-tertiary);
+    transition: all 0.2s;
+  }
+
+  .mockup-switcher button:hover {
+    color: var(--text-secondary);
+  }
+
+  .mockup-switcher button.active {
+    background: var(--void-5);
+    color: var(--text-primary);
+  }
+
+  /* ========================================
+     PAGE CONTAINERS
+     ======================================== */
+  .page {
+    display: none;
+    min-height: 100vh;
+  }
+
+  .page.visible {
+    display: block;
+  }
+
+  /* ========================================
+     INDEX PAGE
+     ======================================== */
+  .index-hero {
+    max-width: var(--index-width);
+    margin: 0 auto;
+    padding: 120px var(--gutter) 64px;
+  }
+
+  .index-hero h1 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .index-hero .tagline {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  .index-divider {
+    max-width: var(--index-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .index-divider hr {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* Post list */
+  .post-list {
+    max-width: var(--index-width);
+    margin: 0 auto;
+    padding: 32px var(--gutter) 120px;
+    list-style: none;
+  }
+
+  .post-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .post-item:first-child {
+    padding-top: 0;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item a {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+
+  .post-item-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-ghost);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .post-item-meta .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: var(--void-3);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .post-item h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 6px;
+    transition: color 0.2s;
+    letter-spacing: -0.005em;
+  }
+
+  .post-item a:hover h2 {
+    color: var(--void-12);
+  }
+
+  .post-item .excerpt {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--text-tertiary);
+    line-height: 1.55;
+  }
+
+  /* Year divider */
+  .year-label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-ghost);
+    padding: 40px 0 16px;
+  }
+
+  /* ========================================
+     POST PAGE — HEADER
+     ======================================== */
+  .post-header {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 120px var(--gutter) 0;
+  }
+
+  .post-header .back-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-ghost);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 40px;
+    transition: color 0.2s;
+  }
+
+  .post-header .back-link:hover {
+    color: var(--text-secondary);
+  }
+
+  .post-header .post-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-ghost);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .post-header h1 {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--void-12);
+    margin-bottom: 16px;
+  }
+
+  .post-header .lead {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+  }
+
+  .post-header .header-rule {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* ========================================
+     POST PAGE — PROSE CONTENT
+     ======================================== */
+  .prose {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 48px var(--gutter) 120px;
+  }
+
+  /* Paragraphs */
+  .prose p {
+    margin-bottom: 1.5em;
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* Headings */
+  .prose h2 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--void-12);
+    margin-top: 2.5em;
+    margin-bottom: 0.75em;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .prose h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+  }
+
+  .prose h4 {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+
+  /* Links */
+  .prose a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--void-6);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .prose a:hover {
+    text-decoration-color: var(--text-secondary);
+  }
+
+  /* Strong and emphasis */
+  .prose strong {
+    font-weight: 600;
+    color: var(--void-12);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  /* Lists */
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.4em;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  .prose li::marker {
+    color: var(--text-ghost);
+  }
+
+  .prose ul ul,
+  .prose ol ol,
+  .prose ul ol,
+  .prose ol ul {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+
+  /* Blockquote */
+  .prose blockquote {
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    border-left: 2px solid var(--void-5);
+  }
+
+  .prose blockquote p {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .prose blockquote cite {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-style: normal;
+    color: var(--text-ghost);
+    margin-top: 8px;
+  }
+
+  /* Inline code */
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--void-3);
+    color: var(--void-10);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* Code blocks */
+  .prose pre {
+    margin: 2em 0;
+    padding: 20px 24px;
+    background: var(--void-0);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    color: var(--void-9);
+  }
+
+  .prose pre .comment { color: var(--void-6); }
+  .prose pre .keyword { color: var(--void-9); }
+  .prose pre .string { color: var(--void-8); }
+  .prose pre .function { color: var(--void-10); }
+  .prose pre .number { color: var(--void-8); }
+
+  /* Horizontal rule */
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 3em 0;
+  }
+
+  /* Images / figures */
+  .prose figure {
+    margin: 2.5em 0;
+  }
+
+  .prose figure img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border-subtle);
+    display: block;
+  }
+
+  .prose figcaption {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-ghost);
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* Image placeholder (for mockup) */
+  .img-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--void-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-ghost);
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+
+  /* Tables */
+  .prose table {
+    width: 100%;
+    margin: 2em 0;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  .prose thead th {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .prose tbody td {
+    padding: 10px 16px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    line-height: 1.5;
+  }
+
+  .prose tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Definition list style for key-value content */
+  .prose dl {
+    margin: 1.5em 0;
+  }
+
+  .prose dt {
+    font-weight: 600;
+    color: var(--void-12);
+    margin-top: 1em;
+  }
+
+  .prose dd {
+    color: var(--text-secondary);
+    margin-left: 0;
+    padding-left: 1.5em;
+    margin-top: 0.25em;
+  }
+
+  /* Keyboard / small UI references */
+  .prose kbd {
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    background: var(--void-3);
+    border: 1px solid var(--void-5);
+    border-bottom-width: 2px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--text-secondary);
+  }
+
+  /* Footnote-style small text */
+  .prose small,
+  .prose .footnote {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  /* Aside / callout */
+  .prose aside,
+  .prose .callout {
+    margin: 2em 0;
+    padding: 16px 20px;
+    background: var(--void-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .prose aside p:last-child,
+  .prose .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Mark / highlight */
+  .prose mark {
+    background: var(--void-4);
+    color: var(--void-12);
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  /* Abbreviation */
+  .prose abbr[title] {
+    text-decoration: underline dotted var(--void-6);
+    text-underline-offset: 3px;
+    cursor: help;
+  }
+
+  /* Superscript footnote refs */
+  .prose sup a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    margin-left: 1px;
+  }
+
+  .prose sup a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Post footer */
+  .post-footer {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter) 120px;
+  }
+
+  .post-footer .footer-rule {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin-bottom: 32px;
+  }
+
+  .post-footer .author-line {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .post-footer .author-line strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ========================================
+     RESPONSIVE
+     ======================================== */
+  @media (max-width: 640px) {
+    html {
+      font-size: 16px;
+    }
+
+    .post-header h1 {
+      font-size: 32px;
+    }
+
+    .post-header .lead {
+      font-size: 18px;
+    }
+
+    .prose h2 {
+      font-size: 24px;
+    }
+
+    .prose h3 {
+      font-size: 20px;
+    }
+
+    .prose pre {
+      padding: 16px;
+      margin-left: calc(-1 * var(--gutter));
+      margin-right: calc(-1 * var(--gutter));
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    .index-hero h1 {
+      font-size: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     MOCKUP SWITCHER
+     ========================================== -->
+<div class="mockup-switcher">
+  <button class="active" onclick="showPage('index')">Index</button>
+  <button onclick="showPage('post')">Post</button>
+</div>
+
+<!-- ==========================================
+     INDEX PAGE
+     ========================================== -->
+<div id="page-index" class="page visible">
+
+  <nav class="page-nav">
+    <div class="page-nav-inner">
+      <a href="#" class="active">Writing</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <header class="index-hero">
+    <h1>Jigar Gosar</h1>
+    <p class="tagline">Notes on software, craft, and the things I learn along the way.</p>
+  </header>
+
+  <div class="index-divider"><hr></div>
+
+  <ul class="post-list">
+    <li class="year-label">2026</li>
+
+    <li class="post-item">
+      <a href="#" onclick="showPage('post'); return false;">
+        <div class="post-item-meta">
+          <time>Mar 14</time>
+          <span class="tag">Deep Dive</span>
+        </div>
+        <h2>The Unreasonable Effectiveness of Reading Source Code</h2>
+        <p class="excerpt">Most developers read documentation. The ones who grow fastest read source code. Here's how to build the habit and what it unlocks.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Mar 2</time>
+        </div>
+        <h2>Why I Stopped Using State Management Libraries</h2>
+        <p class="excerpt">After years of Redux, MobX, and Zustand, I realized the simplest architecture was already built into the framework.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Feb 18</time>
+          <span class="tag">How-to</span>
+        </div>
+        <h2>Building a Markdown Blog with Astro and Zero JavaScript</h2>
+        <p class="excerpt">A walkthrough of shipping a fast, accessible blog that sends no JS to the browser by default.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Jan 30</time>
+        </div>
+        <h2>Monochrome Design Is Not Minimalism</h2>
+        <p class="excerpt">Stripping color from a UI doesn't make it minimal. It makes every other decision louder.</p>
+      </a>
+    </li>
+
+    <li class="year-label">2025</li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Dec 12</time>
+          <span class="tag">TIL</span>
+        </div>
+        <h2>The CSS <code>text-wrap: balance</code> Property Changed My Headlines</h2>
+        <p class="excerpt">One line of CSS that fixes awkward headline breaks. Browser support is finally there.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Nov 24</time>
+        </div>
+        <h2>Debugging Is a Design Skill</h2>
+        <p class="excerpt">The best debuggers aren't the fastest typists. They're the ones who build the clearest mental models of the system.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Oct 8</time>
+        </div>
+        <h2>Notes on Staying Technical as a Senior Engineer</h2>
+        <p class="excerpt">Meeting load grows. Code time shrinks. Here are the habits that kept me sharp over the last decade.</p>
+      </a>
+    </li>
+
+    <li class="post-item">
+      <a href="#">
+        <div class="post-item-meta">
+          <time>Sep 15</time>
+          <span class="tag">Opinion</span>
+        </div>
+        <h2>The Tools You Ignore Are the Ones That Matter</h2>
+        <p class="excerpt">We chase new frameworks while ignoring grep, awk, and the browser DevTools profiler. The leverage is in the boring tools.</p>
+      </a>
+    </li>
+  </ul>
+
+</div>
+
+<!-- ==========================================
+     POST PAGE
+     ========================================== -->
+<div id="page-post" class="page">
+
+  <nav class="page-nav">
+    <div class="page-nav-inner">
+      <a href="#" onclick="showPage('index'); return false;">Writing</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <header class="post-header">
+    <a href="#" class="back-link" onclick="showPage('index'); return false;">&larr; Back to all posts</a>
+
+    <div class="post-meta">
+      <time>March 14, 2026</time>
+      <span>&middot;</span>
+      <span>12 min read</span>
+    </div>
+
+    <h1>The Unreasonable Effectiveness of Reading Source Code</h1>
+
+    <p class="lead">Most developers read documentation. The ones who grow fastest read source code. It's not about memorizing implementations &mdash; it's about developing an intuition for how software <em>actually</em> works under the surface.</p>
+
+    <hr class="header-rule">
+  </header>
+
+  <article class="prose">
+
+    <p>I remember the first time I opened a dependency's source code intentionally. It was 2017, I was fighting a bug in an HTTP client library, and the documentation had nothing useful to say about the edge case I'd hit. Out of frustration, I clicked through to the GitHub repository, found the relevant function, and read it line by line.</p>
+
+    <p>The bug took ten minutes to understand after that. But something else happened that was more important: I realized that the code was <em>readable</em>. It wasn't magic. It was just code, written by a person, making trade-offs I could follow. That moment changed how I approach software.</p>
+
+    <h2>Why Developers Avoid Source Code</h2>
+
+    <p>There's a persistent myth that library internals are too complex for "normal" developers to understand. This isn't entirely wrong &mdash; some codebases are genuinely impenetrable &mdash; but it's far less true than most people assume. The real barriers are psychological:</p>
+
+    <ul>
+      <li><strong>Intimidation.</strong> We assume the authors are smarter than us. Sometimes they are. But their code still has to follow the same rules of logic and syntax we already know.</li>
+      <li><strong>Unfamiliar patterns.</strong> Every codebase has its own idioms. The first few files feel alien. By the tenth file, you've internalized the style and can navigate freely.</li>
+      <li><strong>No clear entry point.</strong> Documentation has a beginning. Source code doesn't. You have to learn to <a href="#">find your own starting point</a>, which is itself a skill worth developing.</li>
+      <li><strong>Time pressure.</strong> Reading source code feels slow when you're under deadline. But the understanding it builds compounds over months and years.</li>
+    </ul>
+
+    <p>None of these are technical barriers. They're habits of avoidance that dissolve with practice.</p>
+
+    <h2>The Compound Returns of Reading Code</h2>
+
+    <p>Reading source code doesn't just solve the immediate problem. It builds three kinds of knowledge that pay off long after you close the file:</p>
+
+    <h3>1. Pattern Recognition</h3>
+
+    <p>Every well-maintained open source project is a masterclass in software design. When you read enough of them, you start recognizing recurring patterns: how they handle errors, structure their public APIs, manage internal state, and separate concerns. You don't need to memorize these patterns. You <em>absorb</em> them.</p>
+
+    <p>Consider how a library like <code>zod</code> handles schema composition. The public API is clean and chainable, but underneath, each method returns a new schema instance with the transformation baked in. Once you've seen this pattern in three or four libraries, you recognize it instantly and can apply it in your own code.</p>
+
+    <h3>2. Debugging Intuition</h3>
+
+    <p>When you've read the source code of your dependencies, error messages stop being cryptic. You know <em>where</em> in the code the error is thrown, <em>why</em> the check exists, and what conditions trigger it. This transforms debugging from guesswork into targeted investigation.</p>
+
+    <blockquote>
+      <p>The goal of reading source code isn't to memorize it. It's to build a mental model accurate enough that you can predict what the code does before you read it.</p>
+    </blockquote>
+
+    <h3>3. Architectural Judgment</h3>
+
+    <p>Documentation tells you <em>what</em> a library does. Source code tells you <em>how</em> it does it and, more importantly, what trade-offs were made. Should you use this library in production? The answer is in the code: how it handles edge cases, whether it manages resources carefully, how it deals with concurrency.</p>
+
+    <h2>A Method for Reading Unfamiliar Code</h2>
+
+    <p>Here's the approach I've refined over years of reading other people's code. It works for libraries, frameworks, and even large application codebases.</p>
+
+    <h4>Step 1: Find the Entry Point</h4>
+
+    <p>Look at the package's <code>main</code> or <code>exports</code> field in <code>package.json</code>. This tells you what file is exposed to consumers. Start there.</p>
+
+    <pre><code><span class="comment">// package.json — find what's exported</span>
+{
+  <span class="string">"name"</span>: <span class="string">"my-library"</span>,
+  <span class="string">"main"</span>: <span class="string">"./dist/index.js"</span>,
+  <span class="string">"exports"</span>: {
+    <span class="string">"."</span>: <span class="string">"./src/index.ts"</span>,
+    <span class="string">"./utils"</span>: <span class="string">"./src/utils/index.ts"</span>
+  }
+}</code></pre>
+
+    <h4>Step 2: Map the Surface</h4>
+
+    <p>Don't dive deep immediately. Skim the entry file to understand what's exported, then follow one path at a time. Build a mental map of the module boundaries before you try to understand any single module.</p>
+
+    <h4>Step 3: Follow a Feature</h4>
+
+    <p>Pick one function or behavior you care about and trace it from the public API down to the implementation. This is far more effective than trying to understand the entire codebase at once.</p>
+
+    <pre><code><span class="comment">// Start from what you know: the public API</span>
+<span class="keyword">import</span> { <span class="function">createClient</span> } <span class="keyword">from</span> <span class="string">'some-library'</span>
+
+<span class="keyword">const</span> client = <span class="function">createClient</span>({
+  baseURL: <span class="string">'https://api.example.com'</span>,
+  timeout: <span class="number">5000</span>,
+})
+
+<span class="comment">// Then open the source and find createClient's definition.</span>
+<span class="comment">// What does it return? What does it store?</span>
+<span class="comment">// How does `timeout` actually get enforced?</span></code></pre>
+
+    <h4>Step 4: Read the Tests</h4>
+
+    <p>Tests are often the best documentation a project has. They show you the intended behavior, edge cases the author thought about, and the API used in context. When the source code is confusing, the tests will clarify intent.</p>
+
+    <h2>What Good Source Code Teaches You</h2>
+
+    <p>Here are some of the specific things I've learned from reading other people's code that I wouldn't have picked up any other way:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Codebase</th>
+          <th>Lesson</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>React</td>
+          <td>How a fiber architecture enables interruptible rendering</td>
+        </tr>
+        <tr>
+          <td>Express</td>
+          <td>How middleware chains can be implemented in under 50 lines</td>
+        </tr>
+        <tr>
+          <td>Vite</td>
+          <td>How <abbr title="ECMAScript Modules">ESM</abbr> imports can be intercepted and transformed on the fly</td>
+        </tr>
+        <tr>
+          <td>SQLite</td>
+          <td>How a single-file database manages pages, locking, and journaling</td>
+        </tr>
+        <tr>
+          <td>tRPC</td>
+          <td>How TypeScript generics can thread types through an entire RPC layer</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>None of this knowledge came from documentation. It came from reading the code and tracing the execution path until I understood the mechanism.</p>
+
+    <aside>
+      <p><strong>A note on AI-generated code:</strong> Large language models are changing how we write code, but they make reading code <em>more</em> important, not less. When your AI assistant generates a solution, you need the source-reading skills to evaluate whether it's correct, idiomatic, and safe to ship.</p>
+    </aside>
+
+    <h2>Building the Habit</h2>
+
+    <p>You don't need to block out hours for source code reading. The most effective approach is to integrate it into your existing workflow:</p>
+
+    <ol>
+      <li><strong>When you hit a confusing error,</strong> open the source and find where that error string is thrown. Read the surrounding context. What condition triggers it? This alone will solve most debugging mysteries.</li>
+      <li><strong>When you learn a new library,</strong> spend fifteen minutes reading its entry point after you finish the quickstart tutorial. You'll retain the API better because you understand the structure behind it.</li>
+      <li><strong>When you're choosing between libraries,</strong> open both and compare how they solve the same problem. The one with clearer code is usually the better long-term bet.</li>
+      <li><strong>When you have dead time,</strong> pick a small utility library &mdash; something under 500 lines &mdash; and read it end to end. <mark>Small libraries are the best teachers</mark> because you can hold the entire thing in your head.</li>
+    </ol>
+
+    <p>The key is consistency. Reading one source file a week will, over a year, give you a breadth of knowledge that no course or tutorial can match.</p>
+
+    <hr>
+
+    <h2>The Deeper Skill</h2>
+
+    <p>At its core, reading source code is about building <strong>mechanical sympathy</strong> &mdash; a term borrowed from race car driving that means understanding the machine well enough to work <em>with</em> it rather than against it. When you understand how your tools work internally, you make better decisions about when to use them, how to configure them, and when to replace them.</p>
+
+    <p>Documentation gives you the map. Source code gives you the territory. Both matter, but developers who only read the map will always be surprised by the terrain.</p>
+
+    <blockquote>
+      <p>Programs must be written for people to read, and only incidentally for machines to execute.</p>
+      <cite>&mdash; Harold Abelson, <em>Structure and Interpretation of Computer Programs</em></cite>
+    </blockquote>
+
+    <p>Start with the next error you hit. Don't google it. Open the source. Read ten lines in each direction from the error. You'll be surprised how often that's enough &mdash; and how much you learn in the process.</p>
+
+  </article>
+
+  <footer class="post-footer">
+    <hr class="footer-rule">
+    <p class="author-line">Written by <strong>Jigar Gosar</strong> &mdash; building software, writing about the craft.</p>
+  </footer>
+
+</div>
+
+<!-- ==========================================
+     PAGE SWITCHING SCRIPT
+     ========================================== -->
+<script>
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(function(el) {
+      el.classList.remove('visible');
+    });
+    document.getElementById('page-' + page).classList.add('visible');
+
+    document.querySelectorAll('.mockup-switcher button').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    var buttons = document.querySelectorAll('.mockup-switcher button');
+    if (page === 'index') buttons[0].classList.add('active');
+    if (page === 'post') buttons[1].classList.add('active');
+
+    window.scrollTo(0, 0);
+  }
+</script>
+
+</body>
+</html>

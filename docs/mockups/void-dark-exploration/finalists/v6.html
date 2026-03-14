@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>void/dark — monochrome blog</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ========================================
+     DESIGN TOKENS
+     ======================================== */
+  :root {
+    /* Monochrome scale — warm-tinted grays */
+    --void-0: #0a0a0b;
+    --void-1: #101012;
+    --void-2: #161618;
+    --void-3: #1c1c1f;
+    --void-4: #232328;
+    --void-5: #2a2a30;
+    --void-6: #3a3a42;
+    --void-7: #4a4a54;
+    --void-8: #5a5a66;
+    --void-9: #7a7a88;
+    --void-10: #9a9aa8;
+    --void-11: #b0b0bc;
+    --void-12: #c8c8d0;
+    --void-13: #dcdce2;
+    --void-14: #ededf0;
+
+    /* Semantic */
+    --bg: var(--void-1);
+    --bg-surface: var(--void-2);
+    --bg-elevated: var(--void-3);
+    --bg-code: var(--void-2);
+
+    --text-body: var(--void-12);
+    --text-heading: var(--void-14);
+    --text-dim: var(--void-9);
+    --text-dimmer: var(--void-7);
+    --text-faint: var(--void-6);
+
+    --border: var(--void-4);
+    --border-strong: var(--void-6);
+
+    --accent: var(--void-12);
+
+    /* Typography */
+    --font-body: 'Newsreader', 'Georgia', serif;
+    --font-heading: 'Instrument Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-ui: 'Instrument Sans', sans-serif;
+
+    /* Reading width */
+    --content-width: 640px;
+    --page-width: 840px;
+  }
+
+  /* ========================================
+     RESET & BASE
+     ======================================== */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-body);
+    line-height: 1.72;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--void-6);
+    color: var(--void-14);
+  }
+
+  /* ========================================
+     PAGE NAVIGATION
+     ======================================== */
+  .page-nav {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    gap: 4px;
+    background: var(--void-2);
+    border: 1px solid var(--void-4);
+    border-radius: 8px;
+    padding: 4px;
+  }
+
+  .page-nav a {
+    display: block;
+    padding: 8px 16px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .page-nav a:hover {
+    color: var(--text-body);
+    background: var(--void-3);
+  }
+
+  .page-nav a.active {
+    color: var(--text-heading);
+    background: var(--void-4);
+  }
+
+  /* ========================================
+     SECTION WRAPPER
+     ======================================== */
+  .page-section {
+    min-height: 100vh;
+    display: none;
+  }
+
+  .page-section.active {
+    display: block;
+  }
+
+  /* ========================================
+     INDEX PAGE
+     ======================================== */
+  .index-header {
+    padding: 120px 32px 80px;
+    max-width: var(--page-width);
+    margin: 0 auto;
+  }
+
+  .site-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+  }
+
+  .index-headline {
+    font-family: var(--font-body);
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--text-heading);
+    max-width: 580px;
+    letter-spacing: -0.01em;
+  }
+
+  .index-subtitle {
+    margin-top: 20px;
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  /* Post list */
+  .post-list {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  .post-list-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--void-3);
+    margin-bottom: 8px;
+  }
+
+  .post-list-label {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dimmer);
+  }
+
+  .post-year-group {
+    margin-top: 48px;
+  }
+
+  .post-year-group:first-of-type {
+    margin-top: 0;
+  }
+
+  .post-year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+    padding-left: 2px;
+  }
+
+  .post-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--void-2);
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .post-item:hover {
+    border-bottom-color: var(--void-4);
+  }
+
+  .post-item:hover .post-title {
+    color: var(--text-heading);
+  }
+
+  .post-title {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-body);
+    line-height: 1.4;
+    transition: color 0.15s ease;
+  }
+
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .post-excerpt {
+    grid-column: 1 / -1;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+    max-width: 540px;
+    margin-top: -6px;
+  }
+
+  /* Footer */
+  .site-footer {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 48px 32px;
+    border-top: 1px solid var(--void-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--text-dimmer);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-body);
+  }
+
+  /* ========================================
+     POST PAGE
+     ======================================== */
+  .post-header {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 120px 32px 0;
+  }
+
+  .post-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dimmer);
+    text-decoration: none;
+    margin-bottom: 56px;
+    transition: color 0.15s;
+  }
+
+  .post-back:hover {
+    color: var(--text-body);
+  }
+
+  .post-back svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .post-header-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+
+  .post-header-title {
+    font-family: var(--font-body);
+    font-size: 2.6rem;
+    font-weight: 400;
+    line-height: 1.18;
+    color: var(--text-heading);
+    letter-spacing: -0.015em;
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+
+  .post-header-description {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.55;
+    max-width: 560px;
+    margin-bottom: 56px;
+  }
+
+  .post-header-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--void-5);
+    margin-bottom: 0;
+  }
+
+  /* ========================================
+     PROSE — the heart of readability
+     ======================================== */
+  .prose {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 56px 32px 120px;
+  }
+
+  /* Paragraphs */
+  .prose p {
+    margin-bottom: 1.5em;
+    font-size: 1rem;
+    hanging-punctuation: first;
+  }
+
+  /* Lead paragraph */
+  .prose p.lead {
+    font-size: 1.12rem;
+    color: var(--text-body);
+    line-height: 1.75;
+  }
+
+  /* Headings */
+  .prose h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    line-height: 1.3;
+    margin-top: 3em;
+    margin-bottom: 0.8em;
+    letter-spacing: -0.01em;
+  }
+
+  .prose h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    line-height: 1.4;
+    margin-top: 2.4em;
+    margin-bottom: 0.6em;
+  }
+
+  .prose h4 {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+
+  /* Links */
+  .prose a {
+    color: var(--text-heading);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--void-6);
+    transition: text-decoration-color 0.15s;
+  }
+
+  .prose a:hover {
+    text-decoration-color: var(--text-body);
+  }
+
+  /* Strong & emphasis */
+  .prose strong {
+    font-weight: 500;
+    color: var(--text-heading);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  /* Blockquote */
+  .prose blockquote {
+    border-left: 2px solid var(--void-5);
+    padding-left: 24px;
+    margin: 2em 0;
+    margin-left: 0;
+  }
+
+  .prose blockquote p {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .prose blockquote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    color: var(--text-dimmer);
+    margin-top: 8px;
+  }
+
+  .prose blockquote cite::before {
+    content: "\2014\00a0";
+  }
+
+  /* Lists */
+  .prose ul, .prose ol {
+    margin: 1.5em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.5em;
+    line-height: 1.65;
+  }
+
+  .prose li::marker {
+    color: var(--text-faint);
+  }
+
+  .prose ol li::marker {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    color: var(--text-dimmer);
+  }
+
+  /* Nested lists */
+  .prose ul ul, .prose ol ol, .prose ul ol, .prose ol ul {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+
+  /* Inline code */
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.84em;
+    background: var(--bg-code);
+    border: 1px solid var(--void-3);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--void-11);
+    font-weight: 400;
+  }
+
+  /* Code blocks */
+  .prose pre {
+    background: var(--void-0);
+    border: 1px solid var(--void-3);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 2em 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    color: var(--void-11);
+  }
+
+  /* Code block caption */
+  .code-caption {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.03em;
+    margin-bottom: -1.4em;
+    margin-top: 2em;
+    padding-left: 2px;
+  }
+
+  /* Syntax dimming for comments */
+  .prose pre .comment {
+    color: var(--void-7);
+  }
+
+  .prose pre .keyword {
+    color: var(--void-10);
+  }
+
+  .prose pre .string {
+    color: var(--void-11);
+  }
+
+  .prose pre .function {
+    color: var(--void-13);
+  }
+
+  /* Horizontal rule */
+  .prose hr {
+    border: none;
+    height: 1px;
+    background: var(--void-3);
+    margin: 3em 0;
+  }
+
+  /* Figure / Image */
+  .prose figure {
+    margin: 2.5em 0;
+  }
+
+  .prose figure img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--void-3);
+  }
+
+  .prose figcaption {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--text-dimmer);
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* Image placeholder for mockup */
+  .img-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--void-2);
+    border: 1px solid var(--void-3);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  /* Table */
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    font-size: 0.92rem;
+  }
+
+  .prose thead th {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--void-4);
+  }
+
+  .prose tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--void-2);
+    color: var(--text-body);
+  }
+
+  .prose tbody tr:hover {
+    background: var(--void-2);
+  }
+
+  .prose tbody td code {
+    font-size: 0.82em;
+  }
+
+  /* Definition-style (term : description) */
+  .prose dl {
+    margin: 1.5em 0;
+  }
+
+  .prose dt {
+    font-weight: 500;
+    color: var(--text-heading);
+    margin-top: 1em;
+  }
+
+  .prose dd {
+    margin-left: 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--void-3);
+    margin-top: 4px;
+    color: var(--text-dim);
+  }
+
+  /* Footnote-style small text */
+  .prose .note {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    border-left: 2px solid var(--void-4);
+    padding-left: 16px;
+    margin: 2em 0;
+  }
+
+  /* Callout / aside */
+  .prose .callout {
+    background: var(--void-2);
+    border: 1px solid var(--void-3);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 2em 0;
+  }
+
+  .prose .callout-label {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dimmer);
+    margin-bottom: 8px;
+  }
+
+  .prose .callout p {
+    font-size: 0.92rem;
+    margin-bottom: 0;
+    color: var(--text-dim);
+  }
+
+  /* Abbreviation */
+  .prose abbr {
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--void-6);
+    cursor: help;
+  }
+
+  /* Keyboard key */
+  .prose kbd {
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    background: var(--void-3);
+    border: 1px solid var(--void-5);
+    border-bottom-width: 2px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--text-body);
+  }
+
+  /* Mark / highlight */
+  .prose mark {
+    background: var(--void-4);
+    color: var(--text-heading);
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  /* Subscript & superscript */
+  .prose sub, .prose sup {
+    font-size: 0.75em;
+  }
+
+  .prose sup a {
+    text-decoration: none;
+    color: var(--text-dimmer);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  /* Post footer */
+  .post-footer {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  .post-footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--void-5);
+    margin-bottom: 32px;
+  }
+
+  .post-footer-bio {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .post-footer-bio strong {
+    color: var(--text-body);
+    font-weight: 500;
+  }
+
+  /* ========================================
+     RESPONSIVENESS
+     ======================================== */
+  @media (max-width: 680px) {
+    html {
+      font-size: 17px;
+    }
+
+    .index-header,
+    .post-header {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .post-list,
+    .prose,
+    .post-footer {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .index-headline {
+      font-size: 2rem;
+    }
+
+    .post-header-title {
+      font-size: 2rem;
+    }
+
+    .post-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .post-meta {
+      order: -1;
+    }
+
+    .page-nav {
+      top: auto;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .prose pre {
+      border-radius: 0;
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  /* ========================================
+     SUBTLE AMBIENT EFFECTS
+     ======================================== */
+
+  /* Gentle top fade on post page */
+  .post-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--void-0), transparent);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.4;
+  }
+
+  /* Reading progress bar */
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 1px;
+    background: var(--void-6);
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+</style>
+</head>
+<body>
+
+<!-- Page Switcher -->
+<nav class="page-nav">
+  <a href="#" class="active" data-page="index">Index</a>
+  <a href="#" data-page="post">Post</a>
+</nav>
+
+<!-- ============================================================
+     INDEX PAGE
+     ============================================================ -->
+<section class="page-section active" id="page-index">
+
+  <header class="index-header">
+    <div class="site-title">Jigar Gosar</div>
+    <h1 class="index-headline">Notes on software,<br>craft, and the things<br>in between.</h1>
+    <p class="index-subtitle">Writing about the tools, patterns, and decisions behind building things that last.</p>
+  </header>
+
+  <div class="post-list">
+    <div class="post-list-header">
+      <span class="post-list-label">Writing</span>
+    </div>
+
+    <div class="post-year-group">
+      <div class="post-year">2026</div>
+
+      <a class="post-item" data-page="post">
+        <span class="post-title">The Trap of Premature Abstraction</span>
+        <span class="post-meta">Mar 14</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Why I Switched from Next.js to Astro for My Blog</span>
+        <span class="post-meta">Feb 28</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Designing a Monochrome UI That Doesn't Feel Lifeless</span>
+        <span class="post-meta">Feb 11</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Content Collections in Astro 5: What Changed and Why It Matters</span>
+        <span class="post-meta">Jan 24</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">On Reading Code You Wrote Six Months Ago</span>
+        <span class="post-meta">Jan 09</span>
+      </a>
+    </div>
+
+    <div class="post-year-group">
+      <div class="post-year">2025</div>
+
+      <a class="post-item">
+        <span class="post-title">Tailwind CSS 4: The Migration Nobody Talks About</span>
+        <span class="post-meta">Dec 18</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">TypeScript Patterns I Keep Coming Back To</span>
+        <span class="post-meta">Nov 30</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">A Case for Boring Technology</span>
+        <span class="post-meta">Nov 02</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Structured Data for Blogs: JSON-LD Without the Pain</span>
+        <span class="post-meta">Oct 14</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Image Optimization on the Modern Web Is Still a Mess</span>
+        <span class="post-meta">Sep 20</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">The Git Workflow That Replaced My Documentation</span>
+        <span class="post-meta">Aug 05</span>
+      </a>
+
+      <a class="post-item">
+        <span class="post-title">Why Every Side Project Teaches You More Than Work</span>
+        <span class="post-meta">Jul 11</span>
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">Jigar Gosar</span>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">RSS</a>
+    </div>
+  </footer>
+
+</section>
+
+<!-- ============================================================
+     POST PAGE
+     ============================================================ -->
+<section class="page-section" id="page-post">
+
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <header class="post-header">
+    <a href="#" class="post-back" data-page="index">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+      Back
+    </a>
+
+    <div class="post-header-meta">March 14, 2026 &middot; 12 min read</div>
+    <h1 class="post-header-title">The Trap of Premature Abstraction</h1>
+    <p class="post-header-description">Why the instinct to generalize early leads to worse code, and how waiting longer than comfortable produces better designs.</p>
+    <div class="post-header-divider"></div>
+  </header>
+
+  <article class="prose">
+
+    <p class="lead">Every developer I respect has told me some version of the same thing: don't abstract too early. And every time, I've nodded, agreed, and then done it anyway. It took years of unwinding my own abstractions to understand what they really meant.</p>
+
+    <p>The urge is understandable. You write a function, then another that looks similar, and something in your brain fires: <em>these should be one thing</em>. You extract, parameterize, and feel a brief rush of satisfaction. The code is "cleaner." You've reduced duplication. You've followed the rules.</p>
+
+    <p>Six months later, you're staring at a function with eight parameters, four boolean flags, and a comment that says <code>// TODO: refactor this</code>. The abstraction that was supposed to simplify your code has become the most complex part of it.</p>
+
+    <h2>The Duplication Instinct</h2>
+
+    <p>We're taught early that duplication is the cardinal sin of programming. <strong><abbr title="Don't Repeat Yourself">DRY</abbr></strong> is one of the first principles we learn, and for good reason. Duplicated logic means duplicated bugs, inconsistent behavior, and maintenance headaches. But somewhere along the way, we internalized a distorted version of this principle: that <em>any</em> similarity between two pieces of code means they should be merged.</p>
+
+    <p>Here's the distinction that took me years to internalize: <strong>similar code is not the same as duplicated code</strong>. Two functions might look identical today but exist for entirely different reasons. They serve different use cases, different stakeholders, different futures. Merging them couples those futures together, and coupling is a far more insidious problem than duplication.</p>
+
+    <blockquote>
+      <p>Duplication is far cheaper than the wrong abstraction.</p>
+      <cite>Sandi Metz, "The Wrong Abstraction"</cite>
+    </blockquote>
+
+    <p>Metz's observation cuts to the heart of it. When you duplicate code, the cost is linear and visible. When you create a bad abstraction, the cost is exponential and hidden. Each new use case bends the abstraction further until you're spending more time working around it than you would have spent maintaining separate implementations.</p>
+
+    <h2>What Premature Abstraction Looks Like</h2>
+
+    <p>Let me walk through a concrete example. Say you're building a notification system for a web application. You start with email notifications:</p>
+
+    <div class="code-caption">notification.ts</div>
+    <pre><code><span class="keyword">async function</span> <span class="function">sendEmailNotification</span>(user: User, message: string) {
+  <span class="keyword">const</span> html = <span class="function">renderEmailTemplate</span>(user.name, message);
+  <span class="keyword">await</span> emailService.<span class="function">send</span>({
+    to: user.email,
+    subject: <span class="string">`Notification: ${message.slice(0, 50)}`</span>,
+    body: html,
+  });
+  <span class="keyword">await</span> <span class="function">logNotification</span>(user.id, <span class="string">'email'</span>, message);
+}</code></pre>
+
+    <p>Then you add Slack notifications. The function looks similar enough:</p>
+
+    <pre><code><span class="keyword">async function</span> <span class="function">sendSlackNotification</span>(user: User, message: string) {
+  <span class="keyword">const</span> blocks = <span class="function">renderSlackBlocks</span>(user.name, message);
+  <span class="keyword">await</span> slackService.<span class="function">postMessage</span>({
+    channel: user.slackId,
+    blocks,
+  });
+  <span class="keyword">await</span> <span class="function">logNotification</span>(user.id, <span class="string">'slack'</span>, message);
+}</code></pre>
+
+    <p>At this point, the abstraction alarm goes off. Both functions take a user and a message. Both render content and send it through a service. Both log the result. Surely we should extract a common <code>sendNotification</code> function with a strategy pattern:</p>
+
+    <pre><code><span class="comment">// The "clean" abstraction that will haunt you</span>
+<span class="keyword">async function</span> <span class="function">sendNotification</span>(
+  user: User,
+  message: string,
+  channel: NotificationChannel,
+  options?: NotificationOptions,
+) {
+  <span class="keyword">const</span> renderer = <span class="function">getRenderer</span>(channel);
+  <span class="keyword">const</span> service = <span class="function">getService</span>(channel);
+  <span class="keyword">const</span> content = renderer.<span class="function">render</span>(user, message, options);
+  <span class="keyword">await</span> service.<span class="function">send</span>(user, content, options);
+  <span class="keyword">await</span> <span class="function">logNotification</span>(user.id, channel, message);
+}</code></pre>
+
+    <p>This looks cleaner. It <em>is</em> cleaner, for now. But then requirements start arriving:</p>
+
+    <ul>
+      <li>Slack notifications need to support threaded replies</li>
+      <li>Email notifications need CC and BCC support</li>
+      <li>Slack messages should have different formatting for urgent vs. normal</li>
+      <li>Email needs retry logic with exponential backoff; Slack doesn't</li>
+      <li>You add push notifications, which work completely differently</li>
+    </ul>
+
+    <p>Each requirement adds another branch, another option, another parameter. The <code>NotificationOptions</code> type grows into a union of channel-specific types. The <code>getRenderer</code> and <code>getService</code> factories become switch statements with channel-specific logic leaking through their seams.</p>
+
+    <h3>The Escape Hatch That Isn't</h3>
+
+    <p>At some point, someone suggests adding a <code>beforeSend</code> hook or a middleware system. This is the classic escape hatch for an abstraction that can't handle reality. Instead of admitting the abstraction is wrong, we add a mechanism to bypass it. Now we have a general system that most callers override with specific behavior, which is worse than having no system at all.</p>
+
+    <div class="callout">
+      <div class="callout-label">A useful heuristic</div>
+      <p>If your abstraction needs an escape hatch within the first three months, the abstraction is wrong. Kill it early while the cost of unwinding is still low.</p>
+    </div>
+
+    <h2>The Rule of Three, Revisited</h2>
+
+    <p>The old advice says wait until you have three instances before abstracting. This is decent but incomplete. I'd refine it:</p>
+
+    <ol>
+      <li><strong>Wait for three instances</strong> — not two, not "I can imagine a third"</li>
+      <li><strong>Ensure the instances share a reason to change</strong> — if they'd evolve independently, they're not really duplicated</li>
+      <li><strong>Extract the stable parts, not the similar parts</strong> — look for the pieces that <em>won't</em> diverge, not the ones that happen to match today</li>
+    </ol>
+
+    <p>The second point is the one most people miss. Two pieces of code that look identical but serve different domains are not duplication. They're <em>coincidental similarity</em>, and merging them creates a dependency between things that should be independent.</p>
+
+    <h2>Real-World Cost</h2>
+
+    <p>I once spent three weeks unwinding an abstraction that took two days to build. The abstraction was a "universal form handler" that was supposed to manage all forms in a React application. It handled validation, submission, error states, and field-level interactions.</p>
+
+    <p>It worked beautifully for the first two forms. By the fifth form, we were fighting it constantly. The login form needed inline validation. The signup form needed multi-step flow. The settings form needed partial saves. Each new requirement meant modifying a shared component that every form depended on, which meant testing every form for regressions.</p>
+
+    <p>The fix? Delete the abstraction. Write separate form logic for each form. Let them share small, focused utilities — a <code>useFieldValidation</code> hook, a <code>FormError</code> component — but not a unified architecture.</p>
+
+    <p>Here's a comparison of the approaches:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Unified Handler</th>
+          <th>Separate + Utilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lines of code</td>
+          <td>~800</td>
+          <td>~1,200</td>
+        </tr>
+        <tr>
+          <td>Time to add new form</td>
+          <td>2+ days</td>
+          <td>2-4 hours</td>
+        </tr>
+        <tr>
+          <td>Regression surface</td>
+          <td>All forms</td>
+          <td>One form</td>
+        </tr>
+        <tr>
+          <td>Onboarding time</td>
+          <td>~1 week</td>
+          <td>~1 day</td>
+        </tr>
+        <tr>
+          <td><code>// TODO</code> count</td>
+          <td>14</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>More lines of code, but every other metric improved. Total lines is a poor proxy for complexity. The "separate" approach had more code but far less accidental complexity.</p>
+
+    <h2>When Abstraction Is Right</h2>
+
+    <p>I don't want to leave the impression that abstraction is bad. Abstraction is the fundamental tool of software design. The question is timing and shape.</p>
+
+    <p>Good abstractions share some characteristics:</p>
+
+    <dl>
+      <dt>They emerge from usage, not anticipation</dt>
+      <dd>You discover them in code you've already written, not in code you imagine writing.</dd>
+
+      <dt>They simplify the caller</dt>
+      <dd>If calling the abstraction requires understanding its internals, it's not abstracting anything.</dd>
+
+      <dt>They have a narrow interface</dt>
+      <dd>Two or three parameters, not eight. If the interface is wide, the abstraction is trying to do too much.</dd>
+
+      <dt>They're easy to delete</dt>
+      <dd>A good abstraction can be inlined back into its callers without rewriting them.</dd>
+    </dl>
+
+    <h3>The Compression Test</h3>
+
+    <p>Here's a test I use: does the abstraction <em>compress</em> the codebase, or does it just <em>rearrange</em> it? Compression means callers become simpler and you can reason about them without understanding the abstraction's implementation. Rearrangement means you've moved complexity from one file to another without reducing it.</p>
+
+    <pre><code><span class="comment">// Compression — the caller becomes trivially simple</span>
+<span class="keyword">const</span> data = <span class="keyword">await</span> <span class="function">fetchWithRetry</span>(<span class="string">'/api/users'</span>);
+
+<span class="comment">// Rearrangement — complexity just moved to NotificationOptions</span>
+<span class="keyword">await</span> <span class="function">sendNotification</span>(user, msg, <span class="string">'email'</span>, {
+  retries: 3,
+  backoff: <span class="string">'exponential'</span>,
+  template: <span class="string">'urgent'</span>,
+  cc: managers,
+  trackOpens: <span class="keyword">true</span>,
+});</code></pre>
+
+    <h2>A Process, Not a Principle</h2>
+
+    <p>I've stopped thinking of "don't abstract too early" as a principle and started thinking of it as a process. Here's what that process looks like in practice:</p>
+
+    <ol>
+      <li><strong>Write the specific thing.</strong> Don't think about reuse. Solve the problem in front of you.</li>
+      <li><strong>Write the next specific thing.</strong> Notice the similarities. Resist the urge. Keep going.</li>
+      <li><strong>Write the third specific thing.</strong> Now look at all three. What's actually shared? What only <em>looks</em> shared?</li>
+      <li><strong>Extract the stable core.</strong> Pull out only what all three genuinely share and won't diverge on. Leave everything else.</li>
+      <li><strong>Keep the specific code around the shared core.</strong> The abstraction handles the common case. The callers handle their own specifics.</li>
+    </ol>
+
+    <p>This is slower than abstracting on the first duplication. It feels wrong, like you're being lazy or unprofessional. But the code that emerges is dramatically better — more flexible, more understandable, and far easier to change.</p>
+
+    <hr>
+
+    <p>The hardest part isn't knowing this. It's having the discipline to do it when you can <em>see</em> the abstraction right there, ready to be extracted. The voice in your head says, "But this is so obviously the same pattern." That voice is often right about the present and wrong about the future.</p>
+
+    <p>Wait longer than feels comfortable. The right abstraction will still be there when you're ready for it, and it will be better for the waiting.</p>
+
+    <div class="note">
+      If this resonated, I'd recommend Sandi Metz's <a href="#">"The Wrong Abstraction"</a> and Dan Abramov's <a href="#">"Goodbye, Clean Code"</a>. Both shaped how I think about this problem. Casey Muratori's <a href="#">"Semantic Compression"</a> talk covers the theory behind what I've called the compression test.
+    </div>
+
+  </article>
+
+  <div class="post-footer">
+    <div class="post-footer-divider"></div>
+    <p class="post-footer-bio">Written by <strong>Jigar Gosar</strong> — a developer writing about software craft, building tools, and the decisions that shape codebases. Find me on <a href="#">GitHub</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">Jigar Gosar</span>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">RSS</a>
+    </div>
+  </footer>
+
+</section>
+
+<script>
+  // Page switching
+  document.querySelectorAll('[data-page]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = this.getAttribute('data-page');
+
+      document.querySelectorAll('.page-section').forEach(function(s) {
+        s.classList.remove('active');
+      });
+      document.getElementById('page-' + target).classList.add('active');
+
+      document.querySelectorAll('.page-nav a').forEach(function(a) {
+        a.classList.remove('active');
+      });
+      document.querySelector('.page-nav a[data-page="' + target + '"]').classList.add('active');
+
+      window.scrollTo(0, 0);
+    });
+  });
+
+  // Reading progress bar
+  window.addEventListener('scroll', function() {
+    var postPage = document.getElementById('page-post');
+    if (!postPage.classList.contains('active')) return;
+
+    var bar = document.getElementById('readingProgress');
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = Math.min((scrollTop / docHeight) * 100, 100);
+    bar.style.width = progress + '%';
+  });
+</script>
+
+</body>
+</html>
