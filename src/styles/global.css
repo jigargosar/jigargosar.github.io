@@ -23,3 +23,25 @@
 html {
     scrollbar-gutter: stable;
 }
+
+@utility prose-void {
+    & :where(blockquote p:first-of-type)::before { content: none; }
+    & :where(blockquote p:last-of-type)::after { content: none; }
+
+    --tw-prose-body: var(--color-w50);
+    --tw-prose-headings: var(--color-w65);
+    --tw-prose-lead: var(--color-w45);
+    --tw-prose-links: var(--color-w65);
+    --tw-prose-bold: var(--color-w65);
+    --tw-prose-counters: var(--color-w30);
+    --tw-prose-bullets: var(--color-w30);
+    --tw-prose-hr: var(--color-w18);
+    --tw-prose-quotes: var(--color-w45);
+    --tw-prose-quote-borders: var(--color-w18);
+    --tw-prose-captions: var(--color-w30);
+    --tw-prose-code: var(--color-w60);
+    --tw-prose-pre-code: var(--color-w60);
+    --tw-prose-pre-bg: var(--color-bg-raised);
+    --tw-prose-th-borders: var(--color-w18);
+    --tw-prose-td-borders: var(--color-w08);
+}
